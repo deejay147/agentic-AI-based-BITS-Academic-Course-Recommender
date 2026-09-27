@@ -32610,11 +32610,11 @@
  },
  {
   "code": "RIA F211",
-  "title": "Materials and Mechanics for Robotics",
+  "title": "Introduction to Mechanisms and Robotics",
   "L": null,
   "P": null,
   "units": 3,
-  "description": "Structure of Materials (Metals, Polymers, Ceramics & Composites), Novel advanced materials such as Shape memory alloys, Semiconductors, piezo-electric materials, Self-healing materials, 3D printed materials. Static equilibrium, Introduction to Stress and strain, deformation of body under axial, torsional and bending stresses, introduction to buckling.",
+  "description": "Mechanisms Fundamentals: Overview of mechanisms: linkages, gears, cams, and other mechanical systems; Degrees of freedom and mobility analysis; Grashof's law and classification of four-bar linkages; Position, velocity, and acceleration analysis of planar mechanisms. Kinematics of Robots: Introduction to robotic systems; configurations, links, and joints; Denavit-Hartenberg (D-H) parameters and transformations; Forward and inverse kinematics for robotic manipulators.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 743,

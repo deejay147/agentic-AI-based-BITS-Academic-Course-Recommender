@@ -1,0 +1,139 @@
+[
+ {
+  "id": "max_units_fd",
+  "clause": "1.01",
+  "text": "A first degree student can register for at most 25 units in a semester (excluding audit).",
+  "params": {
+   "max_units": 25
+  },
+  "source": {
+   "doc": "regulations.pdf",
+   "clause": "1.01"
+  }
+ },
+ {
+  "id": "elective_categories",
+  "clause": "2.05",
+  "text": "Electives fall under Discipline Electives, Humanities Electives and Open Electives. Any elective counts as an Open Elective once DEL and HUEL requirements are accounted for. For dual degree students, DELs of one degree count as OPELs of the other.",
+  "source": {
+   "doc": "regulations.pdf",
+   "clause": "2.05"
+  }
+ },
+ {
+  "id": "extra_electives",
+  "clause": "2.08",
+  "text": "Over and above the prescribed electives, a first degree student may take at most four more electives.",
+  "params": {
+   "max_extra_electives": 4
+  },
+  "source": {
+   "doc": "regulations.pdf",
+   "clause": "2.08"
+  }
+ },
+ {
+  "id": "hd_course_limit",
+  "clause": "2.08",
+  "text": "A first degree student above a CGPA prescribed by AGC may register in at most one higher degree course per semester; it counts as an OPEL unless it is in the student's DEL pool.",
+  "params": {
+   "max_hd_per_sem": 1,
+   "cgpa_threshold": null
+  },
+  "note": "The CGPA threshold is not given in the supplied data.",
+  "source": {
+   "doc": "regulations.pdf",
+   "clause": "2.08"
+  }
+ },
+ {
+  "id": "hd_prior_prep",
+  "clause": "3.15(b)(ii)",
+  "text": "Higher degree courses of one's own discipline: only after clearing the first set of own discipline core courses (the CDCs of the 2nd year in the semester-wise pattern).",
+  "source": {
+   "doc": "regulations.pdf",
+   "clause": "3.15(b)(ii)"
+  }
+ },
+ {
+  "id": "other_discipline_prior_prep",
+  "clause": "3.15(b)(i)",
+  "text": "Core or elective courses of a degree other than the student's own: only after completing the prior preparation of the student's own third-year first semester.",
+  "source": {
+   "doc": "regulations.pdf",
+   "clause": "3.15(b)(i)"
+  }
+ },
+ {
+  "id": "prerequisites",
+  "clause": "3.13",
+  "text": "Before registering in a course the student must have fulfilled its prerequisite conditions.",
+  "source": {
+   "doc": "regulations.pdf",
+   "clause": "3.13"
+  }
+ },
+ {
+  "id": "prior_prep_named",
+  "clause": "3.14",
+  "text": "Registering in a prescribed semester's courses needs all named courses of the preceding semesters (DCA may allow up to two not-cleared courses with no bearing on core courses).",
+  "source": {
+   "doc": "regulations.pdf",
+   "clause": "3.14"
+  }
+ },
+ {
+  "id": "over_under_prepared",
+  "clause": "3.18",
+  "text": "No student can register in a course for which he/she is over-prepared or under-prepared.",
+  "source": {
+   "doc": "regulations.pdf",
+   "clause": "3.18"
+  }
+ },
+ {
+  "id": "no_timetable_clash",
+  "clause": "3.19",
+  "text": "The final semester programme should be free from any timetable conflict.",
+  "source": {
+   "doc": "regulations.pdf",
+   "clause": "3.19"
+  }
+ },
+ {
+  "id": "timetable_2026_only",
+  "clause": "Timetable note",
+  "text": "Courses with computer code >= 5000 are meant only for 2026 admissions into FD, HD and PhD.",
+  "source": {
+   "doc": "timetable.pdf",
+   "section": "II (page footer)"
+  }
+ },
+ {
+  "id": "cdc_as_elective",
+  "clause": "Timetable V(A)",
+  "text": "A CDC outside the student's own requirement taken as an elective needs the named prior preparation of that discipline's CDC. A higher degree course as elective needs own discipline CDCs cleared or registered; only one HD course per semester.",
+  "source": {
+   "doc": "timetable.pdf",
+   "section": "V"
+  }
+ },
+ {
+  "id": "huel_own_discipline",
+  "clause": "Bulletin IV-127",
+  "text": "A course (or its equivalent) of the student's own discipline cannot count as a Humanities elective even if it is listed in the HUEL pool.",
+  "source": {
+   "doc": "bulletin.pdf",
+   "page": 335
+  }
+ },
+ {
+  "id": "project_limits",
+  "clause": "Bulletin IV-125",
+  "text": "At most 3 project type courses toward DEL (max 1 study, 2 lab, 2 design, 1 special project), at most 3 as OPEL, and at most 5 project courses against elective slots overall.",
+  "source": {
+   "doc": "bulletin.pdf",
+   "page": 333
+  }
+ }
+]

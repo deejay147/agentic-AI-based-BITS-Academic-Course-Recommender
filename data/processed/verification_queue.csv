@@ -1,0 +1,108 @@
+kind,subject,detail,source
+timetable_slots_missing,BITS E574,section L1 has no day/hour,timetable.pdf p.16
+timetable_slots_missing,BITS E594,section L1 has no day/hour,timetable.pdf p.17
+timetable_slots_missing,BITS F382,section L1 has no day/hour,timetable.pdf p.20
+timetable_slots_missing,BITS F412,section L1 has no day/hour,timetable.pdf p.20
+timetable_slots_missing,BITS F413,section L1 has no day/hour,timetable.pdf p.20
+timetable_slots_missing,BITS G511,section L1 has no day/hour,timetable.pdf p.21
+timetable_slots_missing,BITS G513,section L1 has no day/hour,timetable.pdf p.21
+timetable_slots_missing,BITS G529,section L1 has no day/hour,timetable.pdf p.21
+timetable_slots_missing,BITS G539,section L1 has no day/hour,timetable.pdf p.21
+timetable_slots_missing,BITS G540,section L1 has no day/hour,timetable.pdf p.21
+timetable_slots_missing,BITS G649,section L1 has no day/hour,timetable.pdf p.22
+timetable_slots_missing,BITS G661,section L1 has no day/hour,timetable.pdf p.22
+timetable_slots_missing,CHE F415,section L1 has no day/hour,timetable.pdf p.32
+timetable_slots_missing,CHE G553,section L1 has no day/hour,timetable.pdf p.32
+timetable_slots_missing,CS F303,section L1 has no day/hour,timetable.pdf p.45
+timetable_slots_missing,CS F363,section L1 has no day/hour,timetable.pdf p.46
+timetable_slots_missing,GS F244,section L1 has no day/hour,timetable.pdf p.67
+timetable_slots_missing,MATH F243,section T1 has no day/hour,timetable.pdf p.79
+timetable_slots_missing,PHA G642,section L1 has no day/hour,timetable.pdf p.105
+timetable_slots_missing,PHY F112,section L1 has no day/hour,timetable.pdf p.106
+timetable_slots_missing,SW E101,section L1 has no day/hour,timetable.pdf p.112
+handout_ocr,"MATH F214,MAC F214","scanned PDF, text came from OCR",handouts/348_MAC_F214.pdf
+programme_structure,AA,CDC count 14 courses/49 units vs chart footer 14 courses/48 units.,bulletin.pdf p.219
+programme_structure,ENV,"Named on semester chart p.222 but not in CDC list: CHE F211, BITS F240, ENVS F323, ENVS F324 (added as CDC).",bulletin.pdf p.222
+programme_structure,ENV,Dropped CDC-list course(s) not named on the chart: ENVS F232,bulletin.pdf p.222
+programme_structure,ENV,CDC count 16 courses/36 units vs chart footer 16 courses/48 units.,bulletin.pdf p.222
+programme_structure,A5,Dropped GIR course(s) from CDC count: BITS F219,bulletin.pdf p.228
+programme_structure,A5,Dropped CDC-list course(s) not named on the chart: PHA F243,bulletin.pdf p.228
+programme_structure,BBA,CDC count 14 courses/43 units vs chart footer 14 courses/42 units.,bulletin.pdf p.238
+minor_structure,Minor in Tissue Engineering,course/unit requirement not extracted,bulletin.pdf p.[349]
+course_not_in_bulletin_descriptions,AUE F341,listed in AUE CDC but has no Part VI description,bulletin.pdf p.314
+course_not_in_bulletin_descriptions,EEE F318,listed in A3 DEL but has no Part VI description,bulletin.pdf p.318
+course_not_in_bulletin_descriptions,EEE F318,listed in AA DEL but has no Part VI description,bulletin.pdf p.319
+course_not_in_bulletin_descriptions,EEE F318,listed in AJ DEL but has no Part VI description,bulletin.pdf p.321
+course_not_in_bulletin_descriptions,EEE F318,listed in A8 DEL but has no Part VI description,bulletin.pdf p.321
+course_not_in_bulletin_descriptions,INSTR F429,listed in A8 DEL but has no Part VI description,bulletin.pdf p.322
+course_not_in_bulletin_descriptions,INSTR F430,listed in A8 DEL but has no Part VI description,bulletin.pdf p.322
+course_not_in_bulletin_descriptions,ENVS F212,listed in ENV CDC but has no Part VI description,bulletin.pdf p.322
+course_not_in_bulletin_descriptions,ENVS F221,listed in ENV CDC but has no Part VI description,bulletin.pdf p.322
+course_not_in_bulletin_descriptions,ENVS F222,listed in ENV CDC but has no Part VI description,bulletin.pdf p.322
+course_not_in_bulletin_descriptions,CHEM F431,listed in ENV DEL but has no Part VI description,bulletin.pdf p.322
+course_not_in_bulletin_descriptions,ME F451,listed in A4 DEL but has no Part VI description,bulletin.pdf p.324
+course_not_in_bulletin_descriptions,CHEM F431,listed in B2 DEL but has no Part VI description,bulletin.pdf p.326
+course_not_in_bulletin_descriptions,ECON F315,listed in B3 DEL but has no Part VI description,bulletin.pdf p.327
+course_not_in_bulletin_descriptions,ECON F417,listed in B3 DEL but has no Part VI description,bulletin.pdf p.327
+course_not_in_bulletin_descriptions,ECON F434,listed in B3 DEL but has no Part VI description,bulletin.pdf p.327
+course_not_in_bulletin_descriptions,ECON F435,listed in B3 DEL but has no Part VI description,bulletin.pdf p.327
+course_not_in_bulletin_descriptions,BITS F368,listed in B4 DEL but has no Part VI description,bulletin.pdf p.327
+course_not_in_bulletin_descriptions,PHY F425,listed in B5 DEL but has no Part VI description,bulletin.pdf p.329
+course_not_in_bulletin_descriptions,RIA F212,listed in RIA CDC but has no Part VI description,bulletin.pdf p.329
+course_not_in_bulletin_descriptions,BITS F434,listed in RIA DEL but has no Part VI description,bulletin.pdf p.329
+course_not_in_bulletin_descriptions,ECE F313,listed in RIA DEL but has no Part VI description,bulletin.pdf p.330
+course_not_in_bulletin_descriptions,ECON F434,listed in BBA CDC but has no Part VI description,bulletin.pdf p.332
+course_not_in_bulletin_descriptions,BITS F490,listed in BBA DEL but has no Part VI description,bulletin.pdf p.333
+handout_missing,BIO F111,offered this semester but no handout supplied,handouts/
+handout_missing,BITS F102,offered this semester but no handout supplied,handouts/
+handout_missing,BITS F112,offered this semester but no handout supplied,handouts/
+handout_missing,BITS F240,offered this semester but no handout supplied,handouts/
+handout_missing,BITS F332,offered this semester but no handout supplied,handouts/
+handout_missing,BITS F382,offered this semester but no handout supplied,handouts/
+handout_missing,BITS F412,offered this semester but no handout supplied,handouts/
+handout_missing,BITS F413,offered this semester but no handout supplied,handouts/
+handout_missing,BITS F469,offered this semester but no handout supplied,handouts/
+handout_missing,BITS G513,offered this semester but no handout supplied,handouts/
+handout_missing,BITS G529,offered this semester but no handout supplied,handouts/
+handout_missing,BITS G539,offered this semester but no handout supplied,handouts/
+handout_missing,BITS G649,offered this semester but no handout supplied,handouts/
+handout_missing,CE F242,offered this semester but no handout supplied,handouts/
+handout_missing,CE G529,offered this semester but no handout supplied,handouts/
+handout_missing,CE G552,offered this semester but no handout supplied,handouts/
+handout_missing,CE G553,offered this semester but no handout supplied,handouts/
+handout_missing,CE G568,offered this semester but no handout supplied,handouts/
+handout_missing,CHE F422,offered this semester but no handout supplied,handouts/
+handout_missing,CHE F425,offered this semester but no handout supplied,handouts/
+handout_missing,CHE G512,offered this semester but no handout supplied,handouts/
+handout_missing,CHE G513,offered this semester but no handout supplied,handouts/
+handout_missing,CHE G523,offered this semester but no handout supplied,handouts/
+handout_missing,CHEM F101,offered this semester but no handout supplied,handouts/
+handout_missing,CHEM F111,offered this semester but no handout supplied,handouts/
+handout_missing,CS F214,offered this semester but no handout supplied,handouts/
+handout_missing,CS F303,offered this semester but no handout supplied,handouts/
+handout_missing,CS F363,offered this semester but no handout supplied,handouts/
+handout_missing,ECE F212,offered this semester but no handout supplied,handouts/
+handout_missing,EEE F212,offered this semester but no handout supplied,handouts/
+handout_missing,GS F244,offered this semester but no handout supplied,handouts/
+handout_missing,HSS F332,offered this semester but no handout supplied,handouts/
+handout_missing,INSTR F212,offered this semester but no handout supplied,handouts/
+handout_missing,MAC F313,offered this semester but no handout supplied,handouts/
+handout_missing,MATH F111,offered this semester but no handout supplied,handouts/
+handout_missing,MATH F112,offered this semester but no handout supplied,handouts/
+handout_missing,MATH F201,offered this semester but no handout supplied,handouts/
+handout_missing,MATH F243,offered this semester but no handout supplied,handouts/
+handout_missing,MATH F444,offered this semester but no handout supplied,handouts/
+handout_missing,ME G523,offered this semester but no handout supplied,handouts/
+handout_missing,MEL G528,offered this semester but no handout supplied,handouts/
+handout_missing,MPBA G525,offered this semester but no handout supplied,handouts/
+handout_missing,PHA F342,offered this semester but no handout supplied,handouts/
+handout_missing,PHA G544,offered this semester but no handout supplied,handouts/
+handout_missing,PHA G548,offered this semester but no handout supplied,handouts/
+handout_missing,PHA G642,offered this semester but no handout supplied,handouts/
+handout_missing,PHY F101,offered this semester but no handout supplied,handouts/
+handout_missing,PHY F110,offered this semester but no handout supplied,handouts/
+handout_missing,PHY F111,offered this semester but no handout supplied,handouts/
+handout_missing,PHY F112,offered this semester but no handout supplied,handouts/
+handout_missing,SAN G514,offered this semester but no handout supplied,handouts/
+handout_missing,SNS F241,offered this semester but no handout supplied,handouts/
+handout_missing,SW E102,offered this semester but no handout supplied,handouts/

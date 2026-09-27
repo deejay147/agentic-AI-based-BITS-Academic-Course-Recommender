@@ -1,4 +1,4 @@
-"""Shared helpers for the ingestion pipeline."""
+"""Small shared stuff for the ingest scripts - paths, course code cleanup, json io."""
 from __future__ import annotations
 
 import json

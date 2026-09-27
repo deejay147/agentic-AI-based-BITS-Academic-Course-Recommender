@@ -1,19 +1,18 @@
-"""Parse programme structures from the Bulletin (Part IV).
+"""Bulletin Part IV -> programme structures (CDC / DEL lists), HUEL pool, minors.
 
-Sources (PDF page numbers of bulletin.pdf):
-  209-210  category-wise structure of first-degree programmes (IV-1, IV-2)
-  211-238  semester-wise pattern (chart) of each single-degree programme
-  314-335  list of Core (CDC) and Discipline Elective (DEL) courses per programme,
-           the Humanities (HUEL) pool, and 'Other Courses'
-  337-349  minor programmes
+Where stuff lives in bulletin.pdf (pdf page numbers, not the printed IV-xx ones):
+  209-210  overall structure of first degrees (IV-1, IV-2)
+  211-238  semester-wise chart for each single degree programme
+  314-335  CDC + DEL list per programme, then the HUEL pool and 'Other Courses'
+  337-349  minors (these are proper ruled tables, so extract_tables works there)
 
-The course-list pages are two-column text. Each column is cropped separately and the
-lines are run through a small state machine:
-  programme heading -> CORE COURSES -> DISCIPLINE ELECTIVE COURSES (tracks/pools) -> next heading
-'OR' lines between two course lines join them into one alternative group
-(any one course of the group satisfies that slot).
+The course-list pages are two columns of plain text. We crop each column and run the
+lines through a small state machine:
+    programme heading -> CORE COURSES -> DISCIPLINE ELECTIVE COURSES (tracks/pools) -> next heading
+An 'OR' line between two courses means either one fills that slot, so those get grouped.
 
-Output: data/processed/programmes.json, data/processed/huel_pool.json
+Heads up: the list and the semester chart don't always agree (B.Pharm, ECE, Env Engg).
+See reconcile_cdc() - whatever can't be reconciled goes to the verification queue.
 """
 from __future__ import annotations
 

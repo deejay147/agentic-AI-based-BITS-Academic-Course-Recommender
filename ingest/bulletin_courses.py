@@ -1,11 +1,12 @@
-"""Parse course descriptions from Bulletin Part VI (on-campus), PDF pages 610-752.
+"""Bulletin Part VI -> one record per course (title, units, description, prereqs).
 
-Each course starts with a header line  'CS F407 Artificial Intelligence   303'
-(L P U digits run together, or '3*' / '4*' for courses given only in units),
-followed by a free-text description and sometimes 'Pre-requisite(s): ...' and
-'Equivalent: ...' lines. Pages are two-column; each column is read separately.
+Each course starts with a header like  'CS F407 Artificial Intelligence   303'
+where 303 = L P U squashed together (or '3*' / '4*' when only units are given).
+After that it's free text, sometimes with 'Pre-requisite: ...' and 'Equivalent: ...'.
 
-Output: data/processed/courses_bulletin.json
+Only ~70 of ~2000 courses actually state a prerequisite here. Whatever is stated
+gets kept as text + any course codes we can pull out of it. Missing != none, the
+engine treats it as "no prerequisite listed in the supplied data".
 """
 from __future__ import annotations
 
@@ -59,8 +60,7 @@ def parse(pdf):
     while i < len(lines):
         pn, line = lines[i]
         m = HEADER.match(line)
-        # header whose title wraps: 'BITS F232 Foundations of Data Structures and Algo- 3 1 4' is caught above;
-        # 'XX F123 Long title that' + 'continues here 303'
+        # sometimes the L P U ends up on the next line with the rest of the title
         if not m:
             m2 = CODE_ONLY_START.match(line)
             if m2 and i + 1 < len(lines):
@@ -76,11 +76,8 @@ def parse(pdf):
             if code:
                 cur = {"code": code, "title": m["title"].strip(), **_lpu(m["lpu"]),
                        "description": "", "source": {"doc": SOURCE, "page": pn, "section": "Part VI"}}
-                if code in courses:  # same code listed twice (e.g. under two departments) -> keep the richer one later
-                    cur["_dup"] = True
-                courses.setdefault(code, cur) if not cur.get("_dup") else None
-                if cur.get("_dup"):
-                    courses[code].setdefault("alt_descriptions", []).append(cur)
+                # a few codes are described twice (listed under two departments) - keep all, pick later
+                courses.setdefault(code, []).append(cur)
                 # title wrapped onto the next line: 'Foundations of ... Algo-' + 'rithms', '... Biology &' + 'Immunology'
                 if re.search(r"(-|&|,|\b(and|of|in|for|to|with|the))$", cur["title"]) and i + 1 < len(lines):
                     nxt = lines[i + 1][1]
@@ -95,8 +92,7 @@ def parse(pdf):
                 i += 1
                 continue
         if cur is not None:
-            # a line that is just a department heading ('Aeronautics', 'Computer Science') has no period and
-            # is short and Title Case; skip those
+            # lines like 'Aeronautics' / 'Computer Science' are department headings, not description
             if len(line) < 45 and re.fullmatch(r"[A-Z][A-Za-z&,\- ]+", line) and not line.endswith(".") \
                     and sum(w[0].isupper() for w in line.split() if w not in ("and", "of", "&")) == \
                     len([w for w in line.split() if w not in ("and", "of", "&")]) and len(line.split()) <= 5:
@@ -106,8 +102,8 @@ def parse(pdf):
         i += 1
 
     out = []
-    for c in courses.values():
-        c.pop("_dup", None)
+    for versions in courses.values():
+        c = max(versions, key=lambda v: len(v["description"]))  # the fuller description wins
         desc = re.sub(r"\s+", " ", c["description"]).replace("- ", "")
         eq = None
         em = re.search(r"Equivalent\s*:?\s*(.*)$", desc)
@@ -128,10 +124,9 @@ def parse(pdf):
         c["description"] = desc
         c["prerequisite_text"] = pre_txt
         c["prerequisite_codes"] = codes
-        # 'A OR B' -> any one; otherwise treat listed codes as all required (conservative)
+        # 'A OR B' -> any one is enough, otherwise assume all listed codes are needed
         c["prerequisite_mode"] = ("any" if pre_txt and re.search(r"\bOR\b|\bor\b", pre_txt) else "all") if codes else None
         c["equivalent_text"] = eq
-        c.pop("alt_descriptions", None)
         out.append(c)
     return out
 
