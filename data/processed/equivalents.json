@@ -1,0 +1,2077 @@
+[
+ {
+  "course": "BIO F211",
+  "equivalents": [
+   "BIO C211",
+   "BIO F211"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BIO F212",
+  "equivalents": [
+   "BIO C241",
+   "BIO F212"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BIO F213",
+  "equivalents": [
+   "BIO C321",
+   "BIO F213"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BIO F215",
+  "equivalents": [
+   "BIO C331",
+   "BIO F215"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BIO F417",
+  "equivalents": [
+   "BIO C417",
+   "BIO F417"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BIO F418",
+  "equivalents": [
+   "BIO C418",
+   "BIO F418"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BIO F421",
+  "equivalents": [
+   "BIO C421",
+   "BIO F421"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BIO G510",
+  "equivalents": [
+   "BIO G510",
+   "PHA G510"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F217",
+  "equivalents": [
+   "BITS F217",
+   "GS F212"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F316",
+  "equivalents": [
+   "BITS C473",
+   "BITS F316"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F319",
+  "equivalents": [
+   "BITS C319",
+   "BITS F319",
+   "MBA C319"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F320",
+  "equivalents": [
+   "BITS C320",
+   "BITS F320",
+   "MBA C320"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F321",
+  "equivalents": [
+   "BITS C321",
+   "BITS F321",
+   "MBA C321"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F343",
+  "equivalents": [
+   "BITS F343",
+   "EA C482"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F372",
+  "equivalents": [
+   "BITS C372",
+   "BITS F372",
+   "EEE F346"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F382",
+  "equivalents": [
+   "BITS F382"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F385",
+  "equivalents": [
+   "BITS C385",
+   "BITS F385"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F415",
+  "equivalents": [
+   "BITS F415",
+   "EA C415"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F417",
+  "equivalents": [
+   "BITS F417",
+   "EA C417",
+   "ME F423"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F431",
+  "equivalents": [
+   "BITS F431",
+   "EA C412"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F441",
+  "equivalents": [
+   "BITS F441",
+   "EA C441"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F444",
+  "equivalents": [
+   "BITS F444",
+   "EA C461"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F446",
+  "equivalents": [
+   "BITS F446",
+   "EA C471"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F447",
+  "equivalents": [
+   "BITS F447",
+   "EA C473"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F448",
+  "equivalents": [
+   "BITS F448",
+   "EA C474",
+   "MBA C474"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F449",
+  "equivalents": [
+   "BITS F449",
+   "EA C475",
+   "ECON F413",
+   "MBA C475"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 118,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F461",
+  "equivalents": [
+   "BITS C461",
+   "BITS F461",
+   "IS C341"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F462",
+  "equivalents": [
+   "BITS C462",
+   "BITS F462"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F468",
+  "equivalents": [
+   "BITS C468",
+   "BITS F468",
+   "ECON F415"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F482",
+  "equivalents": [
+   "BITS C482",
+   "BITS F482",
+   "ECON F414",
+   "MBA C482"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F488",
+  "equivalents": [
+   "BITS C488",
+   "BITS F488",
+   "MBA C488"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F493",
+  "equivalents": [
+   "BITS C493",
+   "BITS F493",
+   "ECON F355",
+   "MBA C493"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "BITS F494",
+  "equivalents": [
+   "BITS C494",
+   "BITS F494",
+   "CE F434"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CE F213",
+  "equivalents": [
+   "CE C392",
+   "CE F213"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CE F323",
+  "equivalents": [
+   "CE C414",
+   "CE F323"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CE F343",
+  "equivalents": [
+   "CE C381",
+   "CE F343"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CE F416",
+  "equivalents": [
+   "CE C416",
+   "CE F416"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CE F420",
+  "equivalents": [
+   "CE C422",
+   "CE F420",
+   "CE G616"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CE F423",
+  "equivalents": [
+   "CE C394",
+   "CE F423"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CE F431",
+  "equivalents": [
+   "CE F431",
+   "IS C472"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CE F434",
+  "equivalents": [
+   "BITS C494",
+   "CE F434"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CE G616",
+  "equivalents": [
+   "CE C422",
+   "CE F420",
+   "CE G616"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CE G641",
+  "equivalents": [
+   "CE G641",
+   "ME G641"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CHE F213",
+  "equivalents": [
+   "CHE C311",
+   "CHE F213"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CHE F411",
+  "equivalents": [
+   "CHE C411",
+   "CHE F411"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CHE F414",
+  "equivalents": [
+   "CHE C414",
+   "CHE F414"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS F213",
+  "equivalents": [
+   "CS C313",
+   "CS F213",
+   "IS C313",
+   "IS F213"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS F214",
+  "equivalents": [
+   "CS F214",
+   "IS F214"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS F215",
+  "equivalents": [
+   "CS F215",
+   "EEE F215",
+   "INSTR F215"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS F222",
+  "equivalents": [
+   "CS F222",
+   "IS F222",
+   "MATH C222"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS F301",
+  "equivalents": [
+   "CS C362",
+   "CS F301",
+   "IS F301"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS F342",
+  "equivalents": [
+   "CS C342",
+   "CS F342"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS F351",
+  "equivalents": [
+   "CS C351",
+   "CS F351"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 119,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS F372",
+  "equivalents": [
+   "CS C372",
+   "CS F372",
+   "IS C362",
+   "IS F372"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS F415",
+  "equivalents": [
+   "CS C415",
+   "CS F415",
+   "IS C415"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS G513",
+  "equivalents": [
+   "CS G513",
+   "SS G513"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS G514",
+  "equivalents": [
+   "CS G514",
+   "SS G514"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS G520",
+  "equivalents": [
+   "CS G520",
+   "SS G520"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS G527",
+  "equivalents": [
+   "CS G527",
+   "SS G527"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS G531",
+  "equivalents": [
+   "CS G531",
+   "EEE G531",
+   "MEL G531"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS G541",
+  "equivalents": [
+   "CS G541",
+   "SS G531"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS G551",
+  "equivalents": [
+   "CS G551",
+   "SS G551"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "CS G653",
+  "equivalents": [
+   "CS G653",
+   "SS G653"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ECON F211",
+  "equivalents": [
+   "ECON C212",
+   "ECON F211"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ECON F212",
+  "equivalents": [
+   "ECON C211",
+   "ECON F212",
+   "FIN F212"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ECON F213",
+  "equivalents": [
+   "ECON F213",
+   "FIN F213"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ECON F214",
+  "equivalents": [
+   "ECON F214",
+   "FIN F214"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ECON F311",
+  "equivalents": [
+   "ECON C372",
+   "ECON F311"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ECON F312",
+  "equivalents": [
+   "ECON C362",
+   "ECON F312",
+   "MGTS C424"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ECON F355",
+  "equivalents": [
+   "BITS C493",
+   "BITS F493",
+   "ECON F355",
+   "MBA C493"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ECON F411",
+  "equivalents": [
+   "ECON C411",
+   "ECON F411",
+   "FIN C411",
+   "MBA C454",
+   "ME C481",
+   "MGTS C451"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ECON F412",
+  "equivalents": [
+   "CDP C313",
+   "ECON C412",
+   "ECON F412",
+   "MBA C437",
+   "MGTS C412"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ECON F413",
+  "equivalents": [
+   "BITS F449",
+   "EA C475",
+   "ECON F413",
+   "MBA C475"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ECON F414",
+  "equivalents": [
+   "BITS C482",
+   "BITS F482",
+   "ECON F414",
+   "MBA C482"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ECON F415",
+  "equivalents": [
+   "BITS C468",
+   "BITS F468",
+   "ECON F415"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "EEE F211",
+  "equivalents": [
+   "EEE F211",
+   "INSTR F211"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "EEE F212",
+  "equivalents": [
+   "EEE F212",
+   "INSTR F212"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "EEE F214",
+  "equivalents": [
+   "EEE C381",
+   "EEE F214",
+   "INSTR F214"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "EEE F215",
+  "equivalents": [
+   "CS F215",
+   "EEE F215",
+   "INSTR F215"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "EEE F313",
+  "equivalents": [
+   "EEE C443",
+   "EEE F313",
+   "INSTR F313"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 120,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "EEE F346",
+  "equivalents": [
+   "BITS C372",
+   "EEE F346"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "EEE F431",
+  "equivalents": [
+   "EA C452",
+   "EEE F431"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "EEE F434",
+  "equivalents": [
+   "EEE C434",
+   "EEE F434"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "EEE F472",
+  "equivalents": [
+   "EEE C472",
+   "EEE F472"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "EEE G531",
+  "equivalents": [
+   "CS G531",
+   "EEE G531",
+   "MEL G531"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "FIN F212",
+  "equivalents": [
+   "ECON C211",
+   "ECON F212",
+   "FIN F212"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "FIN F213",
+  "equivalents": [
+   "ECON F213",
+   "FIN F213"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "FIN F214",
+  "equivalents": [
+   "ECON F214",
+   "FIN F214"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "FIN F314",
+  "equivalents": [
+   "FIN C341",
+   "FIN F314"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "FIN F315",
+  "equivalents": [
+   "ECON C481",
+   "FIN C342",
+   "FIN F315",
+   "MGTS C382"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "GS F211",
+  "equivalents": [
+   "GS F211",
+   "POL C212"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "GS F212",
+  "equivalents": [
+   "GS F212"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "GS F223",
+  "equivalents": [
+   "BITS C214",
+   "GS F223"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "GS F224",
+  "equivalents": [
+   "GS F224",
+   "HSS C314"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "GS F232",
+  "equivalents": [
+   "GS F232",
+   "PSY C211"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "GS F244",
+  "equivalents": [
+   "BITS C396",
+   "GS F244"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "GS F311",
+  "equivalents": [
+   "BITS C484",
+   "GS F311"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "GS F321",
+  "equivalents": [
+   "BITS C394",
+   "GS F321"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "GS F322",
+  "equivalents": [
+   "GS F322",
+   "HSS C313"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "GS F333",
+  "equivalents": [
+   "GS F333",
+   "HUM C351"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "GS F343",
+  "equivalents": [
+   "BITS C395",
+   "GS F343"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "HSS F223",
+  "equivalents": [
+   "HSS F223",
+   "HUM C321"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "HSS F233",
+  "equivalents": [
+   "HIST C112",
+   "HSS F233"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "HSS F234",
+  "equivalents": [
+   "HIST C211",
+   "HSS F234"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "HSS F329",
+  "equivalents": [
+   "HSS F329",
+   "HUM C381"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "HSS F334",
+  "equivalents": [
+   "HSS F334",
+   "HUM C383"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "HSS F343",
+  "equivalents": [
+   "HSS F343",
+   "HUM C411"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "HSS F344",
+  "equivalents": [
+   "HSS F344",
+   "HUM C412"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 121,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "INSTR F211",
+  "equivalents": [
+   "EEE F211",
+   "INSTR F211"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "INSTR F212",
+  "equivalents": [
+   "EEE F212",
+   "INSTR F212"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "INSTR F214",
+  "equivalents": [
+   "EEE C381",
+   "EEE F214",
+   "INSTR F214"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "INSTR F215",
+  "equivalents": [
+   "CS F215",
+   "EEE F215",
+   "INSTR F215"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "INSTR F312",
+  "equivalents": [
+   "INSTR C381",
+   "INSTR F312"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "INSTR F313",
+  "equivalents": [
+   "EEE C443",
+   "EEE F313",
+   "INSTR F313"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "IS F213",
+  "equivalents": [
+   "CS C313",
+   "CS F213",
+   "IS C313",
+   "IS F213"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "IS F214",
+  "equivalents": [
+   "CS F214",
+   "IS F214"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "IS F222",
+  "equivalents": [
+   "CS F222",
+   "IS F222",
+   "MATH C222"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "IS F301",
+  "equivalents": [
+   "CS C362",
+   "CS F301",
+   "IS F301"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "IS F311",
+  "equivalents": [
+   "CS C471",
+   "IS C471",
+   "IS F311"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "IS F372",
+  "equivalents": [
+   "CS C372",
+   "CS F372",
+   "IS C362",
+   "IS F372"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ITEB G621",
+  "equivalents": [
+   "ITEB G621",
+   "MBA C421",
+   "MF C421",
+   "MF F421"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MATH F212",
+  "equivalents": [
+   "AAOC C222",
+   "MATH F212"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MATH F214",
+  "equivalents": [
+   "MATH F214"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MATH F215",
+  "equivalents": [
+   "MATH F215"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MATH F353",
+  "equivalents": [
+   "MATH C353",
+   "MATH F353"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ME F211",
+  "equivalents": [
+   "ES C221",
+   "ME F211",
+   "MF F211"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ME F212",
+  "equivalents": [
+   "ME F212",
+   "MF F212"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ME F213",
+  "equivalents": [
+   "ME F213",
+   "MF F213"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ME F214",
+  "equivalents": [
+   "ME C211",
+   "ME F214",
+   "MF F214"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ME F215",
+  "equivalents": [
+   "ME F215",
+   "MF F215"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ME F423",
+  "equivalents": [
+   "BITS F417",
+   "EA C417",
+   "ME F423"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ME F441",
+  "equivalents": [
+   "ME C441",
+   "ME F441"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ME F443",
+  "equivalents": [
+   "ME C443",
+   "ME F443",
+   "MF C441",
+   "MGTS C432"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "ME G641",
+  "equivalents": [
+   "CE G641",
+   "ME G641"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MEL G531",
+  "equivalents": [
+   "CS G531",
+   "EEE G531",
+   "MEL G531"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 122,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MF F211",
+  "equivalents": [
+   "ES C221",
+   "ME F211",
+   "MF F211"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MF F212",
+  "equivalents": [
+   "ME F212",
+   "MF F212"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MF F213",
+  "equivalents": [
+   "ME F213",
+   "MF F213"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MF F214",
+  "equivalents": [
+   "ME C211",
+   "ME F214",
+   "MF F214"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MF F215",
+  "equivalents": [
+   "ME F215",
+   "MF F215"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MF F311",
+  "equivalents": [
+   "MF C319",
+   "MF F311"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MF F313",
+  "equivalents": [
+   "MF C314",
+   "MF F313"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "MF F421",
+  "equivalents": [
+   "ITEB G621",
+   "MBA C421",
+   "MF C421",
+   "MF F421"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHA F211",
+  "equivalents": [
+   "PHA C212",
+   "PHA F211"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHA F212",
+  "equivalents": [
+   "PHA C322",
+   "PHA F212"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHA F213",
+  "equivalents": [
+   "PHA C241",
+   "PHA F213"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHA F214",
+  "equivalents": [
+   "PHA C321",
+   "PHA F214"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHA F313",
+  "equivalents": [
+   "PHA C391",
+   "PHA F313"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHA F314",
+  "equivalents": [
+   "PHA C421",
+   "PHA F314"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHA F413",
+  "equivalents": [
+   "PHA C413",
+   "PHA F413"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHA F414",
+  "equivalents": [
+   "PHA C414",
+   "PHA F414"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHA F416",
+  "equivalents": [
+   "PHA C416",
+   "PHA F416"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHA F417",
+  "equivalents": [
+   "PHA C417",
+   "PHA F417"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHA G510",
+  "equivalents": [
+   "BIO G510",
+   "PHA G510"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHY F211",
+  "equivalents": [
+   "PHY C212",
+   "PHY F211"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHY F311",
+  "equivalents": [
+   "PHY C321",
+   "PHY F311"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHY F315",
+  "equivalents": [
+   "PHY C242",
+   "PHY F315"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHY F418",
+  "equivalents": [
+   "PHY C432",
+   "PHY F418"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "PHY F424",
+  "equivalents": [
+   "PHY C411",
+   "PHY F424"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "SS G512",
+  "equivalents": [
+   "CS C313",
+   "CS F213",
+   "IS C313",
+   "IS F213",
+   "SS G512"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "SS G513",
+  "equivalents": [
+   "CS G513",
+   "SS G513"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 123,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "SS G514",
+  "equivalents": [
+   "CS G514",
+   "SS G514"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 124,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "SS G520",
+  "equivalents": [
+   "CS G520",
+   "SS G520"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 124,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "SS G527",
+  "equivalents": [
+   "CS G527",
+   "SS G527"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 124,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "SS G531",
+  "equivalents": [
+   "CS G541",
+   "SS G531"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 124,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "SS G551",
+  "equivalents": [
+   "CS G551",
+   "SS G551"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 124,
+   "section": "IX"
+  }
+ },
+ {
+  "course": "SS G653",
+  "equivalents": [
+   "CS G653",
+   "SS G653"
+  ],
+  "source": {
+   "doc": "timetable.pdf",
+   "page": 124,
+   "section": "IX"
+  }
+ }
+]
