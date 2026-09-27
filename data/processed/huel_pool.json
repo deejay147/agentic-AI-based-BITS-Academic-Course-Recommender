@@ -1,0 +1,1825 @@
+{
+ "huel_pool": [
+  {
+   "code": "BITS F214",
+   "title": "Science, Technology and Modernity",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "BITS F226",
+   "title": "Soft Skills for Professionals",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "BITS F239",
+   "title": "Evolution of Architecture",
+   "units": 2,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "BITS F328",
+   "title": "Innovation Ecosystem and the Future of Work",
+   "units": 4,
+   "starred": true,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "BITS F385",
+   "title": "Introduction to Gender Studies",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "BITS F399",
+   "title": "Humanistic Theories of Science and Technology",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "BITS F419",
+   "title": "Management of Cross Cultural Engineering Teams",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "BITS F458",
+   "title": "Professional Practice and Ethics",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "GS F211",
+   "title": "Modern Political Concepts",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "GS F212",
+   "title": "Environment, Development & Climate Change",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "GS F213",
+   "title": "Development Theories",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "GS F221",
+   "title": "Business Communication",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "GS F222",
+   "title": "Language Lab Practice",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "GS F223",
+   "title": "Introduction to Mass Communication",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "GS F224",
+   "title": "Print and Audio-Visual Advertisement",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 333
+   }
+  },
+  {
+   "code": "GS F231",
+   "title": "Dynamics of Social Change",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F232",
+   "title": "Introductory Psychology",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F233",
+   "title": "Public Policy",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F234",
+   "title": "Development Economics",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F241",
+   "title": "Creative Writing",
+   "units": 3,
+   "starred": true,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F242",
+   "title": "Cultural Studies",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F243",
+   "title": "Current Affairs",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F244",
+   "title": "Reporting and Writing for Media",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F245",
+   "title": "Effective Public Speaking",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F311",
+   "title": "Introduction to Conflict Management",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F312",
+   "title": "Applied Philosophy",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F313",
+   "title": "Marxian Thoughts",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F321",
+   "title": "Mass Media Content and Design",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F322",
+   "title": "Critical Analysis of Literature and Cinema",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F325",
+   "title": "Journalism",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F326",
+   "title": "Creative Thinking",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F327",
+   "title": "Selected Reading",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F331",
+   "title": "Techniques in Social Research",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F332",
+   "title": "Contemporary India",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F333",
+   "title": "Public Administration",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F334",
+   "title": "Global Business, Technology and Knowledge Sharing",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F343",
+   "title": "Short Film and Video Production",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "GS F344",
+   "title": "Copywriting",
+   "units": 2,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F211",
+   "title": "Introduction to Arabic",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F221",
+   "title": "Readings from Drama",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F222",
+   "title": "Linguistics",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F223",
+   "title": "Appreciation of Indian Music",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F224",
+   "title": "English Skills for Academic",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F226",
+   "title": "Postmodernism",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F227",
+   "title": "Cross Cultural Skills",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F228",
+   "title": "Phonetics & Spoken English",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F229",
+   "title": "Introduction to Western Music",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F232",
+   "title": "Introduction to Development Studies",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F233",
+   "title": "Main Trends in Indian History",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F234",
+   "title": "Main Currents of Modern History",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F235",
+   "title": "Introductory Philosophy",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F236",
+   "title": "Symbolic Logic",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F237",
+   "title": "Contemporary Indian English Fiction",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F238",
+   "title": "Sports and Society",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F244",
+   "title": "Crime and New Media",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F245",
+   "title": "Gender, Science and Technology",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F246",
+   "title": "Philosophy of Nāgārjuna",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F247",
+   "title": "Social Informatics",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F248",
+   "title": "Introduction to Disability Studies",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F249",
+   "title": "Politics in India",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F250",
+   "title": "Comics and Visual Culture",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F251",
+   "title": "Introduction to Discourse and Conversational Analysis",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F252",
+   "title": "International Law",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F253",
+   "title": "Upcycling Theory",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F254",
+   "title": "F ood and Society",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F266",
+   "title": "Study Project",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F311",
+   "title": "Introduction to Videogame Studies",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F313",
+   "title": "Introduction to Contemporary Arts",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F314",
+   "title": "Maritime Studies and Blue Economy",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F315",
+   "title": "Society, Business, and Politics",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F316",
+   "title": "Popular Literature and Culture of South Asia",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F317",
+   "title": "Introduction to Globalization",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F318",
+   "title": "Introduction to Anthropology",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F319",
+   "title": "Lighting for Theatre and Films",
+   "units": 2,
+   "starred": true,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F323",
+   "title": "Organizational Psychology",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F325",
+   "title": "Cinematic Adaptation",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F326",
+   "title": "Humanities and Design",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F327",
+   "title": "Contemporary Drama",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F328",
+   "title": "Human Resource Development",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F329",
+   "title": "Musicology – An – Introduction",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F330",
+   "title": "Appreciation of Art",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F331",
+   "title": "Sankara’s Thoughts",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 334
+   }
+  },
+  {
+   "code": "HSS F332",
+   "title": "Cinematic Art",
+   "units": 3,
+   "starred": true,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F333",
+   "title": "Comparative Religion",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F334",
+   "title": "Srimad Bhagavad Gita",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F335",
+   "title": "Literary Criticism",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F336",
+   "title": "Modern Fiction",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F337",
+   "title": "English Literary Forms and Movements",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F338",
+   "title": "Comparative Indian Literature",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F339",
+   "title": "Theatre Art Acting and Production",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F340",
+   "title": "Post Colonial Literatures",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F341",
+   "title": "Performance Design",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F342",
+   "title": "Advanced Communicative English",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F343",
+   "title": "Professional Ethics",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F344",
+   "title": "Heritage of India",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F345",
+   "title": "Gandhian Thoughts",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F346",
+   "title": "International Relations",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F347",
+   "title": "Introduction to Carnatic Music",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F348",
+   "title": "Introduction to Hindustani Music",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F349",
+   "title": "Ecocriticism",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F350",
+   "title": "Human Rights: History, Theory & Practice",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F351",
+   "title": "Social and Political Ecology",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F352",
+   "title": "Technology, Work and Society",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F353",
+   "title": "Philosophy of Aesthetics",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F354",
+   "title": "Introduction to Islamic Economy",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F355",
+   "title": "Dictatorship, Democracy & Development",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F356",
+   "title": "Social Movements and Protest Politics",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F364",
+   "title": "Political Economy of Gulf Cooperation Council States",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F365",
+   "title": "Science of Sustainable Happiness",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F368",
+   "title": "Asian Cinemas and Cultures",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F369",
+   "title": "Caste and Gender in India",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F371",
+   "title": "Cities-Life, Issues and Conflicts",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F372",
+   "title": "Introduction to Social Psychology",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F373",
+   "title": "Shakespeare and Popular Culture",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F374",
+   "title": "Urban Modernity and the Renewal of Paris",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F375",
+   "title": "Business and Politics in Colonial and Post Colonial India: a historical approach",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F378",
+   "title": "Cinemas of India: From Past to Present",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F380",
+   "title": "Performance Studies",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F381",
+   "title": "Environmental Sustainability Ventures",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F382",
+   "title": "Housing: programs, policies and practices",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F383",
+   "title": "Introduction to Museum Studies",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F384",
+   "title": "Indian National Movement",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F385",
+   "title": "Mental Health Literacy for Youth",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F386",
+   "title": "Ocean Humanities",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F387",
+   "title": "History of Transport and Mobility in Modern Asia",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F388",
+   "title": "G andhi in Literature",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F389",
+   "title": "Introduction to Data and Society",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F390",
+   "title": "Science and the Humanities: the Two Culture Debate",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F391",
+   "title": "Acoustic Humanities",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F392",
+   "title": "Crisis Communication",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F393",
+   "title": "Introduction to Metacognition",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F394",
+   "title": "The Stud of Aging & Soc across cultures",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F395",
+   "title": "Chinese Politics",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F396",
+   "title": "Indian Psychology",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "HSS F399",
+   "title": "Introduction to American Literature",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "SANS F111",
+   "title": "Sanskrit",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  }
+ ],
+ "other_courses": [
+  {
+   "code": "BIO F231",
+   "title": "Biology Project Laboratory",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "BITS C483",
+   "title": "Indian Wisdom for Modern Management",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "BITS F211",
+   "title": "Introduction to IPR",
+   "units": 1,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "BITS F212",
+   "title": "Introduction to Human Rights",
+   "units": 1,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "BITS F213",
+   "title": "Introduction to Environmental studies",
+   "units": 1,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 335
+   }
+  },
+  {
+   "code": "BITS F215",
+   "title": "Applications of Bio-Medical Instrumentation Techniques in Healthcare",
+   "units": 2,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F217",
+   "title": "Environment, Development and Climate Change *BITS F225 Environmental Studies 3 0 3",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F311",
+   "title": "Image Processing",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F320",
+   "title": "Managerial Skills",
+   "units": 2,
+   "starred": true,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F321",
+   "title": "Legal and Economic Environment of Business",
+   "units": 4,
+   "starred": true,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F330",
+   "title": "Negotiation Skills and Techniques",
+   "units": 3,
+   "starred": true,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F333",
+   "title": "Project on Organisational Aspects",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F334",
+   "title": "Project on Organisational Aspects",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F372",
+   "title": "Data Communications and Networks",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F381",
+   "title": "TIC Projects",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F382",
+   "title": "Reading Course",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F383",
+   "title": "TIC Projects",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F398",
+   "title": "Creative Multimedia",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F414",
+   "title": "Introduction to Bioinformatics",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F416",
+   "title": "Introduction to Nanoscience",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F417",
+   "title": "Micro Fluidics and its Application",
+   "units": 4,
+   "starred": true,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F428",
+   "title": "Essentials of Strategic Management",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F431",
+   "title": "Flexible Manufacturing Systems",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F441",
+   "title": "Robotics",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F442",
+   "title": "Remote Sensing and Image Processing",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F444",
+   "title": "Artificial Intelligence",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F445",
+   "title": "Neural Networks and Applications",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F446",
+   "title": "Pattern Recognition",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F447",
+   "title": "Multimedia Computing",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F448",
+   "title": "Retail Management Systems",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F449",
+   "title": "Financial Engineering",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F461",
+   "title": "Software Engineering",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F462",
+   "title": "Renewable Energy",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F468",
+   "title": "New Venture Creation",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F469",
+   "title": "Financing Infrastructure Projects",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F488",
+   "title": "Services Management Systems",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F490",
+   "title": "Project Management",
+   "units": 4,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F493",
+   "title": "Business Analysis and Valuation",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS F494",
+   "title": "Environmental Impact Assessment",
+   "units": 4,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS G516",
+   "title": "Introduction to Business Sustainability",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "BITS G517",
+   "title": "Cross Cultural Management",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "MGTS F351",
+   "title": "Organisational Behaviour",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "MGTS F433",
+   "title": "Advertising and Sales Promotion",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "PHY F221",
+   "title": "Modern Physics",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  },
+  {
+   "code": "PHY F345",
+   "title": "Quantum Mechanics for Engineers awarded a non-letter grade (GOOD or POOR)]",
+   "units": 3,
+   "starred": false,
+   "source": {
+    "doc": "bulletin.pdf",
+    "page": 336
+   }
+  }
+ ],
+ "rule": "A student cannot count a course (or its equivalent) of his/her own discipline(s) as a humanities elective even if it is listed in this pool.",
+ "source": {
+  "doc": "bulletin.pdf",
+  "pages": [
+   333,
+   334,
+   335
+  ]
+ }
+}

@@ -1,0 +1,4077 @@
+{
+ "rules": {
+  "core_max": {
+   "courses": 4,
+   "units": 12
+  },
+  "electives_min": {
+   "courses": 2,
+   "units": 6
+  },
+  "total_min": {
+   "courses": 5,
+   "units": 15
+  },
+  "overlap": "At most 2 courses (and at most 6 units) of the minor requirement may be met by mandatory courses of the student's degree(s) (GIR excluding Humanities, or discipline core). No course may count toward two minors, or toward two majors and a minor.",
+  "project_limit": "At most one project/seminar type course may be used for a minor.",
+  "gpa": "Cumulative GPA of 4.5 or above (out of 10) in the courses applied to the minor.",
+  "declaration": "Declared at the end of the 2nd year.",
+  "source": {
+   "doc": "bulletin.pdf",
+   "page": 337,
+   "section": "IV-129"
+  }
+ },
+ "minors": [
+  {
+   "name": "Minor in Aeronautics",
+   "requirement": {
+    "courses": 6,
+    "units": 18
+   },
+   "core": [
+    {
+     "options": [
+      "AN F311"
+     ],
+     "title": "Principles of Aerodynamics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "AN F312"
+     ],
+     "title": "Aircraft Propulsion",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "AN F313"
+     ],
+     "title": "Flight Mechanics and Controls",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "AN F314"
+     ],
+     "title": "Introduction to Flight",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "AN F315"
+     ],
+     "title": "Aircraft Structures",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "ME F415"
+     ],
+     "title": "Gas Dynamics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "ME F418"
+     ],
+     "title": "Rocket and Spacecraft Propulsion",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "ME F435"
+     ],
+     "title": "Shape Memory Alloys: Fundamentals and Applications",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "ME F452"
+     ],
+     "title": "Composite Materials and Design",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "ME F482"
+     ],
+     "title": "Combustion",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "ME F485"
+     ],
+     "title": "Numerical Techniques for Fluid Flow & Heat Transfer",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "EEE F242"
+     ],
+     "title": "Control Systems",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "EEE F417"
+     ],
+     "title": "Computer Based Control Systems",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "ME F376"
+     ],
+     "title": "Design Project",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     338
+    ]
+   }
+  },
+  {
+   "name": "Minor in Biomedical Engineering",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "BITS F418"
+     ],
+     "title": "Introduction to Biomedical Engineering",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "PHA F214"
+     ],
+     "title": "Anatomy Physiology & Hygiene",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BIO F215"
+     ],
+     "title": "Biophysics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "BITS F315"
+     ],
+     "title": "Introduction to Cognitive Neuroscience",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "CHEM F414"
+     ],
+     "title": "Bio and Chemical Sensors",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "MST F333"
+     ],
+     "title": "Introduction to Biomaterials",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "PHA F215"
+     ],
+     "title": "Introduction to Molecular Biology and Immunology",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "BITS F415"
+     ],
+     "title": "Introduction to MEMS",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "BITS F417"
+     ],
+     "title": "Microfluidics and Its Application",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "BITS F441"
+     ],
+     "title": "Robotics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "BIO G532"
+     ],
+     "title": "Biostatistics and Biomodelling",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "CS F320"
+     ],
+     "title": "Foundations of Data Science",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "EEE F420"
+     ],
+     "title": "Biomedical Signal Processing",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "EEE F435"
+     ],
+     "title": "Digital Image Processing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "INSTR F432"
+     ],
+     "title": "Medical Instrumentation",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    },
+    {
+     "options": [
+      "ME F324"
+     ],
+     "title": "Cell and Tissue Biomechanics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 338
+     }
+    }
+   ],
+   "pools": {
+    "Science Pool": {
+     "min_courses": 1,
+     "codes": [
+      "BIO F215",
+      "BITS F315",
+      "CHEM F414",
+      "MST F333",
+      "PHA F215"
+     ]
+    },
+    "Engineering Pool": {
+     "min_courses": 2,
+     "codes": [
+      "BITS F415",
+      "BITS F417",
+      "BITS F441",
+      "BIO G532",
+      "CS F320",
+      "EEE F420",
+      "EEE F435",
+      "INSTR F432",
+      "ME F324"
+     ]
+    }
+   },
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     338
+    ]
+   }
+  },
+  {
+   "name": "Minor in Computational Economics",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "ECON F215"
+     ],
+     "title": "Computational Methods for Economics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "ECON F241"
+     ],
+     "title": "Econometric Methods",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "ECON F242"
+     ],
+     "title": "Microeconomics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BITS F314"
+     ],
+     "title": "Game Theory and its Applications",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "BITS F464"
+     ],
+     "title": "Machine Learning",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "CS F320"
+     ],
+     "title": "Foundations of Data Science",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "ECON F342"
+     ],
+     "title": "Applied Econometrics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "ECON F419"
+     ],
+     "title": "Advanced Microeconomics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "ECON F420"
+     ],
+     "title": "Applied Macroeconometrics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "MATH F424"
+     ],
+     "title": "Applied Stochastic Process",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     339
+    ]
+   }
+  },
+  {
+   "name": "Minor in Computational Mechanics",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "ME F427"
+     ],
+     "title": "Continuum Mechanics",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "BITS F464"
+     ],
+     "title": "Machine Learning",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "CS F422"
+     ],
+     "title": "Parallel Computing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "MATH F425"
+     ],
+     "title": "Numerical Linear Algebra",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "MATH F426"
+     ],
+     "title": "Mathematical Theory of Finite Element Methods",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "ME G512"
+     ],
+     "title": "Finite Element Methods",
+     "units": 5,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "MATH F313"
+     ],
+     "title": "Numerical Analysis",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "ME F321"
+     ],
+     "title": "Data Mining in Mechanical Sciences",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "ME F485"
+     ],
+     "title": "Numerical Techniques for Fluid Flow and Heat Transfer",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "ME F430"
+     ],
+     "title": "Fluid-structure Interactions",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    },
+    {
+     "options": [
+      "ME G515"
+     ],
+     "title": "Computational Fluid Dynamics",
+     "units": 5,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 339
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     339
+    ]
+   }
+  },
+  {
+   "name": "Minor in Computing and Intelligence",
+   "requirement": {
+    "courses": 6,
+    "units": 18
+   },
+   "core": [
+    {
+     "options": [
+      "BITS F232"
+     ],
+     "title": "Foundations of Data Structures and Algorithms",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F372"
+     ],
+     "title": "Operating Systems",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F407"
+     ],
+     "title": "Artificial intelligence",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BITS F311"
+     ],
+     "title": "Image Processing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "BITS F452"
+     ],
+     "title": "Blockchain Technology",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "BITS F459"
+     ],
+     "title": "Computer Vision",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "BITS F463"
+     ],
+     "title": "Cryptography",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "BITS F464"
+     ],
+     "title": "Machine Learning",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F212"
+     ],
+     "title": "Database Systems",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F213"
+     ],
+     "title": "Object Oriented Programming",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F301"
+     ],
+     "title": "Principles of Programming Languages",
+     "units": 2,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F303"
+     ],
+     "title": "Computer Networks",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F314"
+     ],
+     "title": "Software Development for Portable Devices",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F315"
+     ],
+     "title": "Information and Communication Technologies and Development",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F321"
+     ],
+     "title": "System Security",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F415"
+     ],
+     "title": "Data Mining",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F437"
+     ],
+     "title": "Generative Artificial Intelligence",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "IS F311"
+     ],
+     "title": "Computer Graphics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "IS F341"
+     ],
+     "title": "Software Engineering",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     340
+    ]
+   }
+  },
+  {
+   "name": "Minor in Data Science",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "BITS F464"
+     ],
+     "title": "Machine Learning",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F320"
+     ],
+     "title": "Foundations of Data Science",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "MATH F432"
+     ],
+     "title": "Applied statistical Methods",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BITS F453"
+     ],
+     "title": "Computational Learning Theory",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "BITS F454"
+     ],
+     "title": "Bio-Inspired Intelligence: Algorithms and Applications",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "BITS F459"
+     ],
+     "title": "Computer Vision",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F317"
+     ],
+     "title": "Reinforcement Learning",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F407"
+     ],
+     "title": "Artificial Intelligence",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F415"
+     ],
+     "title": "Data Mining",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F425"
+     ],
+     "title": "Deep Learning",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F426"
+     ],
+     "title": "Graph Mining",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F429"
+     ],
+     "title": "Natural Language Processing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F432"
+     ],
+     "title": "Brain-inspired Deep Learning",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F433"
+     ],
+     "title": "Computational Neuroscience",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F434"
+     ],
+     "title": "Data science for Healthcare",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 340
+     }
+    },
+    {
+     "options": [
+      "CS F437"
+     ],
+     "title": "Generative Artificial Intelligence",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "CS F469"
+     ],
+     "title": "Information Retrieval",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "CS G519"
+     ],
+     "title": "Social Media Analytics",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "MATH F212",
+      "ME F320"
+     ],
+     "title": "Optimization OR Engineering Optimization",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "MATH F353"
+     ],
+     "title": "Statistical Inference and applications",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "MATH F424"
+     ],
+     "title": "Applied Stochastic Processes",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "MATH F471"
+     ],
+     "title": "Nonlinear Optimization",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     340,
+     341
+    ]
+   }
+  },
+  {
+   "name": "Minor in Data Science in Climate and Health",
+   "requirement": {
+    "courses": 6,
+    "units": 17
+   },
+   "core": [
+    {
+     "options": [
+      "BITS F329"
+     ],
+     "title": "Project on Social and Environmental Applications of Data Science",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "BITS F464"
+     ],
+     "title": "Machine Learning",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "CS F320"
+     ],
+     "title": "Foundations of Data Science",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "MATH F432"
+     ],
+     "title": "Applied statistical Methods",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "CE F326"
+     ],
+     "title": "Impact of Climate Change on Water",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "CS F434"
+     ],
+     "title": "Data science for Healthcare",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "GS F212"
+     ],
+     "title": "Environmental Development and Climate Change",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "MPH G510"
+     ],
+     "title": "Biostatistics and Computers in Public Health",
+     "units": 5,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     341
+    ]
+   }
+  },
+  {
+   "name": "Minor in English Studies",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "GS F241"
+     ],
+     "title": "Creative Writing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "HSS F337"
+     ],
+     "title": "English Literary Forms and Movements",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "GS F221"
+     ],
+     "title": "Business Communication",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "GS F244"
+     ],
+     "title": "Reporting and Writing for Media",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "GS F245"
+     ],
+     "title": "Effective Public Speaking",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 341
+     }
+    },
+    {
+     "options": [
+      "HSS F222"
+     ],
+     "title": "Linguistics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F227"
+     ],
+     "title": "Cross Cultural Skills",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F228"
+     ],
+     "title": "Phonetics and Spoken English",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F342"
+     ],
+     "title": "Advanced Communicative English",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "GS F242"
+     ],
+     "title": "Cultural Studies",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "GS F322"
+     ],
+     "title": "Critical Analysis of Literature and Cinema",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F221"
+     ],
+     "title": "Readings from Drama",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F226"
+     ],
+     "title": "Postmodernism",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F237"
+     ],
+     "title": "Contemporary Indian English Fiction",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F316"
+     ],
+     "title": "Popular Literature and Culture of South Asia",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F327"
+     ],
+     "title": "Contemporary Drama",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F330"
+     ],
+     "title": "Appreciation of Art",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F332"
+     ],
+     "title": "Cinematic Arts",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F335"
+     ],
+     "title": "Literary Criticism",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F336"
+     ],
+     "title": "Modern Fiction",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F338"
+     ],
+     "title": "Comparative Indian Literature",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F340"
+     ],
+     "title": "Postcolonial Literatures",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F349"
+     ],
+     "title": "Ecocriticism",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F373"
+     ],
+     "title": "Shakespeare and Popular Culture",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "HSS F399"
+     ],
+     "title": "Introduction to American Literature",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     341,
+     342
+    ]
+   }
+  },
+  {
+   "name": "Minor in Entrepreneurship",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "BITS F468"
+     ],
+     "title": "New Venture Creation",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "BITS F482",
+      "ECON F414"
+     ],
+     "title": "Creating and Leading Entrepreneurial Organizations",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "ECON F212"
+     ],
+     "title": "Fundamentals of Finance and Accounting",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BITS F322"
+     ],
+     "title": "Venture Team Development and Organization",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "BITS F323"
+     ],
+     "title": "Venture Finance",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "BITS F324"
+     ],
+     "title": "Strategy for Entrepreneurs",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "BITS F325"
+     ],
+     "title": "New Product and Service Design",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "BITS F326"
+     ],
+     "title": "Design Thinking for Innovation & Entrepreneurship",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    },
+    {
+     "options": [
+      "BITS F427"
+     ],
+     "title": "Digital Marketing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 342
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     342,
+     343
+    ]
+   }
+  },
+  {
+   "name": "Minor in Film and Media",
+   "requirement": {
+    "courses": 6,
+    "units": 18
+   },
+   "core": [
+    {
+     "options": [
+      "GS F223"
+     ],
+     "title": "Introduction to Mass Communication",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "GS F244"
+     ],
+     "title": "Reporting and Writing for Media",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "GS F322"
+     ],
+     "title": "Critical Analysis of Literature and Cinema",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "GS F224"
+     ],
+     "title": "Print and Audio Visual Advertising",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "GS F242"
+     ],
+     "title": "Cultural Studies",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "GS F321"
+     ],
+     "title": "Mass Media Content and Design",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "GS F343"
+     ],
+     "title": "Short Film and Video Production",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "HSS F332"
+     ],
+     "title": "Cinematic Arts",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "HSS F391"
+     ],
+     "title": "Acoustic Humanities",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     343
+    ]
+   }
+  },
+  {
+   "name": "Minor in Finance",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "ECON F212"
+     ],
+     "title": "Fundamentals of Finance and Accounting",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "FIN F315"
+     ],
+     "title": "Financial Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "ECON F241"
+     ],
+     "title": "Econometric methods",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "ECON F312"
+     ],
+     "title": "Money banking and Financial markets",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "ECON F355"
+     ],
+     "title": "Business Analysis & Valuation",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "ECON F411"
+     ],
+     "title": "Project Appraisal",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "ECON F413"
+     ],
+     "title": "Financial Engineering",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "FIN F242"
+     ],
+     "title": "Introduction to Financial Mathematics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "FIN F243"
+     ],
+     "title": "Functions & Working of Stock Exchanges",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "FIN F311"
+     ],
+     "title": "Derivatives & Risk Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "FIN F312"
+     ],
+     "title": "Fundamentals of Taxation and Audit",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "FIN F313"
+     ],
+     "title": "Security Analysis & Portfolio Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "FIN F314"
+     ],
+     "title": "Investment Banking & Financial Services",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    },
+    {
+     "options": [
+      "FIN F414"
+     ],
+     "title": "Financial Risk Analytics and Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 343
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     343
+    ]
+   }
+  },
+  {
+   "name": "Minor in Management",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "BITS F428"
+     ],
+     "title": "Essentials of Strategic Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MGTS F211"
+     ],
+     "title": "Principles of Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MGTS F314"
+     ],
+     "title": "Essentials of Financial Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BITS F326"
+     ],
+     "title": "Design Thinking for Innovation and Entrepreneurship",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "BITS F330"
+     ],
+     "title": "Negotiation Skills and Techniques",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "ECON F415"
+     ],
+     "title": "New Venture Creation",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "ECON F434"
+     ],
+     "title": "International Business",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "ECON F435"
+     ],
+     "title": "Marketing Research",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "HSS F328"
+     ],
+     "title": "Human Resources Development",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MF F219"
+     ],
+     "title": "Operations Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MF F319"
+     ],
+     "title": "Supply Chain Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "ME F443"
+     ],
+     "title": "Quality Control, Assurance and Reliability",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MGTS F311"
+     ],
+     "title": "Marketing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MGTS F313"
+     ],
+     "title": "Product and Brand Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MGTS F315"
+     ],
+     "title": "Foundations of Business Analytics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MGTS F316"
+     ],
+     "title": "Managerial and Leadership Skills",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MGTS F351"
+     ],
+     "title": "Organizational Behaviour",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     344
+    ]
+   }
+  },
+  {
+   "name": "Minor in Materials Science and Engineering",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "CHE F243",
+      "ME F213"
+     ],
+     "title": "Materials Science and Engineering",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MST F331"
+     ],
+     "title": "Materials Characterization",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MST F332"
+     ],
+     "title": "Materials Processing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BITS F416"
+     ],
+     "title": "Introduction to Nanoscience",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "CHE F433"
+     ],
+     "title": "Corrosion Engineering",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "CHEM F223"
+     ],
+     "title": "Colloid and Surface Chemistry",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "CHEM F326"
+     ],
+     "title": "Solid State Chemistry",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "CHEM F336"
+     ],
+     "title": "Nanochemistry",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "ME F452"
+     ],
+     "title": "Composite Materials and Design",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MST F333"
+     ],
+     "title": "Introduction to Biomaterials",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MST F334"
+     ],
+     "title": "Materials for Catalytic Applications",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MST F335"
+     ],
+     "title": "Coating and thin film technology",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MST F336"
+     ],
+     "title": "Glass Technology",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MST F337"
+     ],
+     "title": "Materials for Energy Applications",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MST F338"
+     ],
+     "title": "Metals and Alloys",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "MST F339"
+     ],
+     "title": "Polymer Materials",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "PHY F379"
+     ],
+     "title": "Thin Film Technology",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "PHY F414"
+     ],
+     "title": "Physics of Advanced Materials",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    },
+    {
+     "options": [
+      "PHY F416"
+     ],
+     "title": "Soft condensed Matter Physics",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 344
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     344
+    ]
+   }
+  },
+  {
+   "name": "Minor in Nanoscience and Nanobiotechnology",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "BIOT F422"
+     ],
+     "title": "Nanobiotechnology",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "BITS F416"
+     ],
+     "title": "Introduction to Nanoscience",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "CHE F243",
+      "ME F216",
+      "MF F216"
+     ],
+     "title": "Material Science and Engineering",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BIO F417"
+     ],
+     "title": "Biomolecular Modelling",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "CHEM F223"
+     ],
+     "title": "Colloid and Surface Chemistry",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "CHEM F327"
+     ],
+     "title": "Electrochemistry: Fundamentals and Applications",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "CHEM F328"
+     ],
+     "title": "Supramolecular Chemistry",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "CHEM F333"
+     ],
+     "title": "Chemistry of Materials",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "CHEM F336"
+     ],
+     "title": "Nanochemistry",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "CHEM F414"
+     ],
+     "title": "Bio and Chemical Sensors",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "MST F333"
+     ],
+     "title": "Introduction to Biomaterials",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     345
+    ]
+   }
+  },
+  {
+   "name": "Minor in Philosophy, Economics, and Politics",
+   "requirement": {
+    "courses": 6,
+    "units": 18
+   },
+   "core": [
+    {
+     "options": [
+      "ECON F211"
+     ],
+     "title": "Principles of Economics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "GS F211"
+     ],
+     "title": "Modern Political Concepts",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "HSS F235"
+     ],
+     "title": "Introductory Philosophy",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "GS F231"
+     ],
+     "title": "Dynamics of Social Change",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "GS F234"
+     ],
+     "title": "Development Economics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "GS F243"
+     ],
+     "title": "Current Affairs",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "GS F312"
+     ],
+     "title": "Applied Philosophy",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "GS F313"
+     ],
+     "title": "Marxian Thoughts",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "GS F332"
+     ],
+     "title": "Contemporary India",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "GS F333"
+     ],
+     "title": "Public Administration",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "HSS F232"
+     ],
+     "title": "Introduction to Development Studies",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "HSS F236"
+     ],
+     "title": "Symbolic Logic",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "HSS F315"
+     ],
+     "title": "Society, Business, and Politics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "HSS F322"
+     ],
+     "title": "Social and Political Ecology",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "HSS F331"
+     ],
+     "title": "Sankara’s Thoughts",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "HSS F333"
+     ],
+     "title": "Comparative Religion",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "HSS F343"
+     ],
+     "title": "Professional Ethics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "HSS F345"
+     ],
+     "title": "Gandhian Thoughts",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "HSS F346"
+     ],
+     "title": "International Relations",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "HSS F350"
+     ],
+     "title": "Human Rights: History, Theory and Practice",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 345
+     }
+    },
+    {
+     "options": [
+      "HSS F353"
+     ],
+     "title": "Philosophy of Aesthetics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "HSS F354"
+     ],
+     "title": "Introduction to Islamic Economy",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "HSS F355"
+     ],
+     "title": "Dictatorship, Democracy & Development",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "HSS F356"
+     ],
+     "title": "Social Movements and Protest Politics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     345,
+     346
+    ]
+   }
+  },
+  {
+   "name": "Minor in Physics",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "PHY F212",
+      "ECE F212",
+      "INSTR F212"
+     ],
+     "title": "Electromagnetic Theory – 1 or Electromagnetic Theory",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F242"
+     ],
+     "title": "Quantum Mechanics – 1",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F312"
+     ],
+     "title": "Statistical Mechanics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BITS F316"
+     ],
+     "title": "Nonlinear Dynamics and Chaos",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "BITS F386"
+     ],
+     "title": "Quantum Information and Computing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F211"
+     ],
+     "title": "Classical Mechanics",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F213"
+     ],
+     "title": "Optics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F214"
+     ],
+     "title": "Electricity Magnetism and Optics Lab",
+     "units": 2,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F215"
+     ],
+     "title": "Introduction to Astronomy and Astrophysics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F241"
+     ],
+     "title": "Electromagnetic Theory – 2",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F243"
+     ],
+     "title": "Mathematical Method of Physics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F244"
+     ],
+     "title": "Modern Physics Lab",
+     "units": 2,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F311"
+     ],
+     "title": "Quantum Mechanics – 2",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F313"
+     ],
+     "title": "Computational Physics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F315"
+     ],
+     "title": "Theory of Relativity",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F318"
+     ],
+     "title": "Atoms and Photons",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F341"
+     ],
+     "title": "Solid State Physics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F342"
+     ],
+     "title": "Atomic and Molecular Physics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F343"
+     ],
+     "title": "Nuclear and Particle Physics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F346"
+     ],
+     "title": "Laser Science and Technology",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F418"
+     ],
+     "title": "Lasers and Applications",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F426"
+     ],
+     "title": "Physics of Semiconductors Devices",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F427"
+     ],
+     "title": "Atmospheric Physics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F428"
+     ],
+     "title": "Quantum Information Theory",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "PHY F434"
+     ],
+     "title": "Foundations of Quantum Mechanics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     346
+    ]
+   }
+  },
+  {
+   "name": "Minor in Public Policy",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "GS F233"
+     ],
+     "title": "Public Policy",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "GS F333"
+     ],
+     "title": "Public Administration",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "HSS F232"
+     ],
+     "title": "Introduction to Development Studies",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "HSS F317"
+     ],
+     "title": "Introduction to Globalisation",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "HSS F322"
+     ],
+     "title": "Social and Political Ecology",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "HSS F361"
+     ],
+     "title": "Urban Policy and Governance",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "HSS F362"
+     ],
+     "title": "Local Governance and Participation",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    },
+    {
+     "options": [
+      "HSS F363"
+     ],
+     "title": "Disaster and Development",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 346
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     346
+    ]
+   }
+  },
+  {
+   "name": "Minor in Quantum Information and Technologies",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "BITS F386"
+     ],
+     "title": "Quantum Information and Computations",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BITS F463"
+     ],
+     "title": "Cryptography",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "BITS F464"
+     ],
+     "title": "Machine Learning",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "CS F316"
+     ],
+     "title": "Quantum Architecture and Programming",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "PHY F242",
+      "PHY F345",
+      "CHEM F213"
+     ],
+     "title": "Quantum Mechanics I OR Quantum Mechanics for Engineers OR Physical Chemistry II",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "PHY F420",
+      "PHY F318"
+     ],
+     "title": "Quantum Optics OR Atoms and Photons",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "PHY F428"
+     ],
+     "title": "Quantum Information Theory",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "PHY F434"
+     ],
+     "title": "Foundations of Quantum Mechanics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     347
+    ]
+   }
+  },
+  {
+   "name": "Minor in Robotics and Automation",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "BITS F441"
+     ],
+     "title": "Robotics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "BITS F327"
+     ],
+     "title": "Artificial Intelligence for Robotics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BITS F312"
+     ],
+     "title": "Neural Network & Fuzzy Logic",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "BITS F415"
+     ],
+     "title": "Introduction To MEMS",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "BITS F442"
+     ],
+     "title": "Remote Sensing and Image Processing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "BITS F451"
+     ],
+     "title": "Autonomous Mobile Robotics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "BITS F464"
+     ],
+     "title": "Machine Learning",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "ECE F434"
+     ],
+     "title": "Digital Signal Processing",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "EEE F411"
+     ],
+     "title": "Internet of Things (IoT)",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "EEE F422"
+     ],
+     "title": "Modern Control Systems",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "EEE G512"
+     ],
+     "title": "Embedded System Design",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "INSTR F343"
+     ],
+     "title": "Industrial Instrumentation and Control",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "INSTR G611"
+     ],
+     "title": "Advanced Control Systems",
+     "units": 5,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "ME F221",
+      "MF F221"
+     ],
+     "title": "Mechanisms and Machines",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "ME F426"
+     ],
+     "title": "Industry 4.0 in Manufacturing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "ME F432"
+     ],
+     "title": "Computer Aided Manufacturing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "MF F311"
+     ],
+     "title": "Mechatronics & Automation",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    },
+    {
+     "options": [
+      "MSE G511"
+     ],
+     "title": "Mechatronics",
+     "units": 5,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 347
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     347
+    ]
+   }
+  },
+  {
+   "name": "Minor in Semiconductor Devices and Technology",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "EEE F437"
+     ],
+     "title": "Semiconductor Fabrication Technology",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BITS F415"
+     ],
+     "title": "Introduction to MEMS",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "EEE F477"
+     ],
+     "title": "Modelling of Field-Effect Nano Devices",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "EEE G595"
+     ],
+     "title": "Nanoelectronics and Nanophotonics",
+     "units": 5,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "MEL G514"
+     ],
+     "title": "Nanoelectronic Memories and Technology",
+     "units": 5,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "MST F331"
+     ],
+     "title": "Material Characterization",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "PHY F341"
+     ],
+     "title": "Solid State Physics",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "PHY F379"
+     ],
+     "title": "Thin Film Technology",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     348
+    ]
+   }
+  },
+  {
+   "name": "Minor in Supply Chain Analytics",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "BITS F455"
+     ],
+     "title": "Analytics for Supply Chain",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "MF F319"
+     ],
+     "title": "Supply Chain Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "MF F422"
+     ],
+     "title": "Supply Chain Modelling and Empirical Analysis",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "ME F443"
+     ],
+     "title": "Quality Control Assurance and Reliability",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "MF F321"
+     ],
+     "title": "Procurement Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "MF F418"
+     ],
+     "title": "Lean Manufacturing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "MF F485"
+     ],
+     "title": "Sustainable Manufacturing",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "MATH F212",
+      "ME F320",
+      "MF F320"
+     ],
+     "title": "Optimization OR Engineering Optimization OR Engineering Optimization",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "MATH F242"
+     ],
+     "title": "Operations Research",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    },
+    {
+     "options": [
+      "MATH F353"
+     ],
+     "title": "Statistical Inference and Applications",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 348
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     348
+    ]
+   }
+  },
+  {
+   "name": "Minor in Water and Sanitation",
+   "requirement": {
+    "courses": 5,
+    "units": 15
+   },
+   "core": [
+    {
+     "options": [
+      "BIO F216"
+     ],
+     "title": "Water Sanitation and Solid Waste Management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "BIO F217"
+     ],
+     "title": "Laboratory for Water Sanitation and Solid Waste management",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BIO F266"
+     ],
+     "title": "Study Project",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "SAN G511"
+     ],
+     "title": "Sanitation Technology",
+     "units": 5,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "SAN G512"
+     ],
+     "title": "Sanitation and Public Health",
+     "units": 5,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "SAN G513"
+     ],
+     "title": "Sanitation Governance Behaviour change and Advocacy",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "SAN G514"
+     ],
+     "title": "Sanitation Finance and Project Management",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "SAN G515"
+     ],
+     "title": "Emergency Sanitation & Leadership",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     349
+    ]
+   }
+  },
+  {
+   "name": "Minor in Tissue Engineering",
+   "requirement": null,
+   "core": [
+    {
+     "options": [
+      "MST F333"
+     ],
+     "title": "Introduction to Biomaterials",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "BITS F417"
+     ],
+     "title": "Microfluidics and Its Application",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "ME F423"
+     ],
+     "title": "Microfluidics and Its Application",
+     "units": null,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "BITS F418"
+     ],
+     "title": "Introduction to Biomedical Engineering",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "BIOT F422"
+     ],
+     "title": "Nanobiotechnology",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "BIO F311"
+     ],
+     "title": "Recombinant DNA Technology",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "CHE F414"
+     ],
+     "title": "Transport Phenomena",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    }
+   ],
+   "electives": [
+    {
+     "options": [
+      "BIO F352"
+     ],
+     "title": "Cell and Tissue Culture Technology",
+     "units": 4,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "BIO F422"
+     ],
+     "title": "Fundamentals of Tissue Engineering",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "CHE F421"
+     ],
+     "title": "Biochemical Engineering",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "DE G513"
+     ],
+     "title": "Tribiology",
+     "units": 5,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "ME F211"
+     ],
+     "title": "Mechanics of Solids",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "ME F216"
+     ],
+     "title": "Materials Science & Engineering",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    },
+    {
+     "options": [
+      "ME F452"
+     ],
+     "title": "Composite Materials and Design",
+     "units": 3,
+     "source": {
+      "doc": "bulletin.pdf",
+      "page": 349
+     }
+    }
+   ],
+   "pools": {},
+   "source": {
+    "doc": "bulletin.pdf",
+    "pages": [
+     349
+    ]
+   }
+  }
+ ]
+}
