@@ -81,6 +81,17 @@ def parse(pdf):
                 courses.setdefault(code, cur) if not cur.get("_dup") else None
                 if cur.get("_dup"):
                     courses[code].setdefault("alt_descriptions", []).append(cur)
+                # title wrapped onto the next line: 'Foundations of ... Algo-' + 'rithms', '... Biology &' + 'Immunology'
+                if re.search(r"(-|&|,|\b(and|of|in|for|to|with|the))$", cur["title"]) and i + 1 < len(lines):
+                    nxt = lines[i + 1][1]
+                    first_sentence = re.split(r"(?<=[a-z])\s+(?=[A-Z])", nxt, maxsplit=1)[0] if len(nxt) > 40 else nxt
+                    if not HEADER.match(nxt) and len(first_sentence) <= 40:
+                        joiner = "" if cur["title"].endswith("-") else " "
+                        cur["title"] = (cur["title"].rstrip("-") + joiner + first_sentence).strip()
+                        rest = nxt[len(first_sentence):].strip()
+                        if rest:
+                            cur["description"] = rest
+                        i += 1
                 i += 1
                 continue
         if cur is not None:

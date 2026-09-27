@@ -1560,11 +1560,11 @@
  },
  {
   "code": "BIO F216",
-  "title": "Water,Sanitation and Solid Waste Manage-",
+  "title": "Water,Sanitation and Solid Waste Management",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "ment Municipal Solid Waste Management in Developing Countries, Planning and Design of Sanitation Systems and Technologies, Introduction to Household Water Treatment and Safe Storage, Introduction to Faecal sludge management.",
+  "description": "Municipal Solid Waste Management in Developing Countries, Planning and Design of Sanitation Systems and Technologies, Introduction to Household Water Treatment and Safe Storage, Introduction to Faecal sludge management.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 617,
@@ -2087,7 +2087,7 @@
  },
  {
   "code": "BIO G510",
-  "title": "Application of Computers and Statistics in",
+  "title": "Application of Computers and Statistics in Biology",
   "L": null,
   "P": null,
   "units": 5,
@@ -3396,11 +3396,11 @@
  },
  {
   "code": "BITS F215",
-  "title": "Applications of Bio-Medical Instrumenta-",
+  "title": "Applications of Bio-Medical Instrumentation Techniques in Healthcare",
   "L": 2,
   "P": 0,
   "units": 2,
-  "description": "tion Techniques in Healthcare Introduction to biomechanics, neuro-prosthetics based on functionsensory, motor, neuro prosthetics; based on regulationperson, auto regulated as adjuncts or alternates to therapy, implants, prosthetics for vision, audition, pain relief, pharmako-kinetic studies, brain-machine interface –methods, rapid prototyping technique in developing artificial bones, tissues, tendons, cartilages, and various applications of these techniques in improvement of health-care.",
+  "description": "Introduction to biomechanics, neuro-prosthetics based on functionsensory, motor, neuro prosthetics; based on regulationperson, auto regulated as adjuncts or alternates to therapy, implants, prosthetics for vision, audition, pain relief, pharmako-kinetic studies, brain-machine interface –methods, rapid prototyping technique in developing artificial bones, tissues, tendons, cartilages, and various applications of these techniques in improvement of health-care.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 623,
@@ -3532,11 +3532,11 @@
  },
  {
   "code": "BITS F232",
-  "title": "Foundations of Data Structures and Algo-",
+  "title": "Foundations of Data Structures and Algorithms",
   "L": 3,
   "P": 1,
   "units": 4,
-  "description": "rithms Algorithm Analysis – Mathematical preliminaries, Sorting Algorithms, Search Algorithms, Linear Structures, Non-Linear Structures, Hashing, Non-Linear Structures, Graphs and Algorithms. (Open elective for non-B.E. Computer Science students)",
+  "description": "Algorithm Analysis – Mathematical preliminaries, Sorting Algorithms, Search Algorithms, Linear Structures, Non-Linear Structures, Hashing, Non-Linear Structures, Graphs and Algorithms. (Open elective for non-B.E. Computer Science students)",
   "source": {
    "doc": "bulletin.pdf",
    "page": 624,
@@ -3600,7 +3600,7 @@
  },
  {
   "code": "BITS F236",
-  "title": "Foundations of Artificial Intelligence for",
+  "title": "Foundations of Artificial Intelligence for STEM",
   "L": null,
   "P": null,
   "units": 4,
@@ -3668,11 +3668,11 @@
  },
  {
   "code": "BITS F240",
-  "title": "Introduction to Environmental and Sus-",
+  "title": "Introduction to Environmental and Sustainable Systems Engineering",
   "L": null,
   "P": null,
   "units": 3,
-  "description": "tainable Systems Engineering Introduction to environmental engineering; Triple bottom line concept; Introduction to systems engineering; Innovation, technology, and sustainability; Social essence of engineering; Circular economy and sustainability; Elements of V-cycle; Project management and systems engineering; Project work covering the essence of environmental and sustainable systems engineering. This course introduces sustainability as a decision-making framework for design in engineering. In addition to the introduction to sustainability, the course comprises a project and problem-based learning (PBL) project that focuses on applying sustainable design in current engineering practice. Students will work in a group on a specific local project. They will recommend a design suitable for the project scope. The project is open-ended and aims to integrate student’s knowledge from concurrent first-year courses. It helps the students to identify and develop those generic skills that they will need in their future career. These include skills such as teamwork, communication, computing, drawing, research, and reflection.",
+  "description": "Introduction to environmental engineering; Triple bottom line concept; Introduction to systems engineering; Innovation, technology, and sustainability; Social essence of engineering; Circular economy and sustainability; Elements of V-cycle; Project management and systems engineering; Project work covering the essence of environmental and sustainable systems engineering. This course introduces sustainability as a decision-making framework for design in engineering. In addition to the introduction to sustainability, the course comprises a project and problem-based learning (PBL) project that focuses on applying sustainable design in current engineering practice. Students will work in a group on a specific local project. They will recommend a design suitable for the project scope. The project is open-ended and aims to integrate student’s knowledge from concurrent first-year courses. It helps the students to identify and develop those generic skills that they will need in their future career. These include skills such as teamwork, communication, computing, drawing, research, and reflection.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 624,
@@ -3736,11 +3736,11 @@
  },
  {
   "code": "BITS F313",
-  "title": "Multicriterion Decision Making in Engi-",
+  "title": "Multicriterion Decision Making in Engineering and Management",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "neering and Management Introduction, Single Objective Optimization, Estimation of weights, Multiobjective optimization, Classification Methods, Discrete Multicriterion Decision Making, Fuzzy Logic based discrete MCDM, Correlation coefficients and group decision making, Advanced topics of decision making, Case studies.",
+  "description": "Introduction, Single Objective Optimization, Estimation of weights, Multiobjective optimization, Classification Methods, Discrete Multicriterion Decision Making, Fuzzy Logic based discrete MCDM, Correlation coefficients and group decision making, Advanced topics of decision making, Case studies.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 625,
@@ -3855,11 +3855,11 @@
  },
  {
   "code": "BITS F321",
-  "title": "Legal and Economic Environment of Busi-",
+  "title": "Legal and Economic Environment of Business",
   "L": null,
   "P": null,
   "units": 4,
-  "description": "ness Indian contracts act, sale of goods act, negotiable instruments act, companies act, corporate tax laws, consumer protection and unfair trade practices act, FEMA, Industrial policy, macroeconomic environment, fiscal and monetary policy, overview of Indian economy, economic indicators.",
+  "description": "Indian contracts act, sale of goods act, negotiable instruments act, companies act, corporate tax laws, consumer protection and unfair trade practices act, FEMA, Industrial policy, macroeconomic environment, fiscal and monetary policy, overview of Indian economy, economic indicators.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 625,
@@ -3872,11 +3872,11 @@
  },
  {
   "code": "BITS F322",
-  "title": "Venture Team Development and Organiza-",
+  "title": "Venture Team Development and Organization",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "tion Building and managing high performance teams; Multidisciplinary teams; Virtual teams; Homogeneity and diversity in teams; Team building – inspiration , interdependence, interaction and integrity; Leadership; Motivation; Compensation and ESOPs; Negotiation Skills and techniques; Interpersonal skills; Communication skills; Conflict Management; Decision making; SMART goals; Perception and bias; Cultural and emotional intelligence; Permanent and contingent workforce; Causes and remedies of dysfunctional teams.",
+  "description": "Building and managing high performance teams; Multidisciplinary teams; Virtual teams; Homogeneity and diversity in teams; Team building – inspiration , interdependence, interaction and integrity; Leadership; Motivation; Compensation and ESOPs; Negotiation Skills and techniques; Interpersonal skills; Communication skills; Conflict Management; Decision making; SMART goals; Perception and bias; Cultural and emotional intelligence; Permanent and contingent workforce; Causes and remedies of dysfunctional teams.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 625,
@@ -3940,11 +3940,11 @@
  },
  {
   "code": "BITS F326",
-  "title": "Design Thinking for Innovation & Entrepre-",
+  "title": "Design Thinking for Innovation & Entrepreneurship",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "neurship Design thinking and innovation mind-set; Creative confidence; Design thinking process; Design thinking – need finding and empathy; Idea generation; Prototyping and experimentation; Human centred design ethos; Innovation through brainstorming; Innovation through prototyping; Innovation by design; Case studies for innovation in all spheres: product, service, business, finance/investments, marketing; Designing a startup; Designing in teams; Designing to use; Design thinking in innovation to handle the unexpected; Innovating within the framework of entrepreneurship.",
+  "description": "Design thinking and innovation mind-set; Creative confidence; Design thinking process; Design thinking – need finding and empathy; Idea generation; Prototyping and experimentation; Human centred design ethos; Innovation through brainstorming; Innovation through prototyping; Innovation by design; Case studies for innovation in all spheres: product, service, business, finance/investments, marketing; Designing a startup; Designing in teams; Designing to use; Design thinking in innovation to handle the unexpected; Innovating within the framework of entrepreneurship.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 626,
@@ -3974,7 +3974,7 @@
  },
  {
   "code": "BITS F328",
-  "title": "Innovation Ecosystem and the Future of",
+  "title": "Innovation Ecosystem and the Future of Work",
   "L": null,
   "P": null,
   "units": 4,
@@ -3991,7 +3991,7 @@
  },
  {
   "code": "BITS F329",
-  "title": "Social and Environmental Applications of",
+  "title": "Social and Environmental Applications of Data Science",
   "L": null,
   "P": null,
   "units": 3,
@@ -4280,11 +4280,11 @@
  },
  {
   "code": "BITS F399",
-  "title": "Humanistic Theories of Science and Tech-",
+  "title": "Humanistic Theories of Science and Technology",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "nology Ways of considering the interrelationship among three of the major dimensions of our culture: its science, its technology and its humanistic orientation. Alternative ways of thinking about science and technology, diverse approaches of humanistic scholarship to studying science and technology, along with their historical sources. Approaches by social scientists to analyze technical fields of science and technology.",
+  "description": "Ways of considering the interrelationship among three of the major dimensions of our culture: its science, its technology and its humanistic orientation. Alternative ways of thinking about science and technology, diverse approaches of humanistic scholarship to studying science and technology, along with their historical sources. Approaches by social scientists to analyze technical fields of science and technology.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 627,
@@ -4830,7 +4830,7 @@
  },
  {
   "code": "BITS F454",
-  "title": "Bio-Inspired Intelligence: Algorithms and",
+  "title": "Bio-Inspired Intelligence: Algorithms and Applications",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -5121,11 +5121,11 @@
  },
  {
   "code": "BITS F482",
-  "title": "Creating and Leading Entrepreneurial Or-",
+  "title": "Creating and Leading Entrepreneurial Organizations",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "ganizations Fundamentals of entrepreneurship; elements of leadership; identifying business opportunities; market study and research; business plans; finance, issues in raising finance; venture capitalist evaluation of business plans, technical aspects for the project, corporate strategies for growth; legal aspect to entrepreneurship, people skills, marketing and branding; creativity and communication.",
+  "description": "Fundamentals of entrepreneurship; elements of leadership; identifying business opportunities; market study and research; business plans; finance, issues in raising finance; venture capitalist evaluation of business plans, technical aspects for the project, corporate strategies for growth; legal aspect to entrepreneurship, people skills, marketing and branding; creativity and communication.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 631,
@@ -5359,7 +5359,7 @@
  },
  {
   "code": "BITS G521",
-  "title": "Fourth Generation Languages and",
+  "title": "Fourth Generation Languages and Applications",
   "L": 1,
   "P": 3,
   "units": 4,
@@ -5767,11 +5767,11 @@
  },
  {
   "code": "BITS G644",
-  "title": "Development and Use of Computer Soft-",
+  "title": "Development and Use of Computer Software",
   "L": null,
   "P": null,
   "units": 5,
-  "description": "ware Concepts and operations of processors; concept, capabilities and types of software; review and case studies of computer applications. Principles and use of standard software packages. Principles of software creation: processing concepts, flowcharting and algorithms, programming constructs, programming languages, program development sequence. Concepts of data and information: files and databases, logical data storage structures. Information Systems: need, significance, concepts, their Analysis, Design and Implementation. Software Engineering: software life cycle, with special reference to software planning, software requirements and software maintenance. The course would terminate with a term paper on a specialised area of the development and use of computer software.",
+  "description": "Concepts and operations of processors; concept, capabilities and types of software; review and case studies of computer applications. Principles and use of standard software packages. Principles of software creation: processing concepts, flowcharting and algorithms, programming constructs, programming languages, program development sequence. Concepts of data and information: files and databases, logical data storage structures. Information Systems: need, significance, concepts, their Analysis, Design and Implementation. Software Engineering: software life cycle, with special reference to software planning, software requirements and software maintenance. The course would terminate with a term paper on a specialised area of the development and use of computer software.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 633,
@@ -5886,11 +5886,11 @@
  },
  {
   "code": "BITS N301T",
-  "title": "Personality Integration Leadership Orien-",
+  "title": "Personality Integration Leadership Orientation and Teamwork",
   "L": null,
   "P": null,
   "units": 3,
-  "description": "tation and Teamwork Concept of personality and its role in personal and career growth : self-assessment of strengths and weakness, visioning and goal setting, development of action plans for personal growth; Effective communication, collaboration and conflict management: understanding the process and importance of communication and feedback, assessment of individual conflict management styles, importance of nonverbal communication, creating effective presentations and resume; Leadership and emotional intelligence: understanding individual leadership style, understanding the needs of followers, leveraging the power of EI for relationship building and leading; Team work and networking: building effective teams, decision making and leadership in teams, developing effective networks. (This course will be offered as an Audit Type course for both FirstDegree & Higher-Degree Students)",
+  "description": "Concept of personality and its role in personal and career growth : self-assessment of strengths and weakness, visioning and goal setting, development of action plans for personal growth; Effective communication, collaboration and conflict management: understanding the process and importance of communication and feedback, assessment of individual conflict management styles, importance of nonverbal communication, creating effective presentations and resume; Leadership and emotional intelligence: understanding individual leadership style, understanding the needs of followers, leveraging the power of EI for relationship building and leading; Team work and networking: building effective teams, decision making and leadership in teams, developing effective networks. (This course will be offered as an Audit Type course for both FirstDegree & Higher-Degree Students)",
   "source": {
    "doc": "bulletin.pdf",
    "page": 634,
@@ -6517,7 +6517,7 @@
  },
  {
   "code": "CE F419",
-  "title": "Geotechnical Earthquake Engineering and",
+  "title": "Geotechnical Earthquake Engineering and Machine Foundation",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -6551,11 +6551,11 @@
  },
  {
   "code": "CE F421",
-  "title": "Analysis and Design of FRP Reinforced Con-",
+  "title": "Analysis and Design of FRP Reinforced Concrete Structures",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "crete Structures Course description is to be developed.",
+  "description": "Course description is to be developed.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 637,
@@ -6653,7 +6653,7 @@
  },
  {
   "code": "CE F428",
-  "title": "Earthquake Resistant Design and",
+  "title": "Earthquake Resistant Design and Construction",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -6976,11 +6976,11 @@
  },
  {
   "code": "CE G522",
-  "title": "Pavement Design, Maintenance and Manage-",
+  "title": "Pavement Design, Maintenance and Management",
   "L": 3,
   "P": 2,
   "units": 5,
-  "description": "ment Materials for road construction: specifications and tests on binder, aggregate and soil; Asphalt mix design; Pavement structure; Stresses in flexible and rigid pavements; Design of flexible and rigid pavements; Pavement Management System (PMS) implementation and operation; Data base requirements; Road condition surveys; Data management; Pavement condition analysis; Determination of maintenance and rehabilitation needs at network level; Panel inspection; Prioritization and optimization; Budgets, programmes and plans of action.",
+  "description": "Materials for road construction: specifications and tests on binder, aggregate and soil; Asphalt mix design; Pavement structure; Stresses in flexible and rigid pavements; Design of flexible and rigid pavements; Pavement Management System (PMS) implementation and operation; Data base requirements; Road condition surveys; Data management; Pavement condition analysis; Determination of maintenance and rehabilitation needs at network level; Panel inspection; Prioritization and optimization; Budgets, programmes and plans of action.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 638,
@@ -6993,11 +6993,11 @@
  },
  {
   "code": "CE G523",
-  "title": "Transportation Systems Planning and Man-",
+  "title": "Transportation Systems Planning and Management",
   "L": 3,
   "P": 1,
   "units": 4,
-  "description": "agement System and environment; sequential transportation systems planning: trip generation, trip distribution, modal split and traffic assignment. Transportation Systems Management (TSM) actions: traffic management techniques for improving vehicular flow, preferential treatment for high occupancy modes, demand management technique for reduced traffic demand, staggered hours, vehicle restrictions; planning for pedestrians, parking planning; Methods of accident data collection and analysis.",
+  "description": "System and environment; sequential transportation systems planning: trip generation, trip distribution, modal split and traffic assignment. Transportation Systems Management (TSM) actions: traffic management techniques for improving vehicular flow, preferential treatment for high occupancy modes, demand management technique for reduced traffic demand, staggered hours, vehicle restrictions; planning for pedestrians, parking planning; Methods of accident data collection and analysis.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 638,
@@ -7010,7 +7010,7 @@
  },
  {
   "code": "CE G524",
-  "title": "Urban Mass Transit Planning, Operations and",
+  "title": "Urban Mass Transit Planning, Operations and Management",
   "L": 3,
   "P": 1,
   "units": 4,
@@ -7078,7 +7078,7 @@
  },
  {
   "code": "CE G528",
-  "title": "Selection of Construction Equipment and",
+  "title": "Selection of Construction Equipment and Modeling",
   "L": 3,
   "P": 1,
   "units": 4,
@@ -7163,7 +7163,7 @@
  },
  {
   "code": "CE G533",
-  "title": "Advanced Composite Materials for",
+  "title": "Advanced Composite Materials for Structures",
   "L": 3,
   "P": 1,
   "units": 4,
@@ -7367,11 +7367,11 @@
  },
  {
   "code": "CE G547",
-  "title": "Pavement Failures, Evaluation and Rehabili-",
+  "title": "Pavement Failures, Evaluation and Rehabilitation",
   "L": 3,
   "P": 1,
   "units": 4,
-  "description": "tation Pavement deterioration, distress and different types of failures, pavement surface condition deterioration such as slipperiness, unevenness, rutting, cracking; pot holes, etc., causes, effects, methods of measurement and treatment, use of modern equipment for pavement surface condition measurements, Analysis of data, interpretation. Structural deterioration of pavements: causes, effects, methods of treatment. Structural evaluation of flexible pavements by rebound deflection method, analysis of data, design of overlay, use of FWD and other methods for evaluation of flexible and rigid pavements and their application. Evaluation of new pavement materials, model studies, pavement testing under controlled conditions, accelerated testing and evaluation methods, Test track studies. Instrumentation for pavement testing. V",
+  "description": "Pavement deterioration, distress and different types of failures, pavement surface condition deterioration such as slipperiness, unevenness, rutting, cracking; pot holes, etc., causes, effects, methods of measurement and treatment, use of modern equipment for pavement surface condition measurements, Analysis of data, interpretation. Structural deterioration of pavements: causes, effects, methods of treatment. Structural evaluation of flexible pavements by rebound deflection method, analysis of data, design of overlay, use of FWD and other methods for evaluation of flexible and rigid pavements and their application. Evaluation of new pavement materials, model studies, pavement testing under controlled conditions, accelerated testing and evaluation methods, Test track studies. Instrumentation for pavement testing. V",
   "source": {
    "doc": "bulletin.pdf",
    "page": 640,
@@ -7435,11 +7435,11 @@
  },
  {
   "code": "CE G552",
-  "title": "Advanced Structural Mechanics and Sta-",
+  "title": "Advanced Structural Mechanics and Stability",
   "L": 3,
   "P": 1,
   "units": 4,
-  "description": "bility Analysis of stress and strain in three-dimension domain, deviatoric stress and strain; stress and strain invariants, compatibility conditions, equilibrium equations; stress-strain relations for anisotropic, orthotropic and isotropic elastic materials; yield criterion; plastic potential and flow rules. Problems on plane stress and plain strain conditions, Airy stress function; Axi-symmetric problems; torsion of prismatic bars, circular and non-circular sections; thin-walled sections, membrane and sand-heap analogies, concept of stability of structures and examples of instability. Stability of structures with one and two degree of freedom, buckling of columns; beam-columns and simple frames, lateral torsion buckling of beams; and introduction to postbuckling of plates.",
+  "description": "Analysis of stress and strain in three-dimension domain, deviatoric stress and strain; stress and strain invariants, compatibility conditions, equilibrium equations; stress-strain relations for anisotropic, orthotropic and isotropic elastic materials; yield criterion; plastic potential and flow rules. Problems on plane stress and plain strain conditions, Airy stress function; Axi-symmetric problems; torsion of prismatic bars, circular and non-circular sections; thin-walled sections, membrane and sand-heap analogies, concept of stability of structures and examples of instability. Stability of structures with one and two degree of freedom, buckling of columns; beam-columns and simple frames, lateral torsion buckling of beams; and introduction to postbuckling of plates.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 640,
@@ -7605,7 +7605,7 @@
  },
  {
   "code": "CE G564",
-  "title": "Structural Health Assessment and",
+  "title": "Structural Health Assessment and Rehabilitation",
   "L": 3,
   "P": 1,
   "units": 4,
@@ -8085,11 +8085,11 @@
  },
  {
   "code": "CE G631",
-  "title": "Selected Topics in Soil Mechanics and Ge-",
+  "title": "Selected Topics in Soil Mechanics and Geotechnical Engineering",
   "L": 3,
   "P": 1,
   "units": 4,
-  "description": "otechnical Engineering Formation of soil & soil deposits, subsurface exploration, collapsible soils identification treatment & design consideration, review of casting expansion models in soil, treatment of weak soil, numerical modelling, fracture propagation & fracture energy, fluid infiltered materials, modern trends.",
+  "description": "Formation of soil & soil deposits, subsurface exploration, collapsible soils identification treatment & design consideration, review of casting expansion models in soil, treatment of weak soil, numerical modelling, fracture propagation & fracture energy, fluid infiltered materials, modern trends.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 643,
@@ -8649,11 +8649,11 @@
  },
  {
   "code": "CHE F418",
-  "title": "Modelling and Simulation in Chemical Engi-",
+  "title": "Modelling and Simulation in Chemical Engineering",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "neering Mathematical model and necessity, Introduction to modeling, Physical and Mathematical models, Modelling in Chemical Engineering, Formulation of dynamic models with case studies based on mass, component, momentum and energy balances, Modeling of selected fluid flow, heat transfer, mass transfer and reaction engineering phenomena, Role of Simulation and simulators, Sequential and modular approaches to Process Simulation, Equation solving approach, Decomposition of networks, Convergence promotion, Specific purpose simulation, Introduction to role of evolutionary computation in simulation.",
+  "description": "Mathematical model and necessity, Introduction to modeling, Physical and Mathematical models, Modelling in Chemical Engineering, Formulation of dynamic models with case studies based on mass, component, momentum and energy balances, Modeling of selected fluid flow, heat transfer, mass transfer and reaction engineering phenomena, Role of Simulation and simulators, Sequential and modular approaches to Process Simulation, Equation solving approach, Decomposition of networks, Convergence promotion, Specific purpose simulation, Introduction to role of evolutionary computation in simulation.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 645,
@@ -9040,7 +9040,7 @@
  },
  {
   "code": "CHE G528",
-  "title": "Introduction to Nano Science and",
+  "title": "Introduction to Nano Science and Technology",
   "L": 3,
   "P": 1,
   "units": 4,
@@ -9312,11 +9312,11 @@
  },
  {
   "code": "CHE G561",
-  "title": "Nuclear Reactor Control and Instrumenta-",
+  "title": "Nuclear Reactor Control and Instrumentation",
   "L": null,
   "P": null,
   "units": 4,
-  "description": "tion Fundamentals of process instrumentation and control, Open and closed loops, SCADA and DDC, PLC, Alarms and Safety interlocks for shutdown and emergency shutdown, special sensors and sensor specifications for Nuclear Industry, Nuclear reactor safety, Special control logic for Nuclear safety, reliability and redundancy, Nucleonics: application of Nuclear materials and radiation in measurement techniques, Nucleonics based instruments for analysis, Design, maintenance and operation of such instruments. Calorimetry, detection of alpha, beta and gamma rays including spectrometry, liquid scintillation counting.",
+  "description": "Fundamentals of process instrumentation and control, Open and closed loops, SCADA and DDC, PLC, Alarms and Safety interlocks for shutdown and emergency shutdown, special sensors and sensor specifications for Nuclear Industry, Nuclear reactor safety, Special control logic for Nuclear safety, reliability and redundancy, Nucleonics: application of Nuclear materials and radiation in measurement techniques, Nucleonics based instruments for analysis, Design, maintenance and operation of such instruments. Calorimetry, detection of alpha, beta and gamma rays including spectrometry, liquid scintillation counting.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 648,
@@ -9635,11 +9635,11 @@
  },
  {
   "code": "CHE G622",
-  "title": "Advanced Chemical Engineering Thermody-",
+  "title": "Advanced Chemical Engineering Thermodynamics",
   "L": 3,
   "P": 2,
   "units": 5,
-  "description": "namics Review of fundamental principles; statistical foundations; thermodynamic properties of pure substances and mixtures, their estimation and correlation; stability and equilibrium criteria for homogeneous and heterogeneous systems; thermodynamics of irreversible processes.",
+  "description": "Review of fundamental principles; statistical foundations; thermodynamic properties of pure substances and mixtures, their estimation and correlation; stability and equilibrium criteria for homogeneous and heterogeneous systems; thermodynamics of irreversible processes.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 650,
@@ -9958,11 +9958,11 @@
  },
  {
   "code": "CHEM F320",
-  "title": "Introductory Computational Chemistry La-",
+  "title": "Introductory Computational Chemistry Laboratory",
   "L": 0,
   "P": 4,
   "units": 2,
-  "description": "boratory In this course the major focus is on practical computation of electronic structure of atoms and molecules using open source and proprietary software; specific computational experiments will be in the areas of potential energy surfaces, geometry optimization, molecular geometry from symmetry and trigonometric relations without visualization software, molecular orbitals and bonding patterns, Hartree-Fock calculations, correlation energy and size-consistency, DFT based calculations, computing excited states using CIS, EOM-CCSD jobs for computing energies of excited, ionized and electron-attached states; methods to estimate activation energy, solvent effects etc.; molecular dynamics simulation, molecular mechanics will also be explored; the actual experiments may vary and can have more specific learning outcomes so as to enhance the course with the latest developments in electronic structure theories of chemistry.",
+  "description": "In this course the major focus is on practical computation of electronic structure of atoms and molecules using open source and proprietary software; specific computational experiments will be in the areas of potential energy surfaces, geometry optimization, molecular geometry from symmetry and trigonometric relations without visualization software, molecular orbitals and bonding patterns, Hartree-Fock calculations, correlation energy and size-consistency, DFT based calculations, computing excited states using CIS, EOM-CCSD jobs for computing energies of excited, ionized and electron-attached states; methods to estimate activation energy, solvent effects etc.; molecular dynamics simulation, molecular mechanics will also be explored; the actual experiments may vary and can have more specific learning outcomes so as to enhance the course with the latest developments in electronic structure theories of chemistry.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 651,
@@ -10043,7 +10043,7 @@
  },
  {
   "code": "CHEM F327",
-  "title": "Electrochemistry: Fundamentals and",
+  "title": "Electrochemistry: Fundamentals and Applications",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -10332,11 +10332,11 @@
  },
  {
   "code": "CHEM F413",
-  "title": "Electron Correlation in Atoms and Mole-",
+  "title": "Electron Correlation in Atoms and Molecules",
   "L": 3,
   "P": 1,
   "units": 4,
-  "description": "cules Matrix algebra, Matrix representation of operators; mean-field approach: the Hartree-Fock methodformulation, coulomb and exchange integrals, Fock-operator, second quantization, Slater rules, self-consistency, correlation energy; Brillouin's theorem, Koopmans' theorem; basis-sets, restricted Hartree-Fock, Roothan-Hall equations; unrestricted Hartree-Fock method, spincontamination; restricted open-shell Hartree-Fock method; Recovery of correlation energy time independent perturbation approach: Brillouin-Wigner and Rayleigh-Schrodinger perturbation V theories; Møller Plesset and Epstein-Nesbeth partitioning of molecular Hamiltonion, many-body perturbation theory; Feynman diagrams, connected and disconnected terms, size-consistency; Recovery of correlation energy: configuration interaction and other non-perturbative approaches, variational and projection approaches for obtaining CI anasatz, truncated CI and size-consistency problem, Davidson correction, pair-coupled-pair theory, coupled-electron-pair method and coupled-cluster approach; Density functional theory, N-representability, V-representability, Kohn-Sham approach, natural orbitals, exchange-correlation functionals, Levy functional.",
+  "description": "Matrix algebra, Matrix representation of operators; mean-field approach: the Hartree-Fock methodformulation, coulomb and exchange integrals, Fock-operator, second quantization, Slater rules, self-consistency, correlation energy; Brillouin's theorem, Koopmans' theorem; basis-sets, restricted Hartree-Fock, Roothan-Hall equations; unrestricted Hartree-Fock method, spincontamination; restricted open-shell Hartree-Fock method; Recovery of correlation energy time independent perturbation approach: Brillouin-Wigner and Rayleigh-Schrodinger perturbation V theories; Møller Plesset and Epstein-Nesbeth partitioning of molecular Hamiltonion, many-body perturbation theory; Feynman diagrams, connected and disconnected terms, size-consistency; Recovery of correlation energy: configuration interaction and other non-perturbative approaches, variational and projection approaches for obtaining CI anasatz, truncated CI and size-consistency problem, Davidson correction, pair-coupled-pair theory, coupled-electron-pair method and coupled-cluster approach; Density functional theory, N-representability, V-representability, Kohn-Sham approach, natural orbitals, exchange-correlation functionals, Levy functional.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 653,
@@ -10978,11 +10978,11 @@
  },
  {
   "code": "CS F315",
-  "title": "Information and Communication Technolo-",
+  "title": "Information and Communication Technologies and Development",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "gies and Development Development models; Sustainable Development Goals and Millennium Development Goals; role of Information and Communication Technologies (ICTs) in development; case studies of successes and failures in different domains like low cost communication networks, education, information kiosks, livelihood, health, etc.; theories that have emerged over the years and their criticisms; evaluation of the role of ICTs in development",
+  "description": "Development models; Sustainable Development Goals and Millennium Development Goals; role of Information and Communication Technologies (ICTs) in development; case studies of successes and failures in different domains like low cost communication networks, education, information kiosks, livelihood, health, etc.; theories that have emerged over the years and their criticisms; evaluation of the role of ICTs in development",
   "source": {
    "doc": "bulletin.pdf",
    "page": 656,
@@ -11065,7 +11065,7 @@
  },
  {
   "code": "CS F322",
-  "title": "Knowledge Graphs-Foundations and",
+  "title": "Knowledge Graphs-Foundations and Applications",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -12320,11 +12320,11 @@
  },
  {
   "code": "CS G622",
-  "title": "Local Area Networks: Design and Implemen-",
+  "title": "Local Area Networks: Design and Implementation",
   "L": 2,
   "P": 3,
   "units": 5,
-  "description": "tation Introduction to Local Networks; carrier sense networks; shared memory and device systems; protocol and token passing techniques & algorithms; security and integrity problems; algorithms and implementation; and selected current topics.",
+  "description": "Introduction to Local Networks; carrier sense networks; shared memory and device systems; protocol and token passing techniques & algorithms; security and integrity problems; algorithms and implementation; and selected current topics.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 661,
@@ -12868,11 +12868,11 @@
  },
  {
   "code": "ECE F312",
-  "title": "EM Fields and Microwave Engineering La-",
+  "title": "EM Fields and Microwave Engineering Laboratory",
   "L": 0,
   "P": 1,
   "units": 1,
-  "description": "boratory Experiments in Microwaves and antennas using Microwave benches and simulation softwares.",
+  "description": "Experiments in Microwaves and antennas using Microwave benches and simulation softwares.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 663,
@@ -12885,11 +12885,11 @@
  },
  {
   "code": "ECE F314",
-  "title": "Electromagnetic Fields and Microwave Engi-",
+  "title": "Electromagnetic Fields and Microwave Engineering",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "neering Electromagnetic waves; Maxwell's equations; Poynting theorem and wave equations; propagation of EM waves; transmission lines; microstrip lines; wave guides; cavities and antennas; microwave generators, microwave amplifiers; measurement at microwave frequencies.",
+  "description": "Electromagnetic waves; Maxwell's equations; Poynting theorem and wave equations; propagation of EM waves; transmission lines; microstrip lines; wave guides; cavities and antennas; microwave generators, microwave amplifiers; measurement at microwave frequencies.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 663,
@@ -13038,7 +13038,7 @@
  },
  {
   "code": "ECE F414",
-  "title": "Telecommunication Switching Systems and",
+  "title": "Telecommunication Switching Systems and Networks",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -14532,7 +14532,7 @@
  },
  {
   "code": "EE G504",
-  "title": "Physico Chemical Treatment Principles and",
+  "title": "Physico Chemical Treatment Principles and Design of Wastewater Treatment Systems",
   "L": 3,
   "P": 2,
   "units": 5,
@@ -14549,7 +14549,7 @@
  },
  {
   "code": "EE G505",
-  "title": "Biological Treatment Principles and Design of",
+  "title": "Biological Treatment Principles and Design of Wastewater Treatment Systems",
   "L": 3,
   "P": 2,
   "units": 5,
@@ -14736,7 +14736,7 @@
  },
  {
   "code": "ENV F212",
-  "title": "Environmental Chemistry and",
+  "title": "Environmental Chemistry and Environmental Biotechnology",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -14770,7 +14770,7 @@
  },
  {
   "code": "ENV F222",
-  "title": "Transport Phenomena for",
+  "title": "Transport Phenomena for Environmental Systems",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -14923,7 +14923,7 @@
  },
  {
   "code": "ENVS F323",
-  "title": "Sustainable Urban Design and",
+  "title": "Sustainable Urban Design and Smart Cities",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -14940,7 +14940,7 @@
  },
  {
   "code": "ENVS F324",
-  "title": "Environmental Economics and",
+  "title": "Environmental Economics and Governance",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -14957,7 +14957,7 @@
  },
  {
   "code": "ENVS F331",
-  "title": "Climate Change Adaptation and",
+  "title": "Climate Change Adaptation and Mitigation",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -15199,11 +15199,11 @@
  },
  {
   "code": "EEE F246",
-  "title": "Electrical and Electronic Circuits Labora-",
+  "title": "Electrical and Electronic Circuits Laboratory",
   "L": 0,
   "P": 2,
   "units": 2,
-  "description": "tory Experiments in Electrical sciences, Electronic devices, motors, transformer windings, machine windings, electronic circuits and signals, systems etc.",
+  "description": "Experiments in Electrical sciences, Electronic devices, motors, transformer windings, machine windings, electronic circuits and signals, systems etc.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 674,
@@ -15488,7 +15488,7 @@
  },
  {
   "code": "EEE F414",
-  "title": "Telecommunication Switching Systems &",
+  "title": "Telecommunication Switching Systems & Networks",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -16516,7 +16516,7 @@
  },
  {
   "code": "EEE G543",
-  "title": "Power Device Microelectronics and",
+  "title": "Power Device Microelectronics and Selection",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -18902,11 +18902,11 @@
  },
  {
   "code": "HSS F251",
-  "title": "Introduction to Discourse and Conversa-",
+  "title": "Introduction to Discourse and Conversational Analysis",
   "L": 2,
   "P": 1,
   "units": 3,
-  "description": "tional Analysis History and background of discourse analysis; relationship of discourse and society; patterns in text organization; genres and text types; stance of writers; patterns in talk and conversations; stance of speakers; databases and corpora; methodologies and tools for conversation analysis.",
+  "description": "History and background of discourse analysis; relationship of discourse and society; patterns in text organization; genres and text types; stance of writers; patterns in talk and conversations; stance of speakers; databases and corpora; methodologies and tools for conversation analysis.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 689,
@@ -19803,11 +19803,11 @@
  },
  {
   "code": "HSS F364",
-  "title": "Political Economy of Gulf Cooperation Coun-",
+  "title": "Political Economy of Gulf Cooperation Council States",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "cil States Overview of Gulf History and Society: History in a nutshell; Religion, Language, Identity and Culture, Rentier State, Citizenship; Political and Social Change in the Gulf: Nationalism, Rule of Law and Political Liberalization, Gender and Participation; Media, Bureaucracy and Civil Society Groups; Economic Reforms and Governing Structure: State-Business Relations, Islamic Finance Development, Oil based Economy to Knowledge Economy, Resource Curse, Labour Market & Migration Policies; Internationalization of the Gulf: Security and Strategic Trends, Foreign Policy with International Reach, Environment, Energy, Maritime and Sustainable Policies, Challenges in transition.",
+  "description": "Overview of Gulf History and Society: History in a nutshell; Religion, Language, Identity and Culture, Rentier State, Citizenship; Political and Social Change in the Gulf: Nationalism, Rule of Law and Political Liberalization, Gender and Participation; Media, Bureaucracy and Civil Society Groups; Economic Reforms and Governing Structure: State-Business Relations, Islamic Finance Development, Oil based Economy to Knowledge Economy, Resource Curse, Labour Market & Migration Policies; Internationalization of the Gulf: Security and Strategic Trends, Foreign Policy with International Reach, Environment, Energy, Maritime and Sustainable Policies, Challenges in transition.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 692,
@@ -20109,7 +20109,7 @@
  },
  {
   "code": "HSS F387",
-  "title": "History of Transport and Mobility in",
+  "title": "History of Transport and Mobility in Modern Asia",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -20606,11 +20606,11 @@
  },
  {
   "code": "INSTR F311",
-  "title": "Electronic Instrumentation & Instrumenta-",
+  "title": "Electronic Instrumentation & Instrumentation Technology",
   "L": 3,
   "P": 1,
   "units": 4,
-  "description": "tion Technology Electronic indicating, display, recording and analysis instruments, signal generators, frequency synthesizer, counters, elements of design, grounding and shielding, electronic circuits manufacturing technology, metrology, standards in quality management, instrumentation in hazardous area, industrial communication techniques.",
+  "description": "Electronic indicating, display, recording and analysis instruments, signal generators, frequency synthesizer, counters, elements of design, grounding and shielding, electronic circuits manufacturing technology, metrology, standards in quality management, instrumentation in hazardous area, industrial communication techniques.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 695,
@@ -20827,7 +20827,7 @@
  },
  {
   "code": "INSTR F414",
-  "title": "Telecommunication Switching Systems &",
+  "title": "Telecommunication Switching Systems & Networks",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -20895,11 +20895,11 @@
  },
  {
   "code": "INSTR F422",
-  "title": "Instrumentation for Petrochemical Indus-",
+  "title": "Instrumentation for Petrochemical Industry",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "try Petroleum Processing: Petroleum exploration – Recovery techniques – Oil Gas separation –Processing wet gases refining of crude oil, Unit Operations in Petroleum Industry: Measurement in Petrochemical Industry: Parameter to be measured in refinery and petrochemical industry – Selection and maintenance of measuring instruments – Intrinsic safety of instruments Control Loops in Petrochemical Industry: Process control in refinery and petrochemical industry – Control of distillation column control of catalytic crackers and pyrolysis , Automatic control of polyethylene production – Control on vinyl chloride and PVC production.",
+  "description": "Petroleum Processing: Petroleum exploration – Recovery techniques – Oil Gas separation –Processing wet gases refining of crude oil, Unit Operations in Petroleum Industry: Measurement in Petrochemical Industry: Parameter to be measured in refinery and petrochemical industry – Selection and maintenance of measuring instruments – Intrinsic safety of instruments Control Loops in Petrochemical Industry: Process control in refinery and petrochemical industry – Control of distillation column control of catalytic crackers and pyrolysis , Automatic control of polyethylene production – Control on vinyl chloride and PVC production.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 696,
@@ -20912,11 +20912,11 @@
  },
  {
   "code": "INSTR F423",
-  "title": "Electronic Material Design and Simula-",
+  "title": "Electronic Material Design and Simulations Laboratory",
   "L": 1,
   "P": 2,
   "units": 3,
-  "description": "tions Laboratory Reviewing the basic Theory for Crystalline Solids (Crystal group, real Space, reciprocal space), Introduction of the Concept of Density Functional Theory (Many Electron Scenario, Born-Oppenheimer Approximation, Hartree’s Formulation, Hohenberg and Kohn Theorems, Energy Functional, Kohn Sham Scheme), Familiarization with Quantum Espresso (Plane Wave Basis Set, Exchange Correlation Functional, Pseudopotential, Brillouin Zone Sampling, Quantum Espresso input file format), Theoretical Calculation of Structural Properties of Materials (Unit Cells and Super Cells, Lattice Vectors, Ground-state Energy, Bond-Length and Bond Angles), Theoretical Calculation of Electronic Properties of Materials (Energy Band Profiles and Density of States, Projected Density of States), Theoretical Calculation of Optical Properties of Materials (Optical Spectrum), Introduction of Doping in Materials (Effects on Electronic and Optical Properties), Introduction of Strain in Materials (Effects on Electronic and Optical Properties) Simulation of 2D materials like Graphene and MoS2.",
+  "description": "Reviewing the basic Theory for Crystalline Solids (Crystal group, real Space, reciprocal space), Introduction of the Concept of Density Functional Theory (Many Electron Scenario, Born-Oppenheimer Approximation, Hartree’s Formulation, Hohenberg and Kohn Theorems, Energy Functional, Kohn Sham Scheme), Familiarization with Quantum Espresso (Plane Wave Basis Set, Exchange Correlation Functional, Pseudopotential, Brillouin Zone Sampling, Quantum Espresso input file format), Theoretical Calculation of Structural Properties of Materials (Unit Cells and Super Cells, Lattice Vectors, Ground-state Energy, Bond-Length and Bond Angles), Theoretical Calculation of Electronic Properties of Materials (Energy Band Profiles and Density of States, Projected Density of States), Theoretical Calculation of Optical Properties of Materials (Optical Spectrum), Introduction of Doping in Materials (Effects on Electronic and Optical Properties), Introduction of Strain in Materials (Effects on Electronic and Optical Properties) Simulation of 2D materials like Graphene and MoS2.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 696,
@@ -21608,11 +21608,11 @@
  },
  {
   "code": "MAC F244",
-  "title": "Stochastic Calculus and Application to Fi-",
+  "title": "Stochastic Calculus and Application to Finance",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "nance Overview of financial markets, derivative securities, discrete-time binomial model, arbitrage, hedging and replicating portfolios, riskneutral probabilities and pricing formula, market completeness, concept of probability as measure, filtering, etc., stochastic processes, conditional expectation, martingales, Markov processes, Brownian motion and quadratic variation, Ito’s integral and calculus, replicating portfolios and hedging in continuous time, BlackScholes-Merton formulae, change of measure, Girsanov's theorem, risk-neutral pricing pricing and existence of risk-neutral measure, market completeness and uniqueness of riskneutral measure, Markov property, Feyman-Kac theorem, local volatility and stochastic volatility models.",
+  "description": "Overview of financial markets, derivative securities, discrete-time binomial model, arbitrage, hedging and replicating portfolios, riskneutral probabilities and pricing formula, market completeness, concept of probability as measure, filtering, etc., stochastic processes, conditional expectation, martingales, Markov processes, Brownian motion and quadratic variation, Ito’s integral and calculus, replicating portfolios and hedging in continuous time, BlackScholes-Merton formulae, change of measure, Girsanov's theorem, risk-neutral pricing pricing and existence of risk-neutral measure, market completeness and uniqueness of riskneutral measure, Markov property, Feyman-Kac theorem, local volatility and stochastic volatility models.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 700,
@@ -22498,11 +22498,11 @@
  },
  {
   "code": "MATH F422",
-  "title": "Numerical Methodology for Partial Differ-",
+  "title": "Numerical Methodology for Partial Differential Equations",
   "L": 3,
   "P": 1,
   "units": 4,
-  "description": "ential Equations Review of linear PDEs: First order linear scalar equation and explicit solution by characteristic method; Classification of 2nd order linear PDEs and maximum principle for Laplace and heat equations. Finite differences: Grids, Finite-difference approximations to derivatives. Linear Transport Equation: Upwind, Lax-Wendroff and Lax-Friedrich schemes, von-Neumann stability analysis, CFL condition, Lax-Richtmyer equivalence theorem; Heat Equation: Initial and boundary value problems (Dirichlet and Neumann), Explicit and implicit methods (Backward Euler and Crank-Nicolson schemes) with consistency and stability, Discrete maximum principle, Convergence; Poisson‘s Equation: Finite difference scheme for boundary value problems, Discrete maximum principle, Iterative methods for linear systems (Jacobi, Gauss-Seidel, SOR methods and Conjugate Gradient method), Peaceman-Rachford algorithm (ADI) for linear systems. Wave Equation: Explicit schemes and their stability analysis. Lab Component: Implementation of algorithms discussed in this course",
+  "description": "Review of linear PDEs: First order linear scalar equation and explicit solution by characteristic method; Classification of 2nd order linear PDEs and maximum principle for Laplace and heat equations. Finite differences: Grids, Finite-difference approximations to derivatives. Linear Transport Equation: Upwind, Lax-Wendroff and Lax-Friedrich schemes, von-Neumann stability analysis, CFL condition, Lax-Richtmyer equivalence theorem; Heat Equation: Initial and boundary value problems (Dirichlet and Neumann), Explicit and implicit methods (Backward Euler and Crank-Nicolson schemes) with consistency and stability, Discrete maximum principle, Convergence; Poisson‘s Equation: Finite difference scheme for boundary value problems, Discrete maximum principle, Iterative methods for linear systems (Jacobi, Gauss-Seidel, SOR methods and Conjugate Gradient method), Peaceman-Rachford algorithm (ADI) for linear systems. Wave Equation: Explicit schemes and their stability analysis. Lab Component: Implementation of algorithms discussed in this course",
   "source": {
    "doc": "bulletin.pdf",
    "page": 703,
@@ -22689,11 +22689,11 @@
  },
  {
   "code": "MATH F444",
-  "title": "Numerical Solutions of Ordinary Differen-",
+  "title": "Numerical Solutions of Ordinary Differential Equations",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "tial Equations Introduction to ODEs, Numerical Techniques for One Step Methods, Convergence and Absolute Stability, Numerical techniques for Linear Multi-Step Methods, Zero Stability, Consistency, Convergence, Predictor-Corrector methods, Absolute Stability of Predictor-Corrector methods, Stiff ODEs and its numerical methods, Finite Difference Methods to Linear and Nonlinear Boundary Value Problems, Stability and Convergence Analysis, Differential Algebraic Equations, Numerical techniques for Differential Algebraic Equations, Introduction to One dimensional Finite Element Methods, Comparison between Finite Difference Methods and Finite Element Methods, Variational formulation, Finite Element Approximation, Approximation Errors, Convergence of solution, Order of Convergence. V",
+  "description": "Introduction to ODEs, Numerical Techniques for One Step Methods, Convergence and Absolute Stability, Numerical techniques for Linear Multi-Step Methods, Zero Stability, Consistency, Convergence, Predictor-Corrector methods, Absolute Stability of Predictor-Corrector methods, Stiff ODEs and its numerical methods, Finite Difference Methods to Linear and Nonlinear Boundary Value Problems, Stability and Convergence Analysis, Differential Algebraic Equations, Numerical techniques for Differential Algebraic Equations, Introduction to One dimensional Finite Element Methods, Comparison between Finite Difference Methods and Finite Element Methods, Variational formulation, Finite Element Approximation, Approximation Errors, Convergence of solution, Order of Convergence. V",
   "source": {
    "doc": "bulletin.pdf",
    "page": 704,
@@ -23114,7 +23114,7 @@
  },
  {
   "code": "MBA G504",
-  "title": "Legal and Economic Environment of",
+  "title": "Legal and Economic Environment of Business",
   "L": null,
   "P": null,
   "units": 4,
@@ -24151,11 +24151,11 @@
  },
  {
   "code": "MBA G565",
-  "title": "Information & Knowledge Management Sys-",
+  "title": "Information & Knowledge Management Systems",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "tems Information systems, organization and strategy; Ethical and social issues in information systems; IT infrastructure, emerging technologies, tools and portals for information and knowledge management; Creating, accumulating and applying knowledge in a learning organization; Building information systems in a learning organization; Information and knowledge management systems in digital economy; Managing projects; Future of information and knowledge management systems in the modern era of business.",
+  "description": "Information systems, organization and strategy; Ethical and social issues in information systems; IT infrastructure, emerging technologies, tools and portals for information and knowledge management; Creating, accumulating and applying knowledge in a learning organization; Building information systems in a learning organization; Information and knowledge management systems in digital economy; Managing projects; Future of information and knowledge management systems in the modern era of business.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 709,
@@ -24202,11 +24202,11 @@
  },
  {
   "code": "MBA G568",
-  "title": "International Business Strategy & Opera-",
+  "title": "International Business Strategy & Operations",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "tions Introduction to International Business, International Market, Cultural environment, Legal, political, economic and monetary aspects facing IB, Governments influence on trade via policies and instruments, Trade theory, Global Trade Protection and the Institutional Background, Global foreign exchange markets, trading process and benefits to IB, Determination of exchange rates, forex arrangements, role of IMF, forecasting and IB benefits, IB Strategy for sustainable value creation and profitability, Multinational corporation, Types of global strategies: integration & responsiveness, Export and import strategies: global & Indian context, Export Import Procedures, Country evaluation and selection, Marketing globally & use of digital technologies, Global supply chain management, theory of FDI, Multinational Finance function, India specific analysis: Export Incentives, assistance, ECGC, export finance, role of banks and other institutions, Emerging market enterprise strategies.",
+  "description": "Introduction to International Business, International Market, Cultural environment, Legal, political, economic and monetary aspects facing IB, Governments influence on trade via policies and instruments, Trade theory, Global Trade Protection and the Institutional Background, Global foreign exchange markets, trading process and benefits to IB, Determination of exchange rates, forex arrangements, role of IMF, forecasting and IB benefits, IB Strategy for sustainable value creation and profitability, Multinational corporation, Types of global strategies: integration & responsiveness, Export and import strategies: global & Indian context, Export Import Procedures, Country evaluation and selection, Marketing globally & use of digital technologies, Global supply chain management, theory of FDI, Multinational Finance function, India specific analysis: Export Incentives, assistance, ECGC, export finance, role of banks and other institutions, Emerging market enterprise strategies.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 710,
@@ -24355,11 +24355,11 @@
  },
  {
   "code": "MBA G582",
-  "title": "Creating & Leading Entrepreneurial Organ-",
+  "title": "Creating & Leading Entrepreneurial Organizations",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "izations Fundamentals of entrepreneurship; elements of leadership; identifying business opportunities; market study and research; business plans; finance, issues in raising finance; venture capitalist evaluation of business plans, technical aspects for the project, corporate strategies for growth; legal aspect to entrepreneurship, people skills, marketing and branding; creativity and communication.",
+  "description": "Fundamentals of entrepreneurship; elements of leadership; identifying business opportunities; market study and research; business plans; finance, issues in raising finance; venture capitalist evaluation of business plans, technical aspects for the project, corporate strategies for growth; legal aspect to entrepreneurship, people skills, marketing and branding; creativity and communication.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 710,
@@ -24712,11 +24712,11 @@
  },
  {
   "code": "MPBA G515",
-  "title": "Prescriptive Analytics with Mathe-",
+  "title": "Prescriptive Analytics with Mathematical Programming",
   "L": null,
   "P": null,
   "units": 3,
-  "description": "matical Programming Linear Programming, Duality Theory, Sensitivity Analysis, Network Models, Integer Programs, Stochastic Optimization, Sequential Decision Making, Non-Linear and multi-Objective Optimization, Local Search and Meta-heuristics, Large-Scale Optimization, Monte Carlo simulation. The course necessarily involves the use of statistical software and programming languages.",
+  "description": "Linear Programming, Duality Theory, Sensitivity Analysis, Network Models, Integer Programs, Stochastic Optimization, Sequential Decision Making, Non-Linear and multi-Objective Optimization, Local Search and Meta-heuristics, Large-Scale Optimization, Monte Carlo simulation. The course necessarily involves the use of statistical software and programming languages.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 712,
@@ -24729,11 +24729,11 @@
  },
  {
   "code": "MPBA G516",
-  "title": "Advanced Spreadsheet & Macro Pro-",
+  "title": "Advanced Spreadsheet & Macro Programming for Business",
   "L": null,
   "P": null,
   "units": 3,
-  "description": "gramming for Business Variables, Arrays, Constants, and Data Types, Modules, Functions, and Subroutines, Programming Basics, The Excel Object Model, Using Excel to Interact with Other Office Programs, Working with Databases, API Calls, Class Modules, Animation, Converting Labels to Numbers and Numbers to Labels, Transposing a Range of Cells, Adding Formula Details into Comments, Replacing Characters in a String, Auto Totaling a Matrix of Numbers, Coloring Alternate Rows and Columns of the Spreadsheet, Globally Changing a Range of Values, Searching Multiple Sheets and Workbooks, Brighten Up Your Comments, An Alternative to Message Boxes, Working with Shapes, Turning Your VBA Code into an Add-In.",
+  "description": "Variables, Arrays, Constants, and Data Types, Modules, Functions, and Subroutines, Programming Basics, The Excel Object Model, Using Excel to Interact with Other Office Programs, Working with Databases, API Calls, Class Modules, Animation, Converting Labels to Numbers and Numbers to Labels, Transposing a Range of Cells, Adding Formula Details into Comments, Replacing Characters in a String, Auto Totaling a Matrix of Numbers, Coloring Alternate Rows and Columns of the Spreadsheet, Globally Changing a Range of Values, Searching Multiple Sheets and Workbooks, Brighten Up Your Comments, An Alternative to Message Boxes, Working with Shapes, Turning Your VBA Code into an Add-In.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 712,
@@ -24780,11 +24780,11 @@
  },
  {
   "code": "MPBA G519",
-  "title": "Natural Language Processing for Busi-",
+  "title": "Natural Language Processing for Business",
   "L": null,
   "P": null,
   "units": 3,
-  "description": "ness Natural language processing and its neighbors, Themes in Natural language processing, Types of textual data, Preparing textual data for analysis, Regular expressions and patterns matching, term frequency times inverse document frequency, Word to vector representations (word embeddings), and feature engineering, Text classification or Topic Modeling, Text to knowledge conversion: Knowledge graph construction, Ngrams, and analysis of word networks in text, logical semantics, predicate argument semantics.",
+  "description": "Natural language processing and its neighbors, Themes in Natural language processing, Types of textual data, Preparing textual data for analysis, Regular expressions and patterns matching, term frequency times inverse document frequency, Word to vector representations (word embeddings), and feature engineering, Text classification or Topic Modeling, Text to knowledge conversion: Knowledge graph construction, Ngrams, and analysis of word networks in text, logical semantics, predicate argument semantics.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 712,
@@ -26203,7 +26203,7 @@
  },
  {
   "code": "ME F435",
-  "title": "Shape Memory Alloys: Fundamentals and",
+  "title": "Shape Memory Alloys: Fundamentals and Applications",
   "L": 2,
   "P": 1,
   "units": 3,
@@ -26934,7 +26934,7 @@
  },
  {
   "code": "ME G613",
-  "title": "Advanced Finite Element Modelling &",
+  "title": "Advanced Finite Element Modelling & Analysis",
   "L": 3,
   "P": 2,
   "units": 5,
@@ -27329,11 +27329,11 @@
  },
  {
   "code": "MEL G512",
-  "title": "Optoelectronic Devices, Circuits and Sys-",
+  "title": "Optoelectronic Devices, Circuits and Systems",
   "L": 3,
   "P": 2,
   "units": 5,
-  "description": "tems Course Content: Elemental and Compound Semiconductors, Optical Physics and Processes in Semiconductors, Semiconductor Theory, p-n Junction, Light Emitting Diodes (LEDs), Semiconductor LASERs, p-i-n Diode, Avalanche Photodiode (APD), Photoconductors, Image Sensors, Solar Cells, Optical Waveguides, Resonators, Filters, Couplers, Multiplexers, WDM Devices, Gratings, Amplifiers, Modulation Techniques for optical signals, Optical Modulators and Switches, Guided and Unguided System Design and Applications, Photonic Integrated Circuits (PICs), Emerging trends in optoelectronic devices and circuits. Laboratory Experiments: Characterization of LEDs and laser diodes, Measurement of photodetector characteristics, Design and implementation of simple optoelectronic circuits, Experiments with optical modulation and switching.",
+  "description": "Course Content: Elemental and Compound Semiconductors, Optical Physics and Processes in Semiconductors, Semiconductor Theory, p-n Junction, Light Emitting Diodes (LEDs), Semiconductor LASERs, p-i-n Diode, Avalanche Photodiode (APD), Photoconductors, Image Sensors, Solar Cells, Optical Waveguides, Resonators, Filters, Couplers, Multiplexers, WDM Devices, Gratings, Amplifiers, Modulation Techniques for optical signals, Optical Modulators and Switches, Guided and Unguided System Design and Applications, Photonic Integrated Circuits (PICs), Emerging trends in optoelectronic devices and circuits. Laboratory Experiments: Characterization of LEDs and laser diodes, Measurement of photodetector characteristics, Design and implementation of simple optoelectronic circuits, Experiments with optical modulation and switching.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 723,
@@ -28519,11 +28519,11 @@
  },
  {
   "code": "MF F422",
-  "title": "Supply Chain Modelling and Empirical Analy-",
+  "title": "Supply Chain Modelling and Empirical Analysis",
   "L": 3,
   "P": 1,
   "units": 4,
-  "description": "sis Contexts, issues and challenges in supply chain modelling and empirical analysis, buyer-supplier relationship, cultural implications, Primary and secondary data collection, questionnaire design, Model development and analysis with Statistical Packages such as SMARTPLS3, SPSS, Hugin and AMOS, Value Stream Mapping, Life Cycle Modelling, Model development and analysis with OpenLCA and EVSM, cost benefit analysis, Digital supply chain and Performance modelling, case studies",
+  "description": "Contexts, issues and challenges in supply chain modelling and empirical analysis, buyer-supplier relationship, cultural implications, Primary and secondary data collection, questionnaire design, Model development and analysis with Statistical Packages such as SMARTPLS3, SPSS, Hugin and AMOS, Value Stream Mapping, Life Cycle Modelling, Model development and analysis with OpenLCA and EVSM, cost benefit analysis, Digital supply chain and Performance modelling, case studies",
   "source": {
    "doc": "bulletin.pdf",
    "page": 728,
@@ -28825,11 +28825,11 @@
  },
  {
   "code": "MGTS G511",
-  "title": "Advanced Marketing Theories and Adver-",
+  "title": "Advanced Marketing Theories and Advertisement",
   "L": null,
   "P": null,
   "units": 5,
-  "description": "tisement Strategic planning, theory and methods with emphasis on customer, competitor industry and environmental analysis and its application to strategy development and choice. Marketing communication through advertising and related mass media and promotion campaigns and its influence on market and other organisation. Globalisation and marketing aspects.",
+  "description": "Strategic planning, theory and methods with emphasis on customer, competitor industry and environmental analysis and its application to strategy development and choice. Marketing communication through advertising and related mass media and promotion campaigns and its influence on market and other organisation. Globalisation and marketing aspects.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 729,
@@ -28859,11 +28859,11 @@
  },
  {
   "code": "MGTS G521",
-  "title": "Business Policy-Structure and Organisa-",
+  "title": "Business Policy-Structure and Organisation",
   "L": null,
   "P": null,
   "units": 5,
-  "description": "tion Frame-work of business dynamics; missions; objective and goals; social aspects of business policy; environmental analysis; the dynamic setting of business policy; internal analysis of resources strength and weaknesses; strategic planning choice, implementation and evaluation; functional policies; orientation in special cases MNC's high-tech companies, non-profit organisations etc.",
+  "description": "Frame-work of business dynamics; missions; objective and goals; social aspects of business policy; environmental analysis; the dynamic setting of business policy; internal analysis of resources strength and weaknesses; strategic planning choice, implementation and evaluation; functional policies; orientation in special cases MNC's high-tech companies, non-profit organisations etc.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 729,
@@ -28876,11 +28876,11 @@
  },
  {
   "code": "MGTS G531",
-  "title": "Recent Advances in Organisation Behav-",
+  "title": "Recent Advances in Organisation Behaviour Theory",
   "L": null,
   "P": null,
   "units": 5,
-  "description": "iour Theory Emerging challenges of human resource managementa futuristic perspective; unified global theory of management; empowerment; employeeship; entrepreneurship; organisation diagnosis and development; social system and organisational culture-both in the national and global context interpersonal and group dynamics; employee attitudes; leadership and decision making; motivating employees; quality of work life and socio technical systems; dealing with subordinates, boss, peers, problem employees.",
+  "description": "Emerging challenges of human resource managementa futuristic perspective; unified global theory of management; empowerment; employeeship; entrepreneurship; organisation diagnosis and development; social system and organisational culture-both in the national and global context interpersonal and group dynamics; employee attitudes; leadership and decision making; motivating employees; quality of work life and socio technical systems; dealing with subordinates, boss, peers, problem employees.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 729,
@@ -29131,11 +29131,11 @@
  },
  {
   "code": "MPH G539",
-  "title": "Inter-sectoral co-ordination in Health Ser-",
+  "title": "Inter-sectoral co-ordination in Health Services",
   "L": null,
   "P": null,
   "units": 3,
-  "description": "vices Roles of public, private, government, non-government sectors in providing health services, Public works department, Sanitation, Waste disposal and management, Water and air pollution monitoring and control, Deforestation, Urbanization and rural development, Employment and occupational health hazards, Training of administrators and enforcement agency staff, Public awareness programs, etc.",
+  "description": "Roles of public, private, government, non-government sectors in providing health services, Public works department, Sanitation, Waste disposal and management, Water and air pollution monitoring and control, Deforestation, Urbanization and rural development, Employment and occupational health hazards, Training of administrators and enforcement agency staff, Public awareness programs, etc.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 730,
@@ -29896,11 +29896,11 @@
  },
  {
   "code": "MUSIC N313T",
-  "title": "Advanced Indian Music Practice (Instru-",
+  "title": "Advanced Indian Music Practice (Instrumental)",
   "L": null,
   "P": null,
   "units": 0,
-  "description": "mental) These courses are designed to allow facilities for practice with minimum supervision for students who have satisfactorily completed MUSIC N204T or MUSIC N214T respectively. These courses carry zero units. A student who has met the prerequisite can take these courses as audit courses as many times as he needs.",
+  "description": "These courses are designed to allow facilities for practice with minimum supervision for students who have satisfactorily completed MUSIC N204T or MUSIC N214T respectively. These courses carry zero units. A student who has met the prerequisite can take these courses as audit courses as many times as he needs.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 733,
@@ -29981,7 +29981,7 @@
  },
  {
   "code": "PHA F215",
-  "title": "Introduction to Molecular Biology &",
+  "title": "Introduction to Molecular Biology & Immunology",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -30168,11 +30168,11 @@
  },
  {
   "code": "PHA F314",
-  "title": "Pharmaceutical Formulations and Biophar-",
+  "title": "Pharmaceutical Formulations and Biopharmaceutics",
   "L": 2,
   "P": 1,
   "units": 3,
-  "description": "maceutics Physical, chemical and biopharmaceutical considerations in formulations, absorption, distribution and elimination of drugs; pharmaceutical additives; formulation and stability aspects of solid dosage forms, semi-solid dosage forms and liquids dosage forms; sustained release medication; aerosol products and packaging.",
+  "description": "Physical, chemical and biopharmaceutical considerations in formulations, absorption, distribution and elimination of drugs; pharmaceutical additives; formulation and stability aspects of solid dosage forms, semi-solid dosage forms and liquids dosage forms; sustained release medication; aerosol products and packaging.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 734,
@@ -30599,7 +30599,7 @@
  },
  {
   "code": "PHA G510",
-  "title": "Application of Statistics and Computer in",
+  "title": "Application of Statistics and Computer in Pharmacy",
   "L": null,
   "P": null,
   "units": 5,
@@ -30769,11 +30769,11 @@
  },
  {
   "code": "PHA G534",
-  "title": "Separation and Structure Elucidation Tech-",
+  "title": "Separation and Structure Elucidation Techniques",
   "L": null,
   "P": null,
   "units": 4,
-  "description": "niques Advance separation methods for complex Natural, Semisynthetic and Synthetic New Chemical Entities (NCEs) using LC-MS, LCMS-MS, LC-NMR, GC-MS, GC-MS-MS, CE-MS, Supercritical Fluid Chromatography. Structure elucidation of NCEs using 2D and 3D (1H and 13C) Nuclear Magnetic Resonance (NMR) spectroscopy and X-ray diffraction technique. Prediction of structures using Software tools.",
+  "description": "Advance separation methods for complex Natural, Semisynthetic and Synthetic New Chemical Entities (NCEs) using LC-MS, LCMS-MS, LC-NMR, GC-MS, GC-MS-MS, CE-MS, Supercritical Fluid Chromatography. Structure elucidation of NCEs using 2D and 3D (1H and 13C) Nuclear Magnetic Resonance (NMR) spectroscopy and X-ray diffraction technique. Prediction of structures using Software tools.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 736,
@@ -30871,11 +30871,11 @@
  },
  {
   "code": "PHA G540",
-  "title": "Modern Pharmaceutical Analytical Tech-",
+  "title": "Modern Pharmaceutical Analytical Techniques",
   "L": 3,
   "P": 1,
   "units": 4,
-  "description": "niques Principles of sample preparation, method development for analysis and characterization of Active Pharmaceutical Ingredients (API) and formulations, using techniques such as High Performance Liquid chromatography (HPLC), biochromatography, size exclusion, affinity, chiral, fast protein chromatography (FPLC). Characterization of nanopharmaceutcials using Atomic Force Microscopy, Scanning Electron Microscopy, Transmission Electron Microscopy, Dynamic Light Scattering techniques. 1H and 13C Nuclear Magnetic Resonance (NMR) spectroscopy in structural characterization, Mass Spectrometry and its applications, Elemental analysis, Optical, chiro-optical techniques in structure elucidation.",
+  "description": "Principles of sample preparation, method development for analysis and characterization of Active Pharmaceutical Ingredients (API) and formulations, using techniques such as High Performance Liquid chromatography (HPLC), biochromatography, size exclusion, affinity, chiral, fast protein chromatography (FPLC). Characterization of nanopharmaceutcials using Atomic Force Microscopy, Scanning Electron Microscopy, Transmission Electron Microscopy, Dynamic Light Scattering techniques. 1H and 13C Nuclear Magnetic Resonance (NMR) spectroscopy in structural characterization, Mass Spectrometry and its applications, Elemental analysis, Optical, chiro-optical techniques in structure elucidation.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 736,
@@ -30956,11 +30956,11 @@
  },
  {
   "code": "PHA G545",
-  "title": "Intellectual property rights and Pharmaceu-",
+  "title": "Intellectual property rights and Pharmaceuticals",
   "L": 3,
   "P": 0,
   "units": 3,
-  "description": "ticals Key aspects of intellectual property law and their impact on Pharmaceutical industry; concept of property with respect to intellectual creativity; emerging debates, policy issues and law reforms related to IPR with respect to pharmaceuticals; Issues of Intellectual Property such as Patents, Copyright, Trademarks, and Design; rules and regulations of marketing and competition; Patent processing, infringement of patents, ethics and economic issues related to IPR;",
+  "description": "Key aspects of intellectual property law and their impact on Pharmaceutical industry; concept of property with respect to intellectual creativity; emerging debates, policy issues and law reforms related to IPR with respect to pharmaceuticals; Issues of Intellectual Property such as Patents, Copyright, Trademarks, and Design; rules and regulations of marketing and competition; Patent processing, infringement of patents, ethics and economic issues related to IPR;",
   "source": {
    "doc": "bulletin.pdf",
    "page": 737,
@@ -31109,11 +31109,11 @@
  },
  {
   "code": "PHA G616",
-  "title": "Pharmaceutical Administration and Manage-",
+  "title": "Pharmaceutical Administration and Management",
   "L": 3,
   "P": 2,
   "units": 5,
-  "description": "ment Technology innovation and creativity, new drugs and products planning, strategic considerations, project implementation, product development, production management and scale up, preparation of product literature and marketing strategy, IPR processes, human resource development, industrial relations, documentation, R & D management, ethical aspects.",
+  "description": "Technology innovation and creativity, new drugs and products planning, strategic considerations, project implementation, product development, production management and scale up, preparation of product literature and marketing strategy, IPR processes, human resource development, industrial relations, documentation, R & D management, ethical aspects.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 737,
@@ -31160,11 +31160,11 @@
  },
  {
   "code": "PHA G619",
-  "title": "Screening Methods and Techniques In Phar-",
+  "title": "Screening Methods and Techniques In Pharmacology",
   "L": 3,
   "P": 2,
   "units": 5,
-  "description": "macology Ethics in animal research, CPCSEA guidelines, Biochemical assays, qualitative and quantitative estimation of receptor specific drugs, animal handling, breeding, nutrition and diet manipulation for testing, methods and techniques involved, therein. Design and development of new animal models and evaluation techniques for co-morbid illnesses and their standardization, toxicological, teratogenic, carcinogenic studies, data analysis, normalization in tabular and graphical formats.",
+  "description": "Ethics in animal research, CPCSEA guidelines, Biochemical assays, qualitative and quantitative estimation of receptor specific drugs, animal handling, breeding, nutrition and diet manipulation for testing, methods and techniques involved, therein. Design and development of new animal models and evaluation techniques for co-morbid illnesses and their standardization, toxicological, teratogenic, carcinogenic studies, data analysis, normalization in tabular and graphical formats.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 737,
@@ -31194,11 +31194,11 @@
  },
  {
   "code": "PHA G622",
-  "title": "Chemistry of Natural Drugs & Macromole -",
+  "title": "Chemistry of Natural Drugs & Macromole cules",
   "L": 3,
   "P": 2,
   "units": 5,
-  "description": "cules Size and shape of macromolecules, biomedical polymers, their structure, synthesis and function, chemistry of newer oral contraceptive agents, terpenes used as flavouring agents, newer phytochemical investigations in glycosides, alkaloids, etc. I-128",
+  "description": "Size and shape of macromolecules, biomedical polymers, their structure, synthesis and function, chemistry of newer oral contraceptive agents, terpenes used as flavouring agents, newer phytochemical investigations in glycosides, alkaloids, etc. I-128",
   "source": {
    "doc": "bulletin.pdf",
    "page": 737,
@@ -31211,7 +31211,7 @@
  },
  {
   "code": "PHA G623",
-  "title": "Pharmaceutical Applications of",
+  "title": "Pharmaceutical Applications of Polymers and Biopolymers",
   "L": null,
   "P": null,
   "units": 5,
@@ -32274,11 +32274,11 @@
  },
  {
   "code": "PHY F432",
-  "title": "Classical Theory of Fields: A Symmetry Per-",
+  "title": "Classical Theory of Fields: A Symmetry Perspective",
   "L": null,
   "P": null,
   "units": 4,
-  "description": "spective Rotations in real complex and Minkowski spaces laying group theoretical basis of 3-tensors and 4 tensors and spinors, transition from a discrete to continuous system, stress energy tensor, relativistic field theory, Noether’s theorem, tensor and spinor fields as representation of Lorentz group, action for spin-0 and spin-1/2, and super-symmetric multiplet, introduction of spin-1, spin-2 and spin-3/2 through appropriate local symmetries of spin-0 and spin1/2 actions.",
+  "description": "Rotations in real complex and Minkowski spaces laying group theoretical basis of 3-tensors and 4 tensors and spinors, transition from a discrete to continuous system, stress energy tensor, relativistic field theory, Noether’s theorem, tensor and spinor fields as representation of Lorentz group, action for spin-0 and spin-1/2, and super-symmetric multiplet, introduction of spin-1, spin-2 and spin-3/2 through appropriate local symmetries of spin-0 and spin1/2 actions.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 742,
@@ -32627,7 +32627,7 @@
  },
  {
   "code": "RIA F213",
-  "title": "Foundations of Data Structures and",
+  "title": "Foundations of Data Structures and Algorithms",
   "L": 3,
   "P": 1,
   "units": 4,
@@ -32984,11 +32984,11 @@
  },
  {
   "code": "SAN G514",
-  "title": "Sanitation Financing and Project Manage-",
+  "title": "Sanitation Financing and Project Management",
   "L": null,
   "P": null,
   "units": 5,
-  "description": "ment This course will have two modules – SanitationFinancing and Project Management. Introduction tofinancial viability, CAPEX, OPEX, business modelsand PPP of sanitation project, Calculating CAPEX andOPEX of a sanitation project and developing abusiness model, Local authority/municipal budgetingand public/government financing, Key aspects ofproject management including stakeholders’relationship, people management, risk management,budget management, reporting, Objective OrientedProject Planning.",
+  "description": "This course will have two modules – SanitationFinancing and Project Management. Introduction tofinancial viability, CAPEX, OPEX, business modelsand PPP of sanitation project, Calculating CAPEX andOPEX of a sanitation project and developing abusiness model, Local authority/municipal budgetingand public/government financing, Key aspects ofproject management including stakeholders’relationship, people management, risk management,budget management, reporting, Objective OrientedProject Planning.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 745,
@@ -33071,11 +33071,11 @@
  },
  {
   "code": "SKILL G611",
-  "title": "Computer Operation and Software Devel-",
+  "title": "Computer Operation and Software Development I",
   "L": null,
   "P": null,
   "units": 5,
-  "description": "opment I",
+  "description": "",
   "source": {
    "doc": "bulletin.pdf",
    "page": 745,
@@ -33088,11 +33088,11 @@
  },
  {
   "code": "SKILL G612",
-  "title": "Computer Operation and Software Devel-",
+  "title": "Computer Operation and Software Development II",
   "L": null,
   "P": null,
   "units": 5,
-  "description": "opment II These two courses to be offered in two successive semesters will aim to develop the computer skills for running program packages and writing and developing software programmes for as wide areas as possible. Areas would include both the developmental processes involved in innovative education and of academic and applied research. The operation of and evaluation in the courses would be done through seminars, group discussions, log books and programme outputs. One component of the evaluation will invariably consist of a lengthy involvement on an intricate task.",
+  "description": "These two courses to be offered in two successive semesters will aim to develop the computer skills for running program packages and writing and developing software programmes for as wide areas as possible. Areas would include both the developmental processes involved in innovative education and of academic and applied research. The operation of and evaluation in the courses would be done through seminars, group discussions, log books and programme outputs. One component of the evaluation will invariably consist of a lengthy involvement on an intricate task.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 745,
@@ -33258,7 +33258,7 @@
  },
  {
   "code": "SNS F211",
-  "title": "Fundamentals of Nanoscience and",
+  "title": "Fundamentals of Nanoscience and Nanotechnology",
   "L": 3,
   "P": 0,
   "units": 3,
@@ -33377,7 +33377,7 @@
  },
  {
   "code": "SNS F244",
-  "title": "Nanomaterials Synthesis &",
+  "title": "Nanomaterials Synthesis & Characterization Laboratory",
   "L": 0,
   "P": 3,
   "units": 3,
@@ -33515,7 +33515,7 @@
  },
  {
   "code": "SNS F345",
-  "title": "Physics and Modelling of",
+  "title": "Physics and Modelling of Semiconductor Devices",
   "L": 2,
   "P": 1,
   "units": 3,
@@ -33804,11 +33804,11 @@
  },
  {
   "code": "SS G521",
-  "title": "Fourth Generation Languages and Applica-",
+  "title": "Fourth Generation Languages and Applications",
   "L": null,
   "P": null,
   "units": 4,
-  "description": "tions Nature of 4GLs; application generators; RDBMS and 4GLs; SQL based 4GLs; 4GLs and development of information systems and decision support systems; other types of 4GLs; case studies.",
+  "description": "Nature of 4GLs; application generators; RDBMS and 4GLs; SQL based 4GLs; 4GLs and development of information systems and decision support systems; other types of 4GLs; case studies.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 748,
@@ -34025,11 +34025,11 @@
  },
  {
   "code": "SS G641",
-  "title": "Management Information and Decision Sup-",
+  "title": "Management Information and Decision Support Systems",
   "L": null,
   "P": null,
   "units": 5,
-  "description": "port Systems Data & information; characteristics of information; components of management information systems; information flows; design and maintenance of management information systems; decision support systems.",
+  "description": "Data & information; characteristics of information; components of management information systems; information flows; design and maintenance of management information systems; decision support systems.",
   "source": {
    "doc": "bulletin.pdf",
    "page": 749,
@@ -34382,11 +34382,11 @@
  },
  {
   "code": "QT G625",
-  "title": "Quantum Advanced Programming,",
+  "title": "Quantum Advanced Programming, Compilation",
   "L": null,
   "P": null,
   "units": 5,
-  "description": "Compilation Models and Frameworks (including HPC) Application of Quantum Computing, In-sequence processing, Single-circuit applications, ensemble-circuit applications, macro-architecture design, micro-architecture design, Quantum Programming Languages and Models. Compilation and Program Optimization Techniques, Quantum Parallel Programming, QuantumClassical Hybrid Machine Programming, Circuit Cutting techniques",
+  "description": "Models and Frameworks (including HPC) Application of Quantum Computing, In-sequence processing, Single-circuit applications, ensemble-circuit applications, macro-architecture design, micro-architecture design, Quantum Programming Languages and Models. Compilation and Program Optimization Techniques, Quantum Parallel Programming, QuantumClassical Hybrid Machine Programming, Circuit Cutting techniques",
   "source": {
    "doc": "bulletin.pdf",
    "page": 751,
@@ -34416,7 +34416,7 @@
  },
  {
   "code": "QT G630",
-  "title": "Field Theoretical Understanding of",
+  "title": "Field Theoretical Understanding of Condensed Matter Physics",
   "L": 4,
   "P": 0,
   "units": 4,
