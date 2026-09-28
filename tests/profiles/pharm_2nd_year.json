@@ -1,0 +1,81 @@
+{
+ "id_no": "2025A5PS0055P",
+ "name": "B.Pharm 2-1",
+ "batch": 2025,
+ "programmes": [
+  "A5"
+ ],
+ "completed": [
+  {
+   "code": "BITS F103",
+   "grade": "A-"
+  },
+  {
+   "code": "BITS F111",
+   "grade": "A-"
+  },
+  {
+   "code": "BIO F101",
+   "grade": "B-"
+  },
+  {
+   "code": "BITS F112",
+   "grade": "C-"
+  },
+  {
+   "code": "CHEM F101",
+   "grade": "A-"
+  },
+  {
+   "code": "CS F111",
+   "grade": "A"
+  },
+  {
+   "code": "BITS F113",
+   "grade": "B-"
+  },
+  {
+   "code": "MATH F113",
+   "grade": "C-"
+  },
+  {
+   "code": "PHA F214",
+   "grade": "B-"
+  },
+  {
+   "code": "PHY F102",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F114",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F101",
+   "grade": "A"
+  },
+  {
+   "code": "PHA F216",
+   "grade": "C-"
+  },
+  {
+   "code": "BITS K101",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F102",
+   "grade": "B"
+  }
+ ],
+ "current": [
+  "BITS F218",
+  "PHA F211",
+  "BITS F219",
+  "PHA F242",
+  "PHA F217",
+  "BITS F225"
+ ],
+ "minor": null,
+ "interests": "drug discovery, computational biology",
+ "cgpa": 8.8
+}

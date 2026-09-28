@@ -22,24 +22,24 @@ timetable_slots_missing,PHY F112,section L1 has no day/hour,timetable.pdf p.106
 timetable_slots_missing,SW E101,section L1 has no day/hour,timetable.pdf p.112
 handout_ocr,"MATH F214,MAC F214","scanned PDF, text came from OCR",handouts/348_MAC_F214.pdf
 programme_structure,AA,CDC count 14 courses/49 units vs chart footer 14 courses/48 units.,bulletin.pdf p.219
-programme_structure,ENV,"Named on semester chart p.222 but not in CDC list: CHE F211, BITS F240, ENVS F323, ENVS F324 (added as CDC).",bulletin.pdf p.222
-programme_structure,ENV,Dropped CDC-list course(s) not named on the chart: ENVS F232,bulletin.pdf p.222
-programme_structure,ENV,CDC count 16 courses/36 units vs chart footer 16 courses/48 units.,bulletin.pdf p.222
+programme_structure,AJ,"Named on semester chart p.222 but not in CDC list: CHE F211, BITS F240, ENVS F323, ENVS F324 (added as CDC).",bulletin.pdf p.222
+programme_structure,AJ,Dropped CDC-list course(s) not named on the chart: ENVS F232,bulletin.pdf p.222
+programme_structure,AJ,CDC count 16 courses/36 units vs chart footer 16 courses/48 units.,bulletin.pdf p.222
 programme_structure,A5,Dropped GIR course(s) from CDC count: BITS F219,bulletin.pdf p.228
 programme_structure,A5,Dropped CDC-list course(s) not named on the chart: PHA F243,bulletin.pdf p.228
-programme_structure,BBA,CDC count 14 courses/43 units vs chart footer 14 courses/42 units.,bulletin.pdf p.238
+programme_structure,C8,CDC count 14 courses/43 units vs chart footer 14 courses/42 units.,bulletin.pdf p.238
 minor_structure,Minor in Tissue Engineering,course/unit requirement not extracted,bulletin.pdf p.[349]
-course_not_in_bulletin_descriptions,AUE F341,listed in AUE CDC but has no Part VI description,bulletin.pdf p.314
+course_not_in_bulletin_descriptions,AUE F341,listed in AE CDC but has no Part VI description,bulletin.pdf p.314
 course_not_in_bulletin_descriptions,EEE F318,listed in A3 DEL but has no Part VI description,bulletin.pdf p.318
 course_not_in_bulletin_descriptions,EEE F318,listed in AA DEL but has no Part VI description,bulletin.pdf p.319
-course_not_in_bulletin_descriptions,EEE F318,listed in AJ DEL but has no Part VI description,bulletin.pdf p.321
+course_not_in_bulletin_descriptions,EEE F318,listed in AC DEL but has no Part VI description,bulletin.pdf p.321
 course_not_in_bulletin_descriptions,EEE F318,listed in A8 DEL but has no Part VI description,bulletin.pdf p.321
 course_not_in_bulletin_descriptions,INSTR F429,listed in A8 DEL but has no Part VI description,bulletin.pdf p.322
 course_not_in_bulletin_descriptions,INSTR F430,listed in A8 DEL but has no Part VI description,bulletin.pdf p.322
-course_not_in_bulletin_descriptions,ENVS F212,listed in ENV CDC but has no Part VI description,bulletin.pdf p.322
-course_not_in_bulletin_descriptions,ENVS F221,listed in ENV CDC but has no Part VI description,bulletin.pdf p.322
-course_not_in_bulletin_descriptions,ENVS F222,listed in ENV CDC but has no Part VI description,bulletin.pdf p.322
-course_not_in_bulletin_descriptions,CHEM F431,listed in ENV DEL but has no Part VI description,bulletin.pdf p.322
+course_not_in_bulletin_descriptions,ENVS F212,listed in AJ CDC but has no Part VI description,bulletin.pdf p.322
+course_not_in_bulletin_descriptions,ENVS F221,listed in AJ CDC but has no Part VI description,bulletin.pdf p.322
+course_not_in_bulletin_descriptions,ENVS F222,listed in AJ CDC but has no Part VI description,bulletin.pdf p.322
+course_not_in_bulletin_descriptions,CHEM F431,listed in AJ DEL but has no Part VI description,bulletin.pdf p.322
 course_not_in_bulletin_descriptions,ME F451,listed in A4 DEL but has no Part VI description,bulletin.pdf p.324
 course_not_in_bulletin_descriptions,CHEM F431,listed in B2 DEL but has no Part VI description,bulletin.pdf p.326
 course_not_in_bulletin_descriptions,ECON F315,listed in B3 DEL but has no Part VI description,bulletin.pdf p.327
@@ -51,8 +51,8 @@ course_not_in_bulletin_descriptions,PHY F425,listed in B5 DEL but has no Part VI
 course_not_in_bulletin_descriptions,RIA F212,listed in RIA CDC but has no Part VI description,bulletin.pdf p.329
 course_not_in_bulletin_descriptions,BITS F434,listed in RIA DEL but has no Part VI description,bulletin.pdf p.329
 course_not_in_bulletin_descriptions,ECE F313,listed in RIA DEL but has no Part VI description,bulletin.pdf p.330
-course_not_in_bulletin_descriptions,ECON F434,listed in BBA CDC but has no Part VI description,bulletin.pdf p.332
-course_not_in_bulletin_descriptions,BITS F490,listed in BBA DEL but has no Part VI description,bulletin.pdf p.333
+course_not_in_bulletin_descriptions,ECON F434,listed in C8 CDC but has no Part VI description,bulletin.pdf p.332
+course_not_in_bulletin_descriptions,BITS F490,listed in C8 DEL but has no Part VI description,bulletin.pdf p.333
 handout_missing,BIO F111,offered this semester but no handout supplied,handouts/
 handout_missing,BITS F102,offered this semester but no handout supplied,handouts/
 handout_missing,BITS F112,offered this semester but no handout supplied,handouts/

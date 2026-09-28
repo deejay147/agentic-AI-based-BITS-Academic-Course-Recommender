@@ -27,38 +27,40 @@ LIST_PAGES = range(314, 337)
 CHART_PAGES = range(211, 239)
 COL_SPLIT = 256  # x (pt) between the two text columns (page width 522)
 
-# Course-list heading -> (programme id, chart-page title fragment, degree)
-# Programme ids follow the BITS ID-number codes where they exist (bulletin III-55).
+# course-list heading -> (programme code, bit of the chart page title to find it by, degree)
+# codes are the official ID-number codes from bulletin III-55 (pdf p.199-200), so a student's
+# ID like 2025A7PS0147P maps straight to a programme. two exceptions:
+#   RIA has no code in that table, and both General Studies streams share C2 (-CMS / -DS added)
 PROGRAMMES = {
-    "ARCHITECTURAL AND URBAN ENGINEERING": ("AUE", "Architecture and Urban", "B.E."),
-    "BIOTECHNOLOGY": ("BIOT", "B.E. Biotechnology Programme", "B.E."),
-    "BIOTECHNOLOGY WITH SPECIALIZATION IN APPLIED MOLECULAR BIOLOGY": ("BIOT-AMB", "Specialization in Applied", "B.E."),
+    "ARCHITECTURAL AND URBAN ENGINEERING": ("AE", "Architecture and Urban", "B.E."),
+    "BIOTECHNOLOGY": ("A9", "B.E. Biotechnology Programme", "B.E."),
+    "BIOTECHNOLOGY WITH SPECIALIZATION IN APPLIED MOLECULAR BIOLOGY": ("AH", "Specialization in Applied", "B.E."),
     "CHEMICAL ENGINEERING": ("A1", "B.E. Chemical Programme", "B.E."),
-    "CHEMICAL ENGINEERING WITH SPECIALIZATION IN ENERGY, ENVIRONMENT, AND SUSTAINABILITY": ("A1-EES", "Chemical with Specialization", "B.E."),
+    "CHEMICAL ENGINEERING WITH SPECIALIZATION IN ENERGY, ENVIRONMENT, AND SUSTAINABILITY": ("AF", "Chemical with Specialization", "B.E."),
     "CIVIL ENGINEERING": ("A2", "B.E. Civil", "B.E."),
     "COMPUTER SCIENCE": ("A7", "Computer Science", "B.E."),
     "ELECTRICAL AND ELECTRONICS ENGINEERING": ("A3", "Electrical & Electronics", "B.E."),
     "ELECTRONICS AND COMMUNICATION ENGINEERING": ("AA", "Electronics & Communication", "B.E."),
-    "ELECTRONICS AND COMPUTER ENGINEERING": ("AJ", "Electronics & Computer", "B.E."),
+    "ELECTRONICS AND COMPUTER ENGINEERING": ("AC", "Electronics & Computer", "B.E."),
     "ELECTRONICS AND INSTRUMENTATION ENGINEERING": ("A8", "Electronics and Instrumentation", "B.E."),
-    "ENVIRONMENTAL AND SUSTAINABILITY ENGINEERING": ("ENV", "Environmental and Sustainability", "B.E."),
+    "ENVIRONMENTAL AND SUSTAINABILITY ENGINEERING": ("AJ", "Environmental and Sustainability", "B.E."),
     "MANUFACTURING ENGINEERING": ("AB", "Manufacturing", "B.E."),
     "MATHEMATICS AND COMPUTING": ("AD", "Mathematics and Computing", "B.E."),
     "MECHANICAL ENGINEERING": ("A4", "B.E. Mechanical Programme", "B.E."),
-    "MECHANICAL ENGINEERING WITH SPECIALIZATION IN AEROSPACE": ("A4-AERO", "Mechanical with Specialization", "B.E."),
+    "MECHANICAL ENGINEERING WITH SPECIALIZATION IN AEROSPACE": ("AG", "Mechanical with Specialization", "B.E."),
     "PHARMACY": ("A5", "B. Pharm", "B.Pharm."),
     "BIOLOGICAL SCIENCES": ("B1", "Biological Sciences", "M.Sc."),
     "CHEMISTRY": ("B2", "M.Sc. Chemistry", "M.Sc."),
     "ECONOMICS": ("B3", "Economics", "M.Sc."),
     "MATHEMATICS": ("B4", "M.Sc. Mathematics", "M.Sc."),
     "PHYSICS": ("B5", "M. Sc. Physics Programme", "M.Sc."),
-    "PHYSICS WITH SPECIALIZATION IN SPACE SCIENCE AND TECHNOLOGY": ("B5-SPACE", "Physics specialization in Space", "M.Sc."),
+    "PHYSICS WITH SPECIALIZATION IN SPACE SCIENCE AND TECHNOLOGY": ("B6", "Physics specialization in Space", "M.Sc."),
     "ROBOTICS AND INDUSTRIAL AUTOMATION": ("RIA", "Robotics", "B.E."),
-    "GENERAL STUDIES – COMMUNICATION AND MEDIA STUDIES STREAM": ("GS-CMS", "Communication and Media", "M.Sc."),
-    "GENERAL STUDIES – DEVELOPMENT STUDIES STREAM": ("GS-DS", "Development Studies", "M.Sc."),
-    "SEMICONDUCTOR AND NANOSCIENCE": ("SNS", "Semiconductor and Nanoscience", "M.Sc."),
+    "GENERAL STUDIES – COMMUNICATION AND MEDIA STUDIES STREAM": ("C2-CMS", "Communication and Media", "M.Sc."),
+    "GENERAL STUDIES – DEVELOPMENT STUDIES STREAM": ("C2-DS", "Development Studies", "M.Sc."),
+    "SEMICONDUCTOR AND NANOSCIENCE": ("B7", "Semiconductor and Nanoscience", "M.Sc."),
     # heading is an image in the PDF; recognised by its BBA-prefixed core courses
-    "BACHELOR OF BUSINESS ADMINISTRATION (HONOURS)": ("BBA", "Business Administration", "BBA"),
+    "BACHELOR OF BUSINESS ADMINISTRATION (HONOURS)": ("C8", "Business Administration", "BBA"),
 }
 
 COURSE_LINE = re.compile(
@@ -217,6 +219,38 @@ def parse_course_lists(pdf):
     return programmes, huel, other
 
 
+_TOTAL_TOK = re.compile(r"^\d{1,2}(\*|\(min\)|/\d{1,2}|to\d+)?$|^\(min\)$")
+
+
+def chart_positions(page) -> dict:
+    """code -> [year, semester] read off the semester-wise chart.
+
+    Layout: first semester in the left half, second in the right half. Each year block
+    ends with a row that only has the unit totals ('18  19', '20(min) 21(min)'), so the
+    year of a course = 1 + number of total-rows above it. Summer (PS-I) sits in the middle
+    and gets semester 0."""
+    ws = page.extract_words(x_tolerance=1.5)
+    rows = []
+    for w in sorted(ws, key=lambda w: (round(w["top"]), w["x0"])):
+        if rows and abs(rows[-1][0] - w["top"]) < 3:
+            rows[-1][1].append(w)
+        else:
+            rows.append([w["top"], [w]])
+    ends = [top for top, r in rows if len(r) <= 3 and all(_TOTAL_TOK.match(w["text"]) for w in r)]
+    mid = page.width / 2
+    pos = {}
+    for i, w in enumerate(ws[:-1]):
+        n = ws[i + 1]
+        if re.fullmatch(r"[A-Z]{2,5}", w["text"]) and re.fullmatch(r"[A-Z]\d{3}[A-Z]?", n["text"]) \
+                and abs(w["top"] - n["top"]) < 3:
+            code = norm_code(f"{w['text']} {n['text']}")
+            year = 1 + sum(1 for e in ends if e < w["top"])
+            sem = 0 if mid * 0.55 < w["x0"] < mid * 0.9 else (1 if w["x0"] < mid else 2)
+            if code and code not in pos:
+                pos[code] = [year, sem]
+    return pos
+
+
 def parse_chart(pdf, title_fragment):
     """Find the semester-wise chart page for a programme and pull: all course codes on it,
     the 'Discipline Core - N Units (M Courses)' / 'Discipline Electives - N Units (M Courses)' footer."""
@@ -242,6 +276,7 @@ def parse_chart(pdf, title_fragment):
         return {
             "page": pn,
             "codes": codes,
+            "positions": chart_positions(pdf.pages[pn - 1]),
             "cdc_total": footer(r"Discipline\s+Core"),
             "del_total": footer(r"Discipline\s+Electives?"),
             "text": txt,
@@ -354,6 +389,7 @@ def build():
                 "cdc_total": chart["cdc_total"] if chart else None,
                 "del_total": chart["del_total"] if chart else None,
                 "chart_page": chart["page"] if chart else None,
+                "chart_positions": chart["positions"] if chart else {},
                 "source": {"doc": SOURCE, "pages": sorted(p["pages"]),
                            "chart_page": chart["page"] if chart else None},
             })

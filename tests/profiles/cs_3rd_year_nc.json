@@ -1,0 +1,123 @@
+{
+ "id_no": "2024A7PS0022P",
+ "name": "CS 3-1 with an NC",
+ "batch": 2024,
+ "programmes": [
+  "A7"
+ ],
+ "completed": [
+  {
+   "code": "BITS F103",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F111",
+   "grade": "A-"
+  },
+  {
+   "code": "BIO F101",
+   "grade": "B"
+  },
+  {
+   "code": "BITS F112",
+   "grade": "A-"
+  },
+  {
+   "code": "CHEM F101",
+   "grade": "D"
+  },
+  {
+   "code": "CS F111",
+   "grade": "C"
+  },
+  {
+   "code": "MATH F101",
+   "grade": "A"
+  },
+  {
+   "code": "MATH F113",
+   "grade": "A-"
+  },
+  {
+   "code": "PHY F101",
+   "grade": "B"
+  },
+  {
+   "code": "MATH F102",
+   "grade": "A"
+  },
+  {
+   "code": "BITS F101",
+   "grade": "C"
+  },
+  {
+   "code": "EEE F111",
+   "grade": "A"
+  },
+  {
+   "code": "BITS K101",
+   "grade": "B"
+  },
+  {
+   "code": "BITS F102",
+   "grade": "A"
+  },
+  {
+   "code": "MATH F211",
+   "grade": "D"
+  },
+  {
+   "code": "ECON F211",
+   "grade": "B"
+  },
+  {
+   "code": "CS F214",
+   "grade": "B-"
+  },
+  {
+   "code": "CS F222",
+   "grade": "C"
+  },
+  {
+   "code": "CS F211",
+   "grade": "NC"
+  },
+  {
+   "code": "CS F213",
+   "grade": "D"
+  },
+  {
+   "code": "CS F215",
+   "grade": "A-"
+  },
+  {
+   "code": "CS F241",
+   "grade": "B-"
+  },
+  {
+   "code": "CS F212",
+   "grade": "D"
+  },
+  {
+   "code": "BITS F225",
+   "grade": "B"
+  },
+  {
+   "code": "GS F232",
+   "grade": "A-"
+  },
+  {
+   "code": "HSS F222",
+   "grade": "B"
+  }
+ ],
+ "current": [
+  "CS F351",
+  "CS F372",
+  "CS F301",
+  "CS F342"
+ ],
+ "minor": null,
+ "interests": "AI, data science, systems",
+ "cgpa": 7.9
+}

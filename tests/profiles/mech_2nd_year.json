@@ -1,0 +1,76 @@
+{
+ "id_no": "2025A4PS0044P",
+ "name": "Mech 2-1",
+ "batch": 2025,
+ "programmes": [
+  "A4"
+ ],
+ "completed": [
+  {
+   "code": "BITS F103",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F111",
+   "grade": "B"
+  },
+  {
+   "code": "BIO F101",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F112",
+   "grade": "B"
+  },
+  {
+   "code": "CHEM F101",
+   "grade": "C-"
+  },
+  {
+   "code": "CS F111",
+   "grade": "C"
+  },
+  {
+   "code": "MATH F101",
+   "grade": "A"
+  },
+  {
+   "code": "MATH F113",
+   "grade": "A-"
+  },
+  {
+   "code": "PHY F101",
+   "grade": "D"
+  },
+  {
+   "code": "MATH F102",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F101",
+   "grade": "C"
+  },
+  {
+   "code": "EEE F111",
+   "grade": "C"
+  },
+  {
+   "code": "BITS K101",
+   "grade": "C-"
+  },
+  {
+   "code": "BITS F102",
+   "grade": "C-"
+  }
+ ],
+ "current": [
+  "MATH F211",
+  "ME F211",
+  "ME F212",
+  "ME F216",
+  "ME F217"
+ ],
+ "minor": null,
+ "interests": "robotics, manufacturing, design",
+ "cgpa": 7.2
+}

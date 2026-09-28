@@ -1,0 +1,126 @@
+{
+ "id_no": "2024AAPS0033P",
+ "name": "ECE 3-1",
+ "batch": 2024,
+ "programmes": [
+  "AA"
+ ],
+ "completed": [
+  {
+   "code": "BITS F103",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F111",
+   "grade": "A-"
+  },
+  {
+   "code": "BIO F101",
+   "grade": "D"
+  },
+  {
+   "code": "BITS F112",
+   "grade": "A-"
+  },
+  {
+   "code": "CHEM F101",
+   "grade": "A"
+  },
+  {
+   "code": "CS F111",
+   "grade": "B"
+  },
+  {
+   "code": "MATH F101",
+   "grade": "C-"
+  },
+  {
+   "code": "MATH F113",
+   "grade": "D"
+  },
+  {
+   "code": "PHY F101",
+   "grade": "C"
+  },
+  {
+   "code": "MATH F102",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F101",
+   "grade": "C-"
+  },
+  {
+   "code": "EEE F111",
+   "grade": "C-"
+  },
+  {
+   "code": "BITS K101",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F102",
+   "grade": "B-"
+  },
+  {
+   "code": "MATH F211",
+   "grade": "B"
+  },
+  {
+   "code": "ECON F211",
+   "grade": "B"
+  },
+  {
+   "code": "ECE F211",
+   "grade": "B"
+  },
+  {
+   "code": "ECE F212",
+   "grade": "A-"
+  },
+  {
+   "code": "ECE F215",
+   "grade": "B-"
+  },
+  {
+   "code": "ECE F241",
+   "grade": "D"
+  },
+  {
+   "code": "ECE F214",
+   "grade": "C-"
+  },
+  {
+   "code": "ECE F242",
+   "grade": "C"
+  },
+  {
+   "code": "ECE F243",
+   "grade": "C-"
+  },
+  {
+   "code": "ECE F244",
+   "grade": "B-"
+  },
+  {
+   "code": "BITS F225",
+   "grade": "A-"
+  },
+  {
+   "code": "GS F211",
+   "grade": "A-"
+  },
+  {
+   "code": "HSS F235",
+   "grade": "D"
+  }
+ ],
+ "current": [
+  "ECE F311",
+  "ECE F314",
+  "ECE F434"
+ ],
+ "minor": null,
+ "interests": "signal processing, embedded systems, IoT",
+ "cgpa": 8.1
+}

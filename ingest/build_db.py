@@ -50,7 +50,7 @@ CREATE TABLE handout_codes (handout_id INTEGER, code TEXT);
 CREATE TABLE programmes (
     id TEXT PRIMARY KEY, name TEXT, degree TEXT, curriculum TEXT,
     cdc_units INTEGER, cdc_courses INTEGER, del_units INTEGER, del_courses INTEGER,
-    chart_page INTEGER, notes TEXT, verification TEXT, source TEXT
+    chart_page INTEGER, chart_positions TEXT, notes TEXT, verification TEXT, source TEXT
 );
 CREATE TABLE programme_courses (
     programme_id TEXT, category TEXT, group_id INTEGER, code TEXT, title TEXT, units INTEGER,
@@ -191,9 +191,9 @@ def build():
     # ---- programmes
     for p in progs["programmes"]:
         ct, dt = p["cdc_total"] or {}, p["del_total"] or {}
-        db.execute("INSERT INTO programmes VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", (
+        db.execute("INSERT INTO programmes VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", (
             p["id"], p["name"], p["degree"], p["curriculum"], ct.get("units"), ct.get("courses"),
-            dt.get("units"), dt.get("courses"), p["chart_page"], _j(p["notes"]), _j(p["verification"]),
+            dt.get("units"), dt.get("courses"), p["chart_page"], _j(p.get("chart_positions", {})), _j(p["notes"]), _j(p["verification"]),
             _j(p["source"])))
         for v in p["verification"]:
             issues.append(("programme_structure", p["id"], v, f"bulletin.pdf p.{p['chart_page']}"))

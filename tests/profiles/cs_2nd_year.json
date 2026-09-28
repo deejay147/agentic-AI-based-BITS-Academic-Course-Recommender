@@ -1,0 +1,77 @@
+{
+ "id_no": "2025A7PS0147P",
+ "name": "CS 2-1",
+ "batch": 2025,
+ "programmes": [
+  "A7"
+ ],
+ "completed": [
+  {
+   "code": "BITS F103",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F111",
+   "grade": "B"
+  },
+  {
+   "code": "BIO F101",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F112",
+   "grade": "A"
+  },
+  {
+   "code": "CHEM F101",
+   "grade": "A-"
+  },
+  {
+   "code": "CS F111",
+   "grade": "D"
+  },
+  {
+   "code": "MATH F101",
+   "grade": "A-"
+  },
+  {
+   "code": "MATH F113",
+   "grade": "C"
+  },
+  {
+   "code": "PHY F101",
+   "grade": "A"
+  },
+  {
+   "code": "MATH F102",
+   "grade": "D"
+  },
+  {
+   "code": "BITS F101",
+   "grade": "B"
+  },
+  {
+   "code": "EEE F111",
+   "grade": "A"
+  },
+  {
+   "code": "BITS K101",
+   "grade": "A-"
+  },
+  {
+   "code": "BITS F102",
+   "grade": "C"
+  }
+ ],
+ "current": [
+  "MATH F211",
+  "CS F214",
+  "CS F222",
+  "CS F213",
+  "CS F215",
+  "HSS F235"
+ ],
+ "minor": null,
+ "interests": "artificial intelligence, machine learning",
+ "cgpa": 8.4
+}
