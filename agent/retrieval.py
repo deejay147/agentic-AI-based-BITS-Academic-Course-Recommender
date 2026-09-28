@@ -39,8 +39,25 @@ SYNONYMS = {
     "robotics": ["robot", "robotics", "kinematics", "automation", "control"],
     "bio": ["biology", "biological", "molecular", "cell", "genetics"],
     "security": ["security", "cryptography", "network", "attacks"],
-    "nlp": ["natural", "language", "processing", "text"],
-    "cv": ["computer", "vision", "image", "processing"],
+    "nlp": ["natural_language", "language_processing", "text"],
+    "cv": ["computer_vision", "image_processing", "image"],
+    "cfd": ["computational_fluid", "fluid_dynamics", "fluid", "turbulence"],
+    "vlsi": ["vlsi", "cmos", "integrated_circuits", "digital_design"],
+    "iot": ["internet_of", "sensors", "embedded", "wireless"],
+    "web": ["web", "internet", "html", "javascript", "server", "client"],
+    "networks": ["network", "networks", "networking", "protocols", "tcp"],
+    "economics": ["economics", "economic", "microeconomics", "macroeconomics", "markets"],
+    "management": ["management", "managerial", "organisational", "organizational", "strategy", "business"],
+    "business": ["business", "management", "marketing", "entrepreneurship", "strategy"],
+    "psychology": ["psychology", "psychological", "behaviour", "behavior", "cognitive"],
+    "philosophy": ["philosophy", "philosophical", "ethics", "logic"],
+    "film": ["film", "cinema", "media", "video"],
+    "media": ["media", "journalism", "communication", "advertising"],
+    "energy": ["energy", "renewable", "solar", "power"],
+    "optimization": ["optimization", "optimisation", "linear_programming", "operations_research"],
+    "embedded": ["embedded", "microcontroller", "microprocessor", "real_time"],
+    "pharmacology": ["pharmacology", "drug", "drugs", "pharmacokinetics", "therapeutic"],
+    "security": ["security", "cryptography", "secure", "attacks", "network_security"],
 }
 
 
@@ -60,7 +77,8 @@ def expand(query: str) -> list[str]:
     # spelled-out forms map back to the short keys too ('artificial intelligence' -> ai list)
     joined = " ".join(re.findall(r"[a-z]+", (query or "").lower()))
     for full, key in (("artificial intelligence", "ai"), ("machine learning", "ml"), ("deep learning", "dl"),
-                      ("data science", "data"), ("natural language", "nlp"), ("computer vision", "cv")):
+                      ("data science", "data"), ("natural language", "nlp"), ("computer vision", "cv"),
+                      ("fluid dynamics", "cfd"), ("internet of things", "iot"), ("operations research", "optimization")):
         if full in joined:
             out.extend(SYNONYMS[key])
     return out

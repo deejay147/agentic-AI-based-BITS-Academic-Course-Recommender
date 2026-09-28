@@ -138,6 +138,10 @@ class Session:
                     out.append(r)
             return out
         matched, unverified = dedupe(matched), dedupe(unverified)
+        # drop the long tail of weak topic matches (a single stray word deep in a lecture plan)
+        if topics and matched:
+            top = matched[0]["match_score"]
+            matched = [r for r in matched if r["match_score"] >= max(1.5, 0.3 * top)]
         return {
             "filters": {"categories": cats, "topics": topics, "require": require, "no_8am": no_8am,
                         "free_day": free_day},
@@ -166,6 +170,35 @@ class Session:
             "sources": {"timetable": x["timetable_source"], "bulletin": c.get("source"),
                         "handout": (self.cat.handout(x["code"]) or {}).get("file")},
         }
+
+    def blocked_matches(self, topics: str, categories=None, limit=3) -> list[dict]:
+        """Courses that match the topic but the student can't take this semester, with the rule that
+        blocks each. Makes 'nothing found' answers useful instead of just empty."""
+        q = expand(topics or "")
+        if not q:
+            return []
+        idx = get_index()
+        out = []
+        for code, x in self.ineligible.items():
+            if categories and x["category"] not in [c.upper() for c in categories] and \
+                    not ({"OPEL"} & set(c.upper() for c in categories)):
+                continue
+            sc, hits = idx.score(code, q)
+            if sc <= 0:
+                continue
+            out.append({"code": code, "title": x["title"], "score": round(sc, 2),
+                        "blocked_by": [f"{c['note']} ({c['clause']})" for c in x["checks"] if not c["ok"]]})
+        out.sort(key=lambda r: -r["score"])
+        seen, uniq = set(), []
+        for r in out:   # cross-listed duplicates (ECON F412 / FIN F313 share a handout)
+            k = (self.cat.handout(r["code"]) or {}).get("file") or self.cat.canon(r["code"])
+            if k not in seen:
+                seen.add(k)
+                uniq.append(r)
+        out = uniq
+        if out:
+            out = [r for r in out if r["score"] >= max(1.5, 0.3 * out[0]["score"])]
+        return out[:limit]
 
     def near_misses(self, categories=None, topics=None, require=None, limit=3) -> list[dict]:
         """When nothing satisfies every requested property: the best eligible courses ranked by how many
@@ -225,8 +258,9 @@ class Session:
             "bulletin_source": c.get("source"),
         }
 
-    def check_plan(self, codes: list[str], no_8am: bool = False, free_day: str | None = None) -> dict:
-        out = planner.plan(self.profile, self.cat, codes, _hours_to_avoid(no_8am, free_day) or None)
+    def check_plan(self, codes: list[str], no_8am: bool = False, free_day: str | None = None,
+                   compact: bool = False) -> dict:
+        out = planner.plan(self.profile, self.cat, codes, _hours_to_avoid(no_8am, free_day) or None, compact)
         out.pop("requirements_after", None)
         return out
 

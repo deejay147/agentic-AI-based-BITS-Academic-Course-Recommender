@@ -8,6 +8,7 @@ Nothing here computes academic rules - it only calls engine/ and agent/.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -259,8 +260,14 @@ with tab_ask:
             with st.spinner("Checking requirements and eligibility..."):
                 hist = [{"role": t["role"], "content": t["content"]} for t in st.session_state.chat[:-1]]
                 out = rec.ask(q, hist)
-            text = out["text"] if out["mode"] == "claude" or not out["recommendations"] else \
-                out["text"].split("\n\n**1.")[0]
+            text = out["text"]
+            if out["mode"] == "rules" and out["recommendations"]:
+                # the numbered course blocks are shown as cards below - keep the header and the footers
+                # (could-not-verify / blocked matches / closest options), drop the duplicated middle
+                m = re.search(r"\n\n\*\*1\. .*?(?=\n\n\*\*(Could not verify|Matches your topic|Closest options)|\Z)",
+                              text, re.S)
+                if m:
+                    text = text[:m.start()] + text[m.end():]
             st.markdown(text)
             render_cards(out["recommendations"])
             if out["mode"] == "claude" and out.get("could_not_verify"):
@@ -296,11 +303,12 @@ with tab_plan:
     opts = sorted(sess.eligible)
     picks = st.multiselect("Courses you want to add", opts, format_func=lambda c: f"{course_label(c)} "
                            f"[{sess.eligible[c]['category']}]")
-    a, b = st.columns(2)
+    a, b, c = st.columns(3)
     no8 = a.checkbox("No 8 AM classes")
+    compact = c.checkbox("Compact timetable (fewest gaps)")
     free = b.selectbox("Keep a day free", ["-"] + DAYS)
     if picks:
-        out = sess.check_plan(picks, no8, None if free == "-" else free)
+        out = sess.check_plan(picks, no8, None if free == "-" else free, compact)
         st.dataframe(pd.DataFrame([{"course": course_label(p["code"]), "units": p["units"], "filed as": p["filed_as"],
                                     "sections": ", ".join(f"{k}: {v}" for k, v in p["sections"].items())}
                                    for p in out["picks"]]), hide_index=True, width="stretch")
@@ -310,6 +318,9 @@ with tab_plan:
             f"Total {out['total_units']} units · " + ("clash-free" if out["clash_free"] else "; ".join(out["clash_problems"])))
         for w in out["warnings"]:
             st.warning(w)
+        if out.get("gap_hours") is not None:
+            st.caption(f"Compact pick: {out['gap_hours']} idle hours between classes across {out['days_used']} days "
+                       "(counted with your registered single-section courses).")
         # timetable view: registered single-section components + chosen sections
         entries = []
         for code in profile.current:

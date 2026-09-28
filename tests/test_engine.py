@@ -170,3 +170,25 @@ def test_timetable_clash_detected(cat):
     _, r = run("cs_2nd_year", cat)
     econ = [x for x in r["ineligible"] if x["code"] == "ECON F211"][0]
     assert any(c["rule"] == "timetable" and not c["ok"] for c in econ["checks"])
+
+
+def test_compact_timetable_never_worse(cat):
+    # bonus: compact mode picks the section combination with the fewest idle hours
+    from engine import planner
+    from engine.schedule import busy_from_registered, gap_hours
+    p = load("ece_3rd_year")
+    picks = ["EEE F411", "BITS F364"]
+
+    def gaps(out):
+        slots = set(busy_from_registered(cat, p.current, p.batch)["slots"])
+        for x in out["picks"]:
+            off = cat.offerings[x["code"]][0]
+            for s in off["sections"]:
+                if s["section"] in x["sections"].values():
+                    slots |= {(sl["day"], sl["hour"]) for sl in s["slots"]}
+        return gap_hours(slots)
+
+    plain = planner.plan(p, cat, picks)
+    compact = planner.plan(p, cat, picks, compact=True)
+    assert compact["clash_free"] and gaps(compact) <= gaps(plain)
+    assert compact["gap_hours"] == gaps(compact)

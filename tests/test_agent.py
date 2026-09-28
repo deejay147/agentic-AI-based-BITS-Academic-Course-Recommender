@@ -110,3 +110,13 @@ def test_claude_failure_falls_back_to_rules():
         messages = property(lambda self: (_ for _ in ()).throw(ConnectionError("no network")))
     out = Recommender(load("cs_2nd_year"), client=Broken()).ask("Suggest DELs related to AI.")
     assert out["mode"] == "rules" and "Claude unavailable" in out["text"]
+
+
+def test_rules_blocked_topic_explained():
+    # finance courses exist but a CS 2nd year can't take them yet - the answer has to say why
+    out = Recommender(load("cs_2nd_year"), api_key="").ask("I like finance and economics, any OPEL?")
+    assert "not open to you this semester" in out["text"] and "3.15(b)(i)" in out["text"]
+
+
+def test_nlu_compact():
+    assert nlu.parse("plan CS F317 and GS F232 with no gaps")["compact"]

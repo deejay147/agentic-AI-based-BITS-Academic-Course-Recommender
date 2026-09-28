@@ -85,7 +85,9 @@ TOOLS = [
                     "picks clash-free sections, checks the 25 unit cap.",
      "input_schema": {"type": "object", "properties": {
          "codes": {"type": "array", "items": {"type": "string"}},
-         "no_8am": {"type": "boolean"}, "free_day": {"type": "string"}}, "required": ["codes"]}},
+         "no_8am": {"type": "boolean"}, "free_day": {"type": "string"},
+         "compact": {"type": "boolean", "description": "pick sections with the fewest idle hours between classes"}},
+         "required": ["codes"]}},
     {"name": "submit_recommendations",
      "description": "Submit the final picks. Each is re-validated against the eligibility engine and the requested "
                     "category/properties; invalid ones are rejected and you'll be told why.",
@@ -135,7 +137,7 @@ class Recommender:
         if name == "course_details":
             return s.course_details(args["code"])
         if name == "check_plan":
-            return s.check_plan(args["codes"], args.get("no_8am", False), args.get("free_day"))
+            return s.check_plan(args["codes"], args.get("no_8am", False), args.get("free_day"), args.get("compact", False))
         if name == "submit_recommendations":
             accepted, rejected = [], []
             for it in args.get("items", []):
@@ -233,7 +235,7 @@ class Recommender:
                     "recommendations": [], "could_not_verify": []}
 
         if p["intent"] == "plan":
-            out = s.check_plan(p["codes"], p["no_8am"], p["free_day"])
+            out = s.check_plan(p["codes"], p["no_8am"], p["free_day"], p.get("compact", False))
             return {"mode": "rules", "parsed": p, "text": head + format_plan(out), "recommendations": [],
                     "could_not_verify": [], "plan": out}
 
@@ -242,6 +244,17 @@ class Recommender:
         recs = res["results"]
         text = head + format_recommendations(res, p, s)
         near = []
+        if p["topics"]:
+            blocked = s.blocked_matches(p["topics"], p["categories"])
+            best = recs[0]["match_score"] if recs else 0
+            if blocked and (len(recs) < 3 or blocked[0]["score"] > 2 * best):
+                if recs and blocked[0]["score"] > 2 * best:
+                    # the real matches are blocked - say that first, the list below only touches the topic
+                    text = head + f"> **Heads up:** the courses that best match '{p['topics']}' aren't open to you " \
+                                  f"this semester (reasons at the bottom). The ones listed only partly cover it.\n\n" \
+                        + text[len(head):]
+                text += "\n\n**Matches your topic, but not open to you this semester:**\n\n" + "\n".join(
+                    f"- {b['code']} - {b['title']}: {'; '.join(b['blocked_by'])}" for b in blocked)
         if not recs and len(p["require"]) >= 1:
             near = s.near_misses(p["categories"], p["topics"] or None, p["require"])
             if near:
@@ -383,6 +396,8 @@ def format_plan(out) -> str:
         L.append(f"- **{p['code']}** {p['title']} ({p['units']}u) -> filed as **{p['filed_as']}**, sections {secs}")
     for r in out["rejected"]:
         L.append(f"- ~~{r['code']}~~ not allowed: {'; '.join(r['reasons'])}")
+    if out.get("gap_hours") is not None:
+        L.append(f"- Compact pick: {out['gap_hours']} idle hours across {out['days_used']} days")
     L.append(f"\nTotal this semester: {out['total_units']} units. " +
              ("Clash-free." if out["clash_free"] else "Clashes: " + "; ".join(out["clash_problems"])))
     for w in out["warnings"]:

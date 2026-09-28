@@ -24,7 +24,7 @@ PROPERTY_PATTERNS = [
     ("no_attendance_requirement", r"(no|without|zero|not?\s+\w+\s+)\s*attendance|attendance\s+(not\s+)?(required|mandatory|compulsory)\s*(\?|$)?|no\s+attendance"),
     ("lenient_makeup", r"lenient\s+make[\s-]?ups?|easy\s+make[\s-]?ups?|make[\s-]?ups?\s+(policy\s+)?(is\s+)?(lenient|easy|flexible|relaxed)|flexible\s+make[\s-]?up"),
     ("project_based", r"project[\s-]?based|projects?|term\s+paper"),
-    ("no_quiz", r"no\s+quiz(zes)?|without\s+quiz"),
+    ("no_quiz", r"(no|without)\s+quiz(zes)?"),
     ("no_lab", r"no\s+labs?|without\s+(a\s+)?labs?|no\s+practicals?"),
     ("has_lab", r"(with|has|having)\s+(a\s+)?labs?|hands[\s-]?on\s+lab"),
     ("open_book", r"open[\s-]?book"),
@@ -34,7 +34,9 @@ FILLER = r"\b(suggest|recommend|find|show|give|list|want|need|prefer|looking|som
          r"related|to|for|with|and|a|an|the|me|i|in|on|about|that|which|has|have|having|is|are|of|evaluation|" \
          r"policy|requirement|requirements|this|semester|please|can|could|you|also|like|interested|based|" \
          r"no|without|lenient|easy|makeup|make-up|make|up|midsem|mid-sem|mid|sem|attendance|compre|free|" \
-         r"classes|class|am|8|8am|keep|my|day|days|off|what|take|together|prerequisites?|prereqs?|of|do|does|i|need)\b"
+         r"classes|class|am|8|8am|keep|my|day|days|off|what|take|together|prerequisites?|prereqs?|of|do|does|i|need|" \
+         r"something|anything|afternoons?|mornings?|evenings?|option|options|good|easy|interesting|or|on|any|" \
+         r"list|topics?|area|field|subject|subjects|stuff|things?|compact|gaps?|long|fewer|avoid|timetable)\b"
 
 
 def parse(query: str) -> dict:
@@ -67,12 +69,13 @@ def parse(query: str) -> dict:
             out["require"].append(name)
     # 'what's left / remaining requirements' - but not 'no attendance requirement'
     if not codes and not out["require"] and not out["categories"] and \
-            re.search(r"\b(remaining|left|still\s+need|requirements?|graduat\w*|how\s+many)\b", low):
+            re.search(r"\b(remaining|left|still\s+need|requirements?|graduat\w*|how\s+many|space|room|units)\b", low):
         out["intent"] = "requirements"
     if "has_lab" in out["require"] and "no_lab" in out["require"]:
         out["require"].remove("has_lab")
     if re.search(r"no\s+8\s*(am)?|no\s+early|after\s+9|nothing\s+at\s+8", low):
         out["no_8am"] = True
+    out["compact"] = bool(re.search(r"compact|no\s+(long\s+)?gaps|fewer\s+gaps|avoid\s+(long\s+)?gaps|back[\s-]to[\s-]back", low))
     m = re.search(r"(monday|tuesday|wednesday|thursday|friday|saturday)s?\s+(free|off)|free\s+(on\s+)?(monday|tuesday|wednesday|thursday|friday|saturday)", low)
     if m:
         out["free_day"] = DAYS[m.group(1) or m.group(4)]

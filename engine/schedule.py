@@ -106,7 +106,17 @@ def check_course(off, busy: dict, avoid_hours: set | None = None) -> dict:
     return {"ok": False, "reason": "no combination of its own sections fits", "sections": {}}
 
 
-def plan_sections(offerings: list, busy: dict, avoid_hours: set | None = None) -> dict:
+def gap_hours(taken: set) -> int:
+    """idle hours between the first and last class of each day (lunch hours count too -
+    the timetable says lunch is hour 4, 5 or 6, so one of those gaps is unavoidable anyway)"""
+    by_day = {}
+    for d, h in taken:
+        by_day.setdefault(d, []).append(h)
+    return sum(max(hs) - min(hs) + 1 - len(set(hs)) for hs in by_day.values())
+
+
+def plan_sections(offerings: list, busy: dict, avoid_hours: set | None = None,
+                  compact: bool = False, max_solutions: int = 5000) -> dict:
     """Pick one section per component for *all* chosen courses together so nothing overlaps
     (plain backtracking - a semester is ~6 courses, it's tiny). Exams are checked pairwise too.
 
@@ -133,10 +143,21 @@ def plan_sections(offerings: list, busy: dict, avoid_hours: set | None = None) -
             slots.append((code, kind, secs))
     blocked = set(busy["slots"]) | (avoid_hours or set())
     chosen = {}
+    best = {"score": None, "pick": None, "n": 0}
 
     def bt(i, taken):
+        # returns True to stop searching
         if i == len(slots):
-            return True
+            if not compact:
+                best["pick"] = {c: dict(k) for c, k in chosen.items()}
+                return True
+            # compact mode: keep the combination with the fewest idle hours, then fewest days
+            allh = taken | set(busy["slots"])
+            score = (gap_hours(allh), len({d for d, _ in allh}))
+            if best["score"] is None or score < best["score"]:
+                best["score"], best["pick"] = score, {c: dict(k) for c, k in chosen.items()}
+            best["n"] += 1
+            return best["n"] >= max_solutions
         code, kind, secs = slots[i]
         for s in secs:
             ss = _slot_set(s)
@@ -148,6 +169,10 @@ def plan_sections(offerings: list, busy: dict, avoid_hours: set | None = None) -
             chosen[code].pop(kind, None)
         return False
 
-    if bt(0, set()):
-        return {"ok": True, "sections": chosen, "problems": []}
+    bt(0, set())
+    if best["pick"] is not None:
+        out = {"ok": True, "sections": best["pick"], "problems": []}
+        if compact:
+            out["gap_hours"], out["days_used"] = best["score"]
+        return out
     return {"ok": False, "sections": {}, "problems": ["no clash-free section combination exists for this set of courses"]}

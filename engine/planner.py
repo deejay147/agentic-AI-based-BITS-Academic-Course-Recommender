@@ -22,7 +22,8 @@ from ingest.common import norm_code
 MAX_UNITS = 25
 
 
-def plan(profile: Profile, cat: Catalog, picks: list[str], avoid_hours: set | None = None) -> dict:
+def plan(profile: Profile, cat: Catalog, picks: list[str], avoid_hours: set | None = None,
+         compact: bool = False) -> dict:
     picks = [norm_code(p) or p.upper().strip() for p in picks]
     ev = el.evaluate(profile, cat)
     elig = {x["code"]: x for x in ev["eligible"]}
@@ -54,7 +55,7 @@ def plan(profile: Profile, cat: Catalog, picks: list[str], avoid_hours: set | No
         filed.setdefault(code, "OPEL")
 
     offs = [(c, pick_offering(cat, c, profile.batch)) for c in ok_picks]
-    sched = plan_sections(offs, busy_from_registered(cat, profile.current, profile.batch), avoid_hours)
+    sched = plan_sections(offs, busy_from_registered(cat, profile.current, profile.batch), avoid_hours, compact)
 
     units = ev["registered_units"] + sum(cat.units(c) or 0 for c in ok_picks)
     warnings = []
@@ -77,6 +78,7 @@ def plan(profile: Profile, cat: Catalog, picks: list[str], avoid_hours: set | No
                    "sections": sched["sections"].get(c, {})} for c in ok_picks],
         "rejected": rejected,
         "clash_free": sched["ok"], "clash_problems": sched["problems"],
+        "gap_hours": sched.get("gap_hours"), "days_used": sched.get("days_used"),
         "total_units": units, "warnings": warnings,
         "requirements_after": after,
     }

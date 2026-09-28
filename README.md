@@ -27,14 +27,21 @@ Final recommendations                app/app.py               (Streamlit dashboa
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env              # optional: put ANTHROPIC_API_KEY in it for the Claude agent
-streamlit run app/app.py
+streamlit run app/app.py          # opens http://localhost:8501
 ```
 
-The processed dataset is committed (`data/processed/`), so the app runs straight away.
-Without an API key the agent runs in rule-based mode (same tools, same validation, templated explanations).
+That's it - **no API key needed**. The processed dataset is committed (`data/processed/`), so the app runs straight
+away, and every feature works in the default rule-based agent mode: requirement analysis, eligibility, handout-property
+filters, interest matching, explanations, planner and timetable checks.
 
-Tests: `pytest -q` (31 tests, engine + agent; the Claude loop is tested with a scripted fake client).
+Optional LLM mode: `cp .env.example .env` and put an Anthropic key in `ANTHROPIC_API_KEY`
+([how to get one](https://platform.claude.com/docs/en/get-api-key)). The same tools and the same policy validation are
+used; Claude takes over query understanding, topic expansion / re-ranking and the wording of explanations. The
+dashboard header shows which mode is active.
+
+Try: load `test: cs_2nd_year` in the sidebar, open **Ask** and type *Suggest DELs related to AI*.
+
+Tests: `pytest -q` (34 tests, engine + agent; the Claude loop is tested with a scripted fake client).
 
 ### Rebuilding the data from the PDFs
 
@@ -113,6 +120,11 @@ between ICs for one template, so they're parsed with rules and every extracted p
 | no class or exam clash (tries every section combination) | Reg 3.19 |
 
 - `schedule.py` - clash checks + joint section selection; `planner.py` - the semester planner.
+
+**Timetable intelligence (brownie point):** class, tutorial, lab, midsem and compre clashes; if one section of a course
+clashes, another section is tried before the course is rejected; preferences for no 8 AM classes, keeping a weekday
+free, and a compact timetable (the section combination with the fewest idle hours, then the fewest days); week view in
+the planner tab. Also reachable from chat, e.g. *can I take CS F317 and GS F232 together with no gaps?*
 - Dual degree students are placed on the composite chart of their pair (bulletin p.242-313).
 
 ### 3. Agent (`agent/`)
@@ -127,9 +139,10 @@ between ICs for one template, so they're parsed with rules and every extracted p
     the request, calls the tools (turning "AI" into syllabus words, re-searching if thin), re-ranks, and must finish
     with `submit_recommendations`. Each pick is re-validated against the engine and the requested category /
     properties; anything invalid is dropped and reported. If the API call fails, it falls back to rules mode.
-  - **Rules mode** - `nlu.py` parses category, properties, time preferences, course codes and topic words; the same
-    tools answer; explanations come from templates. When nothing matches every requested property it says so and
-    shows the closest options with what they're missing.
+  - **Rules mode** (default, no key) - `nlu.py` parses category, properties, time preferences, course codes and topic
+    words; the same tools answer; explanations come from templates. When nothing matches every requested property it
+    says so and shows the closest options with what they're missing. When the courses that best match a topic exist
+    but are blocked (e.g. reg 3.15, an exam clash), it says so up front and lists the blocking rule for each.
 
 ## Scope decisions
 
