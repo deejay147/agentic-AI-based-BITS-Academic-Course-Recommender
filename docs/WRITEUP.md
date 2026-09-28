@@ -1,293 +1,278 @@
 # BITS Academic Course Recommender: project writeup
 
-**Postman Round 2 · solo · Pilani campus · First Semester 2026-27 timetable**
+Postman Round 2 · solo project · Pilani campus · uses the First Semester 2026-27 timetable
 Repository: https://github.com/deejay147/agentic-AI-based-BITS-Academic-Course-Recommender
 
-## 1. Summary
+## 1. What it does
 
-The project is an agentic course recommender for BITS Pilani. A student builds a profile, mostly derived from the
-BITS ID, and asks natural-language questions such as *"Suggest an AI-related DEL with no midsem"*. The system
-computes the student's remaining graduation requirements and the set of timetable offerings they are permitted to
-take under the Academic Regulations. It then answers from that eligible set only. Each recommendation states the
-requirement it fills, why the student is eligible, the requested course properties (quoted from the handout or
-timetable), and the source of each fact.
+A BITS Pilani student enters their BITS ID and the courses they've done, then asks a question in plain English,
+like *"Suggest an AI-related DEL with no midsem"*. The app:
 
-The central design choice is a strict separation of responsibilities. **All academic rule checking is
-deterministic Python.** The language layer handles only intent, semantic matching and explanation. That layer is
-an optional LLM, with a rule-based parser as the default. The LLM cannot introduce a course: every pick is
-re-validated against the engine before it is shown.
+1. works out what the student still needs to graduate,
+2. finds which courses in this semester's timetable they are **allowed** to take under the Academic Regulations,
+3. answers the question using only those allowed courses.
 
-| Metric | Value |
+Every recommendation says which requirement it fills, why the student is allowed to take it, the course details
+they asked about (quoted from the handout or timetable), and which document each fact came from.
+
+**The main idea:** all the rule checking is ordinary Python code that gives the same answer every time. The AI
+part only helps understand the question, match interests to courses, and word the answer. The AI can't slip in a
+course: every course it suggests is checked again by the rules code before the student sees it. The AI is also
+optional. Without an API key, a simpler built-in parser does its job, and every feature still works.
+
+**By the numbers**
+
+| | |
 |---|---|
-| Course descriptions parsed (Bulletin Part VI) | 2,015 (2,119 incl. timetable-only codes) |
-| Timetable offerings / sections | 719 rows, 582 codes, 1,557 sections |
-| Programmes (incl. CS/C2 variants) | 28, plus 70 composite dual-degree charts |
-| Handouts | 540 files → 399 unique; 287 with a reliable evaluation table |
-| Minors / HUEL pool / regulation clauses | 23 / 136 / 14 |
-| Items routed to the verification queue | 108 |
-| Tests | 37 (engine + agent, incl. both LLM loops with scripted clients) |
+| Course descriptions read from the Bulletin | 2,015 |
+| Timetable | 719 course rows, 1,557 sections |
+| Degree programmes | 28, plus 70 combined dual-degree charts |
+| Handouts | 540 files, 399 after removing duplicates |
+| Handouts with a clean marks-breakdown table | 287 |
+| Minors | 23 |
+| Regulation rules used | 14 |
+| Items flagged for a human to check | 108 |
+| Automatic tests | 37 |
 
-## 2. Architecture
+## 2. How it's built
+
+The project has four parts, each in its own folder:
 
 ```
-PDFs ──► ingest/  (parse, normalise, validate, SQLite)
-                │
-profile ──► engine/  requirements ─► eligibility (clause-tagged checks) ─► schedule / planner
-                │
-query ──► agent/  intent (LLM or rule parser) ─► tools over the eligible set ─► validate ─► explain
-                │
-            app/  Streamlit dashboard
+PDFs ──► 1. ingest/   read the PDFs once, save clean data
+               │
+profile ──► 2. engine/  what's left to graduate? what am I allowed to take? does it clash?
+               │
+question ──► 3. agent/  understand the question, search allowed courses, double-check, explain
+               │
+          4. app/      the website (Streamlit)
 ```
 
-1. **Ingestion (`ingest/`)** runs once per data release (`python -m ingest.run_all`, ~3 min). It emits JSON,
-   `academic.db`, a validation report and a verification queue. A new timetable or handout set only requires
-   rerunning this step; no engine or agent code changes.
-2. **Engine (`engine/`)** is pure functions over the catalog and a profile: remaining requirements, per-offering
-   eligibility with clause references, clash detection, section selection and the semester planner.
-3. **Agent (`agent/`)** exposes the engine as five tools (`get_requirements`, `find_courses`, `course_details`,
-   `check_plan`, `submit_recommendations`). The same tools serve both the LLM loop and the rule-based path.
-4. **Dashboard (`app/`)** has a profile sidebar and five tabs: Requirements, Ask, Plan semester, Eligible
-   courses, Data sources.
+1. **Reading the PDFs (`ingest/`).** One command (`python -m ingest.run_all`, about 3 minutes) reads the
+   Bulletin, Timetable, Regulations and handouts and saves clean data files and a small database. When a new
+   timetable or new handouts come out, you rerun this step and nothing else changes.
+2. **The rules engine (`engine/`).** Plain Python, no AI. Given a student, it works out remaining requirements,
+   which courses they can take (and why not, for the rest), timetable clashes, and section choices.
+3. **The assistant (`agent/`).** Turns the question into a search over allowed courses and writes the answer.
+   It uses five "tools": get requirements, find courses, course details, check a plan, and submit the final
+   answer.
+4. **The dashboard (`app/`).** A sidebar for the profile and five tabs: Requirements, Ask, Plan semester,
+   Eligible courses, Data sources.
 
-## 3. Data pipeline
+## 3. Reading the PDFs
 
-### 3.1 Parsing strategy
+### Tables need positions, not just text
 
-Early experiments with flattened text (`pdftotext -layout`) on the timetable showed column drift. Wrapped titles,
-wrapped instructor names and glued day tokens were misassigned across rows. The final approach uses
-**coordinate-based parsing** (pdfplumber word boxes) wherever the source is tabular:
+The first attempt copied the text out of the timetable PDF. That broke badly: when a course title or instructor
+name ran onto a second line, it got attached to the wrong course. So the final version uses the **position of
+every word on the page** (with the pdfplumber library). A word's left-right position says which column it belongs
+to, and its height on the page says which row. The same idea is used for the Bulletin's two-column pages, which
+are cut down the middle and read one column at a time.
 
-- **Timetable.** Columns are assigned by x-position and rows by y-proximity. Wrapped fragments attach to the
-  nearest anchored row. Special handling covers glued day tokens (`MW`), two-digit evening hours (`11 12`),
-  cancelled sections, glued lab hours, and the equivalent-course list (Section IX), which is resolved with
-  union-find into 167 groups.
-- **Bulletin programme pages.** CDC and DEL lists come with OR-alternatives, tracks and compulsory DELs. The
-  semester charts are parsed into (year, semester) positions for every named course. Chart totals come from rows
-  whose numbers are ≥ 8, which excludes stray unit numbers that had broken year detection on the Chemical chart.
-- **Bulletin Part VI.** The two-column layout is split by cropping at the measured page midline. Output includes
-  titles (wrapped titles merged), units, and prerequisite text, codes and mode.
-- **Minors.** These are read with table extraction; titles that sit outside the table and tables that span pages
-  are handled.
-- **Handouts.** These are too heterogeneous for a template. The parser uses heading detection plus two
-  evaluation passes: table cells, then explicit percentages. A table counts as reliable only when its weights sum
-  to 95–105%. It also extracts makeup policy (none / restricted / available, with scoped exceptions), attendance
-  policy (five states), recommended background and lecture-plan topics. Every field keeps its evidence sentence.
-  Exact duplicates are removed by MD5, and the single scanned handout goes through Tesseract.
+Some timetable quirks needed their own fixes: days printed stuck together (`MW` means Monday and Wednesday),
+`11 12` meaning the evening hours 11 and 12 rather than hours 1 and 2, cancelled sections, and a list of courses
+that are the same course under different codes.
 
-### 3.2 Validation and uncertainty
+### Handouts
 
-The specification requires that unreliable items be marked rather than guessed. `build_db.py` writes a
-**validation report** (entity counts, for regression spotting) and a **verification queue** of 108 items:
+Every instructor writes their handout differently, so there's no single format to follow. The parser looks for
+section headings like "Evaluation Scheme" and reads the table under it. It only trusts the table if the marks add
+up to about 100%; otherwise it shows the handout's own text instead of numbers. It also pulls out the makeup
+policy, attendance policy, recommended background and lecture topics. **Every fact keeps the sentence it came
+from**, so the app can quote it. Duplicate handouts were removed, and the one scanned (image-only) handout was
+read with OCR.
 
-| Kind | Count |
+### When the data isn't clear, flag it
+
+The task says: if something can't be read reliably, mark it for checking instead of guessing. So the pipeline
+writes a **validation report** (counts of everything, to spot when something breaks) and a **verification list**
+of 108 items:
+
+| What | How many |
 |---|---|
-| handout_missing | 53 |
-| course_not_in_bulletin_descriptions | 24 |
-| timetable_slots_missing | 21 |
-| programme_structure | 8 |
-| other (OCR, minor structure) | 2 |
+| Offered courses with no handout | 53 |
+| Timetable courses missing from the Bulletin's descriptions | 24 |
+| Timetable courses with no class days/hours listed | 21 |
+| Programme structure questions | 8 |
+| Other | 2 |
 
-At runtime a missing or unextractable property yields a tri-state `None`. The UI then shows *"No specific
-information mentioned; contact the Instructor-in-Charge (name)"* and lists the property as could-not-verify. A
-property is shown as satisfied only when a source sentence supports it.
+In the app, if a handout doesn't mention something (say, attendance), the answer is *"No specific information
+mentioned; contact the Instructor-in-Charge (name)"*. The app only says a course has a property when a sentence in
+a source document backs it up.
 
-### 3.3 Reconciling the bulletin with itself
+### The Bulletin sometimes disagrees with itself
 
-For three programmes the bulletin's CDC list and its semester chart disagree. The reconciler moves toward the
-chart and logs every change to the verification queue. The rules:
+For three programmes, the list of compulsory courses (CDCs) and the semester chart don't match. The app goes with
+the chart and logs each difference in the verification list.
 
-- add chart-only codes when the list is short
-- drop pure-GIR courses and off-chart courses
-- swap when counts match but units don't (ECE F331 → ECE F314)
+## 4. The rules engine
 
-## 4. Academic engine
+### Knowing the student
 
-### 4.1 Profile
+The BITS ID gives the batch year, the degree (or two degrees for a dual degree), the stream (PS, TS, 2+2
+CentraleSupélec…) and the campus. Since the only timetable given is First Semester 2026-27, the app can tell which
+year the student is in without asking. Grades are optional: A to E count as passed, and NC, W, I, GA and RC don't
+(Regulations 4.11–4.12).
 
-The BITS ID determines the batch, one or two programme codes (dual degree when the second slot holds a programme
-code), the stream (PS / TS / CentraleSupélec 2+2 / others) and the campus. Because the only timetable is First
-Semester 2026-27, the current year is `2026 − batch + 1`. The student is therefore never asked which semester they
-are planning. Grades are optional: A–E count as cleared, while NC / W / I / GA / RC do not (Reg 4.11–4.12).
+Typing in every course you've done is tedious, so a **Pre-fill** button fills in everything a student in that year
+normally has done, from the semester chart. The student then just edits what's different.
 
-*Pre-fill* populates completed and current courses from the programme's semester chart (the composite chart for
-dual degrees). This turns a long data-entry task into an edit task.
+### What's left to graduate
 
-### 4.2 Requirements
+Single degree: 3 HUELs, 4 DELs, 5 OPELs. Dual degree: no OPEL requirement, since the DELs of one degree count as
+OPELs of the other (Regulation 2.05). If a programme's chart says a different number (Economics needs 6 DELs,
+Biotechnology 5), the chart's number is used. Each elective is placed in the first bucket it fits: DEL, then HUEL,
+then OPEL. A HUEL can't come from your own department. The app also shows a graduation checklist and progress
+towards a minor.
 
-Requirements are counted in courses, as specified: single degree 3 HUEL / 4 DEL / 5 OPEL, and dual degree with no
-OPEL requirement. A programme-specific count from its chart overrides the default (e.g. Economics 6 DEL,
-Biotechnology 5). Electives are filed **DEL → HUEL → OPEL** (Reg 2.05), with two constraints:
+### What you're allowed to take
 
-- a HUEL cannot come from the student's own discipline
-- for dual-degree students there is no separate OPEL requirement, because the DELs of one degree count as OPELs of
-  the other (Reg 2.05)
+Every course in the timetable is checked against these rules. Each rule is tied to the regulation it comes from,
+so the app can answer "Why can't I take X?" with the exact clause.
 
-The output includes a graduation checklist and minor progress. For 2+2 CSP students it adds the progression
-condition from bulletin p.160.
-
-### 4.3 Eligibility
-
-Each timetable offering is evaluated against clause-tagged checks:
-
-| Check | Clause |
+| Rule | Regulation |
 |---|---|
-| Stated prerequisites | 3.13 |
-| Prior preparation for own CDCs (DCA may waive up to two) | 3.14 |
-| Other programmes' CDC/DEL only after own years 1–2 (applied strictly) | 3.15(b)(i) |
-| Higher-degree courses: own discipline, after 2nd-year CDCs, ≤1 per semester; CGPA cutoff not in data → noted | 3.15(b)(ii), 2.08 |
-| 25-unit cap | 1.01 |
-| First-year foundation courses excluded as elective hosts | 2.07 / 3.18 |
-| comcod ≥ 5000 / U-codes restricted to 2026 admits | Timetable note |
-| No class or exam clash, trying every section combination | 3.19 |
+| You've passed the course's prerequisites | 3.13 |
+| For your own CDCs, you've done the earlier-semester ones (the DCA may allow up to two missing) | 3.14 |
+| Another programme's CDCs/DELs only after finishing your own years 1–2 (applied strictly) | 3.15(b)(i) |
+| Higher-degree courses: only your own discipline, after your 2nd-year CDCs, at most one per semester | 3.15(b)(ii), 2.08 |
+| At most 25 units in a semester | 1.01 |
+| First-year foundation courses can't be taken as electives | 2.07, 3.18 |
+| Some new course codes are only for 2026 admits | Timetable note |
+| No clash in classes or exams | 3.19 |
 
-Each rejection carries its clause, so the dashboard can answer "Why can't I take X?" precisely.
+### Timetable intelligence (bonus)
 
-### 4.4 Timetable intelligence (bonus)
+If one section of a course clashes with your timetable, the app tries the other sections before saying no. It
+checks lectures, tutorials, labs, midsems and compres. It can also avoid 8 AM classes, keep a weekday free, or
+pick the most compact timetable (fewest free hours stuck between classes). The planner tab shows the result as a
+week grid.
 
-Section selection is a joint backtracking search over (course, component) decisions. Midsem and compre slots are
-checked pairwise first, since exams clash regardless of section. Preferences are expressed as blocked hours (no
-8 AM, a free weekday). *Compact* chooses the clash-free assignment with the fewest idle hours, with the fewest
-active days as the tie-break. If one section of a course clashes, another is tried before the course is rejected,
-which is the case the specification describes. Students may optionally enter their own sections for registered
-courses to make the check exact. Without them, only single-section components and exam slots block time, and the
-app says which were missing. The planner tab shows a week grid.
+For exact checks, students can enter which sections they're already in. If they don't, the app only blocks the
+times it knows for sure and says which ones it couldn't check.
 
-## 5. Agent layer
+## 5. The assistant
 
-### 5.1 Tools and validation
+### It only searches courses you can take
 
-`find_courses` searches only the eligible set. It filters by category, handout properties and time preferences,
-then ranks by topic. `submit_recommendations` is the only way to finish an LLM turn. Every submitted code passes
-through `Session.validate`, which rejects a pick when:
+The search tool only looks through the courses the rules engine has already allowed. Before anything is shown,
+every suggested course is checked again. It's dropped if:
 
-- it is not eligible for this student (the engine's reason is returned)
-- it cannot count as the requested category
-- the handout contradicts a requested property
+- the student isn't allowed to take it,
+- it doesn't count as what they asked for (e.g. they asked for a DEL and it would be an OPEL),
+- the handout says the opposite of what they asked for (e.g. they asked for no midsem and it has one).
 
-Invalid picks are dropped and reported, never shown as recommendations.
+### Matching interests to courses
 
-### 5.2 Retrieval
+To find "AI-related" courses, the app uses **BM25**, a standard search formula. It scores each course on how
+often the search words appear in its title, description and lecture plan, giving more weight to rare words and to
+the title. A small list of synonyms helps: "AI" also searches for "machine learning", "neural networks" and so on.
+Weak matches are cut off rather than shown just to fill the list.
 
-Interest matching uses **BM25** over a per-course document: title weighted ×3, bulletin description, and handout
-lecture plan. It adds bigrams, a stopword list tuned to handout boilerplate, a light stemmer that keeps a surface
-form for display, and a synonym map (e.g. `ai` → artificial intelligence, machine learning, neural networks,
-reinforcement learning…). A relevance threshold (≥ max(1.5, 0.3 × top score)) prevents padding the list with weak
-matches. Results are deduplicated by handout file and canonical code.
+We chose this over AI-based "embedding" search because it gives the same result every time, needs no internet,
+and can show exactly which words matched.
 
-BM25 was chosen over embeddings on purpose:
+### Two modes
 
-- it is deterministic and explainable (matched terms are shown on each card)
-- it needs no model download or network
-- the vocabulary gap it leaves is closed by the synonym map in rules mode and by the LLM's query expansion in LLM
-  mode
+- **No-key mode (default).** A built-in parser reads the question: which kind of elective, which properties (no
+  midsem, no attendance, project-based), time preferences, course codes and topics. Answers use templates. If
+  nothing matches everything asked for, it shows the closest options and what each is missing. If the best
+  matches exist but the student isn't allowed to take them, it says so and names the rule.
+- **AI mode (optional).** With an API key (Google Gemini and Groq have free tiers; Anthropic's Claude is paid),
+  a language model reads the question, calls the same tools and writes the answer. If the AI call fails (wrong
+  key, no internet, out of quota), the app quietly falls back to no-key mode and says so.
 
-### 5.3 Two modes
+No-key mode became the main mode partway through. The evaluators shouldn't need a paid key to run it, and the
+rules are supposed to be checked by code anyway. The AI makes answers read better; it doesn't make them more
+correct.
 
-- **Rules mode (default, no key).** `nlu.py` extracts intent (recommend / requirements / details / plan),
-  categories, required properties, time preferences, course codes and topic terms. Explanations are templated.
-  When no course satisfies every property, it presents near misses with what each lacks. When the best topical
-  matches are blocked, it says so up front and names the blocking clause for each.
-- **LLM mode (optional).** A tool-calling loop in two implementations: the Anthropic Messages API, and the OpenAI
-  chat-completions format, which covers Gemini's and Groq's free tiers and any compatible server. Keys go in the
-  sidebar (kept for the session only) or in `.env` (gitignored). On any API failure the answer falls back to rules
-  mode with a visible notice.
+## 6. Key decisions and why
 
-Rules mode was promoted to the primary path mid-project. The submission must work for an evaluator without a paid
-key, and the specification asks for deterministic rule checking anyway, so the LLM adds fluency, not correctness.
-
-## 6. Engineering decisions
-
-| Decision | Rationale |
+| Decision | Why |
 |---|---|
-| Coordinate parsing over text extraction for tabular PDFs | Text extraction mis-assigned wrapped cells; coordinates are stable |
-| Bulletin chart wins over CDC list, with logging | The chart encodes placement; discrepancies are surfaced, not hidden |
-| Tri-state property checks with evidence | Enforces "could not be verified" instead of silent defaults |
-| Engine is LLM-free; LLM output re-validated | Hallucinated or ineligible courses cannot reach the user |
-| BM25 + synonyms over embeddings | Deterministic, offline, explainable, adequate for ~580 courses |
-| Rules mode as primary; LLM optional with fallback | Works for any evaluator; no single point of failure |
-| OpenAI-compatible client in addition to Anthropic | Enables free providers without code changes |
-| Year inferred from batch and the single supplied timetable | Removes a user input that could be entered inconsistently |
-| Elective counts in courses; chart-specific counts override defaults | Matches the stated requirements and programme exceptions |
-| Reg 3.15(b)(i) applied strictly | Conservative; avoids recommending something a student can't register for |
-| Processed data committed, raw PDFs not | App runs immediately from a clone; repo stays small |
-| Streamlit | Fastest path to a usable dashboard in pure Python |
+| Read PDF tables by word position | Plain text extraction put wrapped text in the wrong rows |
+| When the Bulletin disagrees with itself, follow the semester chart and log it | The chart shows where each course actually sits; nothing is hidden |
+| Every course property is yes / no / not mentioned, with a quote | So the app never quietly assumes |
+| Rules in plain code; AI answers double-checked | The AI can't recommend a course you can't take |
+| BM25 search instead of AI embeddings | Same answer every time, works offline, easy to explain |
+| No-key mode first, AI optional | Anyone can run it; if the AI fails, the app still works |
+| Support Gemini and Groq as well as Claude | Free options for people without a paid key |
+| Work out the student's year from their ID | One less thing to type in, and one less thing to get wrong |
+| Use each programme's own elective counts | Some degrees need more DELs than the default |
+| Apply Regulation 3.15(b)(i) strictly | Better to be cautious than suggest something you can't register for |
+| Commit the processed data, not the PDFs | The app runs straight after cloning, and the repo stays small |
+| Streamlit for the website | Quickest way to build a working dashboard in Python |
 
-Scope decisions agreed during the project:
+Other scope choices:
 
-- The 2025-26 curriculum applies to every batch. Earlier batches get a notice and still see results.
-- Pilani only.
-- "No prerequisites required" appears only when asked.
-- Missing handout information directs the student to the Instructor-in-Charge.
+- The 2025-26 curriculum is used for everyone. Older batches see a note saying so, and still get results.
+- Pilani campus only.
+- "No prerequisites required" is only said when asked.
+- When a handout doesn't mention something, the student is pointed to the Instructor-in-Charge.
 
-## 7. Problems encountered and resolutions
+## 7. Problems we hit and how we fixed them
 
-| Problem | Cause | Resolution |
+| Problem | Cause | Fix |
 |---|---|---|
-| Only 546 course descriptions found | Column split at x=522 on a 595-wide page | Measured the page; split at 296 → 2,015 courses |
-| Timetable rows with empty titles (e.g. CS U111) | Titles wrapped onto unanchored lines | Attach fragments to the nearest anchored row |
-| `MW`, `11 12` misread | Glued days; evening hours vs hours 1, 2 | Day tokeniser; two-digit hour rule |
-| Chemical chart years wrong | Stray unit numbers taken as totals | Total rows require values ≥ 8 |
-| BBA programme not detected | Heading is an image | Identify by course prefixes |
-| CS F111 dropped from GIR | Own-department filter | Keep the full GIR list |
-| Dual-degree CDCs shown eligible too early | Single-degree chart positions used | Composite dual charts + group positions |
+| Only 546 course descriptions found instead of ~2,000 | The page was cut in the wrong place when splitting the two columns | Measured the page and cut at the real middle: 2,015 found |
+| Some timetable rows had no title | Long titles wrapped onto the next line | Attach the wrapped text to the nearest row above |
+| `MW` and `11 12` read wrongly | Days printed stuck together; evening hours look like hours 1 and 2 | Split day letters; special rule for two-digit hours |
+| Wrong years for the Chemical Engineering chart | Stray unit numbers were read as semester totals | Only treat large numbers (8+) as totals |
+| BBA programme not found | Its heading is an image, not text | Recognise it by its course codes instead |
+| CS F111 missing from the general courses | A filter wrongly removed it | Keep the full list of general courses |
+| Dual-degree students shown courses too early | The single-degree chart was being used | Use the combined dual-degree charts |
 | Handout sections cut short | Numbered table rows looked like headings | Stricter heading detection |
-| "No makeup" over-applied | Sentence scoped to one component | Scoped-exception detection |
-| `NC` matched "announced" | Case-insensitive regex | Case-sensitive `\bNC\b` |
-| Component names like "1" | Serial-number column | Skip numeric first columns; second percent-based pass (192 → 287 reliable tables) |
-| "machine learning" matched every course | "learning" in handout boilerplate | Bigrams + boilerplate stopwords; stopwords applied after stemming |
-| Cards said "fills HUEL" for an OPEL query | Category shown was the default filing | Show the requested category (`shown_as`) |
-| Rules-mode footer lost in UI | Text truncation | Split and render footer below cards |
-| LLM client detection raised on a broken client | `hasattr` triggered the error | Guarded detection with try/except |
+| "No makeup" applied to the whole course | The sentence was only about quizzes | Detect when "no makeup" is about one part only |
+| Searching for "NC" matched the word "announced" | The search ignored upper/lower case | Made that search case-sensitive |
+| Marks components named "1", "2"… | A serial-number column was read as the name | Skip number-only columns; add a second reading pass. Clean tables went from 192 to 287 |
+| "Machine learning" matched almost every course | Every handout mentions "learning outcomes" | Search word pairs, and ignore common filler words |
+| Answers said "fills HUEL" when the student asked for an OPEL | The app showed the default bucket | Show the bucket the student asked for |
+| Part of the answer went missing in the UI | Text was being cut short | Show that part below the course cards |
+| A broken AI connection crashed the check that detects it | The check itself triggered the error | Wrapped it in error handling |
 
-## 8. Additions beyond the specification
+## 8. What we added beyond the task
 
-- A no-key agent that supports every feature, and free LLM providers (Gemini, Groq) alongside Anthropic.
-- Blocked-topic explanations and near-miss suggestions.
-- A semester planner with automatic DEL/HUEL/OPEL filing, section selection, unit and extra-elective warnings
-  (Reg 2.08), and a week view.
-- "Why can't I take X?" with the governing clause.
-- A graduation checklist, minor progress (23 minors), dual-degree composite charts and CentraleSupélec 2+2
-  handling.
-- Optional section entry for registered courses.
-- Recommended background from handouts, shown as advice rather than enforced.
-- Chart-based profile pre-fill.
-- A validation report, a verification queue and a Data sources tab.
-- Reproducible example outputs (`docs/examples.md`) and README screenshots, both generated from code.
-- 11 test profiles, chosen for coverage:
-  - single degrees across five disciplines
-  - an NC grade
-  - a minor
-  - a 2023 batch
-  - CentraleSupélec 2+2
-  - three dual degrees in years 2–4, including one at 23 units where almost nothing fits
+- A no-key mode where every feature works, plus free AI options (Gemini, Groq) next to Claude.
+- When the best matches are blocked, the app says so and names the rule. When nothing matches everything, it shows
+  the closest options.
+- A semester planner: pick electives, and the app files them as DEL/HUEL/OPEL, chooses sections that don't clash,
+  warns about the unit limit, and shows a week view.
+- "Why can't I take X?" with the exact regulation.
+- A graduation checklist, progress towards a minor (23 minors), dual-degree charts, and 2+2 CentraleSupélec
+  students.
+- Students can enter their own sections for exact clash checks.
+- "Recommended background" from handouts, shown as advice, not as a hard requirement.
+- Pre-fill from the semester chart.
+- A validation report, a verification list, and a Data sources tab in the app.
+- Real example answers (`docs/examples.md`) and screenshots, both generated by scripts.
+- 11 test students covering five single degrees, a failed (NC) course, a minor, an older batch, a 2+2 student,
+  and three dual-degree students in years 2–4. One of them is already at 23 units, so almost nothing fits; the app
+  has to explain that instead of recommending anyway.
 
-## 9. Mapping to the evaluation requirements
+## 9. How it meets the task requirements
 
-| Requirement | Where it is met |
+| Requirement | How |
 |---|---|
-| Profile create/update | Sidebar: ID parsing, pre-fill, editable completed/registered lists, save/load |
-| Live computation, nothing hardcoded | Engine computes from `academic.db` on every query; examples generated by script |
-| Pre-processing with schema and source metadata | `ingest/`, JSON + SQLite, per-record source references |
-| Mark rather than guess | Verification queue; tri-state properties; "could not be verified" |
-| Deterministic rules; LLM for intent/matching/explanation | `engine/` has no LLM; `Session.validate` gates the agent |
-| Handout-based preferences | Evaluation, midsem/compre, quizzes, project, lab, open book, makeup, attendance, topics, IC |
-| Concise recommendation format | Card: requirement, eligibility, properties with quotes, match reason, sources |
-| New semester without logic changes | Rerun `ingest.run_all` only |
-| Timetable intelligence (bonus) | Class/tutorial/lab/exam clashes, alternative sections, no 8 AM, free day, compact |
-| Clean repo with setup instructions | README, `docs/RUNNING.md`, tests |
+| Create and update a profile | Sidebar: BITS ID, pre-fill, edit courses and grades, save and load |
+| Computed live, nothing hardcoded | Every answer is computed from the processed data when asked |
+| Pre-process documents with sources kept | `ingest/` saves every record with the document and page it came from |
+| Flag instead of guessing | Verification list; "could not be verified" in answers |
+| Rules checked by code; AI only for understanding and wording | The rules engine has no AI; every AI suggestion is re-checked |
+| Use handout details | Marks breakdown, midsem, compre, quizzes, projects, labs, open book, makeup, attendance, topics, instructor |
+| Short, clear recommendations | Each card: requirement filled, why you're allowed, requested details with quotes, why it matches, sources |
+| New semester without code changes | Rerun one command on the new PDFs |
+| Timetable intelligence (bonus) | All clash types, other sections tried, no 8 AM, free day, compact timetable |
+| Clean repo with instructions | README, `docs/RUNNING.md`, tests |
 
-## 10. Limitations and future work
+## 10. Limitations and what could come next
 
-- **Handout coverage.** 112 of 399 handouts have no reliable numeric evaluation table; their text is shown
-  instead. An LLM-assisted extraction pass, with human review via the verification queue, would close most of
-  this gap.
-- **Section-level clash precision** depends on the student entering sections for registered multi-section
-  courses.
-- **Source inconsistencies.** Three programmes have bulletin inconsistencies, and 21 offerings lack slots in the
-  timetable. These are surfaced, not resolved.
-- **Data not supplied.** The CGPA cutoffs for higher-degree courses (Reg 2.08) and the CSP course mapping are not
-  in the dataset; the app notes this.
-- **Retrieval.** Synonyms are hand-curated. Embedding-based retrieval, with BM25 as a fallback, would widen
-  topic coverage in no-key mode.
-- **Scope.** Pilani only, one semester. Other campuses would need their timetables and handouts run through the
-  same pipeline.
+- 112 of 399 handouts don't have a marks table the parser can trust, so their text is shown instead of numbers. An
+  AI-assisted reading pass, checked by a person, could fix most of these.
+- Clash checks are only exact if the student enters their sections for courses with more than one section.
+- The source documents themselves have gaps: three programmes where the Bulletin disagrees with itself, and 21
+  timetable courses with no class times. The app shows these; it doesn't guess.
+- Some information isn't in the dataset at all, like the CGPA cutoff for higher-degree courses and which courses
+  count for 2+2 students. The app says so.
+- The synonym list is written by hand. AI-based search could find more related courses in no-key mode.
+- Pilani and one semester only. Other campuses would need their own timetables and handouts run through the same
+  pipeline.
