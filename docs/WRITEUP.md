@@ -32,7 +32,7 @@ optional. Without an API key, a simpler built-in parser does its job, and every 
 | Minors | 23 |
 | Regulation rules used | 14 |
 | Items flagged for a human to check | 108 |
-| Automatic tests | 37 |
+| Automatic tests | 39 |
 
 ## 2. How it's built
 
@@ -235,8 +235,12 @@ Other scope choices:
 - A no-key mode where every feature works, plus free AI options (Gemini, Groq) next to Claude.
 - When the best matches are blocked, the app says so and names the rule. When nothing matches everything, it shows
   the closest options.
-- A semester planner: pick electives, and the app files them as DEL/HUEL/OPEL, chooses sections that don't clash,
-  warns about the unit limit, and shows a week view.
+- A semester planner: core courses are auto-filled, electives are filed as DEL/HUEL/OPEL, sections are chosen for
+  every course (registered ones too) so nothing clashes, and the student can limit which sections they'd accept.
+  It flags same-day exams, shows a week grid and an exam calendar, and exports CSV/JSON. Some feature ideas came from
+  the DVM timetable tool students already use.
+- A dark "galaxy" dashboard theme with one colour per requirement type, used everywhere, and a guided-search mode next
+  to chat.
 - "Why can't I take X?" with the exact regulation.
 - A graduation checklist, progress towards a minor (23 minors), dual-degree charts, and 2+2 CentraleSupélec
   students.

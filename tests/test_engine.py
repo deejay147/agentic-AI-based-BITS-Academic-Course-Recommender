@@ -206,3 +206,31 @@ def test_known_sections_block_their_hours(cat):
     assert slots <= set(with_sec["slots"]) and not slots <= set(without["slots"])
     assert "CS F213 (lecture)" in without["unknown_sections"]
     assert "CS F213 (lecture)" not in with_sec["unknown_sections"]
+
+
+def test_planner_schedules_registered_courses(cat):
+    # with schedule_registered the registered multi-section courses get sections too, clash-free
+    from engine import planner
+    p = load("cs_2nd_year")
+    out = planner.plan(p, cat, [], schedule_registered=True)
+    assert out["clash_free"]
+    got = {r["code"]: r["sections"] for r in out["registered"]}
+    assert set(got) == set(p.current)
+    assert got["CS F213"].get("lecture")                       # multi-section lecture picked
+    assert not any("Sections not given" in w for w in out["warnings"])
+    # a section the student gave is kept
+    lec = [s["section"] for s in cat.offerings["CS F213"][0]["sections"] if s["type"] == "lecture"]
+    p.current_sections = {"CS F213": {"lecture": lec[-1]}}
+    out2 = planner.plan(p, cat, [], schedule_registered=True)
+    assert {r["code"]: r["sections"] for r in out2["registered"]}["CS F213"]["lecture"] == lec[-1]
+
+
+def test_planner_respects_allowed_sections(cat):
+    # 'sections you'd accept': the planner only uses the allowed ones
+    from engine import planner
+    p = load("cs_2nd_year")
+    lec = [s["section"] for s in cat.offerings["CS F213"][0]["sections"] if s["type"] == "lecture"]
+    for want in lec:
+        out = planner.plan(p, cat, [], schedule_registered=True, allowed={"CS F213": {"lecture": [want]}})
+        got = {r["code"]: r["sections"] for r in out["registered"]}["CS F213"]
+        assert not out["clash_free"] or got["lecture"] == want

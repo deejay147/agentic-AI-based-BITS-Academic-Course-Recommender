@@ -72,11 +72,13 @@ A step-by-step guide for Windows, Mac and Linux (virtual environments, troublesh
 | ![requirements](docs/img/1_requirements.png) | ![AI DELs](docs/img/2_ask_ai_dels.png) |
 | What you still need to graduate, and a graduation checklist | "Suggest DELs related to AI": each card shows what it fills, why you can take it, and sources |
 | ![blocked topic](docs/img/3_ask_blocked_topic.png) | ![planner](docs/img/4_plan_semester.png) |
-| "Finance OPEL" for a 2nd-year: what fits, and which better matches are blocked by which rule | Semester planner: electives sorted into DEL/HUEL/OPEL, clash-free sections, compact week |
+| "Finance OPEL" for a 2nd-year: what fits, and which better matches are blocked by which rule | Planner: core courses auto-filled, sections picked for every course, week grid |
 
 ---
 
 ## Using the app
+
+The dashboard uses a dark "galaxy" theme (`.streamlit/config.toml`). Each requirement type has one colour, used everywhere: CDC blue, GIR grey, DEL violet, HUEL amber, OPEL teal. Green / red / amber mean yes / no / could not be verified. An "A or B" slot (take either one) has a dashed outline.
 
 ### Your profile (left sidebar)
 
@@ -107,8 +109,8 @@ You can also load any of the 11 test students from the same box.
 | Tab | What you do there |
 |---|---|
 | **Requirements** | See what's left: general courses (GIR), compulsory courses (CDC), DELs, HUELs, OPELs, minor progress, graduation checklist |
-| **Ask** | Chat in plain English. See the example questions below |
-| **Plan semester** | Pick the electives you want. The app sorts each into DEL / HUEL / OPEL, picks sections that don't clash, checks the 25-unit limit, and shows your week. Options: no 8 AM, keep a day free, compact timetable |
+| **Ask** | **Chat**: tap a ready-made question or type your own; the newest answer shows on top. **Guided search**: pick the requirement type, the handout properties you want, a topic and time preferences, then press Find |
+| **Plan semester** | Your whole timetable. Core courses due this semester are auto-filled, and sections are chosen for your registered courses too. Add electives and each is filed as DEL / HUEL / OPEL. Per course: section counts, prerequisites, what it unlocks, a same-day exam warning, and **Choose sections** to pick which sections you'd accept. Preferences: free day, no 8 AM, compact. Results: week grid, exam calendar, CSV / JSON downloads |
 | **Eligible courses** | Every course you can take this semester, and "Why can't I take X?" for any course, with the exact regulation |
 | **Data sources** | How the data was built, what couldn't be checked, and which regulations the rules use |
 
@@ -231,8 +233,17 @@ does this by trying section combinations one by one and backing up when it hits 
 - **a compact timetable:** of all clash-free choices, the one with the fewest free hours stuck between classes,
   then the fewest days on campus
 
-This works from the planner tab (with a week grid) and from chat, e.g. *"can I take CS F317 and GS F232 together
-with no gaps?"*.
+This works from the planner tab and from chat, e.g. *"can I take CS F317 and GS F232 together with no gaps?"*.
+
+The planner tab builds the whole semester, not just the new courses:
+
+- **Core courses are auto-filled.** CDC / GIR courses the chart puts in this semester (or earlier) that are still
+  open and allowed are added. Cross-listed codes and "A or B" slots count once. Turn it off to plan only your picks.
+- **Sections are chosen for registered courses too**, keeping any section you gave, so the week is complete.
+- **Choose sections**, borrowed from the DVM timetable tool: pick the sections you'd accept for any course (none = any).
+  The planner only uses those.
+- Course cards show section counts ("2 L · 6 T"), prerequisites, what the course unlocks, and a **same-day exam** flag.
+- There's an **exam calendar**, and the timetable, exams and plan can be downloaded as CSV / JSON.
 
 ### 3. The assistant (`agent/`)
 
@@ -329,7 +340,7 @@ Only needed for a new timetable or new handouts. The engine and assistant code d
 ## Tests and test students
 
 ```bash
-pytest -q                          # 37 tests
+pytest -q                          # 39 tests
 python -m tests.run_examples       # regenerates docs/examples.md
 ```
 

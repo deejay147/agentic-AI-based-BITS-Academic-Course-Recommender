@@ -52,3 +52,10 @@ def named_in(cat, pids, year, sem, pick=None):
                 code = next((c for c in alts[code] if c in pick), alts[code][0])
             out.append(code)
     return out
+
+
+def due_by(cat, pids, year, sem):
+    """named courses (GIR + CDC) the chart puts in this semester or earlier - what a planner
+    should fill in by default. Both options of an OR slot are returned; callers keep what's eligible."""
+    return [c for c, (y, s) in _positions(cat, pids).items()
+            if s in (1, 2) and (y, s) <= (year, sem) and not c.startswith("BITS F4")]

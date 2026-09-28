@@ -262,8 +262,9 @@ class Session:
         }
 
     def check_plan(self, codes: list[str], no_8am: bool = False, free_day: str | None = None,
-                   compact: bool = False) -> dict:
-        out = planner.plan(self.profile, self.cat, codes, _hours_to_avoid(no_8am, free_day) or None, compact)
+                   compact: bool = False, schedule_registered: bool = False, allowed: dict | None = None) -> dict:
+        out = planner.plan(self.profile, self.cat, codes, _hours_to_avoid(no_8am, free_day) or None, compact,
+                           schedule_registered, allowed)
         out.pop("requirements_after", None)
         return out
 

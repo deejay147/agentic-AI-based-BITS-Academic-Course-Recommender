@@ -1,0 +1,12 @@
+# "galaxy" theme: deep-space navy background, violet accent, light text. The custom cards and badges
+# in app/app.py use the same palette, so everything reads the same whatever the viewer's OS theme is.
+[theme]
+base = "dark"
+primaryColor = "#8b7bff"
+backgroundColor = "#070b1a"
+secondaryBackgroundColor = "#121936"
+textColor = "#e6e8ff"
+font = "sans serif"
+
+[browser]
+gatherUsageStats = false
