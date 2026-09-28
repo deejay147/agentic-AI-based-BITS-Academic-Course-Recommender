@@ -6,3 +6,4 @@ __pycache__/
 .venv/
 .DS_Store
 data/profiles/*.json
+docs/BEGINNER_GUIDE.md

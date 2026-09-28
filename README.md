@@ -29,7 +29,6 @@ Final recommendations                app/app.py               (Streamlit dashboa
 |---|---|
 | [docs/RUNNING.md](docs/RUNNING.md) | Step-by-step install and run guide for users (Windows / Mac / Linux), optional LLM setup, troubleshooting |
 | [docs/WRITEUP.md](docs/WRITEUP.md) | Project writeup: approach, engineering decisions, problems hit and how they were fixed, extras, limitations |
-| [docs/BEGINNER_GUIDE.md](docs/BEGINNER_GUIDE.md) | The whole build explained from scratch for a beginner, including every tool used |
 | [docs/examples.md](docs/examples.md) | Real answers to the task's example queries on the test profiles |
 
 ## Quick start
