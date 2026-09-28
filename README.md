@@ -7,8 +7,8 @@ Work in progress - built phase by phase, see the status table below.
 |---|---|---|
 | 1 | Ingestion: timetable, bulletin, handouts, regulations -> SQLite | done |
 | 2 | Academic engine: remaining CDC/DEL/HUEL/OPEL, eligibility, clash check | done |
-| 3 | Agent + retrieval (Claude API, with a no-key fallback) | next |
-| 4 | Streamlit dashboard | |
+| 3 | Agent + retrieval (Claude API, with a no-key fallback) | done |
+| 4 | Streamlit dashboard | next |
 | 5 | Timetable intelligence (bonus) | |
 
 ## Data
@@ -66,6 +66,25 @@ Deterministic, no LLM involved:
 - `schedule.py` - class + exam clash checks; tries every section combination before calling a course a clash.
 
 Test profiles (built from the semester charts) are in `tests/profiles/`, tests in `tests/test_engine.py` (`pytest -q`).
+
+## Agent (`agent/`)
+
+```
+profile + query -> requirement analysis -> eligible set -> preference matching -> policy validation -> answer
+                   (engine, deterministic)                  (tools + Claude)      (Session.validate)
+```
+
+- `tools.py` - the tools the agent calls: `get_requirements`, `find_courses` (category / handout-property / time filters,
+  topic ranking), `course_details`, `check_plan`, and `submit_recommendations`. Every submitted pick is re-validated
+  against the eligibility engine and the requested properties, so the LLM can't recommend something the rules didn't clear.
+- `retrieval.py` - BM25 (with bigrams) over title + bulletin description + handout lecture plan for interest matching,
+  and the handout property checks (no midsem, attendance, lenient makeup, project based, quizzes, lab, open book).
+  Each check is yes / no / *could not be verified*, always with the evidence it came from.
+- `agent.py` - with `ANTHROPIC_API_KEY` set, Claude (default `claude-sonnet-5`, override with `ANTHROPIC_MODEL`)
+  runs a tool-calling loop: it turns the request into filters, expands topics into syllabus words, re-ranks, then
+  submits. Without a key, `nlu.py` parses the query with rules and the same tools answer with templated explanations.
+- Each recommendation says: the requirement it fills, why the student is eligible, the relevant properties
+  (quoted from the handout / timetable, with source), and why it matches the request.
 
 ## Scope decisions
 
