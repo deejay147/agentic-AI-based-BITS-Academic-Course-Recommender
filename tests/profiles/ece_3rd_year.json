@@ -1,42 +1,43 @@
 {
  "id_no": "2024AAPS0033P",
- "name": "ECE 3-1",
+ "name": "B.E. ECE, 3-1",
  "batch": 2024,
  "programmes": [
   "AA"
  ],
+ "stream": null,
  "completed": [
   {
    "code": "BITS F103",
-   "grade": "C"
-  },
-  {
-   "code": "BITS F111",
-   "grade": "A-"
-  },
-  {
-   "code": "BIO F101",
-   "grade": "D"
-  },
-  {
-   "code": "BITS F112",
-   "grade": "A-"
-  },
-  {
-   "code": "CHEM F101",
-   "grade": "A"
-  },
-  {
-   "code": "CS F111",
    "grade": "B"
   },
   {
-   "code": "MATH F101",
+   "code": "BITS F111",
    "grade": "C-"
   },
   {
-   "code": "MATH F113",
+   "code": "BIO F101",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F112",
+   "grade": "A"
+  },
+  {
+   "code": "CHEM F101",
+   "grade": "A-"
+  },
+  {
+   "code": "CS F111",
    "grade": "D"
+  },
+  {
+   "code": "MATH F101",
+   "grade": "C"
+  },
+  {
+   "code": "MATH F113",
+   "grade": "C"
   },
   {
    "code": "PHY F101",
@@ -44,7 +45,7 @@
   },
   {
    "code": "MATH F102",
-   "grade": "C"
+   "grade": "C-"
   },
   {
    "code": "BITS F101",
@@ -52,11 +53,11 @@
   },
   {
    "code": "EEE F111",
-   "grade": "C-"
+   "grade": "A-"
   },
   {
    "code": "BITS K101",
-   "grade": "C"
+   "grade": "A-"
   },
   {
    "code": "BITS F102",
@@ -64,31 +65,31 @@
   },
   {
    "code": "MATH F211",
-   "grade": "B"
+   "grade": "C-"
   },
   {
    "code": "ECON F211",
-   "grade": "B"
-  },
-  {
-   "code": "ECE F211",
-   "grade": "B"
-  },
-  {
-   "code": "ECE F212",
    "grade": "A-"
   },
   {
-   "code": "ECE F215",
+   "code": "ECE F211",
+   "grade": "A"
+  },
+  {
+   "code": "ECE F212",
    "grade": "B-"
   },
   {
+   "code": "ECE F215",
+   "grade": "C-"
+  },
+  {
    "code": "ECE F241",
-   "grade": "D"
+   "grade": "B-"
   },
   {
    "code": "ECE F214",
-   "grade": "C-"
+   "grade": "C"
   },
   {
    "code": "ECE F242",
@@ -96,23 +97,23 @@
   },
   {
    "code": "ECE F243",
-   "grade": "C-"
+   "grade": "A"
   },
   {
    "code": "ECE F244",
-   "grade": "B-"
+   "grade": "C-"
   },
   {
    "code": "BITS F225",
-   "grade": "A-"
+   "grade": "C"
   },
   {
    "code": "GS F211",
-   "grade": "A-"
+   "grade": "B"
   },
   {
    "code": "HSS F235",
-   "grade": "D"
+   "grade": "A-"
   }
  ],
  "current": [

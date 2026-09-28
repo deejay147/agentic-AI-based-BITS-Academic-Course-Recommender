@@ -79,6 +79,8 @@ class Catalog:
 
         meta = {r["key"]: r["value"] for r in _rows(db, "SELECT * FROM meta")}
         self.gir_structure = json.loads(meta["gir_structure"])
+        # composite dual degree charts, keyed 'B3+A7'
+        self.dual_charts = json.loads(meta.get("dual_charts", "{}"))
         self.gir_alternatives = json.loads(meta["gir_alternatives"])
         self.minor_rules = json.loads(meta["minor_rules"])
         self.huel_rule = meta["huel_rule"]

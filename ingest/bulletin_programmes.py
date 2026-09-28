@@ -222,7 +222,7 @@ def parse_course_lists(pdf):
 _TOTAL_TOK = re.compile(r"^\d{1,2}(\*|\(min\)|/\d{1,2}|to\d+)?$|^\(min\)$")
 
 
-def chart_positions(page) -> dict:
+def chart_positions(page, year_offset: int = 0) -> dict:
     """code -> [year, semester] read off the semester-wise chart.
 
     Layout: first semester in the left half, second in the right half. Each year block
@@ -236,7 +236,10 @@ def chart_positions(page) -> dict:
             rows[-1][1].append(w)
         else:
             rows.append([w["top"], [w]])
-    ends = [top for top, r in rows if len(r) <= 3 and all(_TOTAL_TOK.match(w["text"]) for w in r)]
+    # a year ends with its semester totals - those are always >= 8 units. rows that only hold
+    # per-course units (3, 4, 1*) show up too when the unit sits on its own line, so skip those
+    ends = [top for top, r in rows if len(r) <= 3 and all(_TOTAL_TOK.match(w["text"]) for w in r)
+            and all(int(re.match(r"\d+", w["text"]).group()) >= 8 for w in r if re.match(r"\d+", w["text"]))]
     mid = page.width / 2
     pos = {}
     for i, w in enumerate(ws[:-1]):
@@ -244,7 +247,7 @@ def chart_positions(page) -> dict:
         if re.fullmatch(r"[A-Z]{2,5}", w["text"]) and re.fullmatch(r"[A-Z]\d{3}[A-Z]?", n["text"]) \
                 and abs(w["top"] - n["top"]) < 3:
             code = norm_code(f"{w['text']} {n['text']}")
-            year = 1 + sum(1 for e in ends if e < w["top"])
+            year = 1 + year_offset + sum(1 for e in ends if e < w["top"])
             sem = 0 if mid * 0.55 < w["x0"] < mid * 0.9 else (1 if w["x0"] < mid else 2)
             if code and code not in pos:
                 pos[code] = [year, sem]
@@ -282,6 +285,36 @@ def parse_chart(pdf, title_fragment):
             "text": txt,
         }
     return None
+
+
+# ---------------------------------------------------------------------------
+# Composite dual degree charts (pdf p.242-313), one page per M.Sc. + B.E. pair.
+# Year I on these pages is just 'Same as First degree Programme', so the first
+# totals row closes year II -> year_offset=1.
+DUAL_PAGES = range(242, 314)
+MSC_NAMES = {"Biological Sciences": "B1", "Chemistry": "B2", "Economics": "B3", "Mathematics": "B4",
+             "Physics": "B5", "Semiconductor and Nanoscience": "B7"}
+BE_NAMES = {"Chemical": "A1", "Civil": "A2", "Computer Science": "A7", "Electrical & Electronics": "A3",
+            "Electronics & Computer Engineering": "AC", "Electronics & Communication": "AA",
+            "Electronics & Instrumentation": "A8", "Environmental and Sustainability Engineering": "AJ",
+            "Manufacturing": "AB", "Mathematic and Computing": "AD", "Mechanical": "A4",
+            "Robotics and Industrial Automation": "RIA"}
+
+
+def parse_dual_charts(pdf) -> dict:
+    out = {}
+    for pn in DUAL_PAGES:
+        page = pdf.pages[pn - 1]
+        head = re.sub(r"\s+", " ", " ".join((page.extract_text() or "").split("\n")[:4]))
+        m = re.search(r"\(M\.\s?Sc\.\s*(.+?) with (?:B\.E\.\s*)?(.+?)(?: Programme| Engineering)?\)", head)
+        if not m:
+            continue
+        msc = next((v for k, v in MSC_NAMES.items() if m.group(1).strip().startswith(k)), None)
+        be = next((v for k, v in BE_NAMES.items() if (m.group(2).strip() + " Engineering").startswith(k)
+                   or m.group(2).strip().startswith(k)), None)
+        if msc and be:
+            out[f"{msc}+{be}"] = {"page": pn, "positions": chart_positions(page, year_offset=1)}
+    return out
 
 
 # General Institutional Requirement (bulletin IV-1/IV-2, p.209-210). The named GIR
@@ -351,11 +384,35 @@ def reconcile_cdc(core, chart):
         if off:
             groups = [g for g in groups if g not in off]
             issues.append("Dropped CDC-list course(s) not named on the chart: " + ", ".join(g["options"][0]["code"] for g in off))
+    # same number of courses but the units are off, and exactly one list course is missing from the
+    # chart while exactly one own-department chart course is missing from the list -> the chart is the
+    # prescribed pattern (reg 1.07), so swap them. (ECE: list has ECE F331, chart has ECE F314.)
+    if tot and len(groups) == tot["courses"] and _units(groups) != tot["units"]:
+        listed_now = {o["code"] for g in groups for o in g["options"]}
+        depts = {g["options"][0]["code"].split()[0] for g in groups}
+        off = [g for g in groups if not any(o["code"] in on_chart for o in g["options"])]
+        only_chart = [c for c in chart["codes"] if c not in listed_now and c.split()[0] in depts
+                      and c not in GIR_ALL and not c.endswith("T")]
+        if len(off) == 1 and len(only_chart) == 1:
+            groups = [g for g in groups if g is not off[0]] + [{
+                "options": [{"code": only_chart[0], "title": None, "units": None, "starred": False,
+                             "source": {"doc": SOURCE, "page": chart["page"]}}],
+                "track": None, "source_kind": "chart_only"}]
+            issues.append(f"CDC list has {off[0]['options'][0]['code']} but the semester chart p.{chart['page']} "
+                          f"prescribes {only_chart[0]} instead; using the chart.")
     if tot and (len(groups) != tot["courses"] or not (tot.get("units_min", tot["units"]) <= _units(groups) <= tot["units"])):
         issues.append(f"CDC count {len(groups)} courses/{_units(groups)} units vs chart footer {tot['courses']} courses/{tot['units']} units.")
     cdc_codes = {o["code"] for g in groups for o in g["options"]}
+    # the programme's own departments (e.g. ECE F314 on the ECE chart is a discipline course
+    # that just isn't in the CDC list, not a GIR course)
+    dept_count = {}
+    for g in groups:
+        d = g["options"][0]["code"].split()[0]
+        dept_count[d] = dept_count.get(d, 0) + 1
+    own = {d for d, n in dept_count.items() if n >= 2}
     gir = [c for c in chart["codes"] if c not in cdc_codes and c not in NON_COURSEWORK
-           and not c.startswith("BITS F42") and not c.endswith("T")]
+           and not c.startswith("BITS F42") and not c.endswith("T")
+           and (c in GIR_ALL or c.split()[0] not in own)]
     return groups, gir, issues
 
 
@@ -393,7 +450,8 @@ def build():
                 "source": {"doc": SOURCE, "pages": sorted(p["pages"]),
                            "chart_page": chart["page"] if chart else None},
             })
-    dump_json({"gir_structure": GIR_STRUCTURE, "programmes": out}, "programmes.json")
+        dual = parse_dual_charts(pdf)
+    dump_json({"gir_structure": GIR_STRUCTURE, "programmes": out, "dual_charts": dual}, "programmes.json")
     dump_json({"huel_pool": huel, "other_courses": other,
                "rule": "A student cannot count a course (or its equivalent) of his/her own discipline(s) as a humanities elective even if it is listed in this pool.",
                "source": {"doc": SOURCE, "pages": [333, 334, 335]}}, "huel_pool.json")

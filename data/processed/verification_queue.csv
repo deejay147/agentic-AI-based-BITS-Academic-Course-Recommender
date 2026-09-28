@@ -21,7 +21,8 @@ timetable_slots_missing,PHA G642,section L1 has no day/hour,timetable.pdf p.105
 timetable_slots_missing,PHY F112,section L1 has no day/hour,timetable.pdf p.106
 timetable_slots_missing,SW E101,section L1 has no day/hour,timetable.pdf p.112
 handout_ocr,"MATH F214,MAC F214","scanned PDF, text came from OCR",handouts/348_MAC_F214.pdf
-programme_structure,AA,CDC count 14 courses/49 units vs chart footer 14 courses/48 units.,bulletin.pdf p.219
+programme_structure,AA,CDC list has ECE F331 but the semester chart p.219 prescribes ECE F314 instead; using the chart.,bulletin.pdf p.219
+programme_structure,AA,CDC count 14 courses/45 units vs chart footer 14 courses/48 units.,bulletin.pdf p.219
 programme_structure,AJ,"Named on semester chart p.222 but not in CDC list: CHE F211, BITS F240, ENVS F323, ENVS F324 (added as CDC).",bulletin.pdf p.222
 programme_structure,AJ,Dropped CDC-list course(s) not named on the chart: ENVS F232,bulletin.pdf p.222
 programme_structure,AJ,CDC count 16 courses/36 units vs chart footer 16 courses/48 units.,bulletin.pdf p.222

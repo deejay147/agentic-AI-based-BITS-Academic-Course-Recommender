@@ -1,10 +1,11 @@
 {
  "id_no": "2025A4PS0044P",
- "name": "Mech 2-1",
+ "name": "B.E. Mechanical, 2-1",
  "batch": 2025,
  "programmes": [
   "A4"
  ],
+ "stream": null,
  "completed": [
   {
    "code": "BITS F103",
@@ -12,19 +13,19 @@
   },
   {
    "code": "BITS F111",
-   "grade": "B"
+   "grade": "A-"
   },
   {
    "code": "BIO F101",
-   "grade": "C"
-  },
-  {
-   "code": "BITS F112",
    "grade": "B"
   },
   {
+   "code": "BITS F112",
+   "grade": "A-"
+  },
+  {
    "code": "CHEM F101",
-   "grade": "C-"
+   "grade": "D"
   },
   {
    "code": "CS F111",
@@ -40,11 +41,11 @@
   },
   {
    "code": "PHY F101",
-   "grade": "D"
+   "grade": "B"
   },
   {
    "code": "MATH F102",
-   "grade": "C"
+   "grade": "A"
   },
   {
    "code": "BITS F101",
@@ -52,15 +53,15 @@
   },
   {
    "code": "EEE F111",
-   "grade": "C"
+   "grade": "A"
   },
   {
    "code": "BITS K101",
-   "grade": "C-"
+   "grade": "B"
   },
   {
    "code": "BITS F102",
-   "grade": "C-"
+   "grade": "A"
   }
  ],
  "current": [

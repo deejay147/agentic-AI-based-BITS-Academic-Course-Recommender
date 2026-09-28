@@ -1,18 +1,19 @@
 {
- "id_no": "2024A7PS0021P",
- "name": "CS 3-1",
+ "id_no": "2024A1PS0031P",
+ "name": "B.E. Chemical, 3-1, NC in Thermodynamics",
  "batch": 2024,
  "programmes": [
-  "A7"
+  "A1"
  ],
+ "stream": null,
  "completed": [
-  {
-   "code": "BITS F103",
-   "grade": "C"
-  },
   {
    "code": "BITS F111",
    "grade": "A-"
+  },
+  {
+   "code": "BITS F103",
+   "grade": "A"
   },
   {
    "code": "BIO F101",
@@ -20,7 +21,7 @@
   },
   {
    "code": "BITS F112",
-   "grade": "A-"
+   "grade": "C-"
   },
   {
    "code": "CHEM F101",
@@ -32,27 +33,27 @@
   },
   {
    "code": "MATH F101",
-   "grade": "A"
-  },
-  {
-   "code": "MATH F113",
-   "grade": "A-"
-  },
-  {
-   "code": "PHY F101",
-   "grade": "B"
-  },
-  {
-   "code": "MATH F102",
-   "grade": "A"
-  },
-  {
-   "code": "BITS F101",
    "grade": "C"
   },
   {
+   "code": "MATH F113",
+   "grade": "C-"
+  },
+  {
+   "code": "PHY F101",
+   "grade": "C-"
+  },
+  {
+   "code": "MATH F102",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F101",
+   "grade": "B-"
+  },
+  {
    "code": "EEE F111",
-   "grade": "A"
+   "grade": "B"
   },
   {
    "code": "BITS K101",
@@ -60,64 +61,68 @@
   },
   {
    "code": "BITS F102",
-   "grade": "A"
+   "grade": "B"
   },
   {
    "code": "MATH F211",
-   "grade": "D"
+   "grade": "A-"
   },
   {
    "code": "ECON F211",
-   "grade": "B"
-  },
-  {
-   "code": "CS F214",
    "grade": "B-"
   },
   {
-   "code": "CS F222",
+   "code": "CHE F211",
+   "grade": "D"
+  },
+  {
+   "code": "CHE F214",
+   "grade": "C-"
+  },
+  {
+   "code": "CHE F241",
    "grade": "C"
   },
   {
-   "code": "CS F211",
-   "grade": "B"
+   "code": "CHE F213",
+   "grade": "NC"
   },
   {
-   "code": "CS F213",
-   "grade": "D"
-  },
-  {
-   "code": "CS F215",
-   "grade": "A-"
-  },
-  {
-   "code": "CS F241",
+   "code": "CHE F242",
    "grade": "B-"
   },
   {
-   "code": "CS F212",
-   "grade": "D"
-  },
-  {
-   "code": "BITS F225",
-   "grade": "B"
-  },
-  {
-   "code": "GS F232",
+   "code": "CHE F212",
    "grade": "A-"
   },
   {
-   "code": "HSS F222",
+   "code": "CHE F243",
+   "grade": "A-"
+  },
+  {
+   "code": "BITS F225",
+   "grade": "D"
+  },
+  {
+   "code": "CHE F244",
+   "grade": "C"
+  },
+  {
+   "code": "GS F232",
    "grade": "B"
+  },
+  {
+   "code": "HSS F222",
+   "grade": "C"
   }
  ],
  "current": [
-  "CS F351",
-  "CS F372",
-  "CS F301",
-  "CS F342"
+  "CHE F312",
+  "CHE F313",
+  "CHE F311",
+  "CHE F314"
  ],
  "minor": null,
- "interests": "AI, data science, systems",
- "cgpa": 7.9
+ "interests": "energy, process simulation, sustainability",
+ "cgpa": 6.9
 }

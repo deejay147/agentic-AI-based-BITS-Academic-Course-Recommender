@@ -212,6 +212,7 @@ def build():
                 p["id"], "GIR", gid, code, courses.get(code, {}).get("title"), courses.get(code, {}).get("units"),
                 None, 1, _j({"doc": "bulletin.pdf", "page": p["chart_page"]})))
     db.execute("INSERT INTO meta VALUES (?,?)", ("gir_structure", _j(progs["gir_structure"])))
+    db.execute("INSERT INTO meta VALUES (?,?)", ("dual_charts", _j(progs.get("dual_charts", {}))))
     db.execute("INSERT INTO meta VALUES (?,?)", ("gir_alternatives", _j(progs["programmes"][0]["gir_alternatives"])))
 
     for h in huel["huel_pool"]:

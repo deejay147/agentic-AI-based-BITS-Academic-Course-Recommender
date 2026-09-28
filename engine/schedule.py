@@ -104,3 +104,50 @@ def check_course(off, busy: dict, avoid_hours: set | None = None) -> dict:
                     "sections": {s["type"]: s["section"] for s in combo},
                     "alternatives": {k: [s["section"] for s in f] for k, f in choices}}
     return {"ok": False, "reason": "no combination of its own sections fits", "sections": {}}
+
+
+def plan_sections(offerings: list, busy: dict, avoid_hours: set | None = None) -> dict:
+    """Pick one section per component for *all* chosen courses together so nothing overlaps
+    (plain backtracking - a semester is ~6 courses, it's tiny). Exams are checked pairwise too.
+
+    offerings: [(code, offering_row)]. Returns {ok, sections: {code: {type: sec}}, problems: [...]}"""
+    problems = []
+    # exams between the chosen courses themselves + against registered ones
+    seen = {"midsem": dict(busy["exams"]["midsem"]), "compre": dict(busy["exams"]["compre"])}
+    for code, off in offerings:
+        for kind, d, sess in (("midsem", off["midsem_date"], off["midsem_session"]),
+                              ("compre", off["compre_date"], off["compre_session"])):
+            if not d:
+                continue
+            if (d, sess) in seen[kind]:
+                problems.append(f"{kind} of {code} ({d} {sess}) clashes with {seen[kind][(d, sess)]}")
+            else:
+                seen[kind][(d, sess)] = code
+    if problems:
+        return {"ok": False, "sections": {}, "problems": problems}
+
+    # one decision per (course, component)
+    slots = []
+    for code, off in offerings:
+        for kind, secs in _by_type(off).items():
+            slots.append((code, kind, secs))
+    blocked = set(busy["slots"]) | (avoid_hours or set())
+    chosen = {}
+
+    def bt(i, taken):
+        if i == len(slots):
+            return True
+        code, kind, secs = slots[i]
+        for s in secs:
+            ss = _slot_set(s)
+            if ss & taken or ss & blocked:
+                continue
+            chosen.setdefault(code, {})[kind] = s["section"]
+            if bt(i + 1, taken | ss):
+                return True
+            chosen[code].pop(kind, None)
+        return False
+
+    if bt(0, set()):
+        return {"ok": True, "sections": chosen, "problems": []}
+    return {"ok": False, "sections": {}, "problems": ["no clash-free section combination exists for this set of courses"]}

@@ -51,10 +51,15 @@ Every record carries a `source` (document + page/section) so answers can be trac
 
 Deterministic, no LLM involved:
 
-- `profile.py` - profile + ID parsing (`2025A7PS0147P` -> batch 2025, B.E. CS, Pilani -> year 2, sem 1 of 2026-27;
+- `profile.py` - profile + ID parsing (incl. the 2+2 CentraleSupelec stream, `..CS..` in the ID) (`2025A7PS0147P` -> batch 2025, B.E. CS, Pilani -> year 2, sem 1 of 2026-27;
   `2024B3A70123P` -> dual degree M.Sc. Eco + B.E. CS). Grades optional; NC / W / I / RC etc. count as not cleared (reg 4.11-4.12).
-- `requirements.py` - remaining GIR, CDC, DEL, HUEL, OPEL (+ minor progress). Old/cross-listed codes are matched
-  through the equivalence list. Electives are allocated DEL -> HUEL -> OPEL as in reg 2.05.
+- `requirements.py` - remaining GIR, CDC, DEL, HUEL, OPEL (+ minor progress) and a graduation checklist.
+  Electives are counted in courses: single degree 3 HUEL / 4 DEL / 5 OPEL, dual degree has no OPEL (reg 2.05);
+  a programme whose chart gives a different DEL count (Economics 6, Biotech 5 ...) uses that.
+  Old/cross-listed codes are matched through the equivalence list; electives are filed DEL -> HUEL -> OPEL (reg 2.05).
+  Dual degree students are placed on the composite dual-degree chart of their pair (bulletin p.242-313).
+- `planner.py` - the student picks the electives they want this semester; the planner files each into
+  DEL / HUEL / OPEL, picks clash-free sections for all of them together, and checks the 25-unit cap.
 - `eligibility.py` - every course offered this semester gets a category for this student and a list of rule checks,
   each tagged with its clause: prerequisites (3.13), prior preparation (3.14), other-discipline courses (3.15(b)(i)),
   higher degree courses (3.15(b)(ii), 2.08), 25-unit cap (1.01), 2026-only courses, clash-free timetable (3.19).

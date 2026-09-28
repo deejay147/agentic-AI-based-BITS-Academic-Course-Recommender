@@ -1,18 +1,19 @@
 {
  "id_no": "2025A5PS0055P",
- "name": "B.Pharm 2-1",
+ "name": "B.Pharm, 2-1 (General Maths sequence)",
  "batch": 2025,
  "programmes": [
   "A5"
  ],
+ "stream": null,
  "completed": [
   {
    "code": "BITS F103",
-   "grade": "A-"
+   "grade": "D"
   },
   {
    "code": "BITS F111",
-   "grade": "A-"
+   "grade": "B"
   },
   {
    "code": "BIO F101",
@@ -20,51 +21,51 @@
   },
   {
    "code": "BITS F112",
-   "grade": "C-"
+   "grade": "C"
   },
   {
    "code": "CHEM F101",
-   "grade": "A-"
+   "grade": "B"
   },
   {
    "code": "CS F111",
-   "grade": "A"
+   "grade": "D"
   },
   {
    "code": "BITS F113",
-   "grade": "B-"
+   "grade": "A-"
   },
   {
    "code": "MATH F113",
-   "grade": "C-"
-  },
-  {
-   "code": "PHA F214",
    "grade": "B-"
   },
   {
+   "code": "PHA F214",
+   "grade": "D"
+  },
+  {
    "code": "PHY F102",
-   "grade": "C"
+   "grade": "B"
   },
   {
    "code": "BITS F114",
-   "grade": "C"
+   "grade": "A-"
   },
   {
    "code": "BITS F101",
-   "grade": "A"
+   "grade": "B"
   },
   {
    "code": "PHA F216",
-   "grade": "C-"
-  },
-  {
-   "code": "BITS K101",
    "grade": "C"
   },
   {
+   "code": "BITS K101",
+   "grade": "A-"
+  },
+  {
    "code": "BITS F102",
-   "grade": "B"
+   "grade": "D"
   }
  ],
  "current": [

@@ -1,10 +1,12 @@
 {
- "id_no": "2024A7PS0088P",
- "name": "CS 3-1 + DS minor",
+ "id_no": "2024B3A70123P",
+ "name": "M.Sc. Economics + B.E. CS, 3-1",
  "batch": 2024,
  "programmes": [
+  "B3",
   "A7"
  ],
+ "stream": null,
  "completed": [
   {
    "code": "BITS F103",
@@ -16,11 +18,11 @@
   },
   {
    "code": "BIO F101",
-   "grade": "A"
+   "grade": "C"
   },
   {
    "code": "BITS F112",
-   "grade": "C-"
+   "grade": "B"
   },
   {
    "code": "CHEM F101",
@@ -28,27 +30,27 @@
   },
   {
    "code": "CS F111",
-   "grade": "C"
+   "grade": "A"
   },
   {
    "code": "MATH F101",
-   "grade": "C"
+   "grade": "D"
   },
   {
    "code": "MATH F113",
-   "grade": "C"
+   "grade": "B-"
   },
   {
    "code": "PHY F101",
-   "grade": "C"
-  },
-  {
-   "code": "MATH F102",
    "grade": "A-"
   },
   {
+   "code": "MATH F102",
+   "grade": "B-"
+  },
+  {
    "code": "BITS F101",
-   "grade": "C-"
+   "grade": "D"
   },
   {
    "code": "EEE F111",
@@ -56,47 +58,47 @@
   },
   {
    "code": "BITS K101",
-   "grade": "A"
+   "grade": "B"
   },
   {
    "code": "BITS F102",
-   "grade": "B"
-  },
-  {
-   "code": "MATH F211",
-   "grade": "A-"
-  },
-  {
-   "code": "ECON F211",
-   "grade": "B"
-  },
-  {
-   "code": "CS F214",
-   "grade": "C-"
-  },
-  {
-   "code": "CS F222",
-   "grade": "B"
-  },
-  {
-   "code": "CS F211",
-   "grade": "A-"
-  },
-  {
-   "code": "CS F213",
    "grade": "C"
   },
   {
-   "code": "CS F215",
-   "grade": "A"
+   "code": "MATH F211",
+   "grade": "B"
   },
   {
-   "code": "CS F241",
-   "grade": "A-"
+   "code": "ECON F211",
+   "grade": "D"
   },
   {
-   "code": "CS F212",
-   "grade": "A"
+   "code": "ECON F241",
+   "grade": "D"
+  },
+  {
+   "code": "ECON F212",
+   "grade": "D"
+  },
+  {
+   "code": "ECON F242",
+   "grade": "C"
+  },
+  {
+   "code": "ECON F213",
+   "grade": "B"
+  },
+  {
+   "code": "ECON F243",
+   "grade": "B"
+  },
+  {
+   "code": "ECON F214",
+   "grade": "B"
+  },
+  {
+   "code": "ECON F244",
+   "grade": "C"
   },
   {
    "code": "BITS F225",
@@ -104,24 +106,23 @@
   },
   {
    "code": "GS F232",
-   "grade": "D"
+   "grade": "B"
   },
   {
    "code": "HSS F235",
-   "grade": "A-"
-  },
-  {
-   "code": "CS F320",
-   "grade": "C"
+   "grade": "D"
   }
  ],
  "current": [
-  "CS F351",
-  "CS F372",
-  "CS F301",
-  "CS F342"
+  "ECON F311",
+  "ECON F312",
+  "ECON F313",
+  "CS F215",
+  "CS F214",
+  "CS F222",
+  "CS F213"
  ],
- "minor": "Minor in Data Science",
- "interests": "data science, deep learning",
- "cgpa": 8.6
+ "minor": null,
+ "interests": "finance, econometrics, machine learning",
+ "cgpa": 8.0
 }

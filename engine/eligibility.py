@@ -25,13 +25,30 @@ def _level(code: str) -> int | None:
     return int(num[1]) if num[1].isdigit() else None
 
 
-def _position(cat: Catalog, pid: str, code: str) -> tuple[int, int]:
-    """(year, semester) of a named course from the semester chart; falls back to the course
-    number level (bulletin VI-1 pt 5) if the chart didn't give us a position."""
-    pos = cat.programmes[pid]["chart_positions"].get(code)
+def _position(cat: Catalog, pid: str, code: str, pids: list[str] | None = None) -> tuple[int, int]:
+    """(year, semester) of a named course from the semester chart; dual degree students use the
+    composite chart for their pair. Falls back to the course number level (bulletin VI-1 pt 5)."""
+    pos = None
+    if pids and len(pids) == 2:
+        pos = cat.dual_charts.get(f"{pids[0]}+{pids[1]}", {}).get("positions", {}).get(code)
+    pos = pos or cat.programmes[pid]["chart_positions"].get(code)
     if pos and pos[1] in (1, 2):
         return tuple(pos)
     return (_level(code) or 1, 1)
+
+
+def _group_position(cat: Catalog, pid: str, opts: list[str], pids: list[str]) -> tuple[int, int]:
+    """Position of a named slot = position of whichever of its options is on the chart
+    (the chart may name EEE F211 while the student's option is INSTR F211)."""
+    for o in opts:
+        charts = [cat.programmes[pid]["chart_positions"]]
+        if len(pids) == 2:
+            charts.insert(0, cat.dual_charts.get(f"{pids[0]}+{pids[1]}", {}).get("positions", {}))
+        for ch in charts:
+            pos = ch.get(o)
+            if pos and pos[1] in (1, 2):
+                return tuple(pos)
+    return _position(cat, pid, opts[0], pids)
 
 
 def _missing_prior(cat: Catalog, state: dict, pids: list[str], before: tuple[int, int]) -> list[str]:
@@ -42,7 +59,7 @@ def _missing_prior(cat: Catalog, state: dict, pids: list[str], before: tuple[int
     for pid in pids:
         slots = req._gir_groups(cat, [pid]) + [[m["code"] for m in g] for g in cat.programmes[pid]["cdc_groups"]]
         for opts in slots:
-            if _position(cat, pid, opts[0]) >= before:
+            if _group_position(cat, pid, opts, pids) >= before:
                 continue
             if not any(cat.canon(o) in cleared for o in opts) and opts[0] not in missing:
                 missing.append(opts[0])
@@ -169,7 +186,9 @@ def evaluate(profile: Profile, cat: Catalog, state: dict | None = None) -> dict:
         # own CDCs: prior preparation (3.14 iii) = named courses of the semesters before it.
         # DCA can allow up to 2 missing (with no bearing on core), more than that is a no
         if category == "CDC":
-            miss = _missing_prior(cat, state, pids, _position(cat, open_cdc[cn], code))
+            grp = next(([m["code"] for m in g] for g in cat.programmes[open_cdc[cn]]["cdc_groups"]
+                        if any(cat.same(m["code"], code) for m in g)), [code])
+            miss = _missing_prior(cat, state, pids, _group_position(cat, open_cdc[cn], grp, pids))
             if len(miss) > 2:
                 check("cdc_prior_prep", False, f"{len(miss)} earlier named courses not cleared "
                       f"({', '.join(miss[:5])}...)", "Reg 3.14")

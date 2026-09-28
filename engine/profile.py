@@ -30,16 +30,20 @@ CLEARED_GRADES = {"A", "A-", "B", "B-", "C", "C-", "D", "E", "GOOD", "POOR", "CL
 NOT_CLEARED = {"NC", "W", "I", "GA", "RC", "RRA", "DP", "TGA", "AC"}
 
 
+# the slot after the first degree code: stream, or the second degree for dual degree students
+STREAMS = {"PS": "PS", "TS": "TS", "CS": "CSP", "RM": "RMIT", "UB": "UB", "IS": "ISU", "RP": "RPI"}
+
+
 def parse_id(id_no: str, known_programmes: set[str]) -> dict:
     s = (id_no or "").strip().upper().replace(" ", "")
     m = ID_RE.match(s)
     if not m:
         raise ValueError(f"'{id_no}' doesn't look like a BITS ID (e.g. 2025A7PS0147P)")
     batch, p1, p2, _, campus = m.groups()
-    progs = [p1]
-    if p2 in known_programmes or p2 == "C2":
+    progs, stream = [p1], STREAMS.get(p2)
+    if stream is None and (p2 in known_programmes or p2 == "C2"):
         progs.append(p2)          # dual degree, second code sits where PS/TS normally is
-    return {"batch": int(batch), "programmes": progs, "campus": CAMPUS[campus], "raw": s}
+    return {"batch": int(batch), "programmes": progs, "stream": stream, "campus": CAMPUS[campus], "raw": s}
 
 
 @dataclass
@@ -67,6 +71,7 @@ class Profile:
     interests: str = ""
     cgpa: float | None = None
     name: str | None = None
+    stream: str | None = None                               # PS / TS / CSP (2+2 CentraleSupelec) ...
 
     @property
     def year(self) -> int:
@@ -91,9 +96,11 @@ class Profile:
         return cls(id_no=d.get("id_no"), batch=int(d.get("batch", CURRICULUM_BATCH)),
                    programmes=list(d.get("programmes", [])), campus=d.get("campus", "Pilani"),
                    completed=comp, current=list(d.get("current", [])), minor=d.get("minor"),
-                   interests=d.get("interests", ""), cgpa=d.get("cgpa"), name=d.get("name"))
+                   interests=d.get("interests", ""), cgpa=d.get("cgpa"), name=d.get("name"),
+                   stream=d.get("stream"))
 
     def to_dict(self) -> dict:
         return {"id_no": self.id_no, "name": self.name, "batch": self.batch, "programmes": self.programmes,
                 "campus": self.campus, "completed": [{"code": c.code, "grade": c.grade} for c in self.completed],
-                "current": self.current, "minor": self.minor, "interests": self.interests, "cgpa": self.cgpa}
+                "current": self.current, "minor": self.minor, "interests": self.interests, "cgpa": self.cgpa,
+                "stream": self.stream}

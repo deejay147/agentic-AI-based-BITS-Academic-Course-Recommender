@@ -1,78 +1,79 @@
 {
- "id_no": "2025A7PS0147P",
- "name": "B.E. CS, 2-1",
+ "id_no": "2025B5A30011P",
+ "name": "M.Sc. Physics + B.E. EEE, 2-1",
  "batch": 2025,
  "programmes": [
-  "A7"
+  "B5",
+  "A3"
  ],
  "stream": null,
  "completed": [
   {
    "code": "BITS F103",
-   "grade": "C"
+   "grade": "C-"
   },
   {
    "code": "BITS F111",
-   "grade": "B"
+   "grade": "C-"
   },
   {
    "code": "BIO F101",
-   "grade": "C"
+   "grade": "C-"
   },
   {
    "code": "BITS F112",
-   "grade": "A"
+   "grade": "C-"
   },
   {
    "code": "CHEM F101",
-   "grade": "A-"
+   "grade": "B-"
   },
   {
    "code": "CS F111",
-   "grade": "D"
+   "grade": "A-"
   },
   {
    "code": "MATH F101",
-   "grade": "A-"
-  },
-  {
-   "code": "MATH F113",
-   "grade": "C"
-  },
-  {
-   "code": "PHY F101",
-   "grade": "A"
-  },
-  {
-   "code": "MATH F102",
-   "grade": "D"
-  },
-  {
-   "code": "BITS F101",
    "grade": "B"
   },
   {
-   "code": "EEE F111",
-   "grade": "A"
-  },
-  {
-   "code": "BITS K101",
+   "code": "MATH F113",
    "grade": "A-"
   },
   {
-   "code": "BITS F102",
+   "code": "PHY F101",
    "grade": "C"
+  },
+  {
+   "code": "MATH F102",
+   "grade": "B-"
+  },
+  {
+   "code": "BITS F101",
+   "grade": "C-"
+  },
+  {
+   "code": "EEE F111",
+   "grade": "B"
+  },
+  {
+   "code": "BITS K101",
+   "grade": "D"
+  },
+  {
+   "code": "BITS F102",
+   "grade": "A"
   }
  ],
  "current": [
   "MATH F211",
-  "CS F214",
-  "CS F222",
-  "CS F213",
-  "CS F215",
-  "HSS F235"
+  "PHY F211",
+  "PHY F212",
+  "PHY F213",
+  "PHY F214",
+  "BITS F225"
  ],
  "minor": null,
- "interests": "artificial intelligence, machine learning",
- "cgpa": 8.4
+ "interests": "quantum computing, electronics",
+ "cgpa": 8.2
 }

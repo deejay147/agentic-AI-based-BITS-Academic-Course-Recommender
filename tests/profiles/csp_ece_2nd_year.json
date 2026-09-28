@@ -1,19 +1,19 @@
 {
- "id_no": "2025A7PS0147P",
- "name": "B.E. CS, 2-1",
+ "id_no": "2025AACS0077P",
+ "name": "B.E. ECE, 2+2 CentraleSupelec, 2-1",
  "batch": 2025,
  "programmes": [
-  "A7"
+  "AA"
  ],
- "stream": null,
+ "stream": "CSP",
  "completed": [
   {
    "code": "BITS F103",
-   "grade": "C"
+   "grade": "D"
   },
   {
    "code": "BITS F111",
-   "grade": "B"
+   "grade": "A-"
   },
   {
    "code": "BIO F101",
@@ -29,31 +29,31 @@
   },
   {
    "code": "CS F111",
-   "grade": "D"
-  },
-  {
-   "code": "MATH F101",
-   "grade": "A-"
-  },
-  {
-   "code": "MATH F113",
-   "grade": "C"
-  },
-  {
-   "code": "PHY F101",
-   "grade": "A"
-  },
-  {
-   "code": "MATH F102",
-   "grade": "D"
-  },
-  {
-   "code": "BITS F101",
    "grade": "B"
   },
   {
+   "code": "MATH F101",
+   "grade": "C"
+  },
+  {
+   "code": "MATH F113",
+   "grade": "B"
+  },
+  {
+   "code": "PHY F101",
+   "grade": "B-"
+  },
+  {
+   "code": "MATH F102",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F101",
+   "grade": "C"
+  },
+  {
    "code": "EEE F111",
-   "grade": "A"
+   "grade": "C-"
   },
   {
    "code": "BITS K101",
@@ -61,18 +61,17 @@
   },
   {
    "code": "BITS F102",
-   "grade": "C"
+   "grade": "A-"
   }
  ],
  "current": [
   "MATH F211",
-  "CS F214",
-  "CS F222",
-  "CS F213",
-  "CS F215",
-  "HSS F235"
+  "ECE F211",
+  "ECE F212",
+  "ECE F215",
+  "ECE F214"
  ],
  "minor": null,
- "interests": "artificial intelligence, machine learning",
- "cgpa": 8.4
+ "interests": "electronics, communication",
+ "cgpa": 7.8
 }

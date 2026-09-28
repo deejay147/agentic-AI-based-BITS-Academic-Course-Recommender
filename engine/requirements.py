@@ -1,17 +1,18 @@
-"""Remaining requirements for a student: GIR, CDC, DEL, HUEL, OPEL (+ minor).
+"""Remaining requirements for a student: GIR, CDC, DEL, HUEL, OPEL (+ minor), and a
+graduation checklist.
 
 Pure python over the catalog, no LLM anywhere in here.
 
-How electives get counted (reg 2.05): a cleared course that isn't a named course (GIR/CDC)
-goes to DEL if it's in the programme's DEL pool and DEL isn't full yet, else to HUEL if it's
-in the humanities pool (and not from the student's own discipline, bulletin IV-127) and HUEL
-isn't full, else it's an open elective.
+Elective requirements are counted in courses:
+  single degree: 3 HUEL, 4 DEL, 5 OPEL
+  dual degree  : 3 HUEL, DELs of each degree, no OPEL (DELs of one degree count as OPELs of
+                 the other, reg 2.05)
+If a programme's semester chart gives a different DEL count (Economics 6, Biotech 5, ...),
+the chart wins.
 
-OPEL units aren't printed per programme anywhere, so they're derived from bulletin IV-1
-(p.209): coursework needs 129 units min, so
-    OPEL = 129 - (GIR units + CDC units) - DEL units - HUEL units
-For CS that gives 15, which sits inside the 15-27 range IV-1 gives.
-Dual degree: OPEL is met by counting DELs of one degree as OPELs of the other (2.05).
+Filing (reg 2.05): a cleared course that isn't a named course (GIR/CDC) goes to DEL if it's
+in the programme's DEL pool and DEL isn't full, else HUEL if it's in the humanities pool (and
+not from the student's own discipline, bulletin IV-127) and HUEL isn't full, else OPEL.
 """
 from __future__ import annotations
 
@@ -21,9 +22,12 @@ from engine.catalog import PROJECT_RE, Catalog
 from engine.profile import Profile
 from ingest.common import norm_code
 
-HUEL_UNITS = 8        # bulletin IV-1: humanities electives 8 units / 3 courses
-HUEL_COURSES = 3
-COURSEWORK_MIN_UNITS = 129
+HUEL_COURSES = 3          # humanities electives (bulletin IV-1 also says 8 units min)
+HUEL_UNITS = 8
+DEL_COURSES_DEFAULT = 4
+OPEL_COURSES_SINGLE = 5
+COURSEWORK_MIN_UNITS = 129    # bulletin IV-1
+COURSEWORK_MIN_COURSES = 41
 
 
 @dataclass
@@ -42,13 +46,11 @@ class Bucket:
         return sum(cat.units(c) or 0 for c in codes)
 
     def is_full(self, cat: Catalog, include_current=True) -> bool:
-        if self.required_units is None and self.required_courses is None:
+        # electives are counted in courses; units are only shown for info
+        if self.required_courses is None:
             return False
         n = len(self.done) + (len(self.in_progress) if include_current else 0)
-        u = self.units_done(cat, include_current)
-        ok_u = self.required_units is None or u >= self.required_units
-        ok_c = self.required_courses is None or n >= self.required_courses
-        return ok_u and ok_c
+        return n >= self.required_courses
 
     def summary(self, cat: Catalog) -> dict:
         u_done = self.units_done(cat)
@@ -125,10 +127,9 @@ def compute(profile: Profile, cat: Catalog) -> dict:
             gir.in_progress.append(hit)
         else:
             gir.remaining.append(g)
-    gir_units = sum(cat.units(g[0]) or 0 for g in _gir_groups(cat, pids))
 
     # ---- per programme CDC
-    del_buckets, cdc_units_total = {}, 0
+    del_buckets = {}
     for pid in pids:
         p = cat.programmes[pid]
         cdc = Bucket(f"CDC ({pid})", required_units=p["cdc_units"], required_courses=p["cdc_courses"],
@@ -147,9 +148,10 @@ def compute(profile: Profile, cat: Catalog) -> dict:
                 cdc.in_progress.append(hit)
             else:
                 cdc.remaining.append(opts)
-        cdc_units_total += p["cdc_units"] or sum(cat.units(g[0]["code"]) or 0 for g in p["cdc_groups"])
-        dl = Bucket(f"DEL ({pid})", required_units=p["del_units"], required_courses=p["del_courses"],
-                    source=f"Bulletin semester chart p.{p['chart_page']}")
+        n_del = p["del_courses"] or DEL_COURSES_DEFAULT
+        dl = Bucket(f"DEL ({pid})", required_courses=n_del,
+                    source=f"Bulletin semester chart p.{p['chart_page']}" if p["del_courses"]
+                    else "default 4 DELs (no count on the chart)")
         if p["compulsory_del"]:
             dl.note = "Compulsory DELs: " + ", ".join(p["compulsory_del"])
         del_buckets[pid] = dl
@@ -157,17 +159,13 @@ def compute(profile: Profile, cat: Catalog) -> dict:
 
     # ---- electives: everything cleared/registered that isn't a named course
     own_depts = set().union(*[cat.programme_depts(pid) for pid in pids]) if pids else set()
-    huel = Bucket("HUEL", required_units=HUEL_UNITS, required_courses=HUEL_COURSES,
+    huel = Bucket("HUEL", required_courses=HUEL_COURSES,
                   source="Bulletin IV-1 (p.209), pool IV-125..127 (p.333-335)")
-    opel = Bucket("OPEL", source="Derived from Bulletin IV-1 (p.209): 129 coursework units minimum")
+    opel = Bucket("OPEL", source="Bulletin IV-1 (p.209), reg 2.05")
     if len(pids) == 2:
-        opel.note = "Dual degree: the open elective requirement is met by DELs of the other degree (reg 2.05)."
+        opel.note = "Dual degree: no separate OPEL requirement - DELs of one degree count as OPELs of the other (reg 2.05)."
     elif pids:
-        dl = del_buckets[pids[0]]
-        opel.required_units = max(0, COURSEWORK_MIN_UNITS - gir_units - cdc_units_total
-                                  - (dl.required_units or 0) - HUEL_UNITS)
-        opel.note = (f"OPEL units = 129 - GIR ({gir_units}) - CDC ({cdc_units_total}) - DEL ({dl.required_units}) "
-                     f"- HUEL ({HUEL_UNITS}) = {opel.required_units}")
+        opel.required_courses = OPEL_COURSES_SINGLE
 
     projects = []
     for which, pool in (("done", cleared), ("in_progress", registered)):
@@ -204,9 +202,51 @@ def compute(profile: Profile, cat: Catalog) -> dict:
     result["own_depts"] = sorted(own_depts)
     if profile.minor:
         result["minor"] = minor_progress(profile, cat, cleared, registered, named)
+    result["graduation"] = graduation_check(profile, cat, result, cleared)
+    if profile.stream == "CSP":
+        result["notes"].append(
+            "BITS-CentraleSupélec 2+2: years 3-4 are at CentraleSupélec Paris. To progress you need a CGPA of at "
+            "least 5.0 after the first two years and no grade below D in BITS courses that count toward the CSP "
+            "degree (bulletin p.160). Which BITS courses count for CSP isn't listed in the supplied data.")
     # internal handles the eligibility step needs
     result["_buckets"] = {"del": del_buckets, "huel": huel, "opel": opel, "gir": gir}
     return result
+
+
+def graduation_check(profile: Profile, cat: Catalog, st: dict, cleared: set) -> dict:
+    """Checklist against the first degree graduation requirements (bulletin IV-1, IV-2).
+    Only coursework - PS-II / thesis is listed as a reminder, it isn't something we track."""
+    items = []
+
+    def add(name, ok, detail):
+        items.append({"requirement": name, "met": ok, "detail": detail})
+
+    gir_left = st["gir"].get("remaining", [])
+    add("General institutional requirement (named courses)", not gir_left,
+        f"{len(gir_left)} left" if gir_left else "all done")
+    for prog in st["programmes"]:
+        c, d = prog["cdc"], prog["del"]
+        add(f"Core courses - {prog['id']}", not c.get("remaining"),
+            f"{len(c.get('remaining', []))} left" if c.get("remaining") else "all done")
+        add(f"Discipline electives - {prog['id']} ({d['required_courses']} courses)",
+            d.get("courses_remaining", 0) == 0, f"{len(d['done'])} done, {d.get('courses_remaining', 0)} left")
+    h = st["huel"]
+    add(f"Humanities electives ({HUEL_COURSES} courses, {HUEL_UNITS}+ units)",
+        h.get("courses_remaining", 0) == 0 and h["units_done"] >= HUEL_UNITS,
+        f"{len(h['done'])} courses / {h['units_done']} units done")
+    o = st["opel"]
+    if o["required_courses"]:
+        add(f"Open electives ({o['required_courses']} courses)", o.get("courses_remaining", 0) == 0,
+            f"{len(o['done'])} done, {o.get('courses_remaining', 0)} left")
+    units = sum(cat.units(c) or 0 for c in cleared)
+    add(f"Coursework total ({COURSEWORK_MIN_UNITS}+ units, {COURSEWORK_MIN_COURSES}+ courses)",
+        units >= COURSEWORK_MIN_UNITS and len(cleared) >= COURSEWORK_MIN_COURSES,
+        f"{units} units, {len(cleared)} courses cleared")
+    n_ps = len(st["programmes"])
+    items.append({"requirement": f"PS-II or Thesis ({'one per degree' if n_ps == 2 else 'one'})", "met": None,
+                  "detail": "not tracked here (bulletin IV-1/IV-2)"})
+    done = all(i["met"] for i in items if i["met"] is not None)
+    return {"ready": done, "items": items, "source": "Bulletin IV-1, IV-2 (p.209-210)"}
 
 
 def minor_progress(profile: Profile, cat: Catalog, cleared: set, registered: set, named: set) -> dict:

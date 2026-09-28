@@ -1,0 +1,159 @@
+{
+ "id_no": "2023A2PS0099P",
+ "name": "B.E. Civil, 4-1 (2023 batch)",
+ "batch": 2023,
+ "programmes": [
+  "A2"
+ ],
+ "stream": null,
+ "completed": [
+  {
+   "code": "BITS F103",
+   "grade": "B"
+  },
+  {
+   "code": "BITS F111",
+   "grade": "A"
+  },
+  {
+   "code": "BIO F101",
+   "grade": "C-"
+  },
+  {
+   "code": "BITS F112",
+   "grade": "B"
+  },
+  {
+   "code": "CHEM F101",
+   "grade": "B-"
+  },
+  {
+   "code": "CS F111",
+   "grade": "B-"
+  },
+  {
+   "code": "MATH F101",
+   "grade": "A"
+  },
+  {
+   "code": "MATH F113",
+   "grade": "B"
+  },
+  {
+   "code": "PHY F101",
+   "grade": "C"
+  },
+  {
+   "code": "MATH F102",
+   "grade": "D"
+  },
+  {
+   "code": "BITS F101",
+   "grade": "C"
+  },
+  {
+   "code": "EEE F111",
+   "grade": "C"
+  },
+  {
+   "code": "BITS K101",
+   "grade": "B"
+  },
+  {
+   "code": "BITS F102",
+   "grade": "D"
+  },
+  {
+   "code": "MATH F211",
+   "grade": "A"
+  },
+  {
+   "code": "ECON F211",
+   "grade": "C-"
+  },
+  {
+   "code": "CE F211",
+   "grade": "D"
+  },
+  {
+   "code": "CE F231",
+   "grade": "C"
+  },
+  {
+   "code": "CE F213",
+   "grade": "C"
+  },
+  {
+   "code": "CE F241",
+   "grade": "C"
+  },
+  {
+   "code": "CE F230",
+   "grade": "C"
+  },
+  {
+   "code": "CE F242",
+   "grade": "A-"
+  },
+  {
+   "code": "CE F243",
+   "grade": "C-"
+  },
+  {
+   "code": "CE F244",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F225",
+   "grade": "A"
+  },
+  {
+   "code": "CE F320",
+   "grade": "B"
+  },
+  {
+   "code": "CE F312",
+   "grade": "A-"
+  },
+  {
+   "code": "CE F342",
+   "grade": "B"
+  },
+  {
+   "code": "CE F313",
+   "grade": "C-"
+  },
+  {
+   "code": "CE F321",
+   "grade": "B"
+  },
+  {
+   "code": "CE F343",
+   "grade": "A-"
+  },
+  {
+   "code": "GS F232",
+   "grade": "C"
+  },
+  {
+   "code": "HSS F235",
+   "grade": "A"
+  },
+  {
+   "code": "HSS F222",
+   "grade": "A-"
+  },
+  {
+   "code": "CE F423",
+   "grade": "A"
+  },
+  {
+   "code": "CE F434",
+   "grade": "B"
+  }
+ ],
+ "current": [],
+ "minor": null,
+ "interests": "structures, GIS, sustainability",
+ "cgpa": 7.0
+}

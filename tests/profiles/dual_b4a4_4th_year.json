@@ -1,0 +1,193 @@
+{
+ "id_no": "2023B4A40066P",
+ "name": "M.Sc. Mathematics + B.E. Mechanical, 4-1",
+ "batch": 2023,
+ "programmes": [
+  "B4",
+  "A4"
+ ],
+ "stream": null,
+ "completed": [
+  {
+   "code": "BITS F103",
+   "grade": "C-"
+  },
+  {
+   "code": "BITS F111",
+   "grade": "C"
+  },
+  {
+   "code": "BIO F101",
+   "grade": "A"
+  },
+  {
+   "code": "BITS F112",
+   "grade": "A"
+  },
+  {
+   "code": "CHEM F101",
+   "grade": "B-"
+  },
+  {
+   "code": "CS F111",
+   "grade": "C-"
+  },
+  {
+   "code": "MATH F101",
+   "grade": "B-"
+  },
+  {
+   "code": "MATH F113",
+   "grade": "B"
+  },
+  {
+   "code": "PHY F101",
+   "grade": "C"
+  },
+  {
+   "code": "MATH F102",
+   "grade": "C-"
+  },
+  {
+   "code": "BITS F101",
+   "grade": "C"
+  },
+  {
+   "code": "EEE F111",
+   "grade": "C"
+  },
+  {
+   "code": "BITS K101",
+   "grade": "A-"
+  },
+  {
+   "code": "BITS F102",
+   "grade": "B"
+  },
+  {
+   "code": "MATH F211",
+   "grade": "A-"
+  },
+  {
+   "code": "ECON F211",
+   "grade": "B"
+  },
+  {
+   "code": "MATH F212",
+   "grade": "C-"
+  },
+  {
+   "code": "MATH F213",
+   "grade": "B"
+  },
+  {
+   "code": "MATH F214",
+   "grade": "C"
+  },
+  {
+   "code": "MATH F241",
+   "grade": "B"
+  },
+  {
+   "code": "MATH F215",
+   "grade": "C-"
+  },
+  {
+   "code": "MATH F242",
+   "grade": "A"
+  },
+  {
+   "code": "MATH F243",
+   "grade": "C-"
+  },
+  {
+   "code": "BITS F225",
+   "grade": "C"
+  },
+  {
+   "code": "MATH F244",
+   "grade": "A-"
+  },
+  {
+   "code": "MATH F311",
+   "grade": "A-"
+  },
+  {
+   "code": "MATH F341",
+   "grade": "C"
+  },
+  {
+   "code": "MATH F312",
+   "grade": "B"
+  },
+  {
+   "code": "MATH F342",
+   "grade": "C-"
+  },
+  {
+   "code": "MATH F313",
+   "grade": "B"
+  },
+  {
+   "code": "MATH F343",
+   "grade": "C"
+  },
+  {
+   "code": "ME F211",
+   "grade": "C"
+  },
+  {
+   "code": "ME F218",
+   "grade": "A-"
+  },
+  {
+   "code": "ME F212",
+   "grade": "C"
+  },
+  {
+   "code": "ME F219",
+   "grade": "C-"
+  },
+  {
+   "code": "ME F216",
+   "grade": "C"
+  },
+  {
+   "code": "ME F220",
+   "grade": "A-"
+  },
+  {
+   "code": "ME F217",
+   "grade": "B"
+  },
+  {
+   "code": "ME F221",
+   "grade": "B"
+  },
+  {
+   "code": "GS F232",
+   "grade": "B"
+  },
+  {
+   "code": "HSS F235",
+   "grade": "A"
+  },
+  {
+   "code": "HSS F222",
+   "grade": "B"
+  },
+  {
+   "code": "MATH F424",
+   "grade": "C-"
+  }
+ ],
+ "current": [
+  "ME F314",
+  "ME F315",
+  "ME F316",
+  "ME F317"
+ ],
+ "minor": null,
+ "interests": "optimisation, CFD, numerical methods",
+ "cgpa": 7.5
+}

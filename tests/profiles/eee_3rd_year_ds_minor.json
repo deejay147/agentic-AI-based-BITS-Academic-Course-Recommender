@@ -1,0 +1,131 @@
+{
+ "id_no": "2024A3PS0088P",
+ "name": "B.E. EEE, 3-1, Data Science minor",
+ "batch": 2024,
+ "programmes": [
+  "A3"
+ ],
+ "stream": null,
+ "completed": [
+  {
+   "code": "BITS F103",
+   "grade": "C-"
+  },
+  {
+   "code": "BITS F111",
+   "grade": "A"
+  },
+  {
+   "code": "BIO F101",
+   "grade": "B"
+  },
+  {
+   "code": "BITS F112",
+   "grade": "B-"
+  },
+  {
+   "code": "CHEM F101",
+   "grade": "B"
+  },
+  {
+   "code": "CS F111",
+   "grade": "B"
+  },
+  {
+   "code": "MATH F101",
+   "grade": "C"
+  },
+  {
+   "code": "MATH F113",
+   "grade": "C"
+  },
+  {
+   "code": "PHY F101",
+   "grade": "C-"
+  },
+  {
+   "code": "MATH F102",
+   "grade": "A-"
+  },
+  {
+   "code": "BITS F101",
+   "grade": "B"
+  },
+  {
+   "code": "EEE F111",
+   "grade": "C-"
+  },
+  {
+   "code": "BITS K101",
+   "grade": "C"
+  },
+  {
+   "code": "BITS F102",
+   "grade": "D"
+  },
+  {
+   "code": "MATH F211",
+   "grade": "B-"
+  },
+  {
+   "code": "ECON F211",
+   "grade": "B"
+  },
+  {
+   "code": "EEE F211",
+   "grade": "C"
+  },
+  {
+   "code": "EEE F212",
+   "grade": "D"
+  },
+  {
+   "code": "EEE F215",
+   "grade": "B-"
+  },
+  {
+   "code": "EEE F241",
+   "grade": "C"
+  },
+  {
+   "code": "EEE F214",
+   "grade": "C"
+  },
+  {
+   "code": "EEE F242",
+   "grade": "C"
+  },
+  {
+   "code": "EEE F243",
+   "grade": "B"
+  },
+  {
+   "code": "EEE F244",
+   "grade": "B"
+  },
+  {
+   "code": "BITS F225",
+   "grade": "A-"
+  },
+  {
+   "code": "GS F232",
+   "grade": "B"
+  },
+  {
+   "code": "HSS F235",
+   "grade": "B"
+  },
+  {
+   "code": "CS F320",
+   "grade": "B"
+  }
+ ],
+ "current": [
+  "EEE F311",
+  "MATH F212",
+  "EEE F313"
+ ],
+ "minor": "Minor in Data Science",
+ "interests": "data science, machine learning, power systems",
+ "cgpa": 8.6
+}
