@@ -1,19 +1,44 @@
 # BITS Academic Course Recommender
 
-Agentic course recommender for BITS Pilani students (Postman Round 2).
-Work in progress - built phase by phase, see the status table below.
+Agentic course recommender for BITS Pilani students - Postman Round 2.
 
-| Phase | What | Status |
-|---|---|---|
-| 1 | Ingestion: timetable, bulletin, handouts, regulations -> SQLite | done |
-| 2 | Academic engine: remaining CDC/DEL/HUEL/OPEL, eligibility, clash check | done |
-| 3 | Agent + retrieval (Claude API, with a no-key fallback) | done |
-| 4 | Streamlit dashboard | next |
-| 5 | Timetable intelligence (bonus) | |
+A student builds a profile (from their BITS ID), the app works out what they still need to graduate,
+which courses in the **First Semester 2026-27** timetable they're actually allowed to take, and then answers
+natural-language questions like *"Suggest DELs related to AI"* or *"I want an OPEL with no attendance requirement"*
+from that eligible set only, with the reason for every pick and where each fact came from.
 
-## Data
+```
+Student profile + query
+        |
+Academic requirement analysis        engine/requirements.py   (deterministic)
+        |
+Remaining GIR / CDC / DEL / HUEL / OPEL
+        |
+Eligible course set                  engine/eligibility.py    (every regulation check tagged with its clause)
+        |
+Course preference matching           agent/                   (Claude tool-calling, or rule-based without a key)
+        |
+BITS policy validation               agent/tools.py Session.validate  (LLM picks re-checked against the engine)
+        |
+Final recommendations                app/app.py               (Streamlit dashboard)
+```
 
-Put the supplied dataset in `data/raw/` (not committed, it's ~250 MB):
+## Quick start
+
+```bash
+pip install -r requirements.txt
+cp .env.example .env              # optional: put ANTHROPIC_API_KEY in it for the Claude agent
+streamlit run app/app.py
+```
+
+The processed dataset is committed (`data/processed/`), so the app runs straight away.
+Without an API key the agent runs in rule-based mode (same tools, same validation, templated explanations).
+
+Tests: `pytest -q` (31 tests, engine + agent; the Claude loop is tested with a scripted fake client).
+
+### Rebuilding the data from the PDFs
+
+Put the supplied files in `data/raw/` (not committed, ~250 MB):
 
 ```
 data/raw/bulletin.pdf
@@ -22,76 +47,116 @@ data/raw/regulations.pdf          # Academic-Regulations-2023.pdf, renamed
 data/raw/handouts/*.pdf
 ```
 
-The processed output is committed in `data/processed/`, so the app runs without the PDFs.
-To rebuild it:
-
 ```bash
-pip install -r requirements.txt     # also needs poppler-utils (pdftotext), tesseract is optional
-python -m ingest.run_all            # ~3 min
+# needs poppler-utils (pdftotext); tesseract is optional (only for the one scanned handout)
+python -m ingest.run_all          # ~3 min
 ```
 
-## What ingestion produces
+A new timetable or a new set of handouts = drop the files in and rerun this. No engine/agent code changes.
 
-| file | contents |
+## Dashboard
+
+- **Sidebar - profile.** Type the BITS ID (`2025A7PS0147P` -> batch 2025, B.E. CS, PS, Pilani; `2024B3A70123P` ->
+  dual degree M.Sc. Economics + B.E. CS; `..CS..` in the stream slot -> 2+2 CentraleSupelec). *Pre-fill* fills the
+  named courses of the earlier semesters from the programme's semester chart; edit the list, set grades (NC / W / I
+  count as not cleared), add electives already done, pick the courses registered this semester, minor, interests.
+  Profiles save to `data/profiles/`. The 11 test profiles can be loaded from the same box.
+- **Requirements** - remaining core / DEL / HUEL / OPEL / GIR, minor progress, graduation checklist.
+- **Ask** - chat. Recommendation cards show the requirement filled, eligibility, requested properties
+  (yes / no / could not be verified, with the handout or timetable quote), IC, exam slots, sections, and sources.
+- **Plan semester** - pick electives; they're filed into CDC / DEL / HUEL / OPEL automatically, sections are chosen
+  so nothing clashes (optionally no 8 AM / a free day), 25-unit cap checked, week view.
+- **Eligible courses** - the full eligible set, and "why can't I take X?" with the clause that blocks it.
+- **Data sources** - validation report, verification queue, regulation clauses in use.
+
+## How it's built
+
+### 1. Ingestion (`ingest/`) - PDFs -> structured records -> SQLite
+
+| script | source | what comes out |
+|---|---|---|
+| `timetable.py` | timetable II, IX | 719 course rows / 582 codes, 1557 sections with day-hour slots, midsem + compre slots, IC, 2026-only flag; 167 equivalent-course groups |
+| `bulletin_programmes.py` | bulletin IV | 28 programmes: CDC + DEL groups (OR-alternatives, tracks, compulsory DELs), GIR courses, semester positions of every named course, CDC/DEL totals from the charts; 70 composite dual-degree charts; HUEL pool (136); 23 minors |
+| `bulletin_courses.py` | bulletin VI | 2015 course descriptions, units, stated prerequisites |
+| `handouts.py` | 540 handout PDFs (399 unique) | evaluation components/weights, midsem / compre / quiz / project / lab / open-book flags, makeup + attendance policy, lecture-plan topics - each field keeps the text it came from |
+| `regulations_rules.py` | Academic Regulations | the 14 clauses the engine uses, with clause numbers |
+| `build_db.py` | all of the above | `academic.db`, `validation_report.md`, `verification_queue.csv` |
+
+Every record carries its source (document + page / section / file). Things that don't check out go to the
+verification queue instead of being guessed - e.g. offered courses without a handout, sections with no day/hour
+in the timetable, programmes where the bulletin's CDC list and semester chart disagree (reconciled toward the chart,
+reg 1.07, and logged).
+
+The PDFs are parsed with coordinates (pdfplumber) rather than flattened text: the timetable by column x-positions,
+the bulletin's two-column pages by cropping each column, the minors by table extraction. Handouts vary too much
+between ICs for one template, so they're parsed with rules and every extracted property keeps its evidence.
+
+### 2. Academic engine (`engine/`) - no LLM
+
+- `profile.py` - profile + BITS ID parsing. The only timetable is First Semester 2026-27, so year = 2026 - batch + 1.
+  Grades are optional; A-E count as cleared, NC / W / I / GA / RC don't (reg 4.11-4.12).
+- `requirements.py` - remaining requirements. Electives are counted in courses: single degree 3 HUEL / 4 DEL / 5 OPEL,
+  dual degree no OPEL (reg 2.05), and a programme's own DEL count from its chart wins (Economics 6, Biotech 5 ...).
+  Old / cross-listed codes are matched through the equivalence list. Electives are filed DEL -> HUEL -> OPEL (reg 2.05;
+  a HUEL can't be from the student's own discipline, bulletin IV-127). Graduation checklist per bulletin IV-1/IV-2.
+- `eligibility.py` - for every offered course: which requirement it would fill for this student, and each rule:
+
+| check | clause |
 |---|---|
-| `timetable.json` | 719 course rows / 582 codes, 1557 sections with day-hour slots, midsem + compre slots, IC, "2026 admits only" flag |
-| `equivalents.json` | old/cross-listed code groups from timetable section IX (CS F215 ~ EEE F215 ~ INSTR F215 ...) |
-| `programmes.json` | 28 first-degree programmes: CDC + DEL groups (with OR alternatives, tracks, compulsory DELs), GIR courses, unit/course totals from the semester charts |
-| `huel_pool.json` | 136 Humanities electives + the own-discipline rule |
-| `minors.json` | 23 minors: core/electives/pools + the general minor rules |
-| `courses_bulletin.json` | 2015 course descriptions with units and stated prerequisites |
-| `handouts.json` | 399 unique handouts (540 files, cross-listed duplicates merged): evaluation components, midsem/compre/quiz/project/lab flags, makeup + attendance policy - each with the text it came from |
-| `rules.json` | the regulation clauses the engine uses, with clause numbers |
-| `academic.db` | everything above joined in SQLite |
-| `validation_report.md`, `verification_queue.csv` | things that didn't check out and need a human look |
+| prerequisites (only ~70 courses state any) | Reg 3.13 |
+| prior preparation for own CDCs (named courses of earlier semesters; DCA may allow 2 missing) | Reg 3.14 |
+| other degrees' CDC/DEL only after own year 1-2 named courses | Reg 3.15(b)(i) |
+| higher degree courses: own discipline, after 2nd-year CDCs, one per semester, CGPA cutoff (not in data -> note) | Reg 3.15(b)(ii), 2.08 |
+| 25 units per semester | Reg 1.01 |
+| comcod >= 5000 / U-codes only for 2026 admits | Timetable note |
+| first-year foundation courses aren't elective host regions | Reg 2.07 / 3.18 |
+| no class or exam clash (tries every section combination) | Reg 3.19 |
 
-Every record carries a `source` (document + page/section) so answers can be traced back.
+- `schedule.py` - clash checks + joint section selection; `planner.py` - the semester planner.
+- Dual degree students are placed on the composite chart of their pair (bulletin p.242-313).
 
-## Academic engine (`engine/`)
+### 3. Agent (`agent/`)
 
-Deterministic, no LLM involved:
-
-- `profile.py` - profile + ID parsing (incl. the 2+2 CentraleSupelec stream, `..CS..` in the ID) (`2025A7PS0147P` -> batch 2025, B.E. CS, Pilani -> year 2, sem 1 of 2026-27;
-  `2024B3A70123P` -> dual degree M.Sc. Eco + B.E. CS). Grades optional; NC / W / I / RC etc. count as not cleared (reg 4.11-4.12).
-- `requirements.py` - remaining GIR, CDC, DEL, HUEL, OPEL (+ minor progress) and a graduation checklist.
-  Electives are counted in courses: single degree 3 HUEL / 4 DEL / 5 OPEL, dual degree has no OPEL (reg 2.05);
-  a programme whose chart gives a different DEL count (Economics 6, Biotech 5 ...) uses that.
-  Old/cross-listed codes are matched through the equivalence list; electives are filed DEL -> HUEL -> OPEL (reg 2.05).
-  Dual degree students are placed on the composite dual-degree chart of their pair (bulletin p.242-313).
-- `planner.py` - the student picks the electives they want this semester; the planner files each into
-  DEL / HUEL / OPEL, picks clash-free sections for all of them together, and checks the 25-unit cap.
-- `eligibility.py` - every course offered this semester gets a category for this student and a list of rule checks,
-  each tagged with its clause: prerequisites (3.13), prior preparation (3.14), other-discipline courses (3.15(b)(i)),
-  higher degree courses (3.15(b)(ii), 2.08), 25-unit cap (1.01), 2026-only courses, clash-free timetable (3.19).
-- `schedule.py` - class + exam clash checks; tries every section combination before calling a course a clash.
-
-Test profiles (built from the semester charts) are in `tests/profiles/`, tests in `tests/test_engine.py` (`pytest -q`).
-
-## Agent (`agent/`)
-
-```
-profile + query -> requirement analysis -> eligible set -> preference matching -> policy validation -> answer
-                   (engine, deterministic)                  (tools + Claude)      (Session.validate)
-```
-
-- `tools.py` - the tools the agent calls: `get_requirements`, `find_courses` (category / handout-property / time filters,
-  topic ranking), `course_details`, `check_plan`, and `submit_recommendations`. Every submitted pick is re-validated
-  against the eligibility engine and the requested properties, so the LLM can't recommend something the rules didn't clear.
-- `retrieval.py` - BM25 (with bigrams) over title + bulletin description + handout lecture plan for interest matching,
-  and the handout property checks (no midsem, attendance, lenient makeup, project based, quizzes, lab, open book).
-  Each check is yes / no / *could not be verified*, always with the evidence it came from.
-- `agent.py` - with `ANTHROPIC_API_KEY` set, Claude (default `claude-sonnet-5`, override with `ANTHROPIC_MODEL`)
-  runs a tool-calling loop: it turns the request into filters, expands topics into syllabus words, re-ranks, then
-  submits. Without a key, `nlu.py` parses the query with rules and the same tools answer with templated explanations.
-- Each recommendation says: the requirement it fills, why the student is eligible, the relevant properties
-  (quoted from the handout / timetable, with source), and why it matches the request.
+- `tools.py` - `get_requirements`, `find_courses` (category / handout-property / time filters + topic ranking),
+  `course_details`, `check_plan`, `submit_recommendations`.
+- `retrieval.py` - BM25 with bigrams over title + bulletin description + handout lecture plan, and the handout
+  property checks. A property is only "yes" if the handout/timetable says so; silent handouts give
+  *"No specific information mentioned; contact the Instructor-in-Charge (name)"* and are listed as could-not-verify.
+- `agent.py`
+  - **Claude mode** (`ANTHROPIC_API_KEY` set; model `claude-sonnet-5`, override with `ANTHROPIC_MODEL`): Claude reads
+    the request, calls the tools (turning "AI" into syllabus words, re-searching if thin), re-ranks, and must finish
+    with `submit_recommendations`. Each pick is re-validated against the engine and the requested category /
+    properties; anything invalid is dropped and reported. If the API call fails, it falls back to rules mode.
+  - **Rules mode** - `nlu.py` parses category, properties, time preferences, course codes and topic words; the same
+    tools answer; explanations come from templates. When nothing matches every requested property it says so and
+    shows the closest options with what they're missing.
 
 ## Scope decisions
 
-- Curriculum rules come from the supplied Bulletin (2025-26). Profiles from earlier batches still get
-  results, with a note that the 2025-26 curriculum was applied.
+- Programme rules come from the supplied Bulletin (2025-26). Earlier batches still get results, with a note that the
+  2025-26 curriculum was applied. 2026 admits are treated the same way, and only they see the 2026-only (>= 5000
+  comcod / U-code) timetable rows.
 - Pilani campus only (the timetable and handouts are Pilani's).
-- If a handout doesn't say something (attendance, makeup ...), the app says no specific information is
-  mentioned and to contact the Instructor-in-Charge. It never guesses.
-- Prerequisites: only ~70 courses state one in the bulletin. When none is listed, the app says
-  "no prerequisites required" if asked, and doesn't bring it up otherwise.
+- Prerequisites: when none is listed, the app says "No prerequisites required" if asked, and doesn't bring it up otherwise.
+- Reg 3.15(b)(i) is applied strictly.
+- 2+2 CentraleSupelec students get the progression condition from bulletin p.160 (CGPA >= 5.0, no grade below D);
+  which BITS courses count for CSP isn't in the supplied data.
+- PS-II / thesis appear in the graduation checklist as a reminder only.
+
+## Known limitations
+
+- Handout extraction is rule-based: 192 of 399 handouts give an evaluation table whose weights add up to ~100%; for the
+  rest the app shows the handout's evaluation text instead of numbers. Makeup / attendance labels always come with the
+  quoted sentence.
+- For courses a student is already registered in, their section usually isn't known, so only single-section
+  components and exam slots of those courses block time in the clash check.
+- 3 programmes (ECE, Environmental & Sustainability, BBA) have CDC list vs chart differences in the bulletin itself;
+  see `data/processed/verification_queue.csv`.
+
+## Repo layout
+
+```
+ingest/     PDF parsers + db build + validation           engine/   requirements, eligibility, clashes, planner
+agent/      tools, retrieval, Claude agent, rule parser   app/      Streamlit dashboard
+tests/      test profiles (json) + engine/agent tests     data/processed/  structured data + academic.db
+```
