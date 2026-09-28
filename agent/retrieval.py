@@ -61,26 +61,61 @@ SYNONYMS = {
 }
 
 
+_SUFFIXES = ("abilities", "ability", "ibility", "ations", "ation", "ments", "ment", "ings", "ing", "ities", "ity",
+             "ical", "ics", "ic", "ies", "ive", "ness", "able", "ible", "al", "es", "s")
+
+
+def stem(w: str) -> str:
+    """tiny suffix stripper so 'sustainability' / 'sustainable' / 'sustain' meet. not linguistics,
+    just enough for syllabus words; applied the same way to documents and queries"""
+    if len(w) <= 4 or w in ("ai", "ml", "iot", "vlsi", "cfd"):
+        return w
+    for suf in _SUFFIXES:
+        if w.endswith(suf) and len(w) - len(suf) >= 4:
+            return w[: -len(suf)]
+    return w
+
+
 def tokens(text: str) -> list[str]:
-    """unigrams (minus stopwords) + bigrams of adjacent words, e.g. machine_learning"""
-    words = re.findall(r"[a-z][a-z0-9+#]*", (text or "").lower())
-    uni = [t for t in words if t not in STOP and len(t) > 1]
-    bi = [f"{a}_{b}" for a, b in zip(words, words[1:]) if a not in STOP or b not in STOP]
+    """unigrams (minus stopwords) + bigrams of adjacent words, e.g. machine_learning (all stemmed)"""
+    raw = re.findall(r"[a-z][a-z0-9+#]*", (text or "").lower())
+    words = [stem(w) for w in raw]
+    # remember a readable form for each stem so 'why it matches' can show real words
+    for st_, w in zip(words, raw):
+        SURFACE.setdefault(st_, w)
+    for i in range(len(words) - 1):
+        SURFACE.setdefault(f"{words[i]}_{words[i+1]}", f"{raw[i]} {raw[i+1]}")
+    uni = [t for t in words if t not in _STOP_STEMS and len(t) > 1]
+    bi = [f"{a}_{b}" for a, b in zip(words, words[1:]) if a not in _STOP_STEMS or b not in _STOP_STEMS]
     return uni + bi
+
+
+_STOP_STEMS = {stem(w) for w in STOP}
+SURFACE: dict[str, str] = {}
+
+
+def readable(term: str) -> str:
+    return SURFACE.get(term, term.replace("_", " "))
+
+
+def _stem_term(t: str) -> str:
+    return "_".join(stem(x) for x in t.split("_"))
 
 
 def expand(query: str) -> list[str]:
     out = []
+    raw = [w for w in re.findall(r"[a-z][a-z0-9+#]*", (query or "").lower())]
     for t in tokens(query):
         out.append(t)
-        out.extend(SYNONYMS.get(t, []))
+    for w in raw:                      # synonym table is keyed on the plain word
+        out.extend(_stem_term(x) for x in SYNONYMS.get(w, []))
     # spelled-out forms map back to the short keys too ('artificial intelligence' -> ai list)
     joined = " ".join(re.findall(r"[a-z]+", (query or "").lower()))
     for full, key in (("artificial intelligence", "ai"), ("machine learning", "ml"), ("deep learning", "dl"),
                       ("data science", "data"), ("natural language", "nlp"), ("computer vision", "cv"),
                       ("fluid dynamics", "cfd"), ("internet of things", "iot"), ("operations research", "optimization")):
         if full in joined:
-            out.extend(SYNONYMS[key])
+            out.extend(_stem_term(x) for x in SYNONYMS[key])
     return out
 
 
@@ -113,7 +148,7 @@ class CourseIndex:
             f = d.get(t, 0)
             if not f:
                 continue
-            hits.append(t)
+            hits.append(readable(t))
             s += self.idf.get(t, 0) * f * (k1 + 1) / (f + k1 * (1 - b + b * dl / self.avgdl))
         return s, hits
 

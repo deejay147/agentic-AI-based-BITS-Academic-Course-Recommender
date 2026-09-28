@@ -325,6 +325,10 @@ class Recommender:
         res = s.find_courses(categories=p["categories"], topics=p["topics"] or None, require=p["require"],
                              no_8am=p["no_8am"], free_day=p["free_day"], limit=5)
         recs = res["results"]
+        for r in recs:
+            # show the category the student asked for, if the course can be filed that way (reg 2.05)
+            asked = [c for c in p["categories"] if c in r["can_count_as"]]
+            r["shown_as"] = asked[0] if asked else r["fills"]
         text = head + format_recommendations(res, p, s)
         near = []
         if p["topics"]:
@@ -416,7 +420,7 @@ def format_recommendations(res, parsed, s) -> str:
         if r["match_terms"]:
             src = "your request" if f["topics"] else "your interests"
             lines.append(f"- Why it matches {src}: syllabus/description mentions "
-                         f"{', '.join(t.replace('_', ' ') for t in r['match_terms'][:5])}")
+                         f"{', '.join(dict.fromkeys(r['match_terms'][:6]))}")
         lines.append("")
     if res["could_not_verify"]:
         lines.append("**Could not verify** the requested property for: " +

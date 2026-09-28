@@ -233,10 +233,13 @@ with tab_req:
 # --------------------------------------------------------------------------- ask
 def render_cards(recs):
     for r in recs:
-        with st.expander(f"**{r['code']} - {r['title']}** · {r['units']} units · fills {r['fills']}", expanded=True):
+        shown = r.get("shown_as") or r["fills"]
+        with st.expander(f"**{r['code']} - {r['title']}** · {r['units']} units · fills {shown}", expanded=True):
             if r.get("agent_reason"):
                 st.markdown(f"_{r['agent_reason']}_")
-            st.markdown(f"**Requirement:** {r['fills']} - {r['why_category']}"
+            st.markdown(f"**Requirement:** {shown} - " + (r["why_category"] if shown == r["fills"] else
+                        f"you asked for {shown}; it's also in your {r['fills']} pool, so it can be filed as either "
+                        "(reg 2.05)")
                         + (f" (can count as {'/'.join(r['can_count_as'])})" if len(r["can_count_as"]) > 1 else ""))
             st.markdown("**Eligibility:** " + "; ".join(r["eligibility"]))
             for name, pr in (r.get("properties") or {}).items():
@@ -263,6 +266,8 @@ with tab_ask:
             st.markdown(turn["content"])
             if turn.get("cards"):
                 render_cards(turn["cards"])
+            if turn.get("footer"):
+                st.markdown(turn["footer"])
     q = st.chat_input("Ask about courses for this semester")
     if q:
         st.session_state.chat.append({"role": "user", "content": q})
@@ -272,22 +277,25 @@ with tab_ask:
             with st.spinner("Checking requirements and eligibility..."):
                 hist = [{"role": t["role"], "content": t["content"]} for t in st.session_state.chat[:-1]]
                 out = rec.ask(q, hist)
-            text = out["text"]
+            text, footer = out["text"], ""
             if out["mode"] == "rules" and out["recommendations"]:
-                # the numbered course blocks are shown as cards below - keep the header and the footers
-                # (could-not-verify / blocked matches / closest options), drop the duplicated middle
+                # the numbered course blocks become cards; header goes above them, footers (could-not-verify /
+                # blocked matches / closest options) below
                 m = re.search(r"\n\n\*\*1\. .*?(?=\n\n\*\*(Could not verify|Matches your topic|Closest options)|\Z)",
                               text, re.S)
                 if m:
-                    text = text[:m.start()] + text[m.end():]
+                    text, footer = text[:m.start()], text[m.end():].strip()
             st.markdown(text)
             render_cards(out["recommendations"])
+            if footer:
+                st.markdown(footer)
             if out["mode"] == "llm" and out.get("could_not_verify"):
                 st.caption("Could not verify for: " + ", ".join(c["code"] for c in out["could_not_verify"]))
             if out.get("rejected_by_validation"):
                 st.caption("Dropped by policy validation: " +
                            ", ".join(f"{r['code']} ({'; '.join(r['reasons'])})" for r in out["rejected_by_validation"]))
-        st.session_state.chat.append({"role": "assistant", "content": text, "cards": out["recommendations"]})
+        st.session_state.chat.append({"role": "assistant", "content": text, "cards": out["recommendations"],
+                                      "footer": footer})
 
 
 # --------------------------------------------------------------------------- plan
