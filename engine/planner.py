@@ -55,7 +55,7 @@ def plan(profile: Profile, cat: Catalog, picks: list[str], avoid_hours: set | No
         filed.setdefault(code, "OPEL")
 
     offs = [(c, pick_offering(cat, c, profile.batch)) for c in ok_picks]
-    sched = plan_sections(offs, busy_from_registered(cat, profile.current, profile.batch), avoid_hours, compact)
+    sched = plan_sections(offs, busy_from_registered(cat, profile.current, profile.batch, profile.current_sections), avoid_hours, compact)
 
     units = ev["registered_units"] + sum(cat.units(c) or 0 for c in ok_picks)
     warnings = []
@@ -70,8 +70,10 @@ def plan(profile: Profile, cat: Catalog, picks: list[str], avoid_hours: set | No
     if extra > 4:
         warnings.append(f"{extra} electives above requirement; at most 4 extra are allowed (reg 2.08)")
     if ev["unknown_sections"]:
-        warnings.append("Sections of your registered multi-section courses aren't known, so only their exam "
-                        "slots and single-section components were clash-checked.")
+        warnings.append("Sections not given for: " + ", ".join(ev["unknown_sections"][:6]) +
+                        ("..." if len(ev["unknown_sections"]) > 6 else "") +
+                        ". Only exam slots and single-section components of those were clash-checked - "
+                        "add your sections in the profile for a full check.")
 
     return {
         "picks": [{"code": c, "title": cat.title(c), "units": cat.units(c), "filed_as": filed[c],

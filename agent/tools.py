@@ -90,7 +90,7 @@ class Session:
         q = expand(topics or "") or expand(self.profile.interests or "")
         idx = get_index()
         avoid = _hours_to_avoid(no_8am, free_day)
-        busy = busy_from_registered(self.cat, self.profile.current, self.profile.batch) if avoid else None
+        busy = busy_from_registered(self.cat, self.profile.current, self.profile.batch, self.profile.current_sections) if avoid else None
 
         matched, unverified, excluded = [], [], 0
         for code, x in self.eligible.items():

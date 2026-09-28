@@ -130,6 +130,25 @@ with st.sidebar:
     offered = sorted(cat.offerings)
     d["current"] = st.multiselect("Registered this semester", offered,
                                   default=[c for c in d.get("current", []) if c in offered])
+    # which section of each registered course - optional, makes the clash check exact
+    multi = []
+    for code in d["current"]:
+        for o in cat.offerings.get(code, [])[:1]:
+            by = {}
+            for sec in o["sections"]:
+                by.setdefault(sec["type"], []).append(sec["section"])
+            multi += [(code, kind, secs) for kind, secs in by.items() if len(secs) > 1]
+    if multi:
+        with st.expander(f"My sections (optional, {len(multi)} to pick)"):
+            known = d.get("current_sections") or {}
+            new = {}
+            for code, kind, secs in multi:
+                cur = known.get(code, {}).get(kind, "?")
+                v = st.selectbox(f"{code} {kind}", ["?"] + secs, index=(["?"] + secs).index(cur)
+                                 if cur in secs else 0, key=f"sec_{code}_{kind}")
+                if v != "?":
+                    new.setdefault(code, {})[kind] = v
+            d["current_sections"] = new
     with st.expander("LLM (optional)"):
         st.caption("Without a key the agent runs rule-based. Gemini and Groq have free keys. "
                    "The key stays in this browser session only.")
@@ -348,15 +367,17 @@ with tab_plan:
                 by = {}
                 for s in o["sections"]:
                     by.setdefault(s["type"], []).append(s)
-                for secs in by.values():
-                    if len(secs) == 1:
-                        entries.append((code, secs[0]["section"], secs[0]["slots"]))
+                for kind, secs in by.items():
+                    mine = profile.current_sections.get(code, {}).get(kind)
+                    pick = [x for x in secs if x["section"] == mine] or (secs if len(secs) == 1 else [])
+                    if pick:
+                        entries.append((code, pick[0]["section"], pick[0]["slots"]))
         for p in out["picks"]:
             o = cat.offerings[p["code"]][0]
             for s in o["sections"]:
                 if s["section"] in p["sections"].values():
                     entries.append((p["code"], s["section"], s["slots"]))
-        st.markdown("**Week view** (registered courses with a single section + your picks)")
+        st.markdown("**Week view** (registered courses - single-section ones and the sections you gave - plus your picks)")
         st.markdown(week_grid(entries), unsafe_allow_html=True)
 
 

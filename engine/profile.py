@@ -67,6 +67,7 @@ class Profile:
     campus: str = "Pilani"
     completed: list[CourseRecord] = field(default_factory=list)
     current: list[str] = field(default_factory=list)       # registered this semester
+    current_sections: dict = field(default_factory=dict)   # optional {code: {"lecture": "L2", ...}}
     minor: str | None = None
     interests: str = ""
     cgpa: float | None = None
@@ -97,10 +98,10 @@ class Profile:
                    programmes=list(d.get("programmes", [])), campus=d.get("campus", "Pilani"),
                    completed=comp, current=list(d.get("current", [])), minor=d.get("minor"),
                    interests=d.get("interests", ""), cgpa=d.get("cgpa"), name=d.get("name"),
-                   stream=d.get("stream"))
+                   stream=d.get("stream"), current_sections=d.get("current_sections") or {})
 
     def to_dict(self) -> dict:
         return {"id_no": self.id_no, "name": self.name, "batch": self.batch, "programmes": self.programmes,
                 "campus": self.campus, "completed": [{"code": c.code, "grade": c.grade} for c in self.completed],
                 "current": self.current, "minor": self.minor, "interests": self.interests, "cgpa": self.cgpa,
-                "stream": self.stream}
+                "stream": self.stream, "current_sections": self.current_sections}

@@ -43,7 +43,7 @@ The dashboard header shows which mode is active.
 
 Try: load `test: cs_2nd_year` in the sidebar, open **Ask** and type *Suggest DELs related to AI*.
 
-Tests: `pytest -q` (36 tests, engine + agent; both LLM loops are tested with scripted fake clients).
+Tests: `pytest -q` (37 tests, engine + agent; both LLM loops are tested with scripted fake clients).
 
 ### Rebuilding the data from the PDFs
 
@@ -80,7 +80,8 @@ Real answers for all the task's example queries (and more) on several test profi
 - **Sidebar - profile.** Type the BITS ID (`2025A7PS0147P` -> batch 2025, B.E. CS, PS, Pilani; `2024B3A70123P` ->
   dual degree M.Sc. Economics + B.E. CS; `..CS..` in the stream slot -> 2+2 CentraleSupelec). *Pre-fill* fills the
   named courses of the earlier semesters from the programme's semester chart; edit the list, set grades (NC / W / I
-  count as not cleared), add electives already done, pick the courses registered this semester, minor, interests.
+  count as not cleared), add electives already done, pick the courses registered this semester (and, optionally,
+  which section of each - makes the clash check exact), minor, interests.
   Profiles save to `data/profiles/`. The 11 test profiles can be loaded from the same box.
 - **Requirements** - remaining core / DEL / HUEL / OPEL / GIR, minor progress, graduation checklist.
 - **Ask** - chat. Recommendation cards show the requirement filled, eligibility, requested properties
@@ -176,8 +177,8 @@ the planner tab. Also reachable from chat, e.g. *can I take CS F317 and GS F232 
 - Handout extraction is rule-based: 287 of 399 handouts give an evaluation table whose weights add up to ~100%; for the
   rest the app shows the handout's evaluation text instead of numbers. Makeup / attendance labels always come with the
   quoted sentence.
-- For courses a student is already registered in, their section usually isn't known, so only single-section
-  components and exam slots of those courses block time in the clash check.
+- For registered courses whose section the student doesn't enter, only single-section components and exam slots
+  block time in the clash check (the app lists which ones are missing).
 - 3 programmes (ECE, Environmental & Sustainability, BBA) have CDC list vs chart differences in the bulletin itself;
   see `data/processed/verification_queue.csv`.
 

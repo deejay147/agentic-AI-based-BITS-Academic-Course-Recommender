@@ -192,3 +192,17 @@ def test_compact_timetable_never_worse(cat):
     compact = planner.plan(p, cat, picks, compact=True)
     assert compact["clash_free"] and gaps(compact) <= gaps(plain)
     assert compact["gap_hours"] == gaps(compact)
+
+
+def test_known_sections_block_their_hours(cat):
+    from engine.schedule import busy_from_registered
+    p = load("cs_2nd_year")
+    lec = [s for s in cat.offerings["CS F213"][0]["sections"] if s["type"] == "lecture"]
+    assert len(lec) > 1                       # multi-section, so unknown without the student's input
+    without = busy_from_registered(cat, p.current, p.batch)
+    chosen = lec[1]
+    with_sec = busy_from_registered(cat, p.current, p.batch, {"CS F213": {"lecture": chosen["section"]}})
+    slots = {(x["day"], x["hour"]) for x in chosen["slots"]}
+    assert slots <= set(with_sec["slots"]) and not slots <= set(without["slots"])
+    assert "CS F213 (lecture)" in without["unknown_sections"]
+    assert "CS F213 (lecture)" not in with_sec["unknown_sections"]

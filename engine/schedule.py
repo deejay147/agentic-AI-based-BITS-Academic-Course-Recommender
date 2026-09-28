@@ -40,14 +40,22 @@ def _slot_set(section):
     return {(s["day"], s["hour"]) for s in section["slots"]}
 
 
-def busy_from_registered(cat: Catalog, codes: list[str], batch: int) -> dict:
+def busy_from_registered(cat: Catalog, codes: list[str], batch: int, known: dict | None = None) -> dict:
+    """Hours + exam slots taken by registered courses. `known` = {code: {type: section}} for the
+    sections the student told us; otherwise only single-section components are certain."""
     busy, exams, unknown = {}, {"midsem": {}, "compre": {}}, []
+    known = known or {}
     for code in codes:
         off = pick_offering(cat, code, batch)
         if not off:
             continue
         for kind, secs in _by_type(off).items():
-            if len(secs) == 1:
+            mine = known.get(code, {}).get(kind)
+            chosen = [x for x in secs if x["section"] == mine]
+            if chosen:
+                for sl in _slot_set(chosen[0]):
+                    busy[sl] = f"{code} {mine}"
+            elif len(secs) == 1:
                 for sl in _slot_set(secs[0]):
                     busy[sl] = f"{code} {secs[0]['section']}"
             elif len(secs) > 1:

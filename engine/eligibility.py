@@ -96,7 +96,7 @@ def evaluate(profile: Profile, cat: Catalog, state: dict | None = None) -> dict:
             if _level(opts[0]) == 2 and not any(cat.canon(o) in cleared for o in opts):
                 missing_first_cdcs.append(opts[0])
 
-    busy = busy_from_registered(cat, profile.current, profile.batch)
+    busy = busy_from_registered(cat, profile.current, profile.batch, profile.current_sections)
     reg_units = sum(cat.units(c) or 0 for c in profile.current)
     hd_registered = [c for c in profile.current if _level(c) and c.split()[1][0] == "G"]
 
