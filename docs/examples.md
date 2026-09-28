@@ -14,25 +14,25 @@ Registered now: MATH F211, CS F214, CS F222, CS F213, CS F215, HSS F235 · inter
 - Requirement: DEL - in the A7 discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-05 FN1; compre 2026-12-11 FN; sections L1; IC Gopal Singh Phartiyal
-- Why it matches your request: syllabus/description mentions reinforcement learning, ai, intelligent, agents, artificial intelligence
+- Why it matches your request: syllabus/description mentions intelligent, artificial intelligence, ai, agents, reinforcement learning
 
 **2. CS F425 - Deep Learning** (3 units)
 - Requirement: DEL - in the A7 discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-07 FN1; compre 2026-12-08 FN; sections L1, P1; IC Bharat Richhariya
-- Why it matches your request: syllabus/description mentions ai, machine learning, deep learning, neural networks
+- Why it matches your request: syllabus/description mentions neural networks, machine learning, ai, deep learning
 
 **3. BITS F471 - Introduction to Large Language Models** (3 units)
 - Requirement: DEL - in the A7 discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-05 FN1; compre 2026-12-11 FN; sections L1, P1; IC Dhruv Kumar
-- Why it matches your request: syllabus/description mentions reinforcement learning, ai, machine learning, agents
+- Why it matches your request: syllabus/description mentions machine learning, ai, agents, reinforcement learning
 
 **4. CS F317 - Reinforcement Learning** (3 units)
 - Requirement: DEL - in the A7 discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-3 course; normally taken around year 3 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-09 AN1; compre 2026-12-14 FN; sections L1; IC Prashant Trivedi
-- Why it matches your request: syllabus/description mentions reinforcement learning, machine learning, agents
+- Why it matches your request: syllabus/description mentions machine learning, agents, reinforcement learning
 
 **5. BITS F364 - Human Computer Interaction** (3 units)
 - Requirement: DEL - in the A7 discipline elective pool (could also count as OPEL)
@@ -85,11 +85,13 @@ No eligible course matches all of that.
 
 **Looking for:** OPEL, about 'finance economics'
 
+Fewer direct matches than I'd like, so I've also added related courses (🔭), found through words typical of 'finance economics' courses: risks, values, security, assets, accountability, return.
+
 **1. BITS F468 - New Venture Creation** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: sections L1; IC Jyoti
-- Why it matches your request: syllabus/description mentions economic, finance, market
+- Why it matches your request: syllabus/description mentions market, finance, economic
 
 **2. CS F317 - Reinforcement Learning** (3 units)
 - Requirement: OPEL - you asked for OPEL; it's also in your DEL pool, so it can be filed either way (reg 2.05)
@@ -101,19 +103,25 @@ No eligible course matches all of that.
 - Requirement: OPEL - you asked for OPEL; it's also in your HUEL pool, so it can be filed either way (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - Timetable: midsem 2026-10-07 AN1; compre 2026-12-10 FN; sections L1; IC Sangeeta Sharma
-- Why it matches your request: syllabus/description mentions economic, market
+- Why it matches your request: syllabus/description mentions market, economic
 
 **4. GS F313 - Marxian Thoughts** (3 units)
 - Requirement: OPEL - you asked for OPEL; it's also in your HUEL pool, so it can be filed either way (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-3 course; normally taken around year 3 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-06 FN1; compre 2026-12-05 FN; sections L1; IC Paul Mathew
-- Why it matches your request: syllabus/description mentions economic, market
+- Why it matches your request: syllabus/description mentions market, economic
 
 **5. GS F344 - Copywriting** (2 units)
 - Requirement: OPEL - you asked for OPEL; it's also in your HUEL pool, so it can be filed either way (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-3 course; normally taken around year 3 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-09 AN1; compre 2026-12-14 FN; sections L1; IC Gajendra Singh Chauhan
 - Why it matches your request: syllabus/description mentions market
+
+**6. BITS F364 - Human Computer Interaction** (3 units) 🔭 related
+- Requirement: OPEL - you asked for OPEL; it's also in your DEL pool, so it can be filed either way (reg 2.05)
+- Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-3 course; normally taken around year 3 (bulletin VI-1, pt 5) (Bulletin VI-1)
+- Timetable: midsem 2026-10-09 FN1; compre 2026-12-13 FN; sections L1; IC Siddharth Mehrotra
+- Why it matches your request: syllabus/description mentions accountability, risks, values, security
 
 **Matches your topic, but not open to you this semester:**
 
@@ -129,7 +137,7 @@ No eligible course matches all of that.
 
 Total this semester: 26 units. Clash-free.
 - Note: 26 units in total, more than the 25 allowed per semester (reg 1.01)
-- Note: Sections of your registered multi-section courses aren't known, so only their exam slots and single-section components were clash-checked.
+- Note: Sections not given for: MATH F211 (lecture), MATH F211 (tutorial), CS F214 (lecture), CS F214 (tutorial), CS F222 (lecture), CS F222 (tutorial).... Only exam slots and single-section components of those were clash-checked - add your sections in the profile for a full check.
 
 ### Q: what are my remaining requirements?
 
@@ -174,14 +182,14 @@ No eligible course matches all of that.
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - No attendance requirement: yes - "Attendance Policy Attendance is not mandatory. However, students are strongly encouraged to attend lectures, actively engage in class discussions, and benefit f"
 - Timetable: midsem 2026-10-06 AN1; compre 2026-12-07 FN; sections L1; IC Yogesh Singh
-- Why it matches your interests: syllabus/description mentions sensor, signal processing, signal, systems, real time, processes
+- Why it matches your interests: syllabus/description mentions processes, systems, real time, signal processing, sensor, signal
 
 **2. BITS F364 - Human Computer Interaction** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - No attendance requirement: yes - "Attendance Policy: Not mandatory but strongly recommended. 11."
 - Timetable: midsem 2026-10-09 FN1; compre 2026-12-13 FN; sections L1; IC Siddharth Mehrotra
-- Why it matches your interests: syllabus/description mentions systems, processes
+- Why it matches your interests: syllabus/description mentions processes, systems
 
 **Could not verify** the requested property for: EEE F411 (No specific information mentioned in the handout; contact the Instructor-in-Charge (Vinay Chamola).); EEE F314 (No specific information mentioned in the handout; contact the Instructor-in-Charge (Govind Prasad).); EEE F346 (Handout mentions attendance but doesn't say whether it is required: "Attendance Policy: In compliance with the institute)
 
@@ -191,7 +199,9 @@ No eligible course matches all of that.
 
 **Looking for:** about 'vlsi'
 
-**1. EEE F313 - Analog & Digital VLSI Design** (3 units)
+Fewer direct matches than I'd like, so I've also added related courses (🔭), found through words typical of 'vlsi' courses: circuits, vlsi design, amplifiers, digital, digital vlsi, logical.
+
+**1. INSTR F313 - Analog & Digital VLSI Design** (3 units)
 - Requirement: DEL - in the AA discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - Timetable: midsem 2026-10-10 FN1; compre 2026-12-15 FN; sections L1, T1; IC Anu Gupta
@@ -203,11 +213,23 @@ No eligible course matches all of that.
 - Timetable: midsem 2026-10-07 FN2; compre 2026-12-08 AN; sections L1, T1, P1; IC Saurabh Gandhi
 - Why it matches your request: syllabus/description mentions digital design, integrated circuits
 
-**Matches your topic, but not open to you this semester:**
+**3. EEE F314 - FPGA Based System Design** (4 units) 🔭 related
+- Requirement: OPEL - counts as an open elective (reg 2.05)
+- Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
+- Timetable: midsem 2026-10-09 AN2; compre 2026-12-14 AN; sections L1, P1; IC Govind Prasad
+- Why it matches your request: syllabus/description mentions logical, circuits, clock, design digital, digital, sequential
 
-- MEL G623 - Advanced VLSI Design: higher degree course of another discipline (Timetable V(A) / Reg 3.15(b)(ii))
-- MEL G528 - Digital VLSI Design: higher degree course of another discipline (Timetable V(A) / Reg 3.15(b)(ii))
-- EEE F244 - Microelectronic Circuits: every lecture section clashes with ECE F314 L1 (Reg 3.19)
+**4. INSTR F311 - Electronic Instrumentation & Instrumentation Technology** (4 units) 🔭 related
+- Requirement: OPEL - counts as an open elective (reg 2.05)
+- Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
+- Timetable: midsem 2026-10-08 FN1; compre 2026-12-01 FN; sections L1, P1; IC Yenuganti Sujan
+- Why it matches your request: syllabus/description mentions logical, circuits, analogies, digital
+
+**5. MF F315 - Automation and Control** (4 units) 🔭 related
+- Requirement: OPEL - counts as an open elective (reg 2.05)
+- Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
+- Timetable: midsem 2026-10-10 FN1; compre 2026-12-15 FN; sections L1, T1, P1; IC Prateek Kala
+- Why it matches your request: syllabus/description mentions logical, circuits, analogies, digital
 
 ## B.E. Chemical, 3-1, NC in Thermodynamics - `2024A1PS0031P`
 
@@ -232,6 +254,7 @@ Registered now: CHE F312, CHE F313, CHE F311, CHE F314 · interests: *energy, pr
 **CHE F213 - Chemical Engineering Thermodynamics** (3 units)
 - You can take it this semester; it fills **CDC**.
 - Prerequisites: No prerequisites required (none listed in the supplied bulletin).
+- Evaluation: Tutorial Test* 20%, Mid Semester Test 30%, Comprehensive Exam 40%, Continuous evaluation 10%
 - Makeup: 10. Make-up Policy: Make-up will be granted for genuine cases only (No make-up for tutorial tests). 11. NC criterion: 20% of total marks to score grade, else NC will be awarded. Instructor-in-Charge (Course No. CHE F213) 6
 - Attendance: No specific information mentioned in the handout; contact the Instructor-in-Charge (Mohit Garg).
 - Midsem 2026-10-08 AN1; compre 2026-12-12
@@ -263,13 +286,13 @@ Registered now: EEE F311, MATH F212, EEE F313 · interests: *data science, machi
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - Timetable: midsem 2026-10-05 AN1; compre 2026-12-03 FN; sections L1, P1; IC Madhurjya Dev
-- Why it matches your request: syllabus/description mentions statistics, mining, science, data, analytical
+- Why it matches your request: syllabus/description mentions science, statistics, mining, analytical, data
 
 **2. CS F415 - Data Mining** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-09 AN1; compre 2026-12-14 FN; sections L1, P1; IC Yashvardhan Sharma
-- Why it matches your request: syllabus/description mentions statistics, mining, data, analytical
+- Why it matches your request: syllabus/description mentions statistics, mining, analytical, data
 
 **3. CS F469 - Information Retrieval** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
@@ -281,13 +304,13 @@ Registered now: EEE F311, MATH F212, EEE F313 · interests: *data science, machi
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-07 FN1; compre 2026-12-08 FN; sections L1; IC Sumanta Pasari
-- Why it matches your request: syllabus/description mentions statistics, science, data, analytical
+- Why it matches your request: syllabus/description mentions science, statistics, analytical, data
 
 **5. BITS F327 - Artificial Intelligence for Robotics** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - Timetable: midsem 2026-10-06 AN1; compre 2026-12-07 FN; sections L1; IC Yogesh Singh
-- Why it matches your request: syllabus/description mentions statistics, science, data, analytical
+- Why it matches your request: syllabus/description mentions science, statistics, analytical, data
 
 ## B.E. Civil, 4-1 (2023 batch) - `2023A2PS0099P`
 
@@ -303,13 +326,13 @@ Registered now: nothing · interests: *structures, GIS, sustainability*
 - Requirement: DEL - in the A2 discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - Timetable: midsem 2026-10-09 FN1; compre 2026-12-13 FN; sections L1; IC Rajiv Gupta
-- Why it matches your request: syllabus/description mentions machine learning, intelligent, agents, artificial intelligence, engineering, artificial
+- Why it matches your request: syllabus/description mentions intelligent, intelligence, neural networks, machine learning, artificial intelligence, agents
 
 **2. CE F331 - In-situ Testing Methods in Geotechnical** (3 units)
 - Requirement: DEL - in the A2 discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - Timetable: midsem 2026-10-10 AN1; compre 2026-12-16 FN; sections L1; IC Sayantan Chakraborty
-- Why it matches your request: syllabus/description mentions geotechnical, engineering, geotechnical engineering
+- Why it matches your request: syllabus/description mentions geotechnical engineering, geotechnical, engineering
 
 ### Q: DELs related to sustainability
 

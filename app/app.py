@@ -32,7 +32,7 @@ from agent.agent import Recommender, PROP_LABELS                      # noqa: E4
 from agent.retrieval import handout_summary                           # noqa: E402
 from engine.catalog import get_catalog                                # noqa: E402
 from engine.profile import Profile, parse_id, CURRICULUM_BATCH        # noqa: E402
-from ingest.timetable import HOUR_TIMES                               # noqa: E402
+from ingest.timetable import COMPRE_SESSIONS, HOUR_TIMES, MIDSEM_SESSIONS  # noqa: E402
 from engine.chart import due_by, named_in, named_until                # noqa: E402
 
 PROFILE_DIR = ROOT / "data" / "profiles"
@@ -57,10 +57,17 @@ NOW = ("#a5b4fc", "rgba(99,102,241,.22)")
 LEFT = ("#fca5a5", "rgba(239,68,68,.16)")
 INFO = ("#c7d2fe", "rgba(129,140,248,.20)")
 GREY = ("#cbd5e1", "rgba(148,163,184,.16)")
-# fills for courses in the week grid
-COURSE_FILLS = ["rgba(59,130,246,.35)", "rgba(139,92,246,.38)", "rgba(20,184,166,.35)", "rgba(245,158,11,.32)",
-                "rgba(236,72,153,.32)", "rgba(14,165,233,.35)", "rgba(34,197,94,.32)", "rgba(249,115,22,.32)"]
-REG_FILL = "rgba(148,163,184,.22)"
+# one colour per course in the timetable + exam calendar: (solid, translucent fill)
+_HUES = ["#3b82f6", "#a855f7", "#14b8a6", "#f59e0b", "#ec4899", "#0ea5e9", "#22c55e", "#f97316", "#84cc16",
+         "#d946ef", "#06b6d4", "#f43f5e", "#eab308", "#6366f1"]
+
+
+def _fill(hex_, a=.36):
+    r, g, b = (int(hex_[i:i + 2], 16) for i in (1, 3, 5))
+    return f"rgba({r},{g},{b},{a})"
+
+
+COURSE_COLORS = [(h, _fill(h)) for h in _HUES]
 
 QUICK_QUESTIONS = [
     ("🤖 AI-related DELs", "Suggest DELs related to AI."),
@@ -134,6 +141,16 @@ table.week th {background: #161e42; padding: 7px; border-radius: 7px; color: #c7
 table.week td {padding: 6px; border-radius: 7px; vertical-align: top; background: rgba(22,30,66,.45); height: 30px;}
 table.week td.time {background: none; color: #9aa3cf; white-space: nowrap; font-size: .74rem;}
 table.week td.clash {background: rgba(239,68,68,.55) !important; font-weight: 700;}
+.calmonth {font-weight: 700; color: #c4b5fd; margin: 14px 0 6px 0; font-size: 1rem;}
+table.excal {width: 100%; border-collapse: separate; border-spacing: 4px; table-layout: fixed;}
+table.excal th {background: #161e42; color: #c7cdf5; padding: 6px; border-radius: 7px; font-size: .78rem;}
+table.excal td {background: rgba(22,30,66,.45); border-radius: 9px; vertical-align: top; height: 92px; padding: 5px;}
+table.excal td.other {opacity: .35;}
+table.excal td.busy {box-shadow: inset 0 0 0 1px rgba(167,139,250,.5);}
+table.excal td.busy2 {box-shadow: inset 0 0 0 2px #eab308;}
+table.excal .dnum {font-size: .78rem; color: #9aa3cf; font-weight: 700; margin-bottom: 3px;}
+.exchip {border-radius: 6px; padding: 3px 5px; margin-bottom: 3px; font-size: .72rem; color: #eef0ff; line-height: 1.25;}
+.exchip span {color: #d7dbff; font-size: .68rem;}
 .legend span {display: inline-block; padding: 3px 9px; border-radius: 7px; margin: 0 6px 5px 0; font-size: .78rem; color: #eef0ff;}
 div[data-testid="stVerticalBlockBorderWrapper"] {background: rgba(16,22,50,.55); border-radius: 14px;}
 div[data-testid="stSidebar"] .stButton button {border-radius: 10px;}
@@ -499,6 +516,10 @@ def render_card(r):
                    if len(r["can_count_as"]) > 1 else "")
                 + (badge(f"IC: {r['ic']}", *GREY) if r.get("ic") else ""))
         st.markdown(head, unsafe_allow_html=True)
+        if r.get("related"):
+            st.markdown(badge(f"🔭 Related to '{r.get('related_to')}'", "#a5f3fc", "rgba(34,211,238,.16)")
+                        + "<span class='muted'>no direct mention; shares words with courses on that topic</span>",
+                        unsafe_allow_html=True)
         if r.get("agent_reason"):
             st.markdown(f"💡 _{r['agent_reason']}_")
         why = r["why_category"] if shown == r["fills"] else \
@@ -592,10 +613,15 @@ with tab_ask:
                     if cats[0] in r["can_count_as"]:
                         r["shown_as"] = cats[0]
             n = len(res["results"])
-            st.markdown(f"<div class='banner {'ok' if n else 'bad'}'>{n} course(s) match everything you picked"
+            st.markdown(f"<div class='banner {'ok' if n else 'bad'}'>{n} course(s) match everything you picked directly"
                         + (f" · {res['total_matches']} in total" if res['total_matches'] > n else "") + "</div>",
                         unsafe_allow_html=True)
             render_cards(res["results"])
+            rel = res.get("related") or {}
+            if rel.get("results"):
+                st.markdown(f"<div class='banner info'>🔭 Related courses, found through words typical of "
+                            f"'{esc(gtopic)}' courses: {esc(', '.join(rel['terms'][:6]))}</div>", unsafe_allow_html=True)
+                render_cards(rel["results"])
             if res["could_not_verify"]:
                 with st.container(border=True):
                     st.markdown("**❔ Might fit, but the handout doesn't say**")
@@ -638,16 +664,18 @@ with tab_ask:
 
 
 # --------------------------------------------------------------------------- plan
-def week_grid(entries, registered):
-    """entries: [(code, section, slots)] -> coloured html table, days x hours"""
-    colours, i = {}, 0
-    for code, _, _ in entries:
-        if code not in colours:
-            if code in registered:
-                colours[code] = REG_FILL
-            else:
-                colours[code] = COURSE_FILLS[i % len(COURSE_FILLS)]
-                i += 1
+def course_colours(codes):
+    """stable colour per course, in plan order"""
+    out = {}
+    for c in codes:
+        if c not in out:
+            out[c] = COURSE_COLORS[len(out) % len(COURSE_COLORS)]
+    return out
+
+
+def week_grid(entries, registered, colours):
+    """entries: [(code, section, slots)] -> html table, days x hours; every course its own colour,
+    registered courses with a dashed outline, overlaps in red"""
     grid = {}
     for code, sec, slots in entries:
         for sl in slots:
@@ -659,17 +687,55 @@ def week_grid(entries, registered):
         for d in DAYS:
             v = grid.get((d, h), [])
             if len(v) > 1:
-                cells.append("<td class='clash'>" + "<br>".join(f"{esc(c)} {esc(s)}" for c, s in v) + "</td>")
+                cells.append("<td class='clash'>⚠️ " + "<br>".join(f"{esc(c)} {esc(s)}" for c, s in v) + "</td>")
             elif v:
                 c, s = v[0]
-                cells.append(f"<td style='background:{colours[c]}'><b>{esc(c)}</b> {esc(s)}</td>")
+                solid, fill = colours.get(c, COURSE_COLORS[0])
+                border = f"1px dashed {solid}" if c in registered else f"1px solid {solid}"
+                cells.append(f"<td style='background:{fill};border:{border}'><b>{esc(c)}</b> {esc(s)}</td>")
             else:
                 cells.append("<td></td>")
         rows.append(f"<tr><td class='time'>{esc(HOUR_LABELS.get(h, f'slot {h}'))}</td>{''.join(cells)}</tr>")
-    legend = "".join(f"<span style='background:{col}'>{esc(c)}{' (registered)' if c in registered else ''}</span>"
-                     for c, col in colours.items())
-    return (f"<div class='legend'>{legend}<span style='background:rgba(239,68,68,.55)'>clash</span></div>"
+    shown = [c for c in colours if any(e[0] == c for e in entries)]
+    legend = "".join(f"<span style='background:{colours[c][1]};border:1px {'dashed' if c in registered else 'solid'} "
+                     f"{colours[c][0]}'>{esc(c)}</span>" for c in shown)
+    return (f"<div class='legend'>{legend}<span style='background:rgba(239,68,68,.55)'>⚠️ clash</span>"
+            f"<span class='muted' style='background:none'>dashed = already registered</span></div>"
             f"<table class='week'>{''.join(rows)}</table>")
+
+
+def exam_calendar(exam_rows, colours):
+    """month-style calendar(s) of the midsem and compre dates, only the weeks that have exams"""
+    import calendar as _cal
+    from datetime import date
+    by_day = {}
+    for r in exam_rows:
+        by_day.setdefault(r["date"], []).append(r)
+    if not by_day:
+        return "<div class='muted'>No exam slots listed for these courses.</div>"
+    days = sorted(date.fromisoformat(d) for d in by_day)
+    html_ = []
+    cal = _cal.Calendar(firstweekday=0)
+    for (y, m) in sorted({(d.year, d.month) for d in days}):
+        weeks = [w for w in cal.monthdatescalendar(y, m) if any(x.isoformat() in by_day and x.month == m for x in w)]
+        head = "".join(f"<th>{d}</th>" for d in ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"])
+        body = []
+        for w in weeks:
+            tds = []
+            for x in w:
+                ex = by_day.get(x.isoformat(), []) if x.month == m else []
+                chips = "".join(
+                    f"<div class='exchip' style='background:{colours.get(e['code'], COURSE_COLORS[0])[1]};"
+                    f"border-left:3px solid {colours.get(e['code'], COURSE_COLORS[0])[0]}'>"
+                    f"<b>{esc(e['code'])}</b><br><span>{esc(e['exam'])} · {esc(e['session'])} {esc(e['time'])}</span></div>"
+                    for e in sorted(ex, key=lambda e: e["session"]))
+                cls = "busy2" if len(ex) > 1 else ("busy" if ex else "")
+                cls += " other" if x.month != m else ""
+                tds.append(f"<td class='{cls}'><div class='dnum'>{x.day}</div>{chips}</td>")
+            body.append("<tr>" + "".join(tds) + "</tr>")
+        html_.append(f"<div class='calmonth'>{_cal.month_name[m]} {y}</div>"
+                     f"<table class='excal'><tr>{head}</tr>{''.join(body)}</table>")
+    return "".join(html_)
 
 
 TYPE_SHORT = {"lecture": "L", "tutorial": "T", "practical": "P"}
@@ -734,10 +800,17 @@ with tab_plan:
     sched_reg = t2.toggle("🗓️ Pick sections for my registered courses too", value=True,
                           help="Chooses clash-free sections for everything you're registered in, keeping any "
                                "section you gave in the sidebar. Off = only the hours we know for sure are blocked.")
-    picks = st.multiselect("➕ Courses to add this semester", sorted(sess.eligible),
-                           default=core_due if autofill else [],
-                           format_func=lambda c: f"{course_label(c)}  [{sess.eligible[c]['category']}]",
-                           placeholder="Start typing a course code or title...",
+    # any course in the timetable you haven't done / registered - ones you're not allowed to take are still
+    # placed (so you can see clashes) and flagged with the rule that blocks them
+    choosable = sorted(set(sess.eligible) | set(sess.ineligible))
+
+    def pick_label(c):
+        if c in sess.eligible:
+            return f"{course_label(c)}  [{sess.eligible[c]['category']}]"
+        return f"{course_label(c)}  [🚫 not allowed]"
+    picks = st.multiselect("➕ Add any course to your semester", choosable,
+                           default=core_due if autofill else [], format_func=pick_label,
+                           placeholder="Type a course code or title, e.g. CS F317 or psychology...",
                            key=f"plan_{profile.id_no}_{autofill}")
     if autofill:
         st.caption(("📌 Auto-filled: " + ", ".join(core_due)) if core_due else
@@ -754,9 +827,6 @@ with tab_plan:
         p1, p2 = st.columns([1, 3])
         p1.markdown("Earliest class<br><span class='muted'>skip 8 AM classes</span>", unsafe_allow_html=True)
         no8 = p2.toggle("No 8 AM classes", key="pref_no8")
-        p1, p2 = st.columns([1, 3])
-        p1.markdown("Compact<br><span class='muted'>fewest free hours between classes</span>", unsafe_allow_html=True)
-        compact = p2.toggle("Compact timetable", key="pref_compact")
 
     plan_codes = list(picks) + (list(profile.current) if sched_reg else [])
     # sections the student would accept, from the per-course pickers below (kept in session state)
@@ -771,46 +841,77 @@ with tab_plan:
         st.markdown("<div class='banner info'>👆 Add one or more courses to see how they fit.</div>",
                     unsafe_allow_html=True)
     else:
-        out = sess.check_plan(picks, no8, free, compact, sched_reg, allowed)
+        cache_key = json.dumps([picks, no8, free, sched_reg, allowed, profile.current, profile.current_sections,
+                                profile.id_no], sort_keys=True, default=str)
+        if st.session_state.get("plan_cache_key") != cache_key:
+            st.session_state.plan_cache = sess.check_plan(picks, no8, free, False, sched_reg, allowed,
+                                                          include_ineligible=True, options=30)
+            st.session_state.plan_cache_key = cache_key
+            st.session_state.tt_opt = 1
+        out = st.session_state.plan_cache
+
+        # ---- which timetable option is shown
+        opts = out.get("options") or []
+        if opts:
+            opt_i = min(st.session_state.get("tt_opt", 1), len(opts))
+            chosen_secs = opts[opt_i - 1]["sections"]
+        else:
+            opt_i, chosen_secs = 0, {}
+
+        def secs_of(code, default):
+            return chosen_secs.get(code) or default
+
         problems = []
         if out["total_units"] > 25:
             problems.append(f"over the 25-unit cap by {out['total_units'] - 25}")
-        if not out["clash_free"]:
-            problems.append("; ".join(out["clash_problems"]))
-        if out["rejected"]:
-            problems.append(f"{len(out['rejected'])} course(s) not allowed")
+        for d_ in out["clash_details"]:
+            problems.append(f"{d_['code']} clashes" + (f" with {', '.join(d_['with'])}" if d_["with"] else ""))
+        n_blocked = sum(1 for p in out["picks"] if p.get("not_allowed"))
+        if n_blocked:
+            problems.append(f"{n_blocked} course(s) you're not allowed to take")
+        for r in out["rejected"]:
+            problems.append(f"{r['code']} can't be added")
         ok = not problems
 
-        # same-day exams (different sessions - same session would already be a clash)
+        # exams + same-day check (different sessions; the same session would already be a clash)
+        order = [p["code"] for p in out["picks"]] + [r["code"] for r in out.get("registered", [])]
+        colours = course_colours(order)
         exam_rows = []
-        for code in [p["code"] for p in out["picks"]] + [r["code"] for r in out.get("registered", [])]:
+        for code in order:
             o = cat.offerings[code][0]
-            for kind, dkey, skey in (("Midsem", "midsem_date", "midsem_session"), ("Compre", "compre_date", "compre_session")):
+            for kind, dkey, skey, times in (("Midsem", "midsem_date", "midsem_session", MIDSEM_SESSIONS),
+                                            ("Compre", "compre_date", "compre_session", COMPRE_SESSIONS)):
                 if o.get(dkey):
-                    exam_rows.append({"date": o[dkey], "session": o[skey], "exam": kind, "code": code})
+                    exam_rows.append({"date": o[dkey], "session": o[skey], "time": times.get(o[skey], ""),
+                                      "exam": kind, "code": code})
         same_day = {}
         for r in exam_rows:
-            same_day.setdefault((r["exam"], r["date"]), []).append(r["code"])
+            same_day.setdefault(r["date"], []).append(r["code"])
         same_day_codes = {c for v in same_day.values() if len(v) > 1 for c in v}
 
-        n_courses = len(out["picks"]) + len(out.get("registered", []))
         sc = st.columns(4)
-        sc[0].markdown(stat_tile("Courses", n_courses, f"{len(out['picks'])} added", "#8b7bff"), unsafe_allow_html=True)
+        sc[0].markdown(stat_tile("Courses", len(order), f"{len(out['picks'])} added", "#8b7bff"), unsafe_allow_html=True)
         sc[1].markdown(stat_tile("Units", f"{out['total_units']} / 25", "cap per semester",
                                  "#22c55e" if out["total_units"] <= 25 else "#ef4444"), unsafe_allow_html=True)
-        sc[2].markdown(stat_tile("Timetable", "Clash-free" if out["clash_free"] else "Clash",
-                                 "all sections fit" if out["clash_free"] else "see below",
-                                 "#22c55e" if out["clash_free"] else "#ef4444"), unsafe_allow_html=True)
+        sc[2].markdown(stat_tile("Timetable", "Clash-free" if not out["clash_details"] else "Clash",
+                                 f"{len(opts)} options to browse" if opts else "no clash-free option",
+                                 "#22c55e" if not out["clash_details"] else "#ef4444"), unsafe_allow_html=True)
         sc[3].markdown(stat_tile("Same-day exams", len([k for k, v in same_day.items() if len(v) > 1]),
                                  "days with 2+ exams", "#eab308" if same_day_codes else "#22c55e"),
                        unsafe_allow_html=True)
         msg = (f"✅ This plan works · {out['total_units']} / 25 units · clash-free" if ok else
                f"⚠️ {out['total_units']} / 25 units · " + " · ".join(problems))
         st.markdown(f"<div class='banner {'ok' if ok else 'bad'}'>{esc(msg)}</div>", unsafe_allow_html=True)
+        for d_ in out["clash_details"]:
+            st.error(f"**{d_['code']}** doesn't fit" + (f": it clashes with **{', '.join(d_['with'])}**" if d_["with"] else "")
+                     + (" - " + "; ".join(d_["problems"]) if d_["problems"] else "")
+                     + ". It's drawn in red below; try other sections (🎛️) or another course.", icon="⛔")
+        for r in out["rejected"]:
+            st.error(f"**{r['code']}** can't be added: {'; '.join(r['reasons'])}", icon="🚫")
 
         unl = unlocks_map()
 
-        def plan_card(col, code, title, units_, tag_html, chosen):
+        def plan_card(col, code, title, units_, tag_html, chosen, fits=True, blocked=None):
             o = cat.offerings[code][0]
             by = {}
             for s_ in o["sections"]:
@@ -819,13 +920,18 @@ with tab_plan:
             restricted = allowed.get(code)
             pre = (cat.courses.get(code) or {}).get("prerequisite_codes") or []
             opens = unl.get(cat.canon(code), [])[:3]
+            solid = colours.get(code, COURSE_COLORS[0])[0]
             with col.container(border=True):
                 st.markdown(
-                    f"<div class='ctitle'><span class='code'>{esc(code)}</span></div>"
+                    f"<div class='ctitle'><span style='color:{solid}'>●</span> <span class='code'>{esc(code)}</span></div>"
                     f"<div class='muted' style='margin-bottom:6px'>{esc(title)}</div>"
                     + tag_html + badge(f"{units_} units")
+                    + ("" if fits else badge("⛔ Clashes", "#fca5a5", "rgba(239,68,68,.22)"))
+                    + (badge("🚫 Not allowed", "#fca5a5", "rgba(239,68,68,.16)") if blocked else "")
                     + (badge("⚠️ Same-day exam", "#fcd34d", "rgba(234,179,8,.18)") if code in same_day_codes else "")
                     + (badge("📄 Handout", *GREY) if cat.handout(code) else badge("no handout", *GREY))
+                    + (f"<div class='muted' style='margin-top:4px;color:#fca5a5'>{esc('; '.join(blocked))}</div>"
+                       if blocked else "")
                     + f"<div class='muted' style='margin-top:4px'>{esc(counts)} · "
                     + ("<b>your picks only</b>" if restricted else "all allowed") + "</div>"
                     + (f"<div class='muted'>needs {esc(', '.join(pre))}</div>" if pre else "")
@@ -845,36 +951,29 @@ with tab_plan:
                     st.markdown("".join(f"<div class='checkrow na'><b>{a}</b><span class='d'>{esc(b)}</span></div>"
                                         for a, b in rows_), unsafe_allow_html=True)
 
-        if out["picks"]:
-            st.markdown("#### ➕ Adding")
-            cols = st.columns(3)
-            for i, p in enumerate(out["picks"]):
-                plan_card(cols[i % 3], p["code"], p["title"], p["units"],
-                          cat_badge(p["filed_as"], f"Filed as {p['filed_as']}"), p["sections"])
-        if out.get("registered"):
-            st.markdown("#### 📚 Already registered")
-            cols = st.columns(3)
-            for i, r in enumerate(out["registered"]):
-                given = profile.current_sections.get(r["code"], {})
-                plan_card(cols[i % 3], r["code"], r["title"], r["units"],
-                          badge("your section" if given else "registered", *GREY), r["sections"])
-        for r in out["rejected"]:
-            st.error(f"**{r['code']}** can't be added: {'; '.join(r['reasons'])}", icon="🚫")
-        for w in out["warnings"]:
-            if "allowed per semester" not in w:      # the unit cap is already in the banner above
-                st.warning(w, icon="⚠️")
-        if out.get("gap_hours") is not None:
-            st.caption(f"Compact pick: {out['gap_hours']} idle hours between classes across {out['days_used']} days.")
-
-        # week view entries
+        # ---- timetable browser + week grid (first, it's the main thing)
+        st.markdown("#### 🗓️ Your week")
+        if len(opts) > 1:
+            b1, b2, b3 = st.columns([1, 4, 1])
+            if b1.button("◀ Previous", width="stretch", disabled=opt_i <= 1):
+                st.session_state.tt_opt = opt_i - 1
+                st.rerun()
+            b2.markdown(f"<div class='banner info' style='text-align:center;margin:0'>Timetable option "
+                        f"<b>{opt_i}</b> of <b>{len(opts)}</b> · {opts[opt_i - 1]['gap_hours']} free hours between "
+                        f"classes · {opts[opt_i - 1]['days_used']} days on campus"
+                        + (" · 🏆 fewest gaps" if opt_i == 1 else "") + "</div>", unsafe_allow_html=True)
+            if b3.button("Next ▶", width="stretch", disabled=opt_i >= len(opts)):
+                st.session_state.tt_opt = opt_i + 1
+                st.rerun()
+            st.caption("Options differ in sections only (same courses), best first. Fix a section with 🎛️ "
+                       "Choose sections to narrow them down.")
         entries = []
-        if sched_reg:
-            for r in out.get("registered", []):
-                o = cat.offerings[r["code"]][0]
-                for s_ in o["sections"]:
-                    if r["sections"].get(s_["type"]) == s_["section"]:
-                        entries.append((r["code"], s_["section"], s_["slots"]))
-        else:
+        for r in out.get("registered", []) if sched_reg else []:
+            o = cat.offerings[r["code"]][0]
+            mine = secs_of(r["code"], r["sections"])
+            entries += [(r["code"], s_["section"], s_["slots"]) for s_ in o["sections"]
+                        if mine.get(s_["type"]) == s_["section"]]
+        if not sched_reg:
             for code in profile.current:
                 for o in cat.offerings.get(code, [])[:1]:
                     by = {}
@@ -882,31 +981,45 @@ with tab_plan:
                         by.setdefault(s_["type"], []).append(s_)
                     for kind, secs in by.items():
                         mine = profile.current_sections.get(code, {}).get(kind)
-                        pick = [x for x in secs if x["section"] == mine] or (secs if len(secs) == 1 else [])
-                        if pick:
-                            entries.append((code, pick[0]["section"], pick[0]["slots"]))
+                        pk = [x for x in secs if x["section"] == mine] or (secs if len(secs) == 1 else [])
+                        if pk:
+                            entries.append((code, pk[0]["section"], pk[0]["slots"]))
         for p in out["picks"]:
             o = cat.offerings[p["code"]][0]
-            for s_ in o["sections"]:
-                if p["sections"].get(s_["type"]) == s_["section"]:
-                    entries.append((p["code"], s_["section"], s_["slots"]))
+            mine = secs_of(p["code"], p["sections"])
+            entries += [(p["code"], s_["section"], s_["slots"]) for s_ in o["sections"]
+                        if mine.get(s_["type"]) == s_["section"]]
+        st.markdown(week_grid(entries, set(profile.current), colours), unsafe_allow_html=True)
 
-        w1, w2, w3 = st.tabs(["🗓️ Week", "📝 Exam calendar", "⬇️ Download"])
-        with w1:
-            st.markdown(week_grid(entries, set(profile.current)), unsafe_allow_html=True)
-            st.caption("Grey = courses you're registered in. Colours = courses you're adding. Red = clash.")
-        with w2:
-            if exam_rows:
-                ex = pd.DataFrame(sorted(exam_rows, key=lambda r: (r["date"], r["session"])))
-                ex["title"] = ex["code"].map(lambda c: cat.title(c) or "")
-                ex["note"] = [("⚠️ same day as " + ", ".join(x for x in same_day[(r.exam, r.date)] if x != r.code))
-                              if len(same_day[(r.exam, r.date)]) > 1 else "" for r in ex.itertuples()]
-                st.dataframe(ex[["date", "session", "exam", "code", "title", "note"]], hide_index=True,
-                             width="stretch")
-                st.caption("Sessions: FN1 09:00, FN2 11:00, AN1 14:00, AN2 16:00 (midsem) · FN 09:00, AN 14:00 (compre)")
-            else:
-                st.info("No exam slots listed for these courses.")
-        with w3:
+        # ---- course cards
+        if out["picks"]:
+            st.markdown("#### ➕ Adding")
+            cols = st.columns(3)
+            for i, p in enumerate(out["picks"]):
+                tag = cat_badge(p["filed_as"], f"Filed as {p['filed_as']}") if not p.get("not_allowed") else ""
+                plan_card(cols[i % 3], p["code"], p["title"], p["units"], tag, secs_of(p["code"], p["sections"]),
+                          p.get("fits", True), p.get("not_allowed"))
+        if out.get("registered"):
+            st.markdown("#### 📚 Already registered")
+            cols = st.columns(3)
+            for i, r in enumerate(out["registered"]):
+                given = profile.current_sections.get(r["code"], {})
+                plan_card(cols[i % 3], r["code"], r["title"], r["units"],
+                          badge("your section" if given else "registered", *GREY), secs_of(r["code"], r["sections"]))
+        for w in out["warnings"]:
+            if "allowed per semester" not in w:      # the unit cap is already in the banner above
+                st.warning(w, icon="⚠️")
+
+        # ---- exam calendar
+        st.markdown("#### 📅 Exam calendar")
+        if same_day_codes:
+            st.markdown(f"<div class='banner bad'>⚠️ Two exams on the same day: "
+                        + esc(" · ".join(f"{d} ({', '.join(v)})" for d, v in sorted(same_day.items()) if len(v) > 1))
+                        + "</div>", unsafe_allow_html=True)
+        st.markdown(exam_calendar(exam_rows, colours), unsafe_allow_html=True)
+        st.caption("Only the weeks with exams are shown. Yellow outline = 2+ exams that day.")
+
+        with st.expander("⬇️ Download"):
             rows_ = [{"code": c, "section": s_, "day": sl["day"], "start": HOUR_LABELS.get(sl["hour"], sl["hour"])}
                      for c, s_, slots in entries for sl in slots]
             st.download_button("⬇️ Timetable (CSV)", pd.DataFrame(rows_).to_csv(index=False),

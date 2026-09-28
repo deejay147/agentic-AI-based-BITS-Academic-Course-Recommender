@@ -67,7 +67,7 @@ Next time you only need to `cd` into the folder, activate `.venv`, and run `stre
 |---|---|
 | Requirements | See what's left: core courses, DELs, HUELs, OPELs, general courses, minor progress, graduation checklist |
 | Ask | Type questions in plain English, e.g. *Suggest DELs related to AI*, *I want an OPEL with no attendance requirement*, *Suggest courses with no midsem and a lenient makeup policy*, *I need a HUEL and prefer project-based evaluation*, *can I take CS F317 and GS F232 together?*, *what's left for me?*, *prerequisites of CS F425* |
-| Plan semester | Your core courses are filled in for you. Add electives and each is filed as DEL / HUEL / OPEL. Clash-free sections are picked for every course; use **Choose sections** on a course to limit which sections you'd accept. It checks the 25-unit limit and shows your week, an exam calendar and downloads. Preferences: free day, no 8 AM, compact |
+| Plan semester | Your core courses are filled in for you. Add any course you like: the app tells you if it clashes and with what, and if you're not allowed to take it and why. Flip through timetable options with ◀ ▶; each course has its own colour. **Choose sections** limits a course to sections you'd accept. The exam calendar shows your midsem and compre days. Downloads available |
 | Eligible courses | Every course you can take this semester, and "Why can't I take…?" for any course you can't, with the regulation clause |
 | Data sources | How the data was built, what couldn't be verified, and which regulation clauses the rules use |
 
@@ -125,7 +125,7 @@ Only needed if you get a new timetable or new handouts, or want to check the pip
 pytest -q
 ```
 
-39 tests covering the engine (requirements, eligibility rules, clashes, planner, dual degrees, minors) and the agent
+40 tests covering the engine (requirements, eligibility rules, clashes, planner, dual degrees, minors) and the agent
 (query parsing, rule mode, and both LLM loops with scripted fake clients). `python -m tests.run_examples` regenerates
 `docs/examples.md`.
 

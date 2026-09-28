@@ -23,7 +23,8 @@ related about into also can could would should do does have has semester electiv
 introduction intro basic basics fundamentals principles
 outcome outcomes objective objectives lecture lectures chapter ch tb text book books reference references clo
 students student able understand understanding week weeks topic topics module modules unit units hours
-learning""".split())
+learning field fields area areas domain domains stuff thing things kind type types sort based oriented
+something anything subject subjects interested interest interests chap chapter chapters sect slide slides""".split())
 # 'learning' alone is useless (every handout has 'Course Learning Outcomes'), but it survives inside
 # bigrams like machine_learning / deep_learning, which is what we actually want to match
 
@@ -58,6 +59,51 @@ SYNONYMS = {
     "embedded": ["embedded", "microcontroller", "microprocessor", "real_time"],
     "pharmacology": ["pharmacology", "drug", "drugs", "pharmacokinetics", "therapeutic"],
     "security": ["security", "cryptography", "secure", "attacks", "network_security"],
+    "biotech": ["biotechnology", "biology", "biological", "molecular", "genetics", "cell", "microbiology",
+                "biochemistry", "genomics", "protein", "enzyme", "bioinformatics"],
+    "biotechnology": ["biotechnology", "biology", "molecular", "genetics", "cell", "microbiology", "biochemistry",
+                      "genomics", "protein", "enzyme", "bioinformatics"],
+    "biology": ["biology", "biological", "cell", "genetics", "molecular", "ecology", "physiology"],
+    "genetics": ["genetics", "gene", "genome", "dna", "molecular", "heredity"],
+    "health": ["health", "healthcare", "medical", "medicine", "clinical", "disease", "hospital", "public_health"],
+    "healthcare": ["health", "healthcare", "medical", "medicine", "clinical", "disease", "hospital", "biomedical"],
+    "medicine": ["medicine", "medical", "clinical", "disease", "drug", "physiology", "pharmacology"],
+    "medical": ["medical", "medicine", "clinical", "biomedical", "disease", "health"],
+    "neuroscience": ["neuroscience", "neural", "brain", "cognitive", "neuron"],
+    "space": ["space", "astronomy", "astrophysics", "cosmology", "satellite", "orbital", "planetary", "rocket"],
+    "astronomy": ["astronomy", "astrophysics", "cosmology", "stars", "galaxies", "telescope", "planetary"],
+    "physics": ["physics", "quantum", "mechanics", "electromagnetic", "optics", "thermodynamics"],
+    "quantum": ["quantum", "quantum_mechanics", "quantum_computing", "qubit"],
+    "chemistry": ["chemistry", "chemical", "organic", "inorganic", "reaction", "spectroscopy"],
+    "maths": ["mathematics", "mathematical", "algebra", "calculus", "probability", "statistics"],
+    "math": ["mathematics", "mathematical", "algebra", "calculus", "probability", "statistics"],
+    "statistics": ["statistics", "statistical", "probability", "regression", "inference", "sampling"],
+    "environment": ["environment", "environmental", "ecology", "climate", "pollution", "sustainability"],
+    "climate": ["climate", "environment", "environmental", "carbon", "sustainability", "emissions"],
+    "sustainability": ["sustainability", "sustainable", "environment", "renewable", "climate", "green"],
+    "marketing": ["marketing", "consumer", "brand", "advertising", "market_research", "sales"],
+    "startup": ["entrepreneurship", "venture", "startup", "innovation", "business_plan"],
+    "startups": ["entrepreneurship", "venture", "startup", "innovation", "business_plan"],
+    "entrepreneurship": ["entrepreneurship", "venture", "startup", "innovation", "business_plan"],
+    "law": ["law", "legal", "intellectual_property", "patent", "rights", "constitution"],
+    "design": ["design", "product_design", "creativity", "prototyping", "user"],
+    "history": ["history", "historical", "civilization", "colonial", "modern_india"],
+    "sociology": ["sociology", "society", "social", "culture", "anthropology"],
+    "literature": ["literature", "literary", "novel", "poetry", "fiction", "drama"],
+    "writing": ["writing", "creative_writing", "composition", "rhetoric", "communication"],
+    "language": ["language", "linguistics", "grammar", "french", "german", "japanese"],
+    "music": ["music", "musical", "raga", "rhythm", "composition"],
+    "art": ["art", "arts", "painting", "aesthetics", "visual"],
+    "blockchain": ["blockchain", "cryptocurrency", "distributed_ledger", "bitcoin", "smart_contracts"],
+    "cloud": ["cloud", "cloud_computing", "distributed", "virtualization", "datacenter"],
+    "games": ["game", "games", "gaming", "game_theory", "graphics"],
+    "gaming": ["game", "games", "gaming", "graphics", "animation"],
+    "materials": ["materials", "material", "composites", "polymers", "metallurgy", "nanomaterials"],
+    "nano": ["nanotechnology", "nanomaterials", "nano", "nanoscale"],
+    "drones": ["drone", "uav", "aerial", "flight", "aircraft", "control"],
+    "aerospace": ["aerospace", "aircraft", "flight", "aerodynamics", "propulsion", "space"],
+    "automobile": ["automobile", "automotive", "vehicle", "engine", "ic_engines"],
+    "cars": ["automobile", "automotive", "vehicle", "engine"],
 }
 
 

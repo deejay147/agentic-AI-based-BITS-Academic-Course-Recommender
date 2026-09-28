@@ -20,7 +20,7 @@ from engine import eligibility as el
 from engine import requirements as req
 from engine.catalog import Catalog
 from engine.profile import Profile
-from engine.schedule import busy_from_registered, pick_offering, plan_sections
+from engine.schedule import busy_from_registered, pick_offering, plan_sections, section_options
 from ingest.common import norm_code
 
 MAX_UNITS = 25
@@ -36,21 +36,28 @@ def _restrict(off: dict, allowed: dict | None) -> dict:
 
 
 def plan(profile: Profile, cat: Catalog, picks: list[str], avoid_hours: set | None = None,
-         compact: bool = False, schedule_registered: bool = False, allowed: dict | None = None) -> dict:
-    """allowed = {code: {component: [sections the student would accept]}} (optional)"""
+         compact: bool = False, schedule_registered: bool = False, allowed: dict | None = None,
+         include_ineligible: bool = False, options: int = 0) -> dict:
+    """allowed = {code: {component: [sections the student would accept]}} (optional)
+    include_ineligible: courses the student isn't allowed to take are still timetabled (so they can see
+    clashes), and come back under 'not_allowed' with the rules that block them."""
     allowed = allowed or {}
     picks = [norm_code(p) or p.upper().strip() for p in picks]
     ev = el.evaluate(profile, cat)
     elig = {x["code"]: x for x in ev["eligible"]}
     inel = {x["code"]: x for x in ev["ineligible"]}
 
-    rejected, ok_picks = [], []
+    rejected, ok_picks, not_allowed = [], [], {}
     for code in picks:
         if code in elig:
             ok_picks.append(code)
         elif code in inel:
             why = [f"{c['note']} ({c['clause']})" for c in inel[code]["checks"] if not c["ok"]]
-            rejected.append({"code": code, "reasons": why})
+            if include_ineligible:
+                ok_picks.append(code)
+                not_allowed[code] = why
+            else:
+                rejected.append({"code": code, "reasons": why})
         else:
             rejected.append({"code": code, "reasons": ["not offered this semester, or already done / registered"]})
 
@@ -86,6 +93,41 @@ def plan(profile: Profile, cat: Catalog, picks: list[str], avoid_hours: set | No
         busy = busy_from_registered(cat, profile.current, profile.batch, profile.current_sections)
     sched = plan_sections(reg_offs + offs, busy, avoid_hours, compact)
 
+    # doesn't fit together: add the picks one at a time (in the order given - core courses first) and keep
+    # the ones that fit, so the rest of the week still gets a timetable; then say exactly what each
+    # leftover course collides with
+    clash_details, unplaced = [], []
+    if not sched["ok"]:
+        fit = []
+        for code, off in offs:
+            if plan_sections(reg_offs + fit + [(code, off)], busy, avoid_hours)["ok"]:
+                fit.append((code, off))
+                continue
+            partners, notes = [], []
+            alone = plan_sections([(code, off)], busy, avoid_hours)
+            if not alone["ok"]:
+                notes += alone["problems"] if schedule_registered or alone["problems"][0].startswith(("midsem", "compre")) \
+                    else ["clashes with hours your registered courses already use"]
+            empty = busy_from_registered(cat, [], profile.batch)
+            for other, o_off in reg_offs + fit:
+                pair = plan_sections([(code, off), (other, o_off)], empty, avoid_hours)
+                if not pair["ok"]:
+                    partners.append(other)
+                    notes += [p for p in pair["problems"] if p.startswith(("midsem", "compre"))]
+            if not partners and not notes:
+                notes.append("fits with each course on its own, but not with all of them together")
+            if avoid_hours and plan_sections([(code, off)], empty, None)["ok"] and \
+                    not plan_sections([(code, off)], empty, avoid_hours)["ok"]:
+                notes.append("no section of it fits your time preferences (no 8 AM / free day)")
+            clash_details.append({"code": code, "with": partners, "problems": list(dict.fromkeys(notes))})
+            first = {}
+            for s_ in off["sections"]:
+                first.setdefault(s_["type"], s_["section"])
+            unplaced.append({"code": code, "sections": first})
+        sched_fit = plan_sections(reg_offs + fit, busy, avoid_hours, compact)
+        if sched_fit["ok"]:
+            sched = {**sched_fit, "ok": False, "problems": sched["problems"]}
+
     units = ev["registered_units"] + sum(cat.units(c) or 0 for c in ok_picks)
     warnings = []
     if units > MAX_UNITS:
@@ -104,9 +146,18 @@ def plan(profile: Profile, cat: Catalog, picks: list[str], avoid_hours: set | No
                         ". Only exam slots and single-section components of those were clash-checked - "
                         "add your sections in the profile for a full check.")
 
+    placed = {u["code"]: u["sections"] for u in unplaced}
+    # other timetables to flip through (same courses, different sections), best first
+    opts = []
+    if options:
+        unfit = set(placed)
+        opts = section_options(reg_offs + [(c, o) for c, o in offs if c not in unfit], busy, avoid_hours, n=options)
     return {
         "picks": [{"code": c, "title": cat.title(c), "units": cat.units(c), "filed_as": filed[c],
-                   "sections": sched["sections"].get(c, {})} for c in ok_picks],
+                   "sections": sched["sections"].get(c) or placed.get(c, {}), "fits": c not in placed,
+                   "not_allowed": not_allowed.get(c)} for c in ok_picks],
+        "clash_details": clash_details,
+        "options": opts,
         "registered": [{"code": c, "title": cat.title(c), "units": cat.units(c),
                         "sections": sched["sections"].get(c, {})} for c, _ in reg_offs],
         "rejected": rejected,

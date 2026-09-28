@@ -10,7 +10,9 @@ from engine import planner
 from engine.catalog import Catalog, get_catalog
 from engine.profile import Profile
 from engine.schedule import check_course, busy_from_registered, pick_offering
-from agent.retrieval import PROPERTIES, expand, get_index, handout_summary, prop
+from collections import Counter
+
+from agent.retrieval import PROPERTIES, expand, get_index, handout_summary, prop, readable
 
 DAYS = ["M", "T", "W", "Th", "F", "S"]
 
@@ -142,16 +144,74 @@ class Session:
         if topics and matched:
             top = matched[0]["match_score"]
             matched = [r for r in matched if r["match_score"] >= max(1.5, 0.3 * top)]
+        related = {"terms": [], "results": []}
+        weak = False
+        if topics and matched:
+            # direct matches that are far weaker than the best match anywhere in the timetable only brush
+            # the topic (one stray word) - add related courses too
+            best_any = max((idx.score(c, q)[0] for c in idx.docs), default=0)
+            weak = matched[0]["match_score"] < 0.35 * best_any
+        if topics and (len(matched) < 3 or weak):
+            related = self.related_courses(topics, cats, require, no_8am, free_day,
+                                           exclude={r["code"] for r in matched}, limit=max(3, limit - len(matched)))
         return {
             "filters": {"categories": cats, "topics": topics, "require": require, "no_8am": no_8am,
                         "free_day": free_day},
             "results": matched[:limit],
+            "related": related,
             "total_matches": len(matched),
             "could_not_verify": [{"code": r["code"], "title": r["title"],
                                   "why": {k: v["evidence"] for k, v in r["properties"].items() if v["value"] is None}}
                                  for r in unverified[:5]],
             "excluded_by_property_or_time": excluded,
         }
+
+    def related_courses(self, topics: str, categories=None, require=None, no_8am=False, free_day=None,
+                        exclude=(), limit=4) -> dict:
+        """'Nearby' courses when few eligible ones mention the topic directly.
+
+        Pseudo-relevance feedback: find the courses that match the topic best in the WHOLE timetable
+        (eligible or not - e.g. BIO / PHA courses for 'biotech'), take the words that are typical of them
+        (cell, gene, protein ...), and search the student's eligible courses with those words instead.
+        Deterministic, and the words used are returned so the answer can say why a course is related."""
+        idx = get_index()
+        q = expand(topics or "")
+        if not q:
+            return {"terms": [], "results": []}
+        qset = set(q)
+        seeds = sorted(((idx.score(c, q)[0], c) for c in idx.docs), reverse=True)[:6]
+        # only learn from strong matches, or one weak hit drags in unrelated words
+        seeds = [c for sc, c in seeds if sc > 0 and sc >= 0.5 * seeds[0][0]]
+        weight = Counter()
+        for c in seeds:
+            d = idx.docs[c]
+            n = sum(d.values()) or 1
+            for t, f in d.items():
+                parts = t.split("_")
+                if t in qset or not all(x.isalpha() and len(x) >= 4 for x in parts) or idx.idf.get(t, 0) < 2.0:
+                    continue      # skip the query itself, codes / 'l#' / 'chap' fragments, words most courses share
+                weight[t] += f / n * idx.idf[t]
+        terms = [t for t, _ in weight.most_common(14)]
+        if not terms:
+            return {"terms": [], "results": []}
+        pool = self.find_courses(categories=categories, topics=None, require=require, no_8am=no_8am,
+                                 free_day=free_day, limit=500)["results"]
+        scored = []
+        for r in pool:
+            if r["code"] in exclude:
+                continue
+            sc, hits = idx.score(r["code"], terms)
+            if sc > 0 and (len(hits) >= 2 or sc >= 3):     # one incidental shared word isn't 'related'
+                scored.append((sc, hits, r))
+        scored.sort(key=lambda t: -t[0])
+        if scored:
+            top = scored[0][0]
+            scored = [t for t in scored if t[0] >= max(1.0, 0.3 * top)]
+        out = []
+        for sc, hits, r in scored[:limit]:
+            out.append({**r, "match_score": round(sc, 2), "match_terms": hits, "related": True,
+                        "related_to": topics})
+        return {"terms": [readable(t) for t in terms[:8]], "results": out}
 
     def _card(self, x, counts, props, hits, score, sections):
         c = self.cat.courses.get(x["code"]) or {}
@@ -262,9 +322,10 @@ class Session:
         }
 
     def check_plan(self, codes: list[str], no_8am: bool = False, free_day: str | None = None,
-                   compact: bool = False, schedule_registered: bool = False, allowed: dict | None = None) -> dict:
+                   compact: bool = False, schedule_registered: bool = False, allowed: dict | None = None,
+                   include_ineligible: bool = False, options: int = 0) -> dict:
         out = planner.plan(self.profile, self.cat, codes, _hours_to_avoid(no_8am, free_day) or None, compact,
-                           schedule_registered, allowed)
+                           schedule_registered, allowed, include_ineligible, options)
         out.pop("requirements_after", None)
         return out
 

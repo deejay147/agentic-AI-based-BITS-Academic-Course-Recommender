@@ -184,3 +184,60 @@ def plan_sections(offerings: list, busy: dict, avoid_hours: set | None = None,
             out["gap_hours"], out["days_used"] = best["score"]
         return out
     return {"ok": False, "sections": {}, "problems": ["no clash-free section combination exists for this set of courses"]}
+
+
+def section_options(offerings: list, busy: dict, avoid_hours: set | None = None, n: int = 20,
+                    tries: int = 120, node_cap: int = 20000) -> list[dict]:
+    """Several different clash-free timetables for the same set of courses, best first.
+
+    A plain depth-first search finds solutions that differ only in the last course's tutorial, so
+    instead we run it `tries` times with the section order of every component shuffled (seeded, so
+    it's the same every time), keep the first solution of each run, drop duplicates, and sort by
+    (idle hours, days used). Each option: {sections: {code: {type: sec}}, gap_hours, days_used}."""
+    import random
+
+    if not plan_sections(offerings, busy, avoid_hours)["ok"]:
+        return []
+    slots = []
+    for code, off in offerings:
+        for kind, secs in _by_type(off).items():
+            slots.append((code, kind, secs))
+    blocked = set(busy["slots"]) | (avoid_hours or set())
+    seen, found = set(), []
+    for seed in range(tries):
+        rng = random.Random(seed)
+        order = [list(secs) if seed == 0 else rng.sample(secs, len(secs)) for _, _, secs in slots]
+        chosen, nodes = {}, [0]
+
+        def bt(i, taken):
+            nodes[0] += 1
+            if nodes[0] > node_cap:
+                return None
+            if i == len(slots):
+                return taken
+            code, kind, _ = slots[i]
+            for s in order[i]:
+                ss = _slot_set(s)
+                if ss & taken or ss & blocked:
+                    continue
+                chosen[(code, kind)] = s["section"]
+                r = bt(i + 1, taken | ss)
+                if r is not None:
+                    return r
+                chosen.pop((code, kind), None)
+            return None
+
+        taken = bt(0, set())
+        if taken is None:
+            continue
+        key = frozenset(chosen.items())
+        if key in seen:
+            continue
+        seen.add(key)
+        allh = taken | set(busy["slots"])
+        pick = {}
+        for (code, kind), sec in chosen.items():
+            pick.setdefault(code, {})[kind] = sec
+        found.append({"sections": pick, "gap_hours": gap_hours(allh), "days_used": len({d for d, _ in allh})})
+    found.sort(key=lambda o: (o["gap_hours"], o["days_used"]))
+    return found[:n]

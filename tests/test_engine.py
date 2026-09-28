@@ -234,3 +234,17 @@ def test_planner_respects_allowed_sections(cat):
         out = planner.plan(p, cat, [], schedule_registered=True, allowed={"CS F213": {"lecture": [want]}})
         got = {r["code"]: r["sections"] for r in out["registered"]}["CS F213"]
         assert not out["clash_free"] or got["lecture"] == want
+
+
+def test_planner_explains_clashes_and_keeps_the_rest(cat):
+    # any course can be tried; ECON F211's exams collide with CS F213 -> it's named, the rest still fits
+    from engine import planner
+    p = load("cs_2nd_year")
+    out = planner.plan(p, cat, ["ECON F211", "CS F317"], schedule_registered=True, include_ineligible=True)
+    assert not out["clash_free"]
+    det = {d["code"]: d for d in out["clash_details"]}
+    assert "CS F213" in det["ECON F211"]["with"]
+    picks = {x["code"]: x for x in out["picks"]}
+    assert picks["ECON F211"]["not_allowed"] and not picks["ECON F211"]["fits"]
+    assert picks["CS F317"]["fits"] and picks["CS F317"]["sections"]
+    assert all(r["sections"] for r in out["registered"])       # registered courses still timetabled

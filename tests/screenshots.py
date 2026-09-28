@@ -32,7 +32,7 @@ async def main():
 
         await pg.get_by_role("tab", name="Plan semester").click()
         await pg.wait_for_timeout(1000)
-        ms = pg.locator("div[data-testid='stMultiSelect']").filter(has_text="Courses to add this semester").locator("input").first
+        ms = pg.locator("div[data-testid='stMultiSelect']").filter(has_text="Add any course").locator("input").first
         for code in ["CS F317"]:
             await ms.click()
             await ms.type(code)
@@ -40,9 +40,8 @@ async def main():
             await pg.keyboard.press("Enter")
             await pg.wait_for_timeout(1500)
         await pg.keyboard.press("Escape")
-        await pg.get_by_text("Compact timetable", exact=True).click()
         await pg.wait_for_timeout(4000)
-        await pg.mouse.wheel(0, 900)
+        await pg.mouse.wheel(0, 700)
         await pg.wait_for_timeout(1500)
         await pg.screenshot(path=OUT + "4_plan_semester.png")
 

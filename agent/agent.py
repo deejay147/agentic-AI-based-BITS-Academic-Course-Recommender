@@ -325,6 +325,12 @@ class Recommender:
         res = s.find_courses(categories=p["categories"], topics=p["topics"] or None, require=p["require"],
                              no_8am=p["no_8am"], free_day=p["free_day"], limit=5)
         recs = res["results"]
+        rel = res.get("related") or {"terms": [], "results": []}
+        if rel["results"]:
+            # fewer / weaker direct matches: add 'nearby' courses, marked as related (see Session.related_courses)
+            room = max(0, 6 - len(recs))
+            res = {**res, "results": recs + rel["results"][:room]}
+            recs = res["results"]
         for r in recs:
             # show the category the student asked for, if the course can be filed that way (reg 2.05)
             asked = [c for c in p["categories"] if c in r["can_count_as"]]
@@ -383,6 +389,14 @@ def format_recommendations(res, parsed, s) -> str:
     if f["free_day"]:
         want.append(f"{f['free_day']} free")
     lines = [f"**Looking for:** {', '.join(want) or 'anything that fits your requirements'}", ""]
+    rel = res.get("related") or {}
+    n_direct = sum(1 for r in res["results"] if not r.get("related"))
+    if rel.get("results") and any(r.get("related") for r in res["results"]):
+        lines.append(("Nothing open to you mentions it directly, so here" if not n_direct else
+                      "Fewer direct matches than I'd like, so I've also added") +
+                     f" related courses (🔭), found through words typical of '{f['topics']}' courses: "
+                     f"{', '.join(rel['terms'][:6])}.")
+        lines.append("")
     if not res["results"]:
         units_left = 25 - s.ev["registered_units"]
         lines.append("No eligible course matches all of that.")
@@ -393,7 +407,7 @@ def format_recommendations(res, parsed, s) -> str:
             lines.append(f"{res['excluded_by_property_or_time']} eligible courses were ruled out because the "
                          f"handout/timetable contradicts a requested property or time preference.")
     for i, r in enumerate(res["results"], 1):
-        lines.append(f"**{i}. {r['code']} - {r['title']}** ({r['units']} units)")
+        lines.append(f"**{i}. {r['code']} - {r['title']}** ({r['units']} units)" + (" 🔭 related" if r.get("related") else ""))
         asked = [c for c in f["categories"] if c in r["can_count_as"]]
         if asked and asked[0] != r["fills"]:
             fills = f"{asked[0]} - you asked for {asked[0]}; it's also in your {r['fills']} pool, so it can be filed either way (reg 2.05)"

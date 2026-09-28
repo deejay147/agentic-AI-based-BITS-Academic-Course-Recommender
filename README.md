@@ -110,7 +110,7 @@ You can also load any of the 11 test students from the same box.
 |---|---|
 | **Requirements** | See what's left: general courses (GIR), compulsory courses (CDC), DELs, HUELs, OPELs, minor progress, graduation checklist |
 | **Ask** | **Chat**: tap a ready-made question or type your own; the newest answer shows on top. **Guided search**: pick the requirement type, the handout properties you want, a topic and time preferences, then press Find |
-| **Plan semester** | Your whole timetable. Core courses due this semester are auto-filled, and sections are chosen for your registered courses too. Add electives and each is filed as DEL / HUEL / OPEL. Per course: section counts, prerequisites, what it unlocks, a same-day exam warning, and **Choose sections** to pick which sections you'd accept. Preferences: free day, no 8 AM, compact. Results: week grid, exam calendar, CSV / JSON downloads |
+| **Plan semester** | Your whole timetable. Core courses due this semester are auto-filled and your registered courses get sections too. **Add any course**: ones you're not allowed to take are still placed, with the rule that blocks them. Clashes are named ("ECON F211 clashes with CS F213: same midsem slot") and drawn in red. **Flip through timetable options** (◀ ▶, fewest free hours first); every course has its own colour. **Choose sections** limits a course to the sections you'd accept. Preferences: free day, no 8 AM. A month-style **exam calendar** flags days with two exams. CSV / JSON downloads |
 | **Eligible courses** | Every course you can take this semester, and "Why can't I take X?" for any course, with the exact regulation |
 | **Data sources** | How the data was built, what couldn't be checked, and which regulations the rules use |
 
@@ -240,10 +240,17 @@ The planner tab builds the whole semester, not just the new courses:
 - **Core courses are auto-filled.** CDC / GIR courses the chart puts in this semester (or earlier) that are still
   open and allowed are added. Cross-listed codes and "A or B" slots count once. Turn it off to plan only your picks.
 - **Sections are chosen for registered courses too**, keeping any section you gave, so the week is complete.
+- **Add any course.** If it doesn't fit, the app says what it collides with. It adds courses one at a time, keeps
+  the ones that fit, and names the pair that clashes. Courses you aren't allowed to take are still placed, marked
+  with the blocking rule.
+- **Timetable options.** Up to 30 different clash-free section combinations for the same courses, best (fewest
+  free hours between classes) first. You flip through them with ◀ ▶. To get varied options, the search is re-run
+  with the section order shuffled (seeded, so it's reproducible).
 - **Choose sections**, borrowed from the DVM timetable tool: pick the sections you'd accept for any course (none = any).
   The planner only uses those.
 - Course cards show section counts ("2 L · 6 T"), prerequisites, what the course unlocks, and a **same-day exam** flag.
-- There's an **exam calendar**, and the timetable, exams and plan can be downloaded as CSV / JSON.
+- The **exam calendar** is a month-style grid of your midsem and compre dates, in the same colours as the week.
+  The timetable, exams and plan can be downloaded as CSV / JSON.
 
 ### 3. The assistant (`agent/`)
 
@@ -272,7 +279,11 @@ each course on how often your words appear in its title, description and lecture
 rare words and to the title. A synonym list helps ("AI" also searches "machine learning", "neural networks",
 "reinforcement learning"…), and weak matches are cut off instead of being shown just to fill the list. BM25 was
 chosen over AI-based search because it gives the same answer every time, needs no internet, and can show exactly
-which words matched.
+which words matched. When few of your allowed courses mention a topic (a CS 2nd-year asking for biotech), the app looks
+at the courses that match it best across the whole timetable, learns the words typical of them (enzyme, molecular,
+clinical ...), and searches your allowed courses with those words. These results are marked 🔭 *related*, with the
+words used. This is called *pseudo-relevance feedback*. The courses that match the topic best but are blocked are
+listed too, with the rule that blocks each.
 
 **Course properties.** Each property check gives one of three answers:
 
@@ -340,7 +351,7 @@ Only needed for a new timetable or new handouts. The engine and assistant code d
 ## Tests and test students
 
 ```bash
-pytest -q                          # 39 tests
+pytest -q                          # 40 tests
 python -m tests.run_examples       # regenerates docs/examples.md
 ```
 

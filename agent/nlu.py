@@ -69,7 +69,8 @@ def parse(query: str) -> dict:
             out["require"].append(name)
     # 'what's left / remaining requirements' - but not 'no attendance requirement'
     if not codes and not out["require"] and not out["categories"] and \
-            re.search(r"\b(remaining|left|still\s+need|requirements?|graduat\w*|how\s+many|space|room|units)\b", low):
+            (re.search(r"\b(remaining|still\s+need|requirements?|graduat\w*|how\s+many)\b", low)
+             or re.search(r"\b(what'?s|what\s+is)\s+left\b|\b(units?|room|space)\s+(left|remaining)\b", low)):
         out["intent"] = "requirements"
     if "has_lab" in out["require"] and "no_lab" in out["require"]:
         out["require"].remove("has_lab")
