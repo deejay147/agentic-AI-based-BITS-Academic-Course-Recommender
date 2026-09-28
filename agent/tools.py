@@ -243,6 +243,9 @@ class Session:
             pre = {"stated": True, "text": c.get("prerequisite_text"), "codes": c.get("prerequisite_codes")}
         else:
             pre = {"stated": False, "text": "No prerequisites required (none listed in the supplied bulletin)."}
+        bg = (cat.handout(code) or {}).get("recommended_background")
+        if bg:
+            pre["handout_recommends"] = bg   # advice, not an enforced prerequisite
         off = pick_offering(cat, code, self.profile.batch) if code in cat.offerings else None
         return {
             "code": code, "title": cat.title(code), "units": cat.units(code),

@@ -44,7 +44,7 @@ CREATE TABLE handouts (
     has_lab INTEGER, has_viva_presentation INTEGER, open_book INTEGER, eval_evidence TEXT,
     makeup_status TEXT, makeup_note TEXT, makeup_evidence TEXT,
     attendance_status TEXT, attendance_evidence TEXT,
-    prerequisites_text TEXT, topics_text TEXT
+    prerequisites_text TEXT, recommended_background TEXT, topics_text TEXT
 );
 CREATE TABLE handout_codes (handout_id INTEGER, code TEXT);
 CREATE TABLE programmes (
@@ -176,13 +176,14 @@ def build():
     # ---- handouts
     for i, h in enumerate(hand, start=1):
         ev = h["evaluation"]
-        db.execute("INSERT INTO handouts VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", (
+        db.execute("INSERT INTO handouts VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", (
             i, h["file"], h["title"], h["instructor_in_charge"], h["extraction_method"],
             ev["confidence"], _j(ev["components"]), int(ev["components_reliable"]), ev["project_weight"],
             int(ev["has_midsem"]), int(ev["has_compre"]), int(ev["has_quiz"]), int(ev["has_assignment"]),
             int(ev["has_project"]), int(ev["has_lab"]), int(ev["has_viva_presentation"]), int(ev["open_book"]),
             ev["evidence"], h["makeup"]["status"], h["makeup"].get("note"), h["makeup"]["evidence"],
-            h["attendance"]["status"], h["attendance"]["evidence"], h["prerequisites_text"], h["topics_text"]))
+            h["attendance"]["status"], h["attendance"]["evidence"], h["prerequisites_text"],
+            h.get("recommended_background"), h["topics_text"]))
         for c in h["codes"]:
             db.execute("INSERT INTO handout_codes VALUES (?,?)", (i, c))
         if h["extraction_method"] == "ocr":

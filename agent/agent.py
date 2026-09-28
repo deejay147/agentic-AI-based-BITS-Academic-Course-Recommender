@@ -462,6 +462,9 @@ def format_details(d, asks_prereq=False) -> str:
     pre = d["prerequisites"]
     if asks_prereq or pre["stated"]:
         L.append(f"- Prerequisites: {pre['text']}")
+        if pre.get("handout_recommends"):
+            L.append(f"- The handout recommends this background (advice, not a registration rule): "
+                     f"{pre['handout_recommends']}")
     h = d["handout"]
     if h["available"]:
         if h["evaluation"]:

@@ -118,6 +118,72 @@ VIVA = r"viva|presentation|seminar"
 OPENBOOK = r"open[\s-]*book|\bOB\b"
 
 
+def _clean_name(cell: str) -> str:
+    name = re.sub(r"^[^\w(]+", "", cell)  # bullets like \uf0a7, •, -
+    name = re.sub(r"^(\d{1,2}[.)]?|[a-z][.)])\s*", "", name).strip(" :-–")
+    return name
+
+
+def _ok_name(name: str) -> bool:
+    return bool(name) and 2 < len(name) <= 50 and not name[:1].islower() \
+        and not re.fullmatch(r"(total|sl\.? ?no\.?|s\.? ?no\.?|[\d.%()\s]+)", name, re.I) \
+        and not re.search(r"\b(min|mins|minutes|hrs?|hours)\b", name, re.I)
+
+
+def _components_by_cells(sec: list[str]) -> list[dict]:
+    """pass 1: treat each line as table cells (2+ spaces = new cell). first cell is the component
+    name, weight = first later cell that's just a number (optionally % / marks)"""
+    comps = []
+    for l in sec:
+        s = l.strip()
+        if not s or re.search(r"weightage|component\s", s, re.I) and not re.search(r"\d", s):
+            continue
+        cells = re.split(r"\s{2,}", s)
+        if len(cells) > 1 and re.fullmatch(r"\d{1,2}[.)]?|[a-z][.)]", cells[0]):
+            cells = cells[1:]
+        name = _clean_name(cells[0])
+        weight = None
+        for cell in cells[1:]:
+            m = re.fullmatch(r"(\d{1,3}(?:\.\d+)?)\s*(%|marks|M)?(\s*\(.*\))?", cell.strip())
+            if m and 1 <= float(m.group(1)) <= 100:
+                weight = float(m.group(1))
+                break
+        # table rows have column gaps; prose lines that happen to contain a number don't
+        if weight is not None and re.search(r"\S\s{2,}\S", s) and _ok_name(name):
+            comps.append({"name": _clean(name)[:80], "weight": weight})
+    return comps
+
+
+def _components_by_percent(sec: list[str]) -> list[dict]:
+    """pass 2: rows like 'Mid Sem   90 minutes   30% (60)' - take the explicit NN% on each table row.
+    if the row itself starts with a duration/number (name wrapped onto the line above), use the
+    previous line's first cell as the name. '10+10%' style splits get added up."""
+    comps, prev_name = [], None
+    for l in sec:
+        s = l.strip()
+        if not s:
+            continue
+        cells = re.split(r"\s{2,}", s)
+        if len(cells) > 1 and re.fullmatch(r"\d{1,2}[.)]?|[a-z][.)]", cells[0]):
+            cells = cells[1:]          # leading serial-number column ('1.', 'a)')
+        first = _clean_name(cells[0])
+        m = re.search(r"(?<![\d.])(\d{1,3}(?:\.\d+)?)(?:\s*\+\s*(\d{1,3}))?\s*%", s)
+        # skip prose like 'below 10% of the total' / NC criteria (NC matched case-sensitively -
+        # 'announced' contains 'nc'...)
+        if m and re.search(r"\S\s{2,}\S", s) and not re.search(r"below|less than|of the (course )?total", s, re.I) \
+                and not re.search(r"\bNC\b", s):
+            w = float(m.group(1)) + (float(m.group(2)) if m.group(2) else 0)
+            # the % must not sit inside the name cell itself ('Quiz (10% each)' style is too ambiguous)
+            name = first if _ok_name(first) and not re.search(r"\d\s*%", cells[0]) else prev_name
+            if name and 1 <= w <= 100:
+                comps.append({"name": _clean(name)[:80], "weight": w})
+                prev_name = None
+                continue
+        if _ok_name(first) and not re.search(r"weightage|duration|component", first, re.I):
+            prev_name = first
+    return comps
+
+
 def parse_evaluation(lines: list[str]) -> dict:
     i, sec = _section(lines, EVAL_START, max_lines=45)
     found = i >= 0
@@ -130,27 +196,11 @@ def parse_evaluation(lines: list[str]) -> dict:
             cut.append(l)
         sec = cut
     region = "\n".join(sec) if found else ""
-    comps = []
-    for l in sec:
-        s = l.strip()
-        if not s or re.search(r"weightage|component\s", s, re.I) and not re.search(r"\d", s):
-            continue
-        # treat the line as table cells (2+ spaces = new cell). first cell is the component name,
-        # weight = first later cell that is just a number (optionally with % / marks)
-        cells = re.split(r"\s{2,}", s)
-        name = re.sub(r"^[^\w(]+", "", cells[0])  # bullets like \uf0a7, •, -
-        name = re.sub(r"^(\d{1,2}[.)]?|[a-z][.)])\s*", "", name).strip(" :-–")
-        weight = None
-        for cell in cells[1:]:
-            m = re.fullmatch(r"(\d{1,3}(?:\.\d+)?)\s*(%|marks|M)?(\s*\(.*\))?", cell.strip())
-            if m and 1 <= float(m.group(1)) <= 100:
-                weight = float(m.group(1))
-                break
-        # table rows have column gaps; prose lines that happen to contain a number don't
-        looks_like_row = re.search(r"\S\s{2,}\S", s) and len(name) <= 50 and not name[:1].islower()
-        if name and weight is not None and len(name) > 2 and looks_like_row \
-                and not re.fullmatch(r"(total|sl\.? ?no\.?|s\.? ?no\.?)", name, re.I):
-            comps.append({"name": _clean(name)[:80], "weight": weight})
+    comps = _components_by_cells(sec)
+    alt = _components_by_percent(sec)
+    # two passes, keep whichever adds up closer to 100
+    if abs(sum(c["weight"] for c in alt) - 100) < abs(sum(c["weight"] for c in comps) - 100):
+        comps = alt
     text_for_flags = region if found else "\n".join(lines)
     flags = {
         "has_midsem": bool(re.search(MIDSEM, text_for_flags, re.I)),
@@ -227,6 +277,24 @@ def parse_attendance(text: str) -> dict:
     return {"status": status, "evidence": joined[:600]}
 
 
+def parse_background(text: str) -> str | None:
+    """'Prerequisites: a course on linear algebra, probability...' in the handout. These are advice about
+    background, not enforceable course prerequisites (reg 3.13 goes by the bulletin), so they're kept
+    separately and shown as 'the handout recommends'."""
+    flat = _clean(text)
+    # heading form only ('Prerequisites: ...', 'PRE-REQUISITES It is assumed ...'), not prose like
+    # 'this course is a prerequisite for ...'
+    m = re.search(r"(?:course\s+)?pre[\s-]*requisites?\s*(?:[:*]|(?=\s+It\s+is\s+assumed))\s*(.{10,260}?)"
+                  r"(?:\s\d{1,2}\.\s|(?<=[a-z)])\.\s|$)", flat, re.I)
+    if not m:
+        return None
+    t = m.group(1).strip(" .:*")
+    if not t[:1].isupper() or re.match(r"(NA|N/A|nil|none)\b", t, re.I) or \
+            re.search(r"course\s+learning|lectures?\s+reference|BIRLA|Instructor", t, re.I):
+        return None
+    return t[:220]
+
+
 def parse_header(text: str, fname_code: str | None) -> dict:
     head = text[:3000]
     codes = []
@@ -271,6 +339,7 @@ def process_file(path: Path) -> dict:
         "makeup": parse_makeup(text, lines),
         "attendance": parse_attendance(text),
         "prerequisites_text": (_sentences_with(text, r"pre[\s-]*requisite", 1) or [None])[0],
+        "recommended_background": parse_background(text),
         "topics_text": parse_topics(text),
     }
     return rec

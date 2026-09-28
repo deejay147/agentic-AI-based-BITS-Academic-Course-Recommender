@@ -99,7 +99,7 @@ Real answers for all the task's example queries (and more) on several test profi
 | `timetable.py` | timetable II, IX | 719 course rows / 582 codes, 1557 sections with day-hour slots, midsem + compre slots, IC, 2026-only flag; 167 equivalent-course groups |
 | `bulletin_programmes.py` | bulletin IV | 28 programmes: CDC + DEL groups (OR-alternatives, tracks, compulsory DELs), GIR courses, semester positions of every named course, CDC/DEL totals from the charts; 70 composite dual-degree charts; HUEL pool (136); 23 minors |
 | `bulletin_courses.py` | bulletin VI | 2015 course descriptions, units, stated prerequisites |
-| `handouts.py` | 540 handout PDFs (399 unique) | evaluation components/weights, midsem / compre / quiz / project / lab / open-book flags, makeup + attendance policy, lecture-plan topics - each field keeps the text it came from |
+| `handouts.py` | 540 handout PDFs (399 unique) | evaluation components/weights (two parsing passes: table cells, explicit %), midsem / compre / quiz / project / lab / open-book flags, makeup + attendance policy, recommended background (advice, not an enforced prerequisite), lecture-plan topics - each field keeps the text it came from |
 | `regulations_rules.py` | Academic Regulations | the 14 clauses the engine uses, with clause numbers |
 | `build_db.py` | all of the above | `academic.db`, `validation_report.md`, `verification_queue.csv` |
 
@@ -173,7 +173,7 @@ the planner tab. Also reachable from chat, e.g. *can I take CS F317 and GS F232 
 
 ## Known limitations
 
-- Handout extraction is rule-based: 192 of 399 handouts give an evaluation table whose weights add up to ~100%; for the
+- Handout extraction is rule-based: 287 of 399 handouts give an evaluation table whose weights add up to ~100%; for the
   rest the app shows the handout's evaluation text instead of numbers. Makeup / attendance labels always come with the
   quoted sentence.
 - For courses a student is already registered in, their section usually isn't known, so only single-section
