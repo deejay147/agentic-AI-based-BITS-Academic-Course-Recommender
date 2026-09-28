@@ -4,13 +4,15 @@
                     -> policy validation -> answer
 
 Two modes, same tools underneath (agent/tools.py):
-  * claude: Claude gets the tools below and decides what to call. It has to finish by calling
-    submit_recommendations; every course it submits is re-checked by Session.validate()
-    before it reaches the student, so it can't recommend something the engine didn't clear.
-  * rules : no API key -> agent/nlu.py parses the query and we call the same tools directly,
-    explanations come from templates.
+  * llm  : an LLM gets the tools below and decides what to call. It has to finish by calling
+           submit_recommendations; every course it submits is re-checked by Session.validate()
+           before it reaches the student, so it can't recommend something the engine didn't clear.
+           Works with Anthropic (Claude) or any OpenAI-compatible API - Gemini and Groq have free tiers.
+  * rules: no API key -> agent/nlu.py parses the query and we call the same tools directly,
+           explanations come from templates.
 
-Set ANTHROPIC_API_KEY (and optionally ANTHROPIC_MODEL) in .env to get the claude mode.
+Put a key in .env (GEMINI_API_KEY / GROQ_API_KEY / ANTHROPIC_API_KEY, or LLM_PROVIDER + LLM_API_KEY),
+or paste it in the dashboard sidebar.
 """
 from __future__ import annotations
 
@@ -22,7 +24,6 @@ from agent.retrieval import PROPERTIES
 from agent.tools import Session
 from engine.profile import Profile
 
-DEFAULT_MODEL = "claude-sonnet-5"
 MAX_TURNS = 8
 
 PROP_LABELS = {
@@ -99,25 +100,67 @@ TOOLS = [
 ]
 
 
+# Which LLM to use. Anthropic's own API, or anything that speaks the OpenAI chat-completions + tools format
+# (Gemini and Groq both have free tiers and an OpenAI-compatible endpoint). Model names change over time -
+# LLM_MODEL overrides the default, check the provider's model list if a default stops working.
+PROVIDERS = {
+    "anthropic": {"key_env": "ANTHROPIC_API_KEY", "model": "claude-sonnet-5", "base_url": None},
+    "gemini": {"key_env": "GEMINI_API_KEY", "model": "gemini-3.8-flash",
+               "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/"},
+    "groq": {"key_env": "GROQ_API_KEY", "model": "llama-3.3-70b-versatile", "base_url": "https://api.groq.com/openai/v1"},
+    "openai": {"key_env": "OPENAI_API_KEY", "model": None, "base_url": None},   # any OpenAI-compatible server
+}
+
+
+def resolve_llm(provider=None, api_key=None, model=None, base_url=None) -> dict:
+    """Figure out provider / key / model from arguments, then env vars. No key -> rules mode."""
+    provider = (provider or os.getenv("LLM_PROVIDER") or "").lower() or None
+    if provider is None:   # auto-detect from whichever key is set
+        provider = next((p for p, c in PROVIDERS.items() if os.getenv(c["key_env"])), "anthropic")
+    cfg = PROVIDERS.get(provider, PROVIDERS["openai"])
+    key = api_key if api_key is not None else (os.getenv("LLM_API_KEY") or os.getenv(cfg["key_env"]) or "")
+    mdl = model or os.getenv("LLM_MODEL") or (os.getenv("ANTHROPIC_MODEL") if provider == "anthropic" else None) \
+        or cfg["model"]
+    return {"provider": provider, "api_key": key, "model": mdl,
+            "base_url": base_url or os.getenv("LLM_BASE_URL") or cfg["base_url"]}
+
+
+def _openai_tools():
+    return [{"type": "function", "function": {"name": t["name"], "description": t["description"],
+                                              "parameters": t["input_schema"]}} for t in TOOLS]
+
+
 class Recommender:
-    def __init__(self, profile: Profile, api_key: str | None = None, model: str | None = None, client=None):
+    def __init__(self, profile: Profile, api_key: str | None = None, model: str | None = None, client=None,
+                 provider: str | None = None, base_url: str | None = None):
         self.session = Session(profile)
-        self.api_key = api_key if api_key is not None else os.getenv("ANTHROPIC_API_KEY")
-        self.model = model or os.getenv("ANTHROPIC_MODEL", DEFAULT_MODEL)
-        self._client = client     # injectable, the tests pass a fake one
+        cfg = resolve_llm(provider, api_key, model, base_url)
+        if client is not None and provider is None:
+            # injected client: an OpenAI-style one has .chat, otherwise treat it as Anthropic-style
+            try:
+                is_openai = hasattr(client, "chat")
+            except Exception:
+                is_openai = False
+            cfg["provider"] = "openai" if is_openai else "anthropic"
+        self.provider, self.api_key, self.model, self.base_url = cfg["provider"], cfg["api_key"], cfg["model"], cfg["base_url"]
+        self._client = client     # injectable, the tests pass fake ones
 
     @property
     def mode(self) -> str:
-        return "claude" if (self._client or self.api_key) else "rules"
+        return "llm" if (self._client or self.api_key) else "rules"
+
+    @property
+    def label(self) -> str:
+        return f"{self.provider} ({self.model})" if self.mode == "llm" else "rule-based (no API key)"
 
     def ask(self, query: str, history: list[dict] | None = None) -> dict:
-        if self.mode == "claude":
+        if self.mode == "llm":
             try:
-                return self._ask_claude(query, history or [])
-            except Exception as e:  # network / auth problems -> still answer, just without the LLM
+                return self._ask_llm(query, history or [])
+            except Exception as e:  # network / auth / quota problems -> still answer, just without the LLM
                 out = self._ask_rules(query)
-                out["text"] = f"_(Claude unavailable: {type(e).__name__}; answered with the rule-based parser.)_\n\n" \
-                              + out["text"]
+                out["text"] = f"_(LLM unavailable - {type(e).__name__}: {str(e)[:120]} - answered with the " \
+                              f"rule-based parser.)_\n\n" + out["text"]
                 return out
         return self._ask_rules(query)
 
@@ -151,24 +194,52 @@ class Recommender:
             return {"accepted": [a["code"] for a in accepted], "rejected": rejected}
         return {"error": f"unknown tool {name}"}
 
-    # ------------------------------------------------------------------ claude mode
+    # ------------------------------------------------------------------ llm mode
     def _client_or_new(self):
         if self._client is None:
-            import anthropic
-            self._client = anthropic.Anthropic(api_key=self.api_key)
+            if self.provider == "anthropic":
+                import anthropic
+                self._client = anthropic.Anthropic(api_key=self.api_key)
+            else:
+                from openai import OpenAI
+                if not self.model:
+                    raise ValueError("set LLM_MODEL for this provider")
+                self._client = OpenAI(api_key=self.api_key, base_url=self.base_url)
         return self._client
 
-    def _ask_claude(self, query: str, history: list[dict]) -> dict:
-        client = self._client_or_new()
+    def _first_message(self, query):
         s = self.session
-        profile_blurb = json.dumps({
+        blurb = json.dumps({
             "id": s.profile.id_no, "semester": s.profile.semester_label, "programmes": s.profile.programmes,
             "stream": s.profile.stream, "minor": s.profile.minor, "interests": s.profile.interests,
             "registered_now": s.profile.current,
         })
-        messages = [{"role": m["role"], "content": m["content"]} for m in history[-6:]]
-        messages.append({"role": "user", "content": f"Student profile: {profile_blurb}\n\nQuestion: {query}"})
+        return f"Student profile: {blurb}\n\nQuestion: {query}"
+
+    def _ask_llm(self, query: str, history: list[dict]) -> dict:
+        client = self._client_or_new()
         ctx = {"cards": {}, "unverified": [], "accepted": None, "rejected": [], "trace": [], "last_filters": None}
+        hist = [{"role": m["role"], "content": m["content"]} for m in history[-6:]]
+        if self.provider == "anthropic":
+            text = self._loop_anthropic(client, hist, query, ctx)
+        else:
+            text = self._loop_openai(client, hist, query, ctx)
+        recs = []
+        for a in ctx["accepted"] or []:
+            card = ctx["cards"].get(a["code"]) or self._card_for(a["code"])
+            if card:
+                recs.append({**card, "agent_reason": a["reason"]})
+        return {"mode": "llm", "provider": self.provider, "model": self.model, "text": text.strip(),
+                "recommendations": recs, "rejected_by_validation": ctx["rejected"],
+                "could_not_verify": self._dedupe(ctx["unverified"]), "trace": ctx["trace"]}
+
+    def _run_tool(self, name, args, ctx) -> str:
+        out = self._call_tool(name, args, ctx)
+        ctx["trace"].append({"tool": name, "input": args})
+        return json.dumps(out, default=str)[:30000]
+
+    def _loop_anthropic(self, client, hist, query, ctx) -> str:
+        messages = hist + [{"role": "user", "content": self._first_message(query)}]
         text = ""
         for _ in range(MAX_TURNS):
             resp = client.messages.create(model=self.model, max_tokens=1500, system=SYSTEM_PROMPT,
@@ -179,22 +250,34 @@ class Recommender:
             if not uses:
                 break
             messages.append({"role": "assistant", "content": [self._block_to_dict(b) for b in blocks]})
-            results = []
-            for u in uses:
-                out = self._call_tool(u.name, dict(u.input or {}), ctx)
-                ctx["trace"].append({"tool": u.name, "input": u.input})
-                results.append({"type": "tool_result", "tool_use_id": u.id,
-                                "content": json.dumps(out, default=str)[:30000]})
-            messages.append({"role": "user", "content": results})
+            messages.append({"role": "user", "content": [
+                {"type": "tool_result", "tool_use_id": u.id, "content": self._run_tool(u.name, dict(u.input or {}), ctx)}
+                for u in uses]})
+        return text
 
-        recs = []
-        for a in ctx["accepted"] or []:
-            card = ctx["cards"].get(a["code"]) or self._card_for(a["code"])
-            if card:
-                recs.append({**card, "agent_reason": a["reason"]})
-        return {"mode": "claude", "model": self.model, "text": text.strip(), "recommendations": recs,
-                "rejected_by_validation": ctx["rejected"], "could_not_verify": self._dedupe(ctx["unverified"]),
-                "trace": ctx["trace"]}
+    def _loop_openai(self, client, hist, query, ctx) -> str:
+        # same loop, OpenAI chat-completions flavour (Gemini / Groq / any compatible server)
+        messages = [{"role": "system", "content": SYSTEM_PROMPT}] + hist + \
+                   [{"role": "user", "content": self._first_message(query)}]
+        text = ""
+        for _ in range(MAX_TURNS):
+            resp = client.chat.completions.create(model=self.model, messages=messages, tools=_openai_tools(),
+                                                  tool_choice="auto")
+            msg = resp.choices[0].message
+            text = msg.content or ""
+            calls = msg.tool_calls or []
+            if not calls:
+                break
+            messages.append({"role": "assistant", "content": msg.content or "", "tool_calls": [
+                {"id": c.id, "type": "function", "function": {"name": c.function.name, "arguments": c.function.arguments}}
+                for c in calls]})
+            for c in calls:
+                try:
+                    args = json.loads(c.function.arguments or "{}")
+                except json.JSONDecodeError:
+                    args = {}
+                messages.append({"role": "tool", "tool_call_id": c.id, "content": self._run_tool(c.function.name, args, ctx)})
+        return text
 
     @staticmethod
     def _block_to_dict(b):

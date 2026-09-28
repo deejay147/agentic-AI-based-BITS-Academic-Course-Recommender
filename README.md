@@ -34,14 +34,16 @@ That's it - **no API key needed**. The processed dataset is committed (`data/pro
 away, and every feature works in the default rule-based agent mode: requirement analysis, eligibility, handout-property
 filters, interest matching, explanations, planner and timetable checks.
 
-Optional LLM mode: `cp .env.example .env` and put an Anthropic key in `ANTHROPIC_API_KEY`
-([how to get one](https://platform.claude.com/docs/en/get-api-key)). The same tools and the same policy validation are
-used; Claude takes over query understanding, topic expansion / re-ranking and the wording of explanations. The
-dashboard header shows which mode is active.
+Optional LLM mode: `cp .env.example .env` and set one key - `GEMINI_API_KEY` (free tier via Google AI Studio),
+`GROQ_API_KEY` (free tier) or `ANTHROPIC_API_KEY` - or paste a key into the sidebar's *LLM (optional)* panel.
+Any OpenAI-compatible server also works (`LLM_PROVIDER=openai`, `LLM_BASE_URL`, `LLM_MODEL`). The same tools and the
+same policy validation are used; the LLM takes over query understanding, topic expansion / re-ranking and the wording
+of explanations. If the LLM call fails (bad key, quota, network) the answer falls back to rule-based mode and says so.
+The dashboard header shows which mode is active.
 
 Try: load `test: cs_2nd_year` in the sidebar, open **Ask** and type *Suggest DELs related to AI*.
 
-Tests: `pytest -q` (34 tests, engine + agent; the Claude loop is tested with a scripted fake client).
+Tests: `pytest -q` (36 tests, engine + agent; both LLM loops are tested with scripted fake clients).
 
 ### Rebuilding the data from the PDFs
 
@@ -135,10 +137,11 @@ the planner tab. Also reachable from chat, e.g. *can I take CS F317 and GS F232 
   property checks. A property is only "yes" if the handout/timetable says so; silent handouts give
   *"No specific information mentioned; contact the Instructor-in-Charge (name)"* and are listed as could-not-verify.
 - `agent.py`
-  - **Claude mode** (`ANTHROPIC_API_KEY` set; model `claude-sonnet-5`, override with `ANTHROPIC_MODEL`): Claude reads
-    the request, calls the tools (turning "AI" into syllabus words, re-searching if thin), re-ranks, and must finish
-    with `submit_recommendations`. Each pick is re-validated against the engine and the requested category /
-    properties; anything invalid is dropped and reported. If the API call fails, it falls back to rules mode.
+  - **LLM mode** (a key for Anthropic, Gemini, Groq or any OpenAI-compatible API): the model reads the request,
+    calls the tools (turning "AI" into syllabus words, re-searching if thin), re-ranks, and must finish with
+    `submit_recommendations`. Each pick is re-validated against the engine and the requested category / properties;
+    anything invalid is dropped and reported. Two loops share everything else: Anthropic messages API and OpenAI
+    chat-completions tool calling. If the API call fails, it falls back to rules mode.
   - **Rules mode** (default, no key) - `nlu.py` parses category, properties, time preferences, course codes and topic
     words; the same tools answer; explanations come from templates. When nothing matches every requested property it
     says so and shows the closest options with what they're missing. When the courses that best match a topic exist

@@ -96,7 +96,7 @@ class FakeClient:
 def test_claude_loop_and_validation():
     fake = FakeClient()
     out = Recommender(load("cs_2nd_year"), client=fake).ask("Suggest DELs related to AI.")
-    assert out["mode"] == "claude"
+    assert out["mode"] == "llm" and out["provider"] == "anthropic"
     assert [r["code"] for r in out["recommendations"]] == ["CS F407"]
     assert out["rejected_by_validation"][0]["code"] == "ME F212"
     # tool results were fed back to the model
@@ -109,7 +109,7 @@ def test_claude_failure_falls_back_to_rules():
     class Broken:
         messages = property(lambda self: (_ for _ in ()).throw(ConnectionError("no network")))
     out = Recommender(load("cs_2nd_year"), client=Broken()).ask("Suggest DELs related to AI.")
-    assert out["mode"] == "rules" and "Claude unavailable" in out["text"]
+    assert out["mode"] == "rules" and "LLM unavailable" in out["text"]
 
 
 def test_rules_blocked_topic_explained():
@@ -120,3 +120,52 @@ def test_rules_blocked_topic_explained():
 
 def test_nlu_compact():
     assert nlu.parse("plan CS F317 and GS F232 with no gaps")["compact"]
+
+
+# ---------------------------------------------------------------- openai-compatible (gemini / groq) fake
+def _call(id_, name, args):
+    return NS(id=id_, type="function", function=NS(name=name, arguments=json.dumps(args)))
+
+
+class FakeOpenAI:
+    """chat.completions.create playback: search -> submit (valid + bogus) -> final text"""
+
+    def __init__(self):
+        self.calls = []
+        self.chat = NS(completions=NS(create=self.create))
+
+    def create(self, **kw):
+        self.calls.append(kw)
+        n = len(self.calls)
+        if n == 1:
+            msg = NS(content=None, tool_calls=[_call("c1", "find_courses", {"categories": ["DEL"], "topics": "deep learning"})])
+        elif n == 2:
+            msg = NS(content=None, tool_calls=[_call("c2", "submit_recommendations", {
+                "items": [{"code": "CS F425", "reason": "deep learning"}, {"code": "PHA F311", "reason": "nope"}]})])
+        else:
+            msg = NS(content="CS F425 Deep Learning fills a DEL ...", tool_calls=None)
+        return NS(choices=[NS(message=msg)])
+
+
+def test_openai_compatible_loop(monkeypatch):
+    monkeypatch.delenv("LLM_PROVIDER", raising=False)
+    fake = FakeOpenAI()
+    out = Recommender(load("cs_2nd_year"), client=fake, provider="gemini", api_key="x").ask("deep learning DEL?")
+    assert out["mode"] == "llm" and out["provider"] == "gemini"
+    assert [r["code"] for r in out["recommendations"]] == ["CS F425"]
+    assert out["rejected_by_validation"][0]["code"] == "PHA F311"
+    # system prompt goes first, tool results come back as role=tool messages
+    msgs = fake.calls[-1]["messages"]
+    assert msgs[0]["role"] == "system" and any(m["role"] == "tool" for m in msgs)
+    assert fake.calls[0]["tools"][0]["type"] == "function"
+
+
+def test_provider_resolution(monkeypatch):
+    from agent.agent import resolve_llm
+    for k in ("LLM_PROVIDER", "LLM_API_KEY", "LLM_MODEL", "ANTHROPIC_API_KEY", "GROQ_API_KEY", "OPENAI_API_KEY"):
+        monkeypatch.delenv(k, raising=False)
+    monkeypatch.setenv("GEMINI_API_KEY", "g-key")
+    cfg = resolve_llm()
+    assert cfg["provider"] == "gemini" and cfg["api_key"] == "g-key" and "generativelanguage" in cfg["base_url"]
+    monkeypatch.delenv("GEMINI_API_KEY")
+    assert resolve_llm()["api_key"] == ""     # nothing set -> rules mode

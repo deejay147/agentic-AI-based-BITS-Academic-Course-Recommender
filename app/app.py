@@ -130,6 +130,14 @@ with st.sidebar:
     offered = sorted(cat.offerings)
     d["current"] = st.multiselect("Registered this semester", offered,
                                   default=[c for c in d.get("current", []) if c in offered])
+    with st.expander("LLM (optional)"):
+        st.caption("Without a key the agent runs rule-based. Gemini and Groq have free keys. "
+                   "The key stays in this browser session only.")
+        prov = st.selectbox("Provider", ["auto (.env)", "gemini", "groq", "anthropic", "openai"],
+                            help="openai = any OpenAI-compatible server; set the base URL below")
+        ui_key = st.text_input("API key", type="password")
+        ui_model = st.text_input("Model (blank = default)", "")
+        ui_base = st.text_input("Base URL (only for 'openai')", "") if prov == "openai" else ""
     if st.button("Save profile", width="stretch"):
         name = (d.get("id_no") or d.get("name") or "profile").replace(" ", "_")
         (PROFILE_DIR / f"{name}.json").write_text(json.dumps(d, indent=1))
@@ -139,13 +147,17 @@ profile = Profile.from_dict(json.loads(json.dumps(st.session_state.profile)))
 if not profile.programmes:
     st.info("Pick a degree (or type your BITS ID) in the sidebar to start.")
     st.stop()
-rec = Recommender(profile)
+llm_kw = {}
+if prov != "auto (.env)" or ui_key:
+    llm_kw = {"provider": None if prov == "auto (.env)" else prov, "api_key": ui_key or None,
+              "model": ui_model or None, "base_url": ui_base or None}
+rec = Recommender(profile, **llm_kw)
 sess = rec.session
 req = sess.get_requirements()
 
 # --------------------------------------------------------------------------- header
 st.title("BITS Academic Course Recommender")
-mode = "Claude (" + rec.model + ")" if rec.mode == "claude" else "rule-based (no API key)"
+mode = rec.label
 st.caption(f"{profile.id_no or 'no ID'} · {' + '.join(PROG_NAMES.get(p, p) for p in profile.programmes)} · "
            f"{profile.semester_label} · agent mode: {mode}")
 for n in req["notes"]:
@@ -270,7 +282,7 @@ with tab_ask:
                     text = text[:m.start()] + text[m.end():]
             st.markdown(text)
             render_cards(out["recommendations"])
-            if out["mode"] == "claude" and out.get("could_not_verify"):
+            if out["mode"] == "llm" and out.get("could_not_verify"):
                 st.caption("Could not verify for: " + ", ".join(c["code"] for c in out["could_not_verify"]))
             if out.get("rejected_by_validation"):
                 st.caption("Dropped by policy validation: " +
