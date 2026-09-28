@@ -101,6 +101,7 @@ SYNONYMS = {
     "materials": ["materials", "material", "composites", "polymers", "metallurgy", "nanomaterials"],
     "nano": ["nanotechnology", "nanomaterials", "nano", "nanoscale"],
     "drones": ["drone", "uav", "aerial", "flight", "aircraft", "control"],
+    "aeronautics": ["aeronautics", "aerospace", "aircraft", "flight", "aerodynamics", "propulsion", "gas_dynamics"],
     "aerospace": ["aerospace", "aircraft", "flight", "aerodynamics", "propulsion", "space"],
     "automobile": ["automobile", "automotive", "vehicle", "engine", "ic_engines"],
     "cars": ["automobile", "automotive", "vehicle", "engine"],
@@ -316,3 +317,78 @@ def handout_summary(cat: Catalog, code: str) -> dict:
         "makeup": {"status": h["makeup_status"], "text": h["makeup_evidence"] or NO_INFO.format(ic=ic)},
         "attendance": {"status": h["attendance_status"], "text": h["attendance_evidence"] or NO_INFO.format(ic=ic)},
     }
+
+
+# ---------------------------------------------------------------------------- topic matching (hybrid)
+
+# what each department prefix is about - lets 'finance' find the FIN courses even when a course text is thin
+DEPT_TOPICS = {
+    "FIN": "finance financial", "ECON": "economics economic finance", "MGTS": "management business",
+    "BIO": "biology biological biotech biotechnology genetics life", "PHA": "pharmacy pharmaceutical pharmacology drug",
+    "CHEM": "chemistry chemical", "PHY": "physics", "MATH": "mathematics maths math", "CS": "computer computing software programming",
+    "EEE": "electrical electronics", "ECE": "electronics communication", "INSTR": "instrumentation", "ME": "mechanical",
+    "CE": "civil construction", "CHE": "chemical process", "MF": "manufacturing production", "HSS": "humanities",
+    "GS": "media communication writing", "ENVS": "environment environmental sustainability", "SNS": "nanoscience nano",
+    "AN": "aeronautics aerospace flight aircraft", "MST": "materials", "DE": "design",
+}
+_GENERIC = {"minor", "in", "and", "of", "science", "sciences", "engineering", "technology", "technologies", "studies",
+            "introduction", "the", "for", "devices", "information", "applied"}
+
+
+def _stems(text: str) -> set:
+    return {stem(w) for w in re.findall(r"[a-z]+", (text or "").lower()) if w not in _GENERIC and len(w) > 2}
+
+
+@lru_cache(maxsize=1)
+def _anchors():
+    """topic anchors from the Bulletin's own structure: each minor (name -> its courses) and each
+    department prefix (topic words -> its courses). Used to boost, never to filter."""
+    cat = get_catalog()
+    out = []
+    for name, m in cat.minors_by_name.items():
+        codes = {cat.canon(r["code"]) for g in list(m["core"].values()) + list(m["electives"].values()) for r in g}
+        out.append((name, _stems(name.replace("Minor in", "")), codes, 0.25))
+    for dept, words in DEPT_TOPICS.items():
+        codes = {cat.canon(c) for c in set(cat.courses) | set(cat.offerings) if c.split()[0] == dept}
+        out.append((f"{dept} department", _stems(words), codes, 0.15))
+    return out
+
+
+class TopicMatch:
+    """Scores courses against one topic: 0.4 x keyword (BM25, scaled to the best course in the timetable)
+    + 0.6 x semantic similarity (agent/semantic.py), + a boost for courses of a minor / department whose
+    name matches the topic. Weights picked on tests/eval_retrieval.py."""
+
+    W_KW = 0.4
+
+    def __init__(self, text: str):
+        from agent.semantic import get_semantic
+        self.text = text or ""
+        self.q = expand(self.text)
+        idx = get_index()
+        self.idx = idx
+        self.kw = {c: idx.score(c, self.q) for c in idx.docs} if self.q else {}
+        self.kmax = max((s for s, _ in self.kw.values()), default=0) or 1.0
+        sem = get_semantic()
+        self.sim = sem.similarity(self.text, list(idx.docs)) if (sem and self.q) else {}
+        qs = _stems(self.text)
+        cat = get_catalog()
+        self.cat = cat
+        self.anchors = [(label, codes, boost) for label, words, codes, boost in _anchors() if qs & words]
+
+    def score(self, code: str) -> dict:
+        s, hits = self.kw.get(code, (0.0, []))
+        sim = max(self.sim.get(code, 0.0), 0.0)
+        total = self.W_KW * s / self.kmax + (1 - self.W_KW) * sim
+        why = None
+        cn = self.cat.canon(code)
+        for label, codes, boost in self.anchors:
+            if cn in codes:
+                total += boost
+                why = label
+                break
+        return {"score": total, "kw": s, "hits": hits, "sim": sim, "anchor": why}
+
+    def relevant(self, m: dict) -> bool:
+        """a real match: some keyword hit or clear semantic similarity, or it's in a matching minor/department"""
+        return m["anchor"] is not None or (m["score"] >= 0.12 and (m["kw"] > 0 or m["sim"] >= 0.18))

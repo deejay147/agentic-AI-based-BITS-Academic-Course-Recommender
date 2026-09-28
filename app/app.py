@@ -508,6 +508,8 @@ PROP_CLASS = {True: ("yes", "✅ Yes"), False: ("no", "❌ No"), None: ("unk", "
 
 def render_card(r):
     shown = r.get("shown_as") or r["fills"]
+    if r.get("locked"):
+        return render_locked(r)
     with st.container(border=True):
         head = (f"<div class='ctitle'><span class='code'>{esc(r['code'])}</span> · {esc(r['title'])}</div>"
                 + cat_badge(shown, f"Fills {shown}")
@@ -516,6 +518,14 @@ def render_card(r):
                    if len(r["can_count_as"]) > 1 else "")
                 + (badge(f"IC: {r['ic']}", *GREY) if r.get("ic") else ""))
         st.markdown(head, unsafe_allow_html=True)
+        why_match = []
+        if r.get("anchor"):
+            why_match.append(badge(f"📚 {r['anchor']}", "#f0abfc", "rgba(217,70,239,.16)"))
+        if r.get("similarity") and r["similarity"] >= 0.25:
+            why_match.append(badge(f"🧠 {int(round(r['similarity'] * 100))}% similar in content", "#a5f3fc",
+                                   "rgba(34,211,238,.14)"))
+        if why_match:
+            st.markdown(" ".join(why_match), unsafe_allow_html=True)
         if r.get("related"):
             st.markdown(badge(f"🔭 Related to '{r.get('related_to')}'", "#a5f3fc", "rgba(34,211,238,.16)")
                         + "<span class='muted'>no direct mention; shares words with courses on that topic</span>",
@@ -548,6 +558,20 @@ def render_card(r):
                        + (f" · Handout: {src['handout']}" if src.get("handout") else " · no handout supplied"))
 
 
+def render_locked(r):
+    """a course that matches what was asked but the student can't take yet - shown with the reason"""
+    with st.container(border=True):
+        st.markdown(f"<div class='ctitle'><span class='code'>{esc(r['code'])}</span> · {esc(r['title'])}</div>"
+                    + badge("🔒 Not open to you this semester", "#fca5a5", "rgba(239,68,68,.18)")
+                    + cat_badge(r["fills"], f"would be {r['fills']}") + badge(f"{r['units']} units")
+                    + (badge(f"📚 {r['anchor']}", "#f0abfc", "rgba(217,70,239,.16)") if r.get("anchor") else "")
+                    + (badge(f"🧠 {int(round(r.get('similarity', 0) * 100))}% similar in content", "#a5f3fc",
+                             "rgba(34,211,238,.14)") if r.get("similarity", 0) >= 0.25 else ""),
+                    unsafe_allow_html=True)
+        st.markdown("".join(f"<div class='prop no'><b>Why not:</b> {esc(b)}</div>" for b in r.get("blocked_by", [])),
+                    unsafe_allow_html=True)
+
+
 def render_cards(recs):
     for r in recs:
         render_card(r)
@@ -567,6 +591,12 @@ def answer(q):
         m = re.search(r"\n\n\*\*1\. .*?(?=\n\n\*\*(Could not verify|Matches your topic|Closest options)|\Z)", text, re.S)
         if m:
             text, footer = text[:m.start()], text[m.end():].strip()
+    blocked = out.get("blocked") or []
+    if blocked:
+        footer = re.sub(r"\*\*Matches your topic, but not open to you this semester:\*\*.*?(?=\n\n\*\*|\Z)", "",
+                        footer, flags=re.S).strip()
+        text = re.sub(r"\*\*Matches your topic, but not open to you this semester:\*\*.*?(?=\n\n\*\*|\Z)", "",
+                      text, flags=re.S).strip()
     extra = []
     if out["mode"] == "llm" and out.get("could_not_verify"):
         extra.append("Could not verify for: " + ", ".join(c["code"] for c in out["could_not_verify"]))
@@ -574,14 +604,26 @@ def answer(q):
         extra.append("Dropped by policy validation: " +
                      ", ".join(f"{r['code']} ({'; '.join(r['reasons'])})" for r in out["rejected_by_validation"]))
     st.session_state.chat.append({"role": "assistant", "content": text, "cards": out["recommendations"],
-                                  "footer": footer, "extra": extra})
+                                  "footer": footer, "extra": extra, "blocked": blocked,
+                                  "blocked_first": out.get("blocked_first", False)})
 
 
 def show_turn(turn):
     with st.chat_message(turn["role"], avatar="🧑‍🎓" if turn["role"] == "user" else "🎓"):
         st.markdown(turn["content"])
+        blocked = turn.get("blocked") or []
+        if blocked and turn.get("blocked_first"):
+            st.markdown("<div class='banner bad'>🔒 Best matches for this, but not open to you this semester</div>",
+                        unsafe_allow_html=True)
+            render_cards(blocked)
+            if turn.get("cards"):
+                st.markdown("<div class='banner ok'>✅ Closest courses you can take now</div>", unsafe_allow_html=True)
         if turn.get("cards"):
             render_cards(turn["cards"])
+        if blocked and not turn.get("blocked_first"):
+            st.markdown("<div class='banner bad'>🔒 Also matches, but not open to you this semester</div>",
+                        unsafe_allow_html=True)
+            render_cards(blocked)
         if turn.get("footer"):
             st.markdown(turn["footer"])
         for x in turn.get("extra") or []:
@@ -631,10 +673,9 @@ with tab_ask:
             if gtopic:
                 blocked = sess.blocked_matches(gtopic, cats or None)
                 if blocked:
-                    with st.container(border=True):
-                        st.markdown("**🔒 Good matches you can't take this semester**")
-                        for b in blocked:
-                            st.markdown(f"- **{b['code']}** {b['title']}: " + "; ".join(b["blocked_by"]))
+                    st.markdown("<div class='banner bad'>🔒 Good matches you can't take this semester</div>",
+                                unsafe_allow_html=True)
+                    render_cards(blocked)
             if not n and gprops:
                 near = sess.near_misses(cats or None, gtopic or None, gprops)
                 if near:

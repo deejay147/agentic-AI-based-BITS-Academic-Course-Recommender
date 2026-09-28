@@ -336,15 +336,17 @@ class Recommender:
             asked = [c for c in p["categories"] if c in r["can_count_as"]]
             r["shown_as"] = asked[0] if asked else r["fills"]
         text = head + format_recommendations(res, p, s)
-        near = []
+        near, shown_blocked, blocked_first = [], [], False
         if p["topics"]:
             blocked = s.blocked_matches(p["topics"], p["categories"])
-            best = recs[0]["match_score"] if recs else 0
-            if blocked and (len(recs) < 3 or blocked[0]["score"] > 2 * best):
-                if recs and blocked[0]["score"] > 2 * best:
+            best = max((r["match_score"] for r in recs if not r.get("related")), default=0)
+            if blocked and (len(recs) < 3 or blocked[0]["score"] > 1.5 * best):
+                shown_blocked = blocked
+                blocked_first = blocked[0]["score"] > 1.5 * best
+                if recs and blocked_first:
                     # the real matches are blocked - say that first, the list below only touches the topic
                     text = head + f"> **Heads up:** the courses that best match '{p['topics']}' aren't open to you " \
-                                  f"this semester (reasons at the bottom). The ones listed only partly cover it.\n\n" \
+                                  f"this semester (shown with the reason). The ones you can take only partly cover it.\n\n" \
                         + text[len(head):]
                 text += "\n\n**Matches your topic, but not open to you this semester:**\n\n" + "\n".join(
                     f"- {b['code']} - {b['title']}: {'; '.join(b['blocked_by'])}" for b in blocked)
@@ -354,7 +356,7 @@ class Recommender:
                 text += "\n\n**Closest options** (meet some of what you asked, not all):\n\n" + \
                         "\n".join(_short_card(r) for r in near)
         return {"mode": "rules", "parsed": p, "text": text, "recommendations": recs, "near_misses": near,
-                "could_not_verify": res["could_not_verify"]}
+                "could_not_verify": res["could_not_verify"], "blocked": shown_blocked, "blocked_first": blocked_first}
 
 
 # ---------------------------------------------------------------------- templates (rules mode)

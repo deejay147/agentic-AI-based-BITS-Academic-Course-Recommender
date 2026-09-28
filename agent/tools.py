@@ -12,7 +12,7 @@ from engine.profile import Profile
 from engine.schedule import check_course, busy_from_registered, pick_offering
 from collections import Counter
 
-from agent.retrieval import PROPERTIES, expand, get_index, handout_summary, prop, readable
+from agent.retrieval import PROPERTIES, TopicMatch, expand, get_index, handout_summary, prop, readable
 
 DAYS = ["M", "T", "W", "Th", "F", "S"]
 
@@ -89,7 +89,8 @@ class Session:
         ranked by topic match (or the profile's interests if no topic is given)."""
         cats = [c.upper() for c in (categories or [])]
         require = [r for r in (require or []) if r in PROPERTIES]
-        q = expand(topics or "") or expand(self.profile.interests or "")
+        topic_text = topics or self.profile.interests or ""
+        tm = TopicMatch(topic_text) if expand(topic_text) else None
         idx = get_index()
         avoid = _hours_to_avoid(no_8am, free_day)
         busy = busy_from_registered(self.cat, self.profile.current, self.profile.batch, self.profile.current_sections) if avoid else None
@@ -119,10 +120,12 @@ class Session:
                     excluded += 1
                     continue
                 sections = fit["sections"]
-            score, hits = idx.score(code, q) if q else (0.0, [])
-            if topics and score == 0:
+            m = tm.score(code) if tm else {"score": 0.0, "hits": [], "sim": 0.0, "anchor": None, "kw": 0.0}
+            if topics and not tm.relevant(m):
                 continue
-            rec = self._card(x, counts, props, hits, score, sections)
+            rec = self._card(x, counts, props, m["hits"], m["score"], sections)
+            rec["similarity"] = round(m["sim"], 2)
+            rec["anchor"] = m["anchor"]
             (unverified if unknown else matched).append(rec)
 
         key = lambda r: (-r["match_score"], r["code"])
@@ -143,13 +146,12 @@ class Session:
         # drop the long tail of weak topic matches (a single stray word deep in a lecture plan)
         if topics and matched:
             top = matched[0]["match_score"]
-            matched = [r for r in matched if r["match_score"] >= max(1.5, 0.3 * top)]
+            matched = [r for r in matched if r["match_score"] >= 0.45 * top]
         related = {"terms": [], "results": []}
         weak = False
-        if topics and matched:
-            # direct matches that are far weaker than the best match anywhere in the timetable only brush
-            # the topic (one stray word) - add related courses too
-            best_any = max((idx.score(c, q)[0] for c in idx.docs), default=0)
+        if topics and matched and tm:
+            # direct matches far weaker than the best match anywhere in the timetable only brush the topic
+            best_any = max((tm.score(c)["score"] for c in idx.docs), default=0)
             weak = matched[0]["match_score"] < 0.35 * best_any
         if topics and (len(matched) < 3 or weak):
             related = self.related_courses(topics, cats, require, no_8am, free_day,
@@ -168,50 +170,23 @@ class Session:
 
     def related_courses(self, topics: str, categories=None, require=None, no_8am=False, free_day=None,
                         exclude=(), limit=4) -> dict:
-        """'Nearby' courses when few eligible ones mention the topic directly.
-
-        Pseudo-relevance feedback: find the courses that match the topic best in the WHOLE timetable
-        (eligible or not - e.g. BIO / PHA courses for 'biotech'), take the words that are typical of them
-        (cell, gene, protein ...), and search the student's eligible courses with those words instead.
-        Deterministic, and the words used are returned so the answer can say why a course is related."""
-        idx = get_index()
-        q = expand(topics or "")
-        if not q:
-            return {"terms": [], "results": []}
-        qset = set(q)
-        seeds = sorted(((idx.score(c, q)[0], c) for c in idx.docs), reverse=True)[:6]
-        # only learn from strong matches, or one weak hit drags in unrelated words
-        seeds = [c for sc, c in seeds if sc > 0 and sc >= 0.5 * seeds[0][0]]
-        weight = Counter()
-        for c in seeds:
-            d = idx.docs[c]
-            n = sum(d.values()) or 1
-            for t, f in d.items():
-                parts = t.split("_")
-                if t in qset or not all(x.isalpha() and len(x) >= 4 for x in parts) or idx.idf.get(t, 0) < 2.0:
-                    continue      # skip the query itself, codes / 'l#' / 'chap' fragments, words most courses share
-                weight[t] += f / n * idx.idf[t]
-        terms = [t for t, _ in weight.most_common(14)]
-        if not terms:
+        """'Nearby' courses when few eligible ones match the topic directly: the student's eligible
+        courses that the semantic model (trained on the catalogue) puts closest to the topic, even
+        without a shared keyword. Returned with the words the model links to the topic, so the answer
+        can say why."""
+        from agent.semantic import get_semantic
+        sem = get_semantic()
+        if not sem or not expand(topics or ""):
             return {"terms": [], "results": []}
         pool = self.find_courses(categories=categories, topics=None, require=require, no_8am=no_8am,
                                  free_day=free_day, limit=500)["results"]
-        scored = []
-        for r in pool:
-            if r["code"] in exclude:
-                continue
-            sc, hits = idx.score(r["code"], terms)
-            if sc > 0 and (len(hits) >= 2 or sc >= 3):     # one incidental shared word isn't 'related'
-                scored.append((sc, hits, r))
-        scored.sort(key=lambda t: -t[0])
-        if scored:
-            top = scored[0][0]
-            scored = [t for t in scored if t[0] >= max(1.0, 0.3 * top)]
-        out = []
-        for sc, hits, r in scored[:limit]:
-            out.append({**r, "match_score": round(sc, 2), "match_terms": hits, "related": True,
-                        "related_to": topics})
-        return {"terms": [readable(t) for t in terms[:8]], "results": out}
+        sims = sem.similarity(topics, [r["code"] for r in pool])
+        scored = sorted(((sims[r["code"]], r) for r in pool if r["code"] not in exclude and sims[r["code"]] >= 0.15),
+                        key=lambda t: -t[0])
+        out = [{**r, "match_score": round(sc, 2), "similarity": round(sc, 2), "match_terms": [], "related": True,
+                "related_to": topics} for sc, r in scored[:limit]]
+        get_index()     # makes sure readable() knows the surface forms
+        return {"terms": sem.neighbours(topics, 8), "results": out}
 
     def _card(self, x, counts, props, hits, score, sections):
         c = self.cat.courses.get(x["code"]) or {}
@@ -233,21 +208,23 @@ class Session:
 
     def blocked_matches(self, topics: str, categories=None, limit=3) -> list[dict]:
         """Courses that match the topic but the student can't take this semester, with the rule that
-        blocks each. Makes 'nothing found' answers useful instead of just empty."""
-        q = expand(topics or "")
-        if not q:
+        blocks each (full cards, marked locked). Makes 'nothing found' answers useful."""
+        if not expand(topics or ""):
             return []
-        idx = get_index()
+        tm = TopicMatch(topics)
         out = []
         for code, x in self.ineligible.items():
             if categories and x["category"] not in [c.upper() for c in categories] and \
                     not ({"OPEL"} & set(c.upper() for c in categories)):
                 continue
-            sc, hits = idx.score(code, q)
-            if sc <= 0:
+            m = tm.score(code)
+            if not tm.relevant(m):
                 continue
-            out.append({"code": code, "title": x["title"], "score": round(sc, 2),
-                        "blocked_by": [f"{c['note']} ({c['clause']})" for c in x["checks"] if not c["ok"]]})
+            card = self._card(x, self.can_count_as(x), {}, m["hits"], m["score"], x["sections"])
+            reasons = [f"{c['note']} ({c['clause']})" for c in x["checks"] if not c["ok"]]
+            card.update({"locked": True, "blocked_by": reasons, "eligibility": reasons, "score": round(m["score"], 2),
+                         "similarity": round(m["sim"], 2), "anchor": m["anchor"]})
+            out.append(card)
         out.sort(key=lambda r: -r["score"])
         seen, uniq = set(), []
         for r in out:   # cross-listed duplicates (ECON F412 / FIN F313 share a handout)
@@ -255,10 +232,9 @@ class Session:
             if k not in seen:
                 seen.add(k)
                 uniq.append(r)
-        out = uniq
-        if out:
-            out = [r for r in out if r["score"] >= max(1.5, 0.3 * out[0]["score"])]
-        return out[:limit]
+        if uniq:
+            uniq = [r for r in uniq if r["score"] >= 0.45 * uniq[0]["score"]]
+        return uniq[:limit]
 
     def near_misses(self, categories=None, topics=None, require=None, limit=3) -> list[dict]:
         """When nothing satisfies every requested property: the best eligible courses ranked by how many

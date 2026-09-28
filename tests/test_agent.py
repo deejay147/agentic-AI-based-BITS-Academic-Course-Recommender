@@ -169,3 +169,16 @@ def test_provider_resolution(monkeypatch):
     assert cfg["provider"] == "gemini" and cfg["api_key"] == "g-key" and "generativelanguage" in cfg["base_url"]
     monkeypatch.delenv("GEMINI_API_KEY")
     assert resolve_llm()["api_key"] == ""     # nothing set -> rules mode
+
+
+def test_finance_interest_finds_finance_courses():
+    # 'finance' used to surface Copywriting (it mentions 'market'); now finance courses rank first
+    from agent.tools import Session
+    s = Session(load("ece_3rd_year"))
+    top = s.find_courses(topics="finance", limit=5)["results"]
+    assert top and all(r["code"].split()[0] in ("FIN", "ECON") for r in top)
+    s2 = Session(load("cs_2nd_year"))
+    res = s2.find_courses(categories=["OPEL"], topics="finance", limit=8)
+    assert "GS F344" not in [r["code"] for r in res["results"]]          # Copywriting
+    locked = s2.blocked_matches("finance", ["OPEL"])
+    assert locked and locked[0]["code"].startswith("FIN") and locked[0]["locked"] and locked[0]["blocked_by"]

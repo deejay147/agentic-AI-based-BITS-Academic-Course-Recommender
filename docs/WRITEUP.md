@@ -32,7 +32,7 @@ optional. Without an API key, a simpler built-in parser does its job, and every 
 | Minors | 23 |
 | Regulation rules used | 14 |
 | Items flagged for a human to check | 108 |
-| Automatic tests | 40 |
+| Automatic tests | 41 |
 
 ## 2. How it's built
 
@@ -164,13 +164,28 @@ every suggested course is checked again. It's dropped if:
 
 ### Matching interests to courses
 
-To find "AI-related" courses, the app uses **BM25**, a standard search formula. It scores each course on how
-often the search words appear in its title, description and lecture plan, giving more weight to rare words and to
-the title. A small list of synonyms helps: "AI" also searches for "machine learning", "neural networks" and so on.
-Weak matches are cut off rather than shown just to fill the list.
+The first version used keyword search only (BM25 plus a synonym list). Testing showed its weakness: "finance"
+returned Copywriting, because both texts mention "market". The final version scores each course on three signals:
 
-We chose this over AI-based "embedding" search because it gives the same result every time, needs no internet,
-and can show exactly which words matched.
+- **Keywords (BM25), weight 0.4.** How often the student's words and synonyms appear in the course's title,
+  description and lecture plan, with rare words counting more.
+- **A semantic model trained on the catalogue, weight 0.6.** Latent semantic analysis (LSA): the ~2,100 course texts
+  become TF-IDF vectors, and an SVD keeps the 100 strongest directions. Words that appear in the same kind of course
+  end up close together. The model learns from BITS's own documents that finance ≈ investors, capital, equity,
+  assets. It trains in ~5 s, needs no download or GPU, and is deterministic. Instructor names are removed from its
+  vocabulary.
+- **The Bulletin's structure.** Courses of a minor or department whose name matches the topic get a boost and a label.
+
+When few allowed courses match, the nearest ones by the model are added as "related", with the words it links to the
+topic. When the best matches are courses the student can't take yet, they're shown first as locked cards with the
+blocking rule. For example, finance courses for a CS 2nd-year are blocked by Reg 3.15(b)(i).
+
+**Measured, not guessed.** `tests/eval_retrieval.py` uses the Bulletin's 21 minors (with enough offered courses) as
+ground truth: the minor's name is the query, and its courses are the answers. Over 582 offered courses, keywords
+alone reach precision@5 0.29, recall@10 0.37 and MRR 0.50. With the trained model they reach 0.34, 0.44 and 0.54. The
+minors' lists are narrow, so the absolute numbers understate quality. The model size and weights were tuned on this
+set, which is small (21 queries), so the gain is indicative, not precise. A re-ranking step that averages the top
+results (Rocchio) was tried and dropped because it didn't help consistently.
 
 ### Two modes
 
@@ -194,7 +209,7 @@ correct.
 | When the Bulletin disagrees with itself, follow the semester chart and log it | The chart shows where each course actually sits; nothing is hidden |
 | Every course property is yes / no / not mentioned, with a quote | So the app never quietly assumes |
 | Rules in plain code; AI answers double-checked | The AI can't recommend a course you can't take |
-| BM25 search instead of AI embeddings | Same answer every time, works offline, easy to explain |
+| Keyword + a small LSA model trained on the catalogue, not a downloaded embedding model | Learns BITS's own vocabulary; offline, deterministic, ~5 s to train; measured against the minors |
 | No-key mode first, AI optional | Anyone can run it; if the AI fails, the app still works |
 | Support Gemini and Groq as well as Claude | Free options for people without a paid key |
 | Work out the student's year from their ID | One less thing to type in, and one less thing to get wrong |
@@ -280,6 +295,8 @@ Other scope choices:
   timetable courses with no class times. The app shows these; it doesn't guess.
 - Some information isn't in the dataset at all, like the CGPA cutoff for higher-degree courses and which courses
   count for 2+2 students. The app says so.
-- The synonym list is written by hand. AI-based search could find more related courses in no-key mode.
+- Interest matching is measured on only 21 topics, and the minors' lists are a strict stand-in for relevance. A
+  labelled set of real student queries would tune it better. A pretrained sentence-embedding model could be tried
+  next, keeping the trained LSA model as the offline fallback.
 - Pilani and one semester only. Other campuses would need their own timetables and handouts run through the same
   pipeline.

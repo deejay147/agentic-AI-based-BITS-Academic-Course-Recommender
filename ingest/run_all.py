@@ -15,6 +15,7 @@ STEPS = [
     ("handouts", handouts.build),
     ("regulation rules", regulations_rules.build),
     ("sqlite db + validation", build_db.build),
+    ("semantic course model (agent/semantic.py)", lambda: __import__("agent.semantic", fromlist=["build"]).build()),
 ]
 
 if __name__ == "__main__":
