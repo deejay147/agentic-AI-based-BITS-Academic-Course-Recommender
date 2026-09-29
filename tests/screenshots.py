@@ -1,3 +1,4 @@
+import re
 """Takes the README screenshots from a running dashboard (streamlit run app/app.py --server.port 8599)."""
 import asyncio
 import sys
@@ -23,14 +24,14 @@ async def main():
         await pg.wait_for_timeout(7000)
         await pg.screenshot(path=OUT + "1_requirements.png")
 
-        await pg.get_by_role("tab", name="Ask").click()
+        await pg.get_by_role("tab", name=re.compile(r"Ask$")).click()
         await pg.wait_for_timeout(800)
         await ask(pg, "Suggest DELs related to AI.")
         await pg.screenshot(path=OUT + "2_ask_ai_dels.png")
         await ask(pg, "I like finance and economics, any OPEL?", 7000)   # newest answer shows first
         await pg.screenshot(path=OUT + "3_ask_blocked_topic.png")
 
-        await pg.get_by_role("tab", name="Plan semester").click()
+        await pg.get_by_role("tab", name=re.compile(r"Plan semester$")).click()
         await pg.wait_for_timeout(1000)
         ms = pg.locator("div[data-testid='stMultiSelect']").filter(has_text="Add any course").locator("input").first
         for code in ["CS F317"]:
@@ -45,7 +46,7 @@ async def main():
         await pg.wait_for_timeout(1500)
         await pg.screenshot(path=OUT + "4_plan_semester.png")
 
-        await pg.get_by_role("tab", name="Eligible courses").click()
+        await pg.get_by_role("tab", name=re.compile(r"Eligible courses$")).click()
         await pg.wait_for_timeout(2000)
         await pg.screenshot(path=OUT + "5_eligible.png")
         await b.close()

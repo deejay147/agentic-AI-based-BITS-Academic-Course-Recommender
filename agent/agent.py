@@ -345,9 +345,8 @@ class Recommender:
                 blocked_first = blocked[0]["score"] > 1.5 * best
                 if recs and blocked_first:
                     # the real matches are blocked - say that first, the list below only touches the topic
-                    text = head + f"> **Heads up:** the courses that best match '{p['topics']}' aren't open to you " \
-                                  f"this semester (shown with the reason). The ones you can take only partly cover it.\n\n" \
-                        + text[len(head):]
+                    text = head + f"> The best matches for '{p['topics']}' aren't open to you this semester " \
+                                  f"(reasons below); the ones you can take only partly cover it.\n\n" + text[len(head):]
                 text += "\n\n**Matches your topic, but not open to you this semester:**\n\n" + "\n".join(
                     f"- {b['code']} - {b['title']}: {'; '.join(b['blocked_by'])}" for b in blocked)
         if not recs and len(p["require"]) >= 1:
@@ -390,19 +389,12 @@ def format_recommendations(res, parsed, s) -> str:
         want.append("no 8 AM classes")
     if f["free_day"]:
         want.append(f"{f['free_day']} free")
-    lines = [f"**Looking for:** {', '.join(want) or 'anything that fits your requirements'}", ""]
-    if res.get("topic_groups"):
-        lines.append(f"📚 In the Bulletin, '{f['topics']}' is: {'; '.join(res['topic_groups'])}. "
-                     "All of their courses offered this semester are listed - the ones you can take below, the ones "
-                     "you can't yet marked 🔒 with the reason.")
-        lines.append("")
+    lines = [f"**Looking for:** {', '.join(want) or 'anything that fits your requirements'}"
+             + (f" · in the Bulletin: {', '.join(res['topic_groups'])}" if res.get("topic_groups") else ""), ""]
     rel = res.get("related") or {}
     n_direct = sum(1 for r in res["results"] if not r.get("related"))
     if rel.get("results") and any(r.get("related") for r in res["results"]):
-        lines.append(("Nothing open to you mentions it directly, so here" if not n_direct else
-                      "Fewer direct matches than I'd like, so I've also added") +
-                     f" related courses (🔭), found through words typical of '{f['topics']}' courses: "
-                     f"{', '.join(rel['terms'][:6])}.")
+        lines.append(f"Also related (linked through {', '.join(rel['terms'][:5])}).")
         lines.append("")
     if not res["results"]:
         units_left = 25 - s.ev["registered_units"]
@@ -414,7 +406,7 @@ def format_recommendations(res, parsed, s) -> str:
             lines.append(f"{res['excluded_by_property_or_time']} eligible courses were ruled out because the "
                          f"handout/timetable contradicts a requested property or time preference.")
     for i, r in enumerate(res["results"], 1):
-        lines.append(f"**{i}. {r['code']} - {r['title']}** ({r['units']} units)" + (" 🔭 related" if r.get("related") else ""))
+        lines.append(f"**{i}. {r['code']} - {r['title']}** ({r['units']} units)" + (" (related)" if r.get("related") else ""))
         asked = [c for c in f["categories"] if c in r["can_count_as"]]
         if asked and asked[0] != r["fills"]:
             fills = f"{asked[0]} - you asked for {asked[0]}; it's also in your {r['fills']} pool, so it can be filed either way (reg 2.05)"
