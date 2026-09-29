@@ -2,7 +2,8 @@
 
     python -m ingest.run_all
 
-Takes ~3-4 min, most of it is pdfplumber chewing through the bulletin.
+Takes ~3-4 min for the PDFs (mostly pdfplumber on the bulletin), plus a few minutes of embedding
+training on CPU at the end.
 """
 import time
 
@@ -15,18 +16,11 @@ STEPS = [
     ("handouts", handouts.build),
     ("regulation rules", regulations_rules.build),
     ("sqlite db + validation", build_db.build),
-    ("semantic course model (agent/semantic.py)", lambda: __import__("agent.semantic", fromlist=["build"]).build()),
-    ("course embeddings, bge-small (agent/embeddings.py; skipped if fastembed isn't installed)",
-     lambda: _try_embeddings()),
+    # trains the LSA model, rebuilds the bge-small course embedding index, re-runs the retrieval evaluation
+    ("embedding training (agent/train_embeddings.py)",
+     lambda: __import__("agent.train_embeddings", fromlist=["main"]).main([])),
 ]
 
-
-def _try_embeddings():
-    try:
-        from agent import embeddings
-        print("  ", embeddings.build())
-    except ImportError:
-        print("   fastembed not installed - keeping the committed data/processed/embeddings.npz")
 
 if __name__ == "__main__":
     for name, fn in STEPS:
