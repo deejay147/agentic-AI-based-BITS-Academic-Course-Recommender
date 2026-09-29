@@ -182,3 +182,21 @@ def test_finance_interest_finds_finance_courses():
     assert "GS F344" not in [r["code"] for r in res["results"]]          # Copywriting
     locked = s2.blocked_matches("finance", ["OPEL"])
     assert locked and locked[0]["code"].startswith("FIN") and locked[0]["locked"] and locked[0]["blocked_by"]
+
+
+def test_topic_lists_the_whole_bulletin_group():
+    # 'finance' must bring every offered Finance-minor course (can take, or locked with the reason);
+    # 'biotech' must bring the BIO / BIOT courses
+    from agent.tools import Session
+    from engine.catalog import get_catalog
+    cat = get_catalog()
+    m = cat.minors_by_name["Minor in Finance"]
+    minor = {r["code"] for g in list(m["core"].values()) + list(m["electives"].values()) for r in g}
+    offered = {c for c in cat.offerings if any(cat.same(c, x) for x in minor)}
+    for prof in ("cs_2nd_year", "ece_3rd_year"):
+        s = Session(load(prof))
+        shown = s.find_courses(topics="finance", limit=6)["results"] + s.blocked_matches("finance")
+        codes = {c for r in shown for c in [r["code"]] + r.get("also", [])}
+        assert offered <= codes, (prof, offered - codes)
+        bio = s.find_courses(topics="biotech", limit=6)["results"] + s.blocked_matches("biotech")
+        assert sum(r["code"].split()[0] in ("BIO", "BIOT") for r in bio) >= 5

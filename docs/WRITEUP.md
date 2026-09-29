@@ -164,28 +164,38 @@ every suggested course is checked again. It's dropped if:
 
 ### Matching interests to courses
 
-The first version used keyword search only (BM25 plus a synonym list). Testing showed its weakness: "finance"
-returned Copywriting, because both texts mention "market". The final version scores each course on three signals:
+Interest matching went through three versions, each driven by a failure found in testing:
 
-- **Keywords (BM25), weight 0.4.** How often the student's words and synonyms appear in the course's title,
-  description and lecture plan, with rare words counting more.
-- **A semantic model trained on the catalogue, weight 0.6.** Latent semantic analysis (LSA): the ~2,100 course texts
-  become TF-IDF vectors, and an SVD keeps the 100 strongest directions. Words that appear in the same kind of course
-  end up close together. The model learns from BITS's own documents that finance ≈ investors, capital, equity,
-  assets. It trains in ~5 s, needs no download or GPU, and is deterministic. Instructor names are removed from its
-  vocabulary.
-- **The Bulletin's structure.** Courses of a minor or department whose name matches the topic get a boost and a label.
+1. **Keywords only (BM25 + synonyms).** "finance" returned Copywriting, because both texts mention "market".
+2. **+ a model trained on the catalogue (LSA).** The ~2,100 course texts become TF-IDF vectors, and an SVD keeps 100
+   directions, so the model learns BITS's own vocabulary (finance ≈ investors, capital, equity). Better, but the student
+   wanted every Finance-minor course for "finance" and real biotech courses for "biotech", and ranking alone didn't
+   guarantee that.
+3. **+ contextual embeddings and the Bulletin's topic groups (final).**
+   - A pretrained sentence-embedding model (BAAI/bge-small-en-v1.5 via fastembed / ONNX Runtime, no PyTorch)
+     embeds every course's title, description and lecture plan. It matches meaning in context: "investing in stocks"
+     finds portfolio management with no shared word.
+   - The course score is 0.25 keyword + 0.15 LSA + 0.6 embedding.
+   - Separately, each minor, department and programme elective pool is a topic group. A query matches groups by
+     name, by synonym, or when its embedding is far closer (z ≥ 2.9) to a group's courses than to the other groups.
+   - Every offered course in a matched group is listed: the ones the student can take, and, 🔒, the ones they can't
+     yet, with the rule.
 
-When few allowed courses match, the nearest ones by the model are added as "related", with the words it links to the
-topic. When the best matches are courses the student can't take yet, they're shown first as locked cards with the
-blocking rule. For example, finance courses for a CS 2nd-year are blocked by Reg 3.15(b)(i).
+**Is the embedding model allowed under "use only the shared dataset"?** The model is a tool, like the optional LLM.
+The only data it's run on is the supplied course texts, and nothing from outside the dataset is added to the index.
+If the model can't be loaded, the app falls back to keyword + LSA.
 
-**Measured, not guessed.** `tests/eval_retrieval.py` uses the Bulletin's 21 minors (with enough offered courses) as
-ground truth: the minor's name is the query, and its courses are the answers. Over 582 offered courses, keywords
-alone reach precision@5 0.29, recall@10 0.37 and MRR 0.50. With the trained model they reach 0.34, 0.44 and 0.54. The
-minors' lists are narrow, so the absolute numbers understate quality. The model size and weights were tuned on this
-set, which is small (21 queries), so the gain is indicative, not precise. A re-ranking step that averages the top
-results (Rocchio) was tried and dropped because it didn't help consistently.
+**Measured, not guessed** (`tests/eval_retrieval.py`, results in `docs/retrieval_eval.md`):
+
+- **Ranking.** The Bulletin's 21 minors are ground truth: the minor's name is the query, and its courses are the
+  answers, ranked among all 582 offered courses.
+  - Keywords alone: precision@5 0.29, recall@10 0.37, MRR 0.50.
+  - Keywords + LSA: 0.34, 0.44, 0.54.
+  - The final mix: 0.36, 0.47, 0.66.
+- **Everyday wording.** 19 queries ("investing and stock markets", "movies and journalism"…): the expected group is
+  found for all of them, with all its offered courses. These queries were used while tuning, so they're a check rather
+  than an unseen test. The weights and thresholds were chosen on these small sets. A re-ranking step (Rocchio) was
+  tried and dropped because it didn't help consistently.
 
 ### Two modes
 
@@ -209,7 +219,7 @@ correct.
 | When the Bulletin disagrees with itself, follow the semester chart and log it | The chart shows where each course actually sits; nothing is hidden |
 | Every course property is yes / no / not mentioned, with a quote | So the app never quietly assumes |
 | Rules in plain code; AI answers double-checked | The AI can't recommend a course you can't take |
-| Keyword + a small LSA model trained on the catalogue, not a downloaded embedding model | Learns BITS's own vocabulary; offline, deterministic, ~5 s to train; measured against the minors |
+| Keyword + LSA + a small ONNX sentence-embedding model (not a big PyTorch stack) | Matches meaning in context; light enough for a student laptop; falls back to keyword + LSA offline; each step measured against the minors |
 | No-key mode first, AI optional | Anyone can run it; if the AI fails, the app still works |
 | Support Gemini and Groq as well as Claude | Free options for people without a paid key |
 | Work out the student's year from their ID | One less thing to type in, and one less thing to get wrong |
@@ -295,8 +305,7 @@ Other scope choices:
   timetable courses with no class times. The app shows these; it doesn't guess.
 - Some information isn't in the dataset at all, like the CGPA cutoff for higher-degree courses and which courses
   count for 2+2 students. The app says so.
-- Interest matching is measured on only 21 topics, and the minors' lists are a strict stand-in for relevance. A
-  labelled set of real student queries would tune it better. A pretrained sentence-embedding model could be tried
-  next, keeping the trained LSA model as the offline fallback.
+- Interest matching is measured on small sets (21 minors, 19 everyday queries), partly used for tuning. A labelled
+  set of real student queries would give a fairer number.
 - Pilani and one semester only. Other campuses would need their own timetables and handouts run through the same
   pipeline.

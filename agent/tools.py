@@ -126,27 +126,35 @@ class Session:
             rec = self._card(x, counts, props, m["hits"], m["score"], sections)
             rec["similarity"] = round(m["sim"], 2)
             rec["anchor"] = m["anchor"]
+            if topics and tm.groups and not m["anchor"]:
+                rec["related"], rec["related_to"] = True, topics      # outside the topic's own group
             (unverified if unknown else matched).append(rec)
 
-        key = lambda r: (-r["match_score"], r["code"])
+        key = lambda r: (bool(r.get("related")), -r["match_score"], r["code"])   # the topic's group first
         matched.sort(key=key)
         unverified.sort(key=key)
         # cross-listed courses (EEE F313 / INSTR F313 ...) are one course - keep the first
         def dedupe(rows):
-            seen, out = set(), []
+            seen, out = {}, []
             for r in rows:
                 h = self.cat.handout(r["code"])
                 # same equivalence group, or literally the same handout pdf (ECON F412 / FIN F313)
                 k = (h or {}).get("file") or self.cat.canon(r["code"])
                 if k not in seen:
-                    seen.add(k)
+                    seen[k] = r
                     out.append(r)
+                else:
+                    seen[k].setdefault("also", []).append(r["code"])
             return out
         matched, unverified = dedupe(matched), dedupe(unverified)
-        # drop the long tail of weak topic matches (a single stray word deep in a lecture plan)
+        # drop the long tail of weak topic matches (a single stray word deep in a lecture plan) - but never a
+        # course from the topic's own group (minor / department / programme electives)
         if topics and matched:
             top = matched[0]["match_score"]
-            matched = [r for r in matched if r["match_score"] >= 0.45 * top]
+            matched = [r for r in matched if r.get("anchor") or r["match_score"] >= 0.45 * top]
+        # a topic with a Bulletin group: show the whole group, not a top 5
+        if topics and tm and tm.groups:
+            limit = max(limit, min(15, sum(1 for r in matched if r.get("anchor"))))
         related = {"terms": [], "results": []}
         weak = False
         if topics and matched and tm:
@@ -157,6 +165,7 @@ class Session:
             related = self.related_courses(topics, cats, require, no_8am, free_day,
                                            exclude={r["code"] for r in matched}, limit=max(3, limit - len(matched)))
         return {
+            "topic_groups": [g["label"] for g in tm.groups] if (tm and topics) else [],
             "filters": {"categories": cats, "topics": topics, "require": require, "no_8am": no_8am,
                         "free_day": free_day},
             "results": matched[:limit],
@@ -206,7 +215,7 @@ class Session:
                         "handout": (self.cat.handout(x["code"]) or {}).get("file")},
         }
 
-    def blocked_matches(self, topics: str, categories=None, limit=3) -> list[dict]:
+    def blocked_matches(self, topics: str, categories=None, limit=4) -> list[dict]:
         """Courses that match the topic but the student can't take this semester, with the rule that
         blocks each (full cards, marked locked). Makes 'nothing found' answers useful."""
         if not expand(topics or ""):
@@ -225,15 +234,19 @@ class Session:
             card.update({"locked": True, "blocked_by": reasons, "eligibility": reasons, "score": round(m["score"], 2),
                          "similarity": round(m["sim"], 2), "anchor": m["anchor"]})
             out.append(card)
-        out.sort(key=lambda r: -r["score"])
-        seen, uniq = set(), []
+        out.sort(key=lambda r: (r.get("anchor") is None, -r["score"]))
+        seen, uniq = {}, []
         for r in out:   # cross-listed duplicates (ECON F412 / FIN F313 share a handout)
             k = (self.cat.handout(r["code"]) or {}).get("file") or self.cat.canon(r["code"])
             if k not in seen:
-                seen.add(k)
+                seen[k] = r
                 uniq.append(r)
+            else:
+                seen[k].setdefault("also", []).append(r["code"])
         if uniq:
-            uniq = [r for r in uniq if r["score"] >= 0.45 * uniq[0]["score"]]
+            uniq = [r for r in uniq if r.get("anchor") or r["score"] >= 0.45 * uniq[0]["score"]]
+        if tm.groups:     # whole topic group, not a top 3
+            limit = max(limit, min(15, sum(1 for r in uniq if r.get("anchor"))))
         return uniq[:limit]
 
     def near_misses(self, categories=None, topics=None, require=None, limit=3) -> list[dict]:

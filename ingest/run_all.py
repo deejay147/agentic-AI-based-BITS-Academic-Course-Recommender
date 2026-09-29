@@ -16,7 +16,17 @@ STEPS = [
     ("regulation rules", regulations_rules.build),
     ("sqlite db + validation", build_db.build),
     ("semantic course model (agent/semantic.py)", lambda: __import__("agent.semantic", fromlist=["build"]).build()),
+    ("course embeddings, bge-small (agent/embeddings.py; skipped if fastembed isn't installed)",
+     lambda: _try_embeddings()),
 ]
+
+
+def _try_embeddings():
+    try:
+        from agent import embeddings
+        print("  ", embeddings.build())
+    except ImportError:
+        print("   fastembed not installed - keeping the committed data/processed/embeddings.npz")
 
 if __name__ == "__main__":
     for name, fn in STEPS:

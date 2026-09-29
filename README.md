@@ -260,6 +260,7 @@ The planner tab builds the whole semester, not just the new courses:
 | `tools.py` | The five tools the assistant uses (below), and the final double-check |
 | `retrieval.py` | Keyword search, topic scoring (keywords + semantic model + minor/department boost), handout property checks |
 | `semantic.py` | The semantic course model trained on the catalogue (LSA) |
+| `embeddings.py` | Contextual sentence embeddings of every course (bge-small via fastembed) |
 | `nlu.py` | The built-in question parser used in no-key mode |
 | `agent.py` | Runs the conversation in either mode, and formats the answers |
 
@@ -276,40 +277,42 @@ The planner tab builds the whole semester, not just the new courses:
 it, if it doesn't count as what you asked for (you asked for a DEL and it would be an OPEL), or if the handout says
 the opposite of what you asked for.
 
-**Topic search (interest matching).** Every course has a text: title (counted 3×), Bulletin description and handout
-lecture plan. A course's score for your topic combines three signals:
+**Topic search (interest matching).** Search matches *meaning and context*, not just shared words. Every course has a
+text: title, Bulletin description and handout lecture plan. Its score for your topic combines:
 
-1. **Keywords (BM25)**, a standard search-ranking formula. It counts how often your words (plus synonyms: "AI" also
-   searches "machine learning", "neural networks"…) appear in the course text, and gives more weight to rare words.
-   Weighted 0.4.
-2. **A semantic model trained on the catalogue** (`agent/semantic.py`), weighted 0.6. It's built with latent semantic
-   analysis (LSA): each of the ~2,100 courses becomes a word-weight vector (TF-IDF), and an SVD keeps the 100 strongest
-   directions. Words that keep appearing in the same kind of course end up close together, so it learns from BITS's own
-   documents that *finance* ≈ investors, capital, equity, assets. A course can match without sharing a keyword, and a
-   course that mentions "market" once in an advertising syllabus doesn't look like a finance course. Training takes
-   ~5 s, runs offline (no download, no GPU) and gives the same result every time. Instructor names are removed, so
-   courses aren't linked by who teaches them.
-3. **The Bulletin's own grouping.** If your topic names a minor ("Finance", "Film and Media") or a department (FIN,
-   BIO…), its courses get a boost and a 📚 label.
+1. **Contextual embeddings, weight 0.6** (`agent/embeddings.py`). A pretrained sentence-embedding model
+   (**BAAI/bge-small-en-v1.5**, 33M parameters) turns each course text and your query into 384-number vectors, so
+   "investing in stocks" lands next to *Security Analysis and Portfolio Management* even with no word in common. It
+   runs on ONNX Runtime through `fastembed`: no PyTorch, no GPU. Only the supplied course texts are embedded; the
+   vectors are saved in `data/processed/embeddings.npz`, and the model (~67 MB) is downloaded once, the first time a
+   query is embedded.
+2. **A model trained on the catalogue, weight 0.15** (`agent/semantic.py`). Latent semantic analysis over the
+   ~2,100 course texts learns BITS's own vocabulary (finance ≈ investors, capital, equity). It also works fully offline
+   if the embedding model can't be loaded.
+3. **Keywords (BM25), weight 0.25.** Your words plus synonyms, counted in the course text.
+4. **The Bulletin's own topic groups.** Every minor, department and programme elective pool is a topic. Your query
+   is matched to groups by name, by synonym, or by how close it is to the group's courses. "finance" → Minor in
+   Finance, FIN department, Economics electives; "biotech" → BIO / BIOT departments, Biotechnology electives. **Every
+   offered course in a matched group is listed**: the ones you can take, then 🔒 the ones you can't yet, with the rule.
 
-Cards show why each course matched: 📚 minor or department, 🧠 % similar in content, 🔎 matched words.
+Cards show why each course matched: 📚 group, 🧠 % similar in content, 🔎 matched words. Cross-listed codes are shown
+together (FIN F313 = ECON F412).
 
-When few of your allowed courses match, the model's nearest ones are added as 🔭 *related*, with the words it links to
-the topic. The best matches you *can't* take yet come first when they're clearly better, as 🔒 cards with the exact rule
-(e.g. finance courses for a CS 2nd-year: Reg 3.15(b)(i)).
+**How good is it?** `python -m tests.eval_retrieval` writes [docs/retrieval_eval.md](docs/retrieval_eval.md). There
+are two tests, both with ground truth taken from the Bulletin:
 
-**How good is it?** `python -m tests.eval_retrieval` scores the search against ground truth from the Bulletin itself:
-each of the 21 minors with enough offered courses is a query (its name), and its courses are the right answers. Results
-are in [docs/retrieval_eval.md](docs/retrieval_eval.md). Across 582 courses, the trained model plus keywords beats
-keywords alone:
+- **Ranking:** each minor's name is the query, and its courses are the right answers, ranked among all 582 offered
+  courses.
 
-| | Precision@5 | Recall@10 | MRR |
-|---|---|---|---|
-| Keywords only | 0.29 | 0.37 | 0.50 |
-| Keywords + trained model (used) | 0.34 | 0.44 | 0.54 |
+  | | Precision@5 | Recall@10 | MRR |
+  |---|---|---|---|
+  | Keywords only | 0.29 | 0.37 | 0.50 |
+  | Keywords + LSA | 0.34 | 0.44 | 0.54 |
+  | Keywords + LSA + embeddings (used) | 0.36 | 0.47 | 0.66 |
 
-The minors' lists are narrow (ECON F315 *Financial Management* isn't in the Finance minor), so these numbers
-understate real quality. The model size (100 dimensions) and weights were chosen on this set.
+- **Everyday wording:** 19 queries like "investing and stock markets", "movies and journalism", "starting a company".
+  The expected group was found for all 19, and all its offered courses came back. These queries were used while
+  tuning the matching, so treat this as a check, not an unseen test.
 
 **Course properties.** Each property check gives one of three answers:
 

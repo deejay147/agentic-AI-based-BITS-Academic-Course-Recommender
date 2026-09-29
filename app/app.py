@@ -511,7 +511,8 @@ def render_card(r):
     if r.get("locked"):
         return render_locked(r)
     with st.container(border=True):
-        head = (f"<div class='ctitle'><span class='code'>{esc(r['code'])}</span> · {esc(r['title'])}</div>"
+        also = f" <span class='muted'>(also listed as {esc(', '.join(r['also']))})</span>" if r.get("also") else ""
+        head = (f"<div class='ctitle'><span class='code'>{esc(r['code'])}</span> · {esc(r['title'])}{also}</div>"
                 + cat_badge(shown, f"Fills {shown}")
                 + badge(f"{r['units']} units")
                 + (badge("also counts as " + "/".join(c for c in r["can_count_as"] if c != shown), *GREY)
@@ -561,7 +562,8 @@ def render_card(r):
 def render_locked(r):
     """a course that matches what was asked but the student can't take yet - shown with the reason"""
     with st.container(border=True):
-        st.markdown(f"<div class='ctitle'><span class='code'>{esc(r['code'])}</span> · {esc(r['title'])}</div>"
+        also = f" <span class='muted'>(also listed as {esc(', '.join(r['also']))})</span>" if r.get("also") else ""
+        st.markdown(f"<div class='ctitle'><span class='code'>{esc(r['code'])}</span> · {esc(r['title'])}{also}</div>"
                     + badge("🔒 Not open to you this semester", "#fca5a5", "rgba(239,68,68,.18)")
                     + cat_badge(r["fills"], f"would be {r['fills']}") + badge(f"{r['units']} units")
                     + (badge(f"📚 {r['anchor']}", "#f0abfc", "rgba(217,70,239,.16)") if r.get("anchor") else "")

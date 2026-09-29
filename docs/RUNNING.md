@@ -31,6 +31,9 @@ pip install -r requirements.txt
 If PowerShell refuses to run the activate script, run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, or
 use Command Prompt instead.
 
+The first search downloads the embedding model (~67 MB) once. If you're offline, or `fastembed` didn't install,
+search still works, using the keyword and LSA models.
+
 ## 3. Start the app
 
 ```bash

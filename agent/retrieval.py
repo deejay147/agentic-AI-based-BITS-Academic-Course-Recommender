@@ -31,7 +31,7 @@ something anything subject subjects interested interest interests chap chapter c
 # a few common interest words expanded to what shows up in syllabi. only used for recall;
 # with an API key Claude does the real expansion
 SYNONYMS = {
-    "ai": ["artificial_intelligence", "machine_learning", "deep_learning", "neural_networks", "neural_network",
+    "ai": ["intelligence", "artificial_intelligence", "machine_learning", "deep_learning", "neural_networks", "neural_network",
            "reinforcement_learning", "intelligent", "agents"],
     "ml": ["machine_learning", "neural_networks", "classification", "regression", "supervised"],
     "dl": ["deep_learning", "neural_networks", "convolutional"],
@@ -101,6 +101,18 @@ SYNONYMS = {
     "materials": ["materials", "material", "composites", "polymers", "metallurgy", "nanomaterials"],
     "nano": ["nanotechnology", "nanomaterials", "nano", "nanoscale"],
     "drones": ["drone", "uav", "aerial", "flight", "aircraft", "control"],
+    "movies": ["film", "cinema", "cinematic", "media", "video"],
+    "movie": ["film", "cinema", "cinematic", "media", "video"],
+    "cinema": ["film", "cinema", "cinematic", "media"],
+    "journalism": ["journalism", "media", "reporting", "news", "mass_communication"],
+    "novels": ["literature", "literary", "novel", "fiction", "poetry", "english"],
+    "novel": ["literature", "literary", "novel", "fiction", "english"],
+    "poetry": ["poetry", "poem", "literature", "literary", "english"],
+    "fiction": ["fiction", "literature", "novel", "literary"],
+    "nanotechnology": ["nanotechnology", "nanoscience", "nanomaterials", "nanoscale", "nanostructures", "nano"],
+    "biomedical": ["biomedical", "medical", "implant", "prosthetic", "biomaterials", "tissue", "physiology"],
+    "implants": ["implant", "biomaterials", "prosthetic", "biomedical", "tissue"],
+    "aircraft": ["aircraft", "aeronautics", "aerodynamics", "flight", "propulsion"],
     "aeronautics": ["aeronautics", "aerospace", "aircraft", "flight", "aerodynamics", "propulsion", "gas_dynamics"],
     "aerospace": ["aerospace", "aircraft", "flight", "aerodynamics", "propulsion", "space"],
     "automobile": ["automobile", "automotive", "vehicle", "engine", "ic_engines"],
@@ -323,16 +335,17 @@ def handout_summary(cat: Catalog, code: str) -> dict:
 
 # what each department prefix is about - lets 'finance' find the FIN courses even when a course text is thin
 DEPT_TOPICS = {
-    "FIN": "finance financial", "ECON": "economics economic finance", "MGTS": "management business",
+    "FIN": "finance financial", "ECON": "economics economic", "MGTS": "management business",
     "BIO": "biology biological biotech biotechnology genetics life", "PHA": "pharmacy pharmaceutical pharmacology drug",
-    "CHEM": "chemistry chemical", "PHY": "physics", "MATH": "mathematics maths math", "CS": "computer computing software programming",
+    "CHEM": "chemistry chemical", "PHY": "physics", "MATH": "mathematics maths math", "CS": "computer software programming",
     "EEE": "electrical electronics", "ECE": "electronics communication", "INSTR": "instrumentation", "ME": "mechanical",
     "CE": "civil construction", "CHE": "chemical process", "MF": "manufacturing production", "HSS": "humanities",
     "GS": "media communication writing", "ENVS": "environment environmental sustainability", "SNS": "nanoscience nano",
     "AN": "aeronautics aerospace flight aircraft", "MST": "materials", "DE": "design",
 }
 _GENERIC = {"minor", "in", "and", "of", "science", "sciences", "engineering", "technology", "technologies", "studies",
-            "introduction", "the", "for", "devices", "information", "applied"}
+            "introduction", "the", "for", "devices", "information", "applied", "development", "general", "with",
+            "specialization", "bachelor", "honours", "computing"}
 
 
 def _stems(text: str) -> set:
@@ -340,18 +353,103 @@ def _stems(text: str) -> set:
 
 
 @lru_cache(maxsize=1)
-def _anchors():
-    """topic anchors from the Bulletin's own structure: each minor (name -> its courses) and each
-    department prefix (topic words -> its courses). Used to boost, never to filter."""
+def topic_groups():
+    """The Bulletin's own topic groups: every minor, every department prefix (5+ courses) and every
+    programme's elective (DEL) pool - each with its courses and a 'topic centre' = the mean of its
+    courses' vectors in the semantic model. A query is matched to groups by how close it is to those
+    centres (so 'biotech' finds the BIO / BIOT departments and the Biotechnology electives without
+    sharing a word), or by the group's name."""
+    import numpy as np
+    from agent.semantic import get_semantic
     cat = get_catalog()
-    out = []
+    sem = get_semantic()
+    groups = []
+
+    def add(label, codes, name_words):
+        codes = {c for c in codes if c}
+        vec = None
+        if sem:
+            rows = [sem.D[sem.row[c]] for c in codes if c in sem.row]
+            if len(rows) >= 3:
+                v = np.mean(rows, axis=0)
+                vec = v / (np.linalg.norm(v) or 1.0)
+        groups.append({"label": label, "codes": {cat.canon(c) for c in codes}, "words": _stems(name_words),
+                       "vec": vec})
+
     for name, m in cat.minors_by_name.items():
-        codes = {cat.canon(r["code"]) for g in list(m["core"].values()) + list(m["electives"].values()) for r in g}
-        out.append((name, _stems(name.replace("Minor in", "")), codes, 0.25))
-    for dept, words in DEPT_TOPICS.items():
-        codes = {cat.canon(c) for c in set(cat.courses) | set(cat.offerings) if c.split()[0] == dept}
-        out.append((f"{dept} department", _stems(words), codes, 0.15))
-    return out
+        add(name, {r["code"] for g in list(m["core"].values()) + list(m["electives"].values()) for r in g},
+            name.replace("Minor in", ""))
+    by_dept = {}
+    for c in set(cat.courses) | set(cat.offerings):
+        by_dept.setdefault(c.split()[0], set()).add(c)
+    for dept, codes in by_dept.items():
+        if len(codes) >= 5:
+            add(f"{dept} department", codes, DEPT_TOPICS.get(dept, ""))
+    for pid, p in cat.programmes.items():
+        if p.get("del_codes"):
+            add(f"{p['name']} electives", set(p["del_codes"]), p["name"])
+    return groups
+
+
+_CATCH_ALL = {"BITS department", "HSS department", "GS department", "SKILL department", "SS department"}
+
+
+@lru_cache(maxsize=1)
+def _group_embedding_centroids():
+    import numpy as np
+    from agent.embeddings import get_embeddings
+    emb = get_embeddings()
+    if not emb:
+        return None, []
+    labels, rows = [], []
+    for g in topic_groups():
+        vs = [emb.V[emb.row[c]] for c in g["codes"] if c in emb.row]
+        if len(vs) >= 3 and g["label"] not in _CATCH_ALL:
+            v = np.mean(vs, axis=0)
+            labels.append(g["label"])
+            rows.append(v / (np.linalg.norm(v) or 1.0))
+    return (np.array(rows), labels) if rows else (None, [])
+
+
+def match_groups(text: str, min_sim: float = 0.5, rel: float = 0.75, max_groups: int = 4) -> list[dict]:
+    """groups whose topic centre is close to the query (or whose name matches it), best first"""
+    import numpy as np
+    from agent.semantic import get_semantic
+    sem = get_semantic()
+    v = sem.embed(text) if sem else None
+    qs = _stems(text)
+    # synonyms of the query's words ('aircraft' -> aeronautics) count too, but weaker than the word itself
+    syn = {t for t in expand(text) if "_" not in t and t not in _GENERIC and len(t) > 3} - qs
+    named, close, best = [], [], 0.0
+    for g in topic_groups():
+        sim = float(g["vec"] @ v) if (v is not None and g["vec"] is not None) else 0.0
+        best = max(best, sim)
+        if qs & g["words"]:
+            named.append((max(sim, 0.9), g))      # the group is literally named after the topic
+        elif syn & g["words"] and not g["label"].endswith("department"):
+            named.append((max(sim, 0.6), g))      # ... or after one of its synonyms (not whole departments:
+            #                                       'media' shouldn't pull in every GS course for 'film')
+        else:
+            close.append((sim, g))                # only similar in content
+    close_ok = [(sm, g) for sm, g in close if sm >= max(min_sim, rel * best)]
+    # contextual embeddings (agent/embeddings.py): a group whose courses, on average, are far closer to the
+    # query than the other groups are (z >= 2.9, and near the top) - catches wording no synonym list has,
+    # e.g. 'movies and journalism' -> Minor in Film and Media
+    M, labels = _group_embedding_centroids()
+    if M is not None:
+        from agent.embeddings import get_embeddings
+        sims = M @ get_embeddings().embed(text)
+        z = (sims - sims.mean()) / (sims.std() or 1.0)
+        top_z = float(z.max())
+        have = {g["label"] for _, g in named + close_ok}
+        by_label = {g["label"]: g for g in topic_groups()}
+        for i in np.argsort(-z):
+            if z[i] < 2.9 or z[i] < top_z - 0.8:
+                break
+            if labels[i] not in have:
+                close_ok.append((min(0.9, 0.5 + 0.1 * float(z[i])), by_label[labels[i]]))
+    out = sorted(named + close_ok, key=lambda t: -t[0])[:max_groups]
+    return [{**g, "sim": sm} for sm, g in out]
 
 
 class TopicMatch:
@@ -359,9 +457,11 @@ class TopicMatch:
     + 0.6 x semantic similarity (agent/semantic.py), + a boost for courses of a minor / department whose
     name matches the topic. Weights picked on tests/eval_retrieval.py."""
 
-    W_KW = 0.4
+    # weights picked on tests/eval_retrieval.py (keyword / LSA / contextual embedding)
+    W_KW, W_LSA, W_EMB = 0.25, 0.15, 0.6
 
     def __init__(self, text: str):
+        from agent.embeddings import get_embeddings
         from agent.semantic import get_semantic
         self.text = text or ""
         self.q = expand(self.text)
@@ -371,24 +471,44 @@ class TopicMatch:
         self.kmax = max((s for s, _ in self.kw.values()), default=0) or 1.0
         sem = get_semantic()
         self.sim = sem.similarity(self.text, list(idx.docs)) if (sem and self.q) else {}
-        qs = _stems(self.text)
+        emb = get_embeddings()
+        self.emb = emb.similarity(self.text, list(idx.docs)) if (emb and self.text.strip()) else None
         cat = get_catalog()
         self.cat = cat
-        self.anchors = [(label, codes, boost) for label, words, codes, boost in _anchors() if qs & words]
+        # the Bulletin topic groups this query is about (minors / departments / programme electives);
+        # EVERY offered course in them counts as a match - 'finance' has to bring the whole Finance minor
+        self.groups = match_groups(self.text) if self.q else []
+        self.anchors = [(g["label"], g["codes"], 0.3 * g["sim"]) for g in self.groups]
+        self.members = set().union(*[g["codes"] for g in self.groups]) if self.groups else set()
 
     def score(self, code: str) -> dict:
         s, hits = self.kw.get(code, (0.0, []))
-        sim = max(self.sim.get(code, 0.0), 0.0)
-        total = self.W_KW * s / self.kmax + (1 - self.W_KW) * sim
+        lsa = max(self.sim.get(code, 0.0), 0.0)
+        if self.emb is not None:
+            e = self.emb.get(code, 0.0)
+            total = self.W_KW * s / self.kmax + self.W_LSA * lsa + self.W_EMB * e
+            sim = max(lsa, e)
+        else:                               # no embedding model available -> keyword + LSA only
+            total = 0.4 * s / self.kmax + 0.6 * lsa
+            sim = lsa
         why = None
         cn = self.cat.canon(code)
         for label, codes, boost in self.anchors:
             if cn in codes:
+                # a programme's elective pool is broad (Biological Sciences electives include Optimization):
+                # there the course itself has to be about the topic too. Minors / departments count whole.
+                if label.endswith("electives") and sim < 0.3:
+                    continue
                 total += boost
                 why = label
                 break
         return {"score": total, "kw": s, "hits": hits, "sim": sim, "anchor": why}
 
     def relevant(self, m: dict) -> bool:
-        """a real match: some keyword hit or clear semantic similarity, or it's in a matching minor/department"""
-        return m["anchor"] is not None or (m["score"] >= 0.12 and (m["kw"] > 0 or m["sim"] >= 0.18))
+        """a real match: in the topic's Bulletin group, or clearly about it. When the topic has groups,
+        courses outside them need a stronger case (they're shown after the group, marked 'related')."""
+        if m["anchor"] is not None:
+            return True
+        if self.groups:
+            return m["sim"] >= 0.3 or (len(m["hits"]) >= 2 and m["sim"] >= 0.15)
+        return m["score"] >= 0.12 and (m["kw"] > 0 or m["sim"] >= 0.18)

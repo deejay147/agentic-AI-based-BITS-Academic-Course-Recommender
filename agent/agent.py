@@ -323,7 +323,7 @@ class Recommender:
                     "could_not_verify": [], "plan": out}
 
         res = s.find_courses(categories=p["categories"], topics=p["topics"] or None, require=p["require"],
-                             no_8am=p["no_8am"], free_day=p["free_day"], limit=5)
+                             no_8am=p["no_8am"], free_day=p["free_day"], limit=6)
         recs = res["results"]
         rel = res.get("related") or {"terms": [], "results": []}
         if rel["results"]:
@@ -391,6 +391,11 @@ def format_recommendations(res, parsed, s) -> str:
     if f["free_day"]:
         want.append(f"{f['free_day']} free")
     lines = [f"**Looking for:** {', '.join(want) or 'anything that fits your requirements'}", ""]
+    if res.get("topic_groups"):
+        lines.append(f"📚 In the Bulletin, '{f['topics']}' is: {'; '.join(res['topic_groups'])}. "
+                     "All of their courses offered this semester are listed - the ones you can take below, the ones "
+                     "you can't yet marked 🔒 with the reason.")
+        lines.append("")
     rel = res.get("related") or {}
     n_direct = sum(1 for r in res["results"] if not r.get("related"))
     if rel.get("results") and any(r.get("related") for r in res["results"]):
