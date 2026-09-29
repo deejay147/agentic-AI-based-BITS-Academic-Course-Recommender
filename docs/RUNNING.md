@@ -49,12 +49,12 @@ Next time you only need to `cd` into the folder, activate `.venv`, and run `stre
 
 **Set up a student profile (left sidebar)**
 
-1. Either load a ready-made one: pick `test: cs_2nd_year` (or any other test profile) and click **Load**,
+1. Either load a ready-made one: pick **Sample · B.E. CS, 2-1** (or any other sample student) and click **Load**,
    or type a BITS ID such as `2025A7PS0147P`. The ID fills in the batch, degree(s) and stream.
    - `2025A7PS...` gives a single degree (A7 = B.E. Computer Science)
    - `2024B3A7...` gives a dual degree (M.Sc. Economics + B.E. CS)
    - `2025AACS...` gives a 2+2 CentraleSupélec student
-2. Click **Pre-fill courses from my semester chart**. It fills in the courses a student in that year would normally
+2. Click **Pre-fill from my semester chart**. It fills in the courses a student in that year would normally
    have finished, and the courses they're taking now, from the Bulletin's semester chart.
 3. Edit anything that's different for you:
    - Remove a course, or set its grade (NC, W, I and RC count as *not cleared*).
@@ -62,22 +62,25 @@ Next time you only need to `cd` into the folder, activate `.venv`, and run `stre
    - Change the "Registered this semester" list.
    - Optionally, under **My sections**, pick which lecture/tutorial/lab section you're in. This makes the clash
      check exact.
-4. Add a minor, CGPA and interests if you like. Click **Save profile** to keep it (saved to `data/profiles/`).
+4. Add a minor, CGPA and interests under **Edit details** if you like. Click **Save** to keep it (saved to
+   `data/profiles/`; it then shows up as "Saved · …" in the list).
 
 **Tabs**
 
 | Tab | What you do there |
 |---|---|
-| Requirements | See what's left: core courses, DELs, HUELs, OPELs, general courses, minor progress, graduation checklist |
-| Ask | Type questions in plain English, e.g. *Suggest DELs related to AI*, *I want an OPEL with no attendance requirement*, *Suggest courses with no midsem and a lenient makeup policy*, *I need a HUEL and prefer project-based evaluation*, *can I take CS F317 and GS F232 together?*, *what's left for me?*, *prerequisites of CS F425* |
-| Plan semester | Your core courses are filled in for you. Add any course you like: the app tells you if it clashes and with what, and if you're not allowed to take it and why. Flip through timetable options with ◀ ▶; each course has its own colour. **Choose sections** limits a course to sections you'd accept. The exam calendar shows your midsem and compre days. Downloads available |
+| Overview | See what's left: core courses, DELs, HUELs, OPELs, general courses, minor progress, graduation checklist |
+| Ask | Tap a quick question or type your own in plain English, e.g. *finance*, *biotech*, *Suggest DELs related to AI*, *I want an OPEL with no attendance requirement*, *Suggest courses with no midsem and a lenient makeup policy*, *I need a HUEL and prefer project-based evaluation*, *can I take CS F317 and GS F232 together?*, *what's left for me?*, *prerequisites of CS F425* |
+| Plan semester | Your core courses are filled in for you. Add any course you like: the app tells you if it clashes and with what, and if you're not allowed to take it and why. Flip through timetable options with **Previous / Next** (fewest gaps first); each course has its own colour. **Choose sections** limits a course to sections you'd accept. The exam calendar shows your midsem and compre days. Downloads available |
 | Eligible courses | Every course you can take this semester, and "Why can't I take…?" for any course you can't, with the regulation clause |
 | Data sources | How the data was built, what couldn't be verified, and which regulation clauses the rules use |
 
-Every recommendation says which requirement it fills, why you're eligible, the course properties you asked about
-(quoted from the handout or timetable), and where each fact came from.
+Every recommendation is a compact row: the requirement it fills, why it matched (its Bulletin group, how similar
+its content is, the words it mentions) and yes / no / ? tags for what you asked about. Open **Details** for why
+you're eligible, the quotes from the handout or timetable, and the source pages. Matching courses you can't take
+yet are listed together in a **Not open to you this semester** panel with the rule for each.
 
-## 5. Optional: turn on the LLM mode
+## 5. Optional: turn on AI mode
 
 Without a key, the app understands questions with its own rule-based parser. With a key, an LLM does the
 understanding, topic matching and wording, using the same tools and the same final checks. Two providers have free
@@ -89,17 +92,30 @@ tiers:
 
 There are two ways to use a key:
 
-- **Quick:** in the app's sidebar, open **LLM (optional)**, choose the provider and paste the key. It's kept only for
+- **Quick:** in the app's sidebar, open **AI mode (optional)**, choose the provider and paste the key. It's kept only for
   that browser session.
 - **Permanent:** copy `.env.example` to a file named `.env` in the project folder and fill in one line, e.g.
   `GEMINI_API_KEY=your-key-here`. Restart the app. `.env` is in `.gitignore`, so it never gets committed.
 
-The header under the title shows the active mode, e.g. `agent mode: gemini (gemini-3.8-flash)`. Model names change
+The pill at the top right shows the active mode, e.g. `AI · gemini (gemini-3.8-flash)` or `Rule-based · no API key`. Model names change
 over time. If the default one stops working, set `LLM_MODEL` in `.env` to a current model from the provider's
 list. If the LLM call fails (wrong key, quota, no internet), the app still answers with the rule-based parser
 and says so at the top of the answer.
 
-## 6. Optional: rebuild the data from the PDFs
+## 6. Optional: retrain the search models
+
+Both search models are already in `data/processed/`. To rebuild them (for example after changing
+`agent/embeddings.py`):
+
+```bash
+python -m agent.train_embeddings             # a few minutes on a laptop CPU
+python -m agent.train_embeddings --lsa-only  # only the LSA model, a few seconds
+```
+
+It trains the LSA model on the course texts, re-embeds every course with bge-small-en-v1.5 (downloaded once, ~67 MB),
+re-runs the search evaluation and writes `docs/embedding_training.md` with the numbers.
+
+## 7. Optional: rebuild the data from the PDFs
 
 Only needed if you get a new timetable or new handouts, or want to check the pipeline.
 
@@ -120,19 +136,19 @@ Only needed if you get a new timetable or new handouts, or want to check the pip
    ```bash
    python -m ingest.run_all
    ```
-   It takes about 3 minutes and rewrites `data/processed/`. Check `data/processed/validation_report.md` afterwards.
+   It takes a few minutes and rewrites `data/processed/`; the last step retrains the search models. Check `data/processed/validation_report.md` afterwards.
 
-## 7. Run the tests
+## 8. Run the tests
 
 ```bash
 pytest -q
 ```
 
-40 tests covering the engine (requirements, eligibility rules, clashes, planner, dual degrees, minors) and the agent
-(query parsing, rule mode, and both LLM loops with scripted fake clients). `python -m tests.run_examples` regenerates
-`docs/examples.md`.
+42 tests covering the engine (requirements, eligibility rules, clashes, planner, dual degrees, minors) and the agent
+(query parsing, topic search, rule mode, and both AI loops with scripted fake clients). `python -m tests.run_examples`
+regenerates `docs/examples.md`; `python -m tests.eval_retrieval` regenerates `docs/retrieval_eval.md`.
 
-## 8. Troubleshooting
+## 9. Troubleshooting
 
 | Problem | Fix |
 |---|---|
@@ -141,4 +157,6 @@ pytest -q
 | Port 8501 already in use | `streamlit run app/app.py --server.port 8502` |
 | Answer starts with "LLM unavailable" | The key or model is wrong, or you're over the quota. The answer below it is still valid (rule-based) |
 | "No eligible course matches" | Usually genuine: check the listed reasons (unit cap, a clash, clause 3.15). Try without some filters |
+| Windows: `DLL load failed ... An Application Control policy has blocked this file` | Windows Smart App Control is blocking a Python package. Turn it off in Windows Security → App & browser control → Smart App Control (it can only be turned back on by resetting Windows), then reinstall with `pip install -r requirements.txt` |
+| First topic search is slow | It's downloading the embedding model once (~67 MB). Later searches are instant |
 | Changes to code don't show up | Stop the app with `Ctrl + C` and start it again |

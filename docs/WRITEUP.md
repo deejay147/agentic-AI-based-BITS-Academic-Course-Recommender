@@ -32,7 +32,8 @@ optional. Without an API key, a simpler built-in parser does its job, and every 
 | Minors | 23 |
 | Regulation rules used | 14 |
 | Items flagged for a human to check | 108 |
-| Automatic tests | 41 |
+| Courses embedded for topic search | 2,119 (384-number vectors) |
+| Automatic tests | 42 |
 
 ## 2. How it's built
 
@@ -48,15 +49,16 @@ question ──► 3. agent/  understand the question, search allowed courses, d
           4. app/      the website (Streamlit)
 ```
 
-1. **Reading the PDFs (`ingest/`).** One command (`python -m ingest.run_all`, about 3 minutes) reads the
-   Bulletin, Timetable, Regulations and handouts and saves clean data files and a small database. When a new
+1. **Reading the PDFs (`ingest/`).** One command (`python -m ingest.run_all`, a few minutes) reads the
+   Bulletin, Timetable, Regulations and handouts, saves clean data files and a small database, and finally
+   retrains the search models. When a new
    timetable or new handouts come out, you rerun this step and nothing else changes.
 2. **The rules engine (`engine/`).** Plain Python, no AI. Given a student, it works out remaining requirements,
    which courses they can take (and why not, for the rest), timetable clashes, and section choices.
 3. **The assistant (`agent/`).** Turns the question into a search over allowed courses and writes the answer.
    It uses five "tools": get requirements, find courses, course details, check a plan, and submit the final
    answer.
-4. **The dashboard (`app/`).** A sidebar for the profile and five tabs: Requirements, Ask, Plan semester,
+4. **The dashboard (`app/`).** A sidebar for the profile and five tabs: Overview, Ask, Plan semester,
    Eligible courses, Data sources.
 
 ## 3. Reading the PDFs
@@ -145,8 +147,8 @@ so the app can answer "Why can't I take X?" with the exact clause.
 
 If one section of a course clashes with your timetable, the app tries the other sections before saying no. It
 checks lectures, tutorials, labs, midsems and compres. It can also avoid 8 AM classes, keep a weekday free, or
-pick the most compact timetable (fewest free hours stuck between classes). The planner tab shows the result as a
-week grid.
+rank timetables by compactness (fewest free hours stuck between classes). The planner tab shows the result as a
+week grid, with Previous / Next to flip through up to 30 clash-free options.
 
 For exact checks, students can enter which sections they're already in. If they don't, the app only blocks the
 times it knows for sure and says which ones it couldn't check.
@@ -178,8 +180,24 @@ Interest matching went through three versions, each driven by a failure found in
    - The course score is 0.25 keyword + 0.15 LSA + 0.6 embedding.
    - Separately, each minor, department and programme elective pool is a topic group. A query matches groups by
      name, by synonym, or when its embedding is far closer (z ≥ 2.9) to a group's courses than to the other groups.
-   - Every offered course in a matched group is listed: the ones the student can take, and, 🔒, the ones they can't
-     yet, with the rule.
+   - Every offered course in a matched group is listed: the ones the student can take, and, in a separate
+     "Not open to you this semester" panel, the ones they can't yet, with the rule.
+
+### Training the models
+
+One command, `python -m agent.train_embeddings`, rebuilds both models and measures them (it's also the last step
+of `ingest.run_all`):
+
+1. **Trains the LSA model** on the ~2,100 course texts (12,000-term vocabulary with instructor names removed, so
+   courses don't cluster by who teaches them; 100 dimensions). A few seconds.
+2. **Rebuilds the embedding index**: every course text through bge-small, saved as 384-number vectors
+   (`data/processed/embeddings.npz`). A few minutes on a CPU. The pretrained model isn't fine-tuned: there's no
+   labelled data to fine-tune on without borrowing from the evaluation set.
+3. **Re-runs the evaluation** and writes `docs/embedding_training.md`, so every rebuild comes with its numbers.
+
+Two details that mattered: bge's raw cosine scores all sit in a narrow band (about 0.4–0.75), so they're rescaled
+per query (the 90th-percentile course → 0, the best → 1), otherwise every course looked "somewhat related". And
+course vectors are stored as float16, which halves the file.
 
 **Is the embedding model allowed under "use only the shared dataset"?** The model is a tool, like the optional LLM.
 The only data it's run on is the supplied course texts, and nothing from outside the dataset is added to the index.
@@ -227,6 +245,10 @@ correct.
 | Apply Regulation 3.15(b)(i) strictly | Better to be cautious than suggest something you can't register for |
 | Commit the processed data, not the PDFs | The app runs straight after cloning, and the repo stays small |
 | Streamlit for the website | Quickest way to build a working dashboard in Python |
+| List every course in a matched Bulletin group, not just the top-scored ones | A student asking for "finance" expects the whole Finance minor; the Bulletin already says which courses belong together |
+| Show locked matches in their own panel, not mixed in | Students want to see what exists, but must never mistake a blocked course for a recommendation |
+| Pretrained embeddings, not fine-tuned | No labelled training data outside the evaluation set; fine-tuning on it would inflate the scores |
+| Compact rows with folded details | The first UI showed every fact on every card and was hard to scan; details are one click away |
 
 Other scope choices:
 
@@ -254,6 +276,13 @@ Other scope choices:
 | Answers said "fills HUEL" when the student asked for an OPEL | The app showed the default bucket | Show the bucket the student asked for |
 | Part of the answer went missing in the UI | Text was being cut short | Show that part below the course cards |
 | A broken AI connection crashed the check that detects it | The check itself triggered the error | Wrapped it in error handling |
+| "finance" showed Copywriting | Keyword overlap on "market" | LSA, then embeddings and Bulletin topic groups (see section 5) |
+| "finance" pulled in general economics courses | The Economics elective pool and the ECON department were matched as finance groups | Elective-pool members must also be similar in content (≥ 0.3); departments only match by name or content, not synonyms |
+| "Related" searches added junk words | Pseudo-relevance feedback picked up words like "chap" and "fields" from handouts | Replaced it with nearest neighbours in the LSA model |
+| "aircraft" found nothing | The aerospace group was cut by the relative-similarity threshold | A group matched by name or synonym always counts |
+| "space" was read as a requirements question | "space" / "room" were treated as asking about unit space | Only trigger that intent on explicit phrasing |
+| Planner auto-filled the same course twice | Cross-listed codes and "A or B" slots were counted separately | De-duplicate by slot and canonical code |
+| App wouldn't start on a Windows laptop | Smart App Control blocked a compiled Python package ("DLL load failed") | Documented in `docs/RUNNING.md` troubleshooting |
 
 ## 8. What we added beyond the task
 
@@ -265,10 +294,12 @@ Other scope choices:
   can flip through up to 30 clash-free timetable options (fewest gaps first) and limit which sections they'd accept.
   There's a colour-coded week grid, a month-style exam calendar flagging same-day exams, and CSV/JSON export. Some
   feature ideas came from the DVM timetable tool students already use.
-- "Related" answers when few allowed courses mention a topic: pseudo-relevance feedback learns the words typical of
-  the topic's best-matching courses anywhere in the timetable, and searches the student's allowed courses with them.
-- A dark "galaxy" dashboard theme with one colour per requirement type, used everywhere, and a guided-search mode next
-  to chat.
+- Topic search that understands meaning: contextual embeddings, a model trained on the catalogue, and the Bulletin's
+  minors / departments / elective pools as topic groups, with a one-command training and evaluation pipeline
+  (`python -m agent.train_embeddings`). Courses that are close in meaning but outside a matched group are shown as
+  *related* (nearest neighbours in the LSA model).
+- A sleek dark dashboard: one header strip with the key numbers, compact course rows with details folded away,
+  Material icons, one colour per requirement type used everywhere, and a guided-search mode next to chat.
 - "Why can't I take X?" with the exact regulation.
 - A graduation checklist, progress towards a minor (23 minors), dual-degree charts, and 2+2 CentraleSupélec
   students.
@@ -291,7 +322,7 @@ Other scope choices:
 | Flag instead of guessing | Verification list; "could not be verified" in answers |
 | Rules checked by code; AI only for understanding and wording | The rules engine has no AI; every AI suggestion is re-checked |
 | Use handout details | Marks breakdown, midsem, compre, quizzes, projects, labs, open book, makeup, attendance, topics, instructor |
-| Short, clear recommendations | Each card: requirement filled, why you're allowed, requested details with quotes, why it matches, sources |
+| Short, clear recommendations | Each row: requirement filled, why it matches, requested details as yes / no / ? tags; eligibility, quotes and sources one click away |
 | New semester without code changes | Rerun one command on the new PDFs |
 | Timetable intelligence (bonus) | All clash types, other sections tried, no 8 AM, free day, compact timetable |
 | Clean repo with instructions | README, `docs/RUNNING.md`, tests |

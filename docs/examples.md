@@ -8,33 +8,31 @@ Registered now: MATH F211, CS F214, CS F222, CS F213, CS F215, HSS F235 · inter
 
 ### Q: Suggest DELs related to AI.
 
-**Looking for:** DEL, about 'ai'
-
-📚 In the Bulletin, 'ai' is: Minor in Data Science; Minor in Computing and Intelligence. All of their courses offered this semester are listed - the ones you can take below, the ones you can't yet marked 🔒 with the reason.
+**Looking for:** DEL, about 'ai' · in the Bulletin: Minor in Data Science, Minor in Computing and Intelligence
 
 **1. CS F407 - Artificial Intelligence** (3 units)
 - Requirement: DEL - in the A7 discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-05 FN1; compre 2026-12-11 FN; sections L1; IC Gopal Singh Phartiyal
-- Why it matches your request: syllabus/description mentions intelligent, artificial intelligence, agents, ai, reinforcement learning, intelligence
+- Why it matches your request: syllabus/description mentions reinforcement learning, ai, intelligence, agents, intelligent, artificial intelligence
 
 **2. CS F425 - Deep Learning** (3 units)
 - Requirement: DEL - in the A7 discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-07 FN1; compre 2026-12-08 FN; sections L1, P1; IC Bharat Richhariya
-- Why it matches your request: syllabus/description mentions machine learning, neural networks, ai, deep learning
+- Why it matches your request: syllabus/description mentions ai, neural networks, machine learning, deep learning
 
 **3. CS F317 - Reinforcement Learning** (3 units)
 - Requirement: DEL - in the A7 discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-3 course; normally taken around year 3 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-09 AN1; compre 2026-12-14 FN; sections L1; IC Prashant Trivedi
-- Why it matches your request: syllabus/description mentions machine learning, agents, reinforcement learning
+- Why it matches your request: syllabus/description mentions reinforcement learning, agents, machine learning
 
 **4. CS F415 - Data Mining** (3 units)
 - Requirement: DEL - in the A7 discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-09 AN1; compre 2026-12-14 FN; sections L1, P1; IC Yashvardhan Sharma
-- Why it matches your request: syllabus/description mentions machine learning, neural networks
+- Why it matches your request: syllabus/description mentions neural networks, machine learning
 
 **5. CS F320 - Foundations of Data Science** (3 units)
 - Requirement: DEL - in the A7 discipline elective pool (could also count as OPEL)
@@ -61,7 +59,7 @@ Registered now: MATH F211, CS F214, CS F222, CS F213, CS F215, HSS F235 · inter
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-3 course; normally taken around year 3 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - No attendance requirement: yes - "Attendance Policy: Not mandatory but strongly recommended. 11."
 - Timetable: midsem 2026-10-09 FN1; compre 2026-12-13 FN; sections L1; IC Siddharth Mehrotra
-- Why it matches your interests: syllabus/description mentions machine, agents, deep learning
+- Why it matches your interests: syllabus/description mentions agents, machine, deep learning
 
 **Could not verify** the requested property for: CS F407 (No specific information mentioned in the handout; contact the Instructor-in-Charge (Gopal Singh Phartiyal).); CS F415 (No specific information mentioned in the handout; contact the Instructor-in-Charge (Yashvardhan Sharma).); CS F320 (No specific information mentioned in the handout; contact the Instructor-in-Charge (Navneet Goyal).)
 
@@ -93,17 +91,15 @@ No eligible course matches all of that.
 
 ### Q: I like finance and economics, any OPEL?
 
-> **Heads up:** the courses that best match 'finance economics' aren't open to you this semester (shown with the reason). The ones you can take only partly cover it.
+> The best matches for 'finance economics' aren't open to you this semester (reasons below); the ones you can take only partly cover it.
 
-**Looking for:** OPEL, about 'finance economics'
-
-📚 In the Bulletin, 'finance economics' is: Minor in Computational Economics; Minor in Finance; Minor in Philosophy, Economics, and Politics; ECON department. All of their courses offered this semester are listed - the ones you can take below, the ones you can't yet marked 🔒 with the reason.
+**Looking for:** OPEL, about 'finance economics' · in the Bulletin: Minor in Computational Economics, Minor in Finance, Minor in Philosophy, Economics, and Politics, ECON department
 
 **1. BITS F468 - New Venture Creation** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: sections L1; IC Jyoti
-- Why it matches your request: syllabus/description mentions market, economic, finance
+- Why it matches your request: syllabus/description mentions market, finance, economic
 
 **2. CS F320 - Foundations of Data Science** (3 units)
 - Requirement: OPEL - you asked for OPEL; it's also in your DEL pool, so it can be filed either way (reg 2.05)
@@ -188,9 +184,7 @@ Registered now: ECE F311, ECE F314, ECE F434 · interests: *signal processing, e
 
 > Programme rules come from the supplied Bulletin, which is for the 2025-26 curriculum. Your batch (2024) may follow a different structure; results are shown using the 2025-26 rules.
 
-**Looking for:** DEL, about 'ai', no midsem
-
-📚 In the Bulletin, 'ai' is: Minor in Data Science; Minor in Computing and Intelligence. All of their courses offered this semester are listed - the ones you can take below, the ones you can't yet marked 🔒 with the reason.
+**Looking for:** DEL, about 'ai', no midsem · in the Bulletin: Minor in Data Science, Minor in Computing and Intelligence
 
 No eligible course matches all of that.
 10 eligible courses were ruled out because the handout/timetable contradicts a requested property or time preference.
@@ -216,7 +210,7 @@ No eligible course matches all of that.
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - No attendance requirement: yes - "Attendance Policy Attendance is not mandatory. However, students are strongly encouraged to attend lectures, actively engage in class discussions, and benefit f"
 - Timetable: midsem 2026-10-06 AN1; compre 2026-12-07 FN; sections L1; IC Yogesh Singh
-- Why it matches your interests: syllabus/description mentions signal, signal processing, processes, systems, sensor, real time
+- Why it matches your interests: syllabus/description mentions real time, signal processing, processes, sensor, signal, systems
 
 **2. BITS F364 - Human Computer Interaction** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
@@ -231,32 +225,30 @@ No eligible course matches all of that.
 
 > Programme rules come from the supplied Bulletin, which is for the 2025-26 curriculum. Your batch (2024) may follow a different structure; results are shown using the 2025-26 rules.
 
-> **Heads up:** the courses that best match 'vlsi' aren't open to you this semester (shown with the reason). The ones you can take only partly cover it.
+> The best matches for 'vlsi' aren't open to you this semester (reasons below); the ones you can take only partly cover it.
 
-**Looking for:** about 'vlsi'
+**Looking for:** about 'vlsi' · in the Bulletin: MEL department
 
-📚 In the Bulletin, 'vlsi' is: MEL department. All of their courses offered this semester are listed - the ones you can take below, the ones you can't yet marked 🔒 with the reason.
+Also related (linked through clock, jitter, samir, primer, interconnect).
 
-Nothing open to you mentions it directly, so here related courses (🔭), found through words typical of 'vlsi' courses: clock, jitter, samir, primer, interconnect, moore.
-
-**1. EEE F313 - Analog & Digital VLSI Design** (3 units) 🔭 related
+**1. EEE F313 - Analog & Digital VLSI Design** (3 units) (related)
 - Requirement: DEL - in the AA discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - Timetable: midsem 2026-10-10 FN1; compre 2026-12-15 FN; sections L1, T1; IC Anu Gupta
-- Why it matches your request: syllabus/description mentions cmos, vlsi, integrated circuits
+- Why it matches your request: syllabus/description mentions vlsi, cmos, integrated circuits
 
-**2. CS F215 - Digital Design** (4 units) 🔭 related
+**2. CS F215 - Digital Design** (4 units) (related)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - Timetable: midsem 2026-10-07 FN2; compre 2026-12-08 AN; sections L1, T1, P1; IC Saurabh Gandhi
 - Why it matches your request: syllabus/description mentions digital design, integrated circuits
 
-**3. EEE F314 - FPGA Based System Design** (4 units) 🔭 related
+**3. EEE F314 - FPGA Based System Design** (4 units) (related)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - Timetable: midsem 2026-10-09 AN2; compre 2026-12-14 AN; sections L1, P1; IC Govind Prasad
 
-**4. CS F214 - Logic in Computer Science** (3 units) 🔭 related
+**4. CS F214 - Logic in Computer Science** (3 units) (related)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - Timetable: midsem 2026-10-08 AN1; compre 2026-12-12 FN; sections L1, T1; IC Jagat Sesh Challa
@@ -320,39 +312,37 @@ Registered now: EEE F311, MATH F212, EEE F313 · interests: *data science, machi
 
 > Programme rules come from the supplied Bulletin, which is for the 2025-26 curriculum. Your batch (2024) may follow a different structure; results are shown using the 2025-26 rules.
 
-**Looking for:** about 'data science'
-
-📚 In the Bulletin, 'data science' is: Minor in Data Science; Minor in Data Science in Climate and Health; Minor in Supply Chain Analytics. All of their courses offered this semester are listed - the ones you can take below, the ones you can't yet marked 🔒 with the reason.
+**Looking for:** about 'data science' · in the Bulletin: Minor in Data Science, Minor in Data Science in Climate and Health, Minor in Supply Chain Analytics
 
 **1. CS F415 - Data Mining** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-09 AN1; compre 2026-12-14 FN; sections L1, P1; IC Yashvardhan Sharma
-- Why it matches your request: syllabus/description mentions analytical, mining, statistics, data
+- Why it matches your request: syllabus/description mentions data, mining, analytical, statistics
 
 **2. BITS F464 - Machine Learning** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-10 AN1; compre 2026-12-16 FN; sections L1, P1; IC Rakhi Agrawal
-- Why it matches your request: syllabus/description mentions analytical, statistics, data
+- Why it matches your request: syllabus/description mentions data, analytical, statistics
 
 **3. CS F469 - Information Retrieval** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-06 AN1; compre 2026-12-07 FN; sections L1; IC Rakhi Agrawal
-- Why it matches your request: syllabus/description mentions mining, statistics, data
+- Why it matches your request: syllabus/description mentions data, mining, statistics
 
 **4. MATH F432 - Applied Statistical Methods** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-07 FN1; compre 2026-12-08 FN; sections L1; IC Sumanta Pasari
-- Why it matches your request: syllabus/description mentions analytical, statistics, data, science
+- Why it matches your request: syllabus/description mentions data, analytical, science, statistics
 
 **5. CS F429 - Natural Language Processing** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-05 AN1; compre 2026-12-03 FN; sections L1, P1; IC Poonam Goyal
-- Why it matches your request: syllabus/description mentions statistics, data
+- Why it matches your request: syllabus/description mentions data, statistics
 
 **6. CS F425 - Deep Learning** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
@@ -375,7 +365,7 @@ Registered now: EEE F311, MATH F212, EEE F313 · interests: *data science, machi
 - Requirement: OPEL - counts as an open elective (reg 2.05)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable); note: level-4 course; normally taken around year 4 (bulletin VI-1, pt 5) (Bulletin VI-1)
 - Timetable: midsem 2026-10-07 FN2; compre 2026-12-08 AN; sections L1; IC Srikanta Routroy
-- Why it matches your request: syllabus/description mentions statistics, data
+- Why it matches your request: syllabus/description mentions data, statistics
 
 **10. ME F443 - Quality Control, Assurance and Reliability** (3 units)
 - Requirement: OPEL - counts as an open elective (reg 2.05)
@@ -397,22 +387,18 @@ Registered now: nothing · interests: *structures, GIS, sustainability*
 
 > Programme rules come from the supplied Bulletin, which is for the 2025-26 curriculum. Your batch (2023) may follow a different structure; results are shown using the 2025-26 rules.
 
-**Looking for:** DEL, about 'artificial intelligence geotechnical engineering'
+**Looking for:** DEL, about 'artificial intelligence geotechnical engineering' · in the Bulletin: Minor in Computing and Intelligence, Minor in Data Science
 
-📚 In the Bulletin, 'artificial intelligence geotechnical engineering' is: Minor in Computing and Intelligence; Minor in Data Science. All of their courses offered this semester are listed - the ones you can take below, the ones you can't yet marked 🔒 with the reason.
-
-**1. CE F417 - Applications of Artificial Intelligence in Civil** (3 units) 🔭 related
+**1. CE F417 - Applications of Artificial Intelligence in Civil** (3 units) (related)
 - Requirement: DEL - in the A2 discipline elective pool (could also count as OPEL)
 - Eligibility: all checks passed (requirements, prerequisites, prior preparation, units, timetable)
 - Timetable: midsem 2026-10-09 FN1; compre 2026-12-13 FN; sections L1; IC Rajiv Gupta
-- Why it matches your request: syllabus/description mentions intelligent, machine learning, engineering, artificial intelligence, neural networks, agents
+- Why it matches your request: syllabus/description mentions intelligence, engineering, artificial, agents, neural networks, machine learning
 
 ### Q: DELs related to sustainability
 
 > Programme rules come from the supplied Bulletin, which is for the 2025-26 curriculum. Your batch (2023) may follow a different structure; results are shown using the 2025-26 rules.
 
-**Looking for:** DEL, about 'sustainability'
-
-📚 In the Bulletin, 'sustainability' is: ENVS department; Chemical Engineering with Specialization in Energy, Environment, and Sustainability electives; Environmental and Sustainability Engineering electives; Minor in Data Science in Climate and Health. All of their courses offered this semester are listed - the ones you can take below, the ones you can't yet marked 🔒 with the reason.
+**Looking for:** DEL, about 'sustainability' · in the Bulletin: ENVS department, Chemical Engineering with Specialization in Energy, Environment, and Sustainability electives, Environmental and Sustainability Engineering electives, Minor in Data Science in Climate and Health
 
 No eligible course matches all of that.
