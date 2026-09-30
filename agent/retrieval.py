@@ -453,9 +453,11 @@ def match_groups(text: str, min_sim: float = 0.5, rel: float = 0.75, max_groups:
 
 
 class TopicMatch:
-    """Scores courses against one topic: 0.4 x keyword (BM25, scaled to the best course in the timetable)
-    + 0.6 x semantic similarity (agent/semantic.py), + a boost for courses of a minor / department whose
-    name matches the topic. Weights picked on tests/eval_retrieval.py."""
+    """Scores courses against one topic: 0.25 x keyword (BM25, scaled to the best course in the timetable)
+    + 0.15 x LSA similarity (agent/semantic.py) + 0.6 x contextual-embedding similarity (agent/embeddings.py),
+    + a boost for courses in a matched Bulletin topic group (minor / department / elective pool).
+    Without the embedding model it falls back to 0.4 x keyword + 0.6 x LSA. Weights picked on
+    tests/eval_retrieval.py."""
 
     # weights picked on tests/eval_retrieval.py (keyword / LSA / contextual embedding)
     W_KW, W_LSA, W_EMB = 0.25, 0.15, 0.6
