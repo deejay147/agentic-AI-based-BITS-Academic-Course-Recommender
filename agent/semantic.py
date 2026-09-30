@@ -5,13 +5,13 @@ Keyword search (BM25) only sees the exact words: 'finance' matched Copywriting b
 lecture plans themselves (latent semantic analysis):
 
     1. every course -> a TF-IDF vector over the catalogue vocabulary (title counted 3x)
-    2. SVD keeps the ~160 strongest directions of that matrix; words that keep showing up in the same
+    2. SVD keeps the 100 strongest directions of that matrix (K below); words that keep showing up in the same
        kind of course (finance, investment, portfolio, valuation, derivatives) end up close together
     3. a query is folded into the same space, and courses are ranked by cosine similarity
 
 So a course can match 'finance' without the word 'finance' in it, and a course that mentions 'market'
 once in an advertising syllabus doesn't look like a finance course. No download, no GPU, deterministic;
-trained by `python -m agent.semantic` (also part of `python -m ingest.run_all`), saved to
+trained by `python -m agent.train_embeddings` (also part of `python -m ingest.run_all`), saved to
 data/processed/semantic.npz and loaded by the app.
 """
 from __future__ import annotations
